@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <h1 class="form-title heading-large">
+    Everyone’s documents
+  </h1>
+  <div class="grid-row">
+    <div class="column-one-third">
+      <form action="/docs/tutorials-and-examples" method="post" class="form">
+        <h2 class="heading-medium">Filter documents</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="title">
+            Title or slug
+          </label>
+          <input type="text" class="form-control" id="title">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="author">
+            Author
+          </label>
+          <input type="text" class="form-control" id="author">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="organisation">
+            Organisation
+          </label>
+          <input type="text" class="form-control" id="organisation">
+        </div>
+      </form>
+    </div>
+    <div class="column-two-thirds">
+      <h2 class="heading-medium">Documents</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(0, 50) -%}
+            {% set x = [
+              {
+                name: 'Improving social mobility through education',
+                format: 'Detailed guidance',
+                date: '10 August 2017'
+              },
+              {
+                name: 'Product manager: skills they need',
+                format: 'Publication',
+                date: '1 July 2017'
+              },
+              {
+                name: 'Disabled Person’s Railcard and assisted journeys data: 2017 to 2018 (P5 to P7)',
+                format: 'Official statistics',
+                date: '23 January 2017'
+              }
+            ] | random %}
+          <tr>
+            <td><a href="#" class="bold">{{ x.name }}</a><br/>{{ x.format}}, {{ x.date }}</td>
+          </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
