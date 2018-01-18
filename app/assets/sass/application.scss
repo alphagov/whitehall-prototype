@@ -7,3 +7,7 @@ $path: "/public/images/";
 @import 'govuk-elements';
 
 @import 'header';
+
+.form-control {
+  width: 100%;
+}
