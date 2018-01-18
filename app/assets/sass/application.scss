@@ -6,8 +6,14 @@ $path: "/public/images/";
 // Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
 @import 'govuk-elements';
 
+@import 'patterns/success-summary';
 @import 'header';
 
 .form-control {
   width: 100%;
+}
+
+.heading-xlarge {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
