@@ -1,0 +1,14 @@
+#global-header {
+  border-bottom: 10px solid #ffbf47;
+}
+
+.environment-label {
+  @include phase-tag;
+  background-color: #ffbf47;
+  color: $black;
+  margin-top: 6px;
+}
+
+#global-header .header-wrapper .header-global .header-logo {
+  width: auto;
+}
