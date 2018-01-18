@@ -6,15 +6,17 @@
   font-weight: bold;
 }
 
+$success-green: $button-colour;
+
 .success-summary {
   @extend .error-summary;
-  border-color: $green;
+  border-color: $success-green;
 
   .success-summary-list {
     @extend .error-summary-list;
 
     a {
-      color: $green;
+      color: $success-green;
     }
   }
 
