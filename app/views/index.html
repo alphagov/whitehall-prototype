@@ -1,62 +1,19 @@
 {% extends "layout.html" %}
-
-{% block page_title %}
-  GOV.UK prototype kit
-{% endblock %}
-
+{% block page_title %} Examples – GOV.UK Whitehall{% endblock %}
 {% block content %}
-
 <main id="content" role="main">
+  <h1 class="heading-xlarge">Examples</h1>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/docs/tutorials-and-examples" method="post" class="form">
-        <h1 class="form-title heading-large">
-          New publication
-        </h1>
-        <p class="lede">
-          Use this format for stand-alone government documents
-        </p>
-
-        <div class="form-group">
-          <label class="form-label" for="title">
-            Title
-            <span class="form-hint">65 characters or fewer</span>
-          </label>
-          <input type="text" class="form-control" id="title">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="summary">
-            Summary
-          </label>
-          <textarea class="form-control" name="textarea" id="summary" rows="2"></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <div class="form-group">
-          <label class="form-label" for="body">
-            Body
-          </label>
-          <textarea class="form-control" name="textarea" id="body" rows="20"></textarea>
-        </div>
-
-        <div class="form-group">
-          <input type="submit" class="button" value="Create draft">
-        </div>
-      </form>
-    </div>
-    <div class="column-one-third">
-      <h2 style="margin-top: 2em" class="heading-small">Markdown guidance</h2>
-      <p>For details, read the guide to using Markdown</p>
-      <ul>
-        <li><a href="#">Headings</a></li>
-        <li><a href="#">Links</a></li>
-        <li><a href="#">Bullets</a></li>
+      <p class="lede">
+        A collection of examples based on existing Whitehall pages
+      </p>
+      <ul class="list list-bullet">
+        <li><a href="/new-publication">New publication</a></li>
+        <li><a href="/format">Format choice</a></li>
+        <li><a href="/documents">Documents</a></li>
       </ul>
     </div>
   </div>
 </main>
-
 {% endblock %}
