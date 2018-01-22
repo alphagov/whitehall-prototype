@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block page_title %}Modals{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <h1 class="heading-xlarge">
+    Modals
+  </h1>
+
+  <a href="#" id="openModal">Force publish</a>
+
+  <dialog id="js-modal-dialog" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer">
+    <div class="modal-dialog__inner">
+      <h1 id="dialog-title" class="heading-large">
+        Are you sure you want to force publish?
+      </h1>
+      <div class="modal-dialog__inner__text">
+        <div class="timer" aria-hidden="true" aria-relevant="additions"></div>
+        <div id="at-timer" class="at-timer visually-hidden" role="status"></div>
+      </div>
+      <div class="modal-dialog__inner__block">
+        <button class="button dialog-button modal-dialog__inner__button js-dialog-close">Force publish</button>
+        <a href="/" class="modal-dialog__inner__link js-dialog-close">Don’t publish</a>
+      </div>
+    </div>
+  </dialog>
+</main>
+{% endblock %}
