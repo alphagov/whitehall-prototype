@@ -41,7 +41,7 @@
     </div>
     <div class="column-two-thirds">
       <h2 class="heading-large remove-top-margin">Your drafts</h2>
-      {% set documentCount = 5 %}
+      {% set documentCount = [0,1,2,3,4,5,5,5,5,5] | random %}
       {% include "includes/document-table.html" %}
     </div>
   </div>
