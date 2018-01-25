@@ -5,7 +5,7 @@
         Title
         <span class="form-hint">65 characters or fewer</span>
       </label>
-      <input type="text" name="title" class="form-control" id="title" value="{% if editing %}{{data['title']}}{% endif %}">
+      <input type="text" name="title" class="form-control" id="title" value="{% if editing %}{{data['title']}}{% else %}{{data['new-format-title']}}{% endif %}">
     </div>
 
     <div class="form-group">
