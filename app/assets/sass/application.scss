@@ -6,6 +6,7 @@ $path: "/public/images/";
 // Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
 @import 'govuk-elements';
 
+@import 'vendor/accessible-autocomplete';
 @import 'margin-helpers';
 @import 'patterns/success-summary';
 @import 'patterns/modal-dialog';
