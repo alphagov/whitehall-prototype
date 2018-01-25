@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block page_title %}
-  GOV.UK prototype kit
+  New publication
 {% endblock %}
 
 {% block content %}
@@ -56,6 +56,18 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="form-group">
+        <label class="form-label" for="government-organisations">
+          Lead organisation
+        </label>
+        <select id="government-organisations" name="organisation">
+          {% include "includes/organisation-select-options.html" %}
+        </select>
+        <div style="margin-top: 10px">
+          <a href="#">Add more organisations</a>
+        </div>
+      </div>
+
+      <div class="form-group">
         <div class="multiple-choice">
           <input id="checkbox-telephone-number" name="contact-by-text-phone" type="checkbox" value="true">
           <label for="checkbox-telephone-number">Limit access to this draft to users in your organisation (Cabinet Office)</label>
@@ -102,5 +114,15 @@
     </div>
   </div>
 </main>
+{% endblock %}
 
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('government-organisations'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
 {% endblock %}

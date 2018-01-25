@@ -30,10 +30,12 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="organisation">
+          <label class="form-label" for="government-organisations">
             Organisation
           </label>
-          <input type="text" class="form-control" id="organisation">
+          <select id="government-organisations" name="organisation">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
         </div>
       </form>
     </div>
@@ -44,5 +46,15 @@
     </div>
   </div>
 </main>
+{% endblock %}
 
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('government-organisations'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
 {% endblock %}
