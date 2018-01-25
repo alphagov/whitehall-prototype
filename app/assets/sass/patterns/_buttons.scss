@@ -1,0 +1,22 @@
+.button-secondary {
+  background-color: $grey-1;
+
+  &:hover,
+  &:active {
+    background-color: $black;
+  }
+}
+
+.button-tertiary {
+  background-color: $grey-3;
+  box-shadow: none;
+
+  &:link {
+    color: $black;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $grey-2;
+  }
+}
