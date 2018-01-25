@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block page_title %}{{ data['title'] }}{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <div class="success-summary" role="alert" tabindex="-1">
+    <p>
+      Your draft has been saved
+    </p>
+  </div>
+
+  <h1 class="form-title heading-large">
+    <span class="heading-secondary">News article</span>
+    {{ data['title'] }}
+  </h1>
+  <p class="lede">
+    {{ data['summary'] }}
+  </p>
+
+  <a href="/edit-news-article" class="button">Edit draft</a>
+</main>
+{% endblock %}
