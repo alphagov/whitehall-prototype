@@ -8,6 +8,9 @@ $path: "/public/images/";
 
 @import 'vendor/accessible-autocomplete';
 @import 'margin-helpers';
+
+@import 'patterns/check-your-answers';
+@import 'patterns/task-list';
 @import 'patterns/success-summary';
 @import 'patterns/modal-dialog';
 @import 'patterns/buttons';
