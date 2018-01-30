@@ -1,0 +1,35 @@
+.CodeMirror {
+  @extend .form-control;
+  @include core-19;
+
+  // Don't highlight H1s
+  .cm-header-1 {
+    font-weight: normal;
+  }
+
+  // Don't highlight bold
+  .cm-strong {
+    font-weight: normal;
+  }
+
+  // Don't highlight italics
+  .cm-em {
+    font-style: normal;
+  }
+
+  .cm-header-2 {
+    @include bold-24;
+  }
+
+  .cm-quote,
+  .cm-variable-2,
+  .cm-variable-3,
+  .cm-header {
+    color: $black;
+  }
+
+  .cm-url,
+  .cm-link {
+    color: $link-colour;
+  }
+}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block page_title %}Markdown editor{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <h1 class="heading-xlarge">
+    Markdown editor
+  </h1>
+
+  <script src="/public/codemirror/lib/codemirror.js"></script>
+  <script src="/public/codemirror/mode/markdown/markdown.js"></script>
+  <script src="/public/codemirror/mode/xml/xml.js"></script>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <div class="form-group">
+        <textarea name="body" class="form-control" name="textarea" id="body" rows="20"></textarea>
+      </div>
+      <script>
+        var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('body'), {
+                              lineWrapping: true,
+                              viewportMargin: Infinity,
+                              cursorHeight: 0.85
+                            }
+                          );
+      </script>
+    </div>
+  </div>
+</main>
+{% endblock %}

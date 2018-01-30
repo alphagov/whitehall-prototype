@@ -5,8 +5,10 @@ $path: "/public/images/";
 // Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
 // Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
 @import 'govuk-elements';
+@import 'node_modules/codemirror/lib/codemirror';
 
 @import 'vendor/accessible-autocomplete';
+@import 'vendor/codemirror-theme';
 @import 'margin-helpers';
 
 @import 'patterns/check-your-answers';
