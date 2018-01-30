@@ -68,7 +68,7 @@
   .cya-answer {
     padding-bottom: em(9, 19); // from Elements' td
     &.empty {
-      color: #BFC1C3;
+      color: $grey-1;
     }
   }
 
