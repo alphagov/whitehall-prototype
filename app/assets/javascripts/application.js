@@ -18,4 +18,13 @@ $(document).ready(function () {
   showHideContent.init()
 
   GOVUK.modalDialog.init()
+
+  if ($('#body').length > 0) {
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('body'), {
+                            lineWrapping: true,
+                            viewportMargin: Infinity,
+                            cursorHeight: 0.85
+                          }
+                        );
+  }
 })

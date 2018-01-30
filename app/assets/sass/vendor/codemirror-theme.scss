@@ -1,6 +1,7 @@
 .CodeMirror {
   @extend .form-control;
   @include core-19;
+  height: 500px;
 
   // Don't highlight H1s
   .cm-header-1 {
