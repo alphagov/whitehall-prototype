@@ -1,6 +1,8 @@
 // Recommended - Use these styles for the check your answers pattern
 .govuk-check-your-answers {
 
+  margin-top: 60px;
+
   @include media(desktop) {
     display: table;
   }
@@ -65,6 +67,9 @@
 
   .cya-answer {
     padding-bottom: em(9, 19); // from Elements' td
+    &.empty {
+      color: $grey-1;
+    }
   }
 
   .cya-change {

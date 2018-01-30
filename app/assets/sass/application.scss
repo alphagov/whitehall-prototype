@@ -13,6 +13,7 @@ $path: "/public/images/";
 
 @import 'patterns/check-your-answers';
 @import 'patterns/task-list';
+@import 'patterns/document-list';
 @import 'patterns/success-summary';
 @import 'patterns/modal-dialog';
 @import 'patterns/buttons';
@@ -30,4 +31,17 @@ $path: "/public/images/";
 .markdown-body {
   max-width: 100%;
   white-space: pre-wrap;
+}
+
+.metadata dt, .metadata dd {
+	display: inline-block;
+	font-size: 16px;
+}
+
+.metadata dt {
+	width: 20%;
+}
+
+.metadata dd {
+	width: 79%;
 }
