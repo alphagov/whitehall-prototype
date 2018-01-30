@@ -1,91 +1,77 @@
 {% extends "layout.html" %}
-
-{% block page_title %}
-  GOV.UK prototype kit
-{% endblock %}
+{% block page_title %}GOV.UK prototype kit{% endblock %}
 
 {% block content %}
 
 <main id="content" role="main">
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/new-news-article" method="post" class="form">
-        <h1 class="form-title heading-large">
-          New document
-        </h1>
-
-        <!-- <div class="form-group">
-          <label class="form-label" for="title">
-            Title
-            <span class="form-hint">65 characters or fewer</span>
-          </label>
-          <input type="text" name="new-format-title" class="form-control" id="title">
-        </div> -->
-
+      <form action="/document-type" method="post" class="form">
         <div class="form-group">
           <fieldset>
-
             <legend>
-              <h1 class="heading-medium">
+              <h1 class="heading-xlarge">
                 What type of document?
               </h1>
-              <span class="body-text">Select one of the options below.</span>
             </legend>
 
-            <div class="multiple-choice" data-target="news-article-sub-types">
-              <input id="radio-part-2" type="radio" name="format" value="News article">
-              <label for="radio-part-2">
-                <span class="form-label-bold">News article</span>
-                Use for press releases, news stories and responses to media coverage including official statements
-              </label>
-            </div>
+            {% set fields = [
+                {
+                  name: 'Consultation',
+                  text: 'Use for documents requiring collective agreement across government, including calls for evidence'
+                },
+                {
+                  name: 'News article',
+                  text: 'Use for press releases, news stories and responses to media coverage including official statements'
+                },
+                {
+                  name: 'Publication',
+                  text: 'Used for stand-alone government documents'
+                },
+                {
+                  name: 'Speech',
+                  text: 'use for public speeches, ministerial statements to Parliament and bylined articles'
+                },
+                {
+                  name: 'Detailed guide',
+                  text: 'Use to tell users the steps they need to take to complete a specific task. They are usually aimed at specialist or professional audiences.'
+                },
+                {
+                  name: 'Document collection',
+                  text: 'Use for continuously curated, permanent lists of closely related documents for a specific audience'
+                },
+                {
+                  name: 'Case study',
+                  text: 'Use for showing someone’s experience of a process covered on GOV.UK or a policy problem the government is trying to solve'
+                },
+                {
+                  name: 'Statistical data set',
+                  text: 'Use for frequently updated statistical data files'
+                }
+              ]
+            %}
 
-            <div class="panel panel-border-narrow js-hidden" style="margin-left: 50px" id="news-article-sub-types">
+            {% for field in fields %}
+              <!-- <h3 class="heading-small">
+                <a href="#">{{ field.name }}</a>
+              </h3>
+              <p>{{ field.text }}</p>
+              <hr /> -->
+            {% endfor %}
+
+            {% for field in fields %}
               <div class="multiple-choice">
-                <input id="news-article-sub-type-1" type="radio" name="news-article-sub-type" value="News story">
-                <label for="news-article-sub-type-1-2">
-                  <span class="form-label-bold">News story</span>
-                  News written exclusively for GOV.UK which users need, can act on and can’t get from other sources. Avoid duplicating press releases.
+                <input id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}">
+                <label for="radio-part-{{ loop.index }}">
+                  <span class="form-label-bold">{{ field.name }}</span>
+                  {{ field.text }}
                 </label>
               </div>
-
-              <div class="multiple-choice">
-                <input id="news-article-sub-type-2" type="radio" name="news-article-sub-type" value="Press release">
-                <label for="news-article-sub-type-2">
-                  <span class="form-label-bold">Press release</span>
-                  Unedited press releases as sent to the media, and official statements from the organisation or a minister.
-                </label>
-              </div>
-
-              <div class="multiple-choice">
-                <input id="news-article-sub-type-3" type="radio" name="news-article-sub-type" value="Government response">
-                <label for="news-article-sub-type-3">
-                  <span class="form-label-bold">Government response</span>
-                  Government statements in response to media coverage, such as rebuttals and ‘myth busters’.
-                </label>
-              </div>
-
-              <div class="multiple-choice">
-                <input id="news-article-sub-type-4" type="radio" name="news-article-sub-type" value="World news story">
-                <label for="news-article-sub-type-4">
-                  <span class="form-label-bold">World news story</span>
-                  Announcements specific to one or more world location. Don’t duplicate news published by another department.
-                </label>
-              </div>
-            </div>
-
-            <div class="multiple-choice">
-              <input id="radio-part-3" type="radio" name="format" value="Publication">
-              <label for="radio-part-3">
-                <span class="form-label-bold">Publication</span>
-                Used for stand-alone government documents
-              </label>
-            </div>
-
+            {% endfor %}
           </fieldset>
         </div>
         <div class="form-group">
-          <input type="submit" class="button" value="Start draft">
+          <input type="submit" class="button" value="Save and continue">
         </div>
       </form>
     </div>

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block page_title %}GOV.UK prototype kit{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form action="/title-summary-body" method="post" class="form">
+        <div class="form-group">
+          <fieldset>
+            <legend>
+              <h1 class="heading-xlarge form-title">
+                What type of {{ data.format | lower }}?
+              </h1>
+            </legend>
+
+            {% set fields = [
+                {
+                  name: 'News story',
+                  text: 'News written exclusively for GOV.UK which users need, can act on and can’t get from other sources. Avoid duplicating press releases.'
+                },
+                {
+                  name: 'Press release',
+                  text: 'Unedited press releases as sent to the media, and official statements from the organisation or a minister.'
+                },
+                {
+                  name: 'Government response',
+                  text: 'Government statements in response to media coverage, such as rebuttals and ‘myth busters’.'
+                },
+                {
+                  name: 'World news story',
+                  text: 'Announcements specific to one or more world location. Don’t duplicate news published by another department.'
+                }
+              ]
+            %}
+
+            {% for field in fields %}
+              <div class="multiple-choice">
+                <input id="radio-part-{{ loop.index }}" type="radio" name="document-type" value="{{ field.name }}">
+                <label for="radio-part-{{ loop.index }}">
+                  <span class="form-label-bold">{{ field.name }}</span>
+                  {{ field.text }}
+                </label>
+              </div>
+            {% endfor %}
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="button" value="Save and continue">
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
