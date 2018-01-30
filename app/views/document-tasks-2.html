@@ -10,16 +10,25 @@
   </div> -->
 
   <h1 class="form-title heading-xlarge">
-    <span class="heading-secondary">{{ data['format'] }}</span>
+<!--     <span class="heading-secondary">{{ data['format'] }}</span>
     {% if data['title'] %}
       {{ data['title'] }}
     {% else %}
       New {{ data['news-article-sub-type'] | lower }}
-    {% endif %}
+    {% endif %} -->
+    New press release
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
+      <dl class="metadata">
+        <dt>Created by</dt>
+        <dd>Kamala Khan</dd>
+        <dt>Last updated</dt>
+        <dd>20 January 2018</dd>
+        <dt>Status</dt>
+        <dd>Draft</dd>
+      </dl>
       <ol class="task-list task-list--large">
         <li>
           <ul class="task-list-items">
@@ -53,40 +62,100 @@
                   <dt class="cya-question">
                     Body
                   </dt>
-                  <dd class="cya-answer">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam…
+                  <dd class="cya-answer empty">
+                    This field is empty
                   </dd>
                 </div>
               </dl>
             </li>
             <li class="task-list-item">
-              <span class="task-name">
+              <h3 class="task-name task-name-heading">
                 Images
-              </span>
+              </h3>
               <a href="#" class="task-todo">Add</a>
             </li>
             <li class="task-list-item">
-              <span class="task-name">
+              <h3 class="task-name task-name-heading">
                 Attachments
-              </span>
+              </h3>
               <a href="#" class="task-todo">Add</a>
             </li>
             <li class="task-list-item">
-              <span class="task-name">
+              <h3 class="task-name task-name-heading">
                 About this content
-              </span>
+              </h3>
+              <a href="#" class="task-todo">Change</a>
+              <dl class="govuk-check-your-answers cya-questions-short">
+                <div>
+                  <dt class="cya-question">
+                    Policies
+                  </dt>
+                  <dd class="cya-answer empty">
+                    This field is empty
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="cya-question">
+                    Policy areas
+                  </dt>
+                  <dd class="cya-answer empty">
+                    This field is empty
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="cya-question">
+                    Ministers
+                  </dt>
+                  <dd class="cya-answer empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="cya-question">
+                    Topical events
+                  </dt>
+                  <dd class="cya-answer empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="cya-question">
+                    Location
+                  </dt>
+                  <dd class="cya-answer empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="cya-question">
+                    Lead organisations
+                  </dt>
+                  <dd class="cya-answer">
+                    Government Digital Service
+                  </dd>
+                </div>
+                <div>
+                  <dt class="cya-question">
+                    Supporting organisations
+                  </dt>
+                  <dd class="cya-answer empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
+            </li>
+            <li class="task-list-item">
+              <h3 class="task-name task-name-heading">
+                Publish settings
+              </h3>
               <a href="#" class="task-todo">Add</a>
             </li>
             <li class="task-list-item">
-              <span class="task-name">
-                Publishing settings
-              </span>
-              <a href="#" class="task-todo">Add</a>
-            </li>
-            <li class="task-list-item">
-              <span class="task-name">
+              <h3 class="task-name task-name-heading">
                 Translations
-              </span>
+              </h3>
               <a href="#" class="task-todo">Add</a>
             </li>
           </ul>

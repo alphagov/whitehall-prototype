@@ -13,7 +13,7 @@ $task-list-indent: 35px;
 .task-list {
   margin-top: $gutter;
   @include media(tablet) {
-    margin-top: ($gutter * 2);
+    margin-top: ($gutter * 1.5);
   }
 }
 
@@ -54,8 +54,8 @@ $task-list-indent: 35px;
 
 .task-list-item {
   border-bottom: 1px solid $border-colour;
-  padding-top: $gutter-one-third;
-  padding-bottom: $gutter-one-third;
+  padding-top: $gutter;
+  padding-bottom: $gutter;
   @extend %contain-floats;
 }
 
@@ -74,8 +74,7 @@ $task-list-indent: 35px;
 
   &.task-name-heading {
     @include bold-24;
-    margin-top: 5px;
-    margin-bottom: 30px;
+    margin: 0;
   }
 }
 
