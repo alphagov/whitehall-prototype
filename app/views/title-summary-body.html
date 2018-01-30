@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block page_title %}New news article{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  <form action="/document-tasks" method="post" class="form">
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="form-title heading-large">
+          <span class="heading-secondary">{{ data['format'] }}</span>
+          {% if data['title'] %}
+            {{ data['title'] }}
+          {% else %}
+            Create {{ data['document-type'] | lower }}
+          {% endif %}
+        </h1>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <div class="form-group">
+          <label class="form-label" for="title">
+            Title
+            <span class="form-hint">65 characters or fewer</span>
+          </label>
+          <input type="text" name="title" class="form-control" id="title" value="{{data['title']}}">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="summary">
+            Summary
+          </label>
+          <textarea name="summary" class="form-control" name="textarea" id="summary" rows="2">{{data['summary']}}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <div class="form-group">
+          <label class="form-label" for="body">
+            Body
+          </label>
+          <textarea name="body" class="form-control" name="textarea" id="body" rows="20">{{data['body']}}</textarea>
+        </div>
+      </div>
+      <div class="column-one-third">
+        <h2 style="margin-top: 2em" class="heading-small">Markdown guidance</h2>
+        <p>For details, read the guide to using Markdown</p>
+        <ul>
+          <li><a href="#">Headings</a></li>
+          <li><a href="#">Links</a></li>
+          <li><a href="#">Bullets</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="button" value="Save and continue">
+    </div>
+  </form>
+</main>
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('government-organisations'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
+{% endblock %}

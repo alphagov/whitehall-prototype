@@ -6,18 +6,13 @@
 <main id="content" role="main">
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/new-news-article" method="post" class="form">
-        <h1 class="form-title heading-large">
-          New document
-        </h1>
-
+      <form action="/document-type" method="post" class="form">
         <div class="form-group">
           <fieldset>
             <legend>
-              <h1 class="heading-medium">
+              <h1 class="heading-xlarge">
                 What type of document?
               </h1>
-              <span class="body-text">Select one of the options below.</span>
             </legend>
 
             {% set fields = [
@@ -55,6 +50,14 @@
                 }
               ]
             %}
+
+            {% for field in fields %}
+              <!-- <h3 class="heading-small">
+                <a href="#">{{ field.name }}</a>
+              </h3>
+              <p>{{ field.text }}</p>
+              <hr /> -->
+            {% endfor %}
 
             {% for field in fields %}
               <div class="multiple-choice">

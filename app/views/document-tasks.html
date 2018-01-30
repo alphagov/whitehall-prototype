@@ -14,166 +14,176 @@
     {% if data['title'] %}
       {{ data['title'] }}
     {% else %}
-      New {{ data['news-article-sub-type'] | lower }}
+      Some title
     {% endif %}
   </h1>
 
   <div class="grid-row">
     <div class="column-two-thirds">
-      <ol class="task-list">
+      <dl class="metadata">
+        <dt>Created by</dt>
+        <dd>Kamala Khan</dd>
+        <dt>Last updated</dt>
+        <dd>20 January 2018</dd>
+        <dt>Status</dt>
+        <dd>Draft</dd>
+      </dl>
+      <ol class="document-list">
         <li>
-          <h2 class="task-list-section">
-            <span class="task-list-section-number">1. </span> The content
-          </h2>
-          <ul class="task-list-items">
-            <li class="task-list-item">
-              <a class="task-name" href="#">
+          <ul class="document-list-items">
+            <li class="document-list-item">
+              <h3 class="document-task">
                 Title, summary and body
-              </a>
-              <span class="task-completed" id="eligibility-completed" href="#">Completed</span>
+              </h3>
 
-              <!-- <h3 class="task-name">Title, summary and body</h3>
+              <a class="document-task-action" id="eligibility-completed" href="/title-summary-body">Change</a>
 
-              <a class="task-todo" id="eligibility-completed" href="#">Change</a>
-
-              <dl class="govuk-check-your-answers cya-questions-short">
+              <dl class="document-task-part">
                 <div>
-                  <dt class="cya-question">
+                  <dt class="document-part-label">
                     Title
                   </dt>
-                  <dd class="cya-answer">
-                    Some title
+                  <dd class="document-part-value">
+                    {% if data['title'] %}
+                      {{ data['title'] }}
+                    {% else %}
+                      Some title
+                    {% endif %}
                   </dd>
                 </div>
 
                 <div>
-                  <dt class="cya-question">
+                  <dt class="document-part-label">
                     Summary
                   </dt>
-                  <dd class="cya-answer">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  {% if data['summary'] %}
+                    <dd class="document-part-value">
+                      {{ data['summary'] }}
+                    </dd>
+                  {% else %}
+                    <dd class="document-part-value document-part-value--empty">
+                      This field is empty
+                    </dd>
+                  {% endif %}
+                </div>
+
+                <div>
+                  <dt class="document-part-label">
+                    Body
+                  </dt>
+                  {% if data['body'] %}
+                    <dd class="document-part-value">
+                      {{ data['body'] | truncate(200) }}
+                    </dd>
+                  {% else %}
+                    <dd class="document-part-value document-part-value--empty">
+                      This field is empty
+                    </dd>
+                  {% endif %}
+                </div>
+              </dl>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Images
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Attachments
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                About this content
+              </h3>
+              <a href="#" class="document-task-action">Change</a>
+              <dl class="document-task-part">
+                <div>
+                  <dt class="document-part-label">
+                    Policies
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
                   </dd>
                 </div>
 
                 <div>
-                  <dt class="cya-question">
-                    Body
+                  <dt class="document-part-label">
+                    Policy areas
                   </dt>
-                  <dd class="cya-answer">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam…
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
                   </dd>
-                </div> -->
+                </div>
+
+                <div>
+                  <dt class="document-part-label">
+                    Ministers
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Topical events
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Location
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Lead organisations
+                  </dt>
+                  <dd class="document-part-value">
+                    Government Digital Service
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Supporting organisations
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
               </dl>
             </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Images
-              </a>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Publish settings
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
             </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Attachments
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
+            <li class="document-list-item">
+              <h3 class="document-task">
                 Translations
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <h2 class="task-list-section">
-            <span class="task-list-section-number">2. </span> About the content
-          </h2>
-          <ul class="task-list-items">
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Has this been published before?
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Organisations
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Policies and policy areas
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Ministers
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Topical events
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                World locations
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <h2 class="task-list-section">
-            <span class="task-list-section-number">3. </span> Review and publish
-          </h2>
-          <ul class="task-list-items">
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Preview
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Request fact-check
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Request review
-              </a>
-            </li>
-            <li class="task-list-item">
-              <a class="task-name" href="#">
-                Force publish
-              </a>
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
             </li>
           </ul>
         </li>
       </ol>
+      <ul class="buttons">
+        <li><input class="button" type="submit" value="Request review"></li>
+        <li><a href="">Request fact-check</a></li>
+        <li><a href="">Preview</a></li>
+        <li><a href="">Force-publish</a></li>
+        <li><a href="" class="danger">Delete this draft</a></li>
+      </ul>
     </div>
-    <!-- <div class="column-one-third">
-      <div>
-        <h2 class="heading-medium remove-top-margin">Workflow</h2>
-        <ul class="list">
-          <li><a href="#">Preview on website</a></li>
-          <li><a href="#">Submit for review</a></li>
-          <li><a href="#">Delete draft</a></li>
-          <li><a href="#">Schedule publication</a></li>
-          <li><a href="#">Request fact check</a></li>
-          <li><a href="#">Force publish</a></li>
-        </ul>
-
-        <h2 class="heading-medium remove-top-margin">Edit</h2>
-        <ul class="list">
-          <li><a href="#">Attachments</a></li>
-          <li><a href="#">Images</a></li>
-          <li><a href="#">Translations</a></li>
-          <li><a href="#">User need</a></li>
-        </ul>
-
-        <h2 class="heading-medium remove-top-margin">History</h2>
-        <ul class="list">
-          <li><a href="#">History and notes</a></li>
-        </ul>
-      </div>
-    </div> -->
   </div>
 </main>
 {% endblock %}
