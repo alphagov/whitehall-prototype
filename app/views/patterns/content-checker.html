@@ -14,7 +14,7 @@
       </h3>
       <ul class="error-summary-list">
         {% for error in report %}
-          <li>{{ error.message }}</li>
+          <li>{{ error.message }} ({{ error.source }}, {{ error.ruleId }})</li>
         {% endfor %}
       </ul>
     </div>
@@ -23,7 +23,7 @@
   <form action="/patterns/content-checker" method="post">
     <div class="form-group">
       <label for="text">Text to check</label>
-      <textarea id="text" name="text" class="form-control">{{ data['text']}}</textarea>
+      <textarea id="text" name="text" class="form-control" rows="20">{{ data['text']}}</textarea>
     </div>
     <input type="submit" value="Check text" class="button" />
   </form>
