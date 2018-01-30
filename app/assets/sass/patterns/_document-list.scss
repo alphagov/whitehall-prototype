@@ -1,0 +1,102 @@
+// Document list pattern
+
+// Spacing to the left of the task list
+$document-list-indent: 35px;
+
+.document-list {
+  margin-top: $gutter;
+  @include media(tablet) {
+    margin-top: ($gutter * 1.5);
+  }
+}
+
+.document-list-section {
+  display: table;
+  @include bold-36;
+  margin-bottom: 15px;
+  padding-bottom: ($gutter / 6);
+}
+
+.document-list-items {
+  margin-bottom: $gutter;
+  @include media(tablet) {
+    margin-bottom: ($gutter * 2);
+  }
+}
+
+.document-list-item {
+  border-bottom: 1px solid $border-colour;
+  padding-top: $gutter;
+  padding-bottom: $gutter;
+  @extend %contain-floats;
+}
+
+.document-list-item:first-child {
+  border-top: 1px solid $border-colour;
+}
+
+.document-task {
+  width: $two-thirds;
+  float: left;
+  @include bold-24;
+  margin: 0;
+}
+
+.document-task-action {
+  float: right;
+  margin-right: 0;
+  padding-top: 3px;
+}
+
+.document-task-part {
+  margin-top: 60px;
+
+  @include media(desktop) {
+    display: table;
+  }
+
+  > * {
+    position: relative;
+
+    @include media(desktop) {
+      display: table-row;
+    }
+
+    > * {
+      display: block;
+
+      @include media(desktop) {
+        display: table-cell;
+        padding: em(12, 19) em(20, 19) em(9, 19) 0; // copied from Elements' td padding
+        margin: 0;
+      }
+    }
+
+    @include media(desktop) {
+      &:first-child > * {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .document-part-label {
+    font-weight: bold;
+    margin: em(12, 19) 4em em(4,19) 0;
+
+    @include media(desktop) {
+      width: 30%;
+    }
+  }
+
+  > *:first-child .document-part-label {
+    margin-top: 0;
+  }
+
+  .document-part-value {
+    padding-bottom: em(9, 19);
+
+    &--empty {
+      color: $grey-1;
+    }
+  }
+}
