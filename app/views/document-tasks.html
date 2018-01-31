@@ -32,6 +32,18 @@
         <li>
           <ul class="document-list-items">
             <li class="document-list-item">
+              <div class="task-heading-wrapper">
+                <h3 class="document-task">
+                  Type of {{ data['format'] | lower }}
+                </h3>
+                <a href="/document-type" class="document-task-action">Change</a>
+              </div>
+              <div>
+                <h3 class="heading-small">{{ data['document-type'] }}</h3>
+                Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+              </div>
+            </li>
+            <li class="document-list-item">
               <h3 class="document-task">
                 Title, summary and body
               </h3>
