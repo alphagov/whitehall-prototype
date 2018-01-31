@@ -79,6 +79,7 @@ app.use('/public', express.static(path.join(__dirname, '/govuk_modules/govuk_tem
 app.use('/public', express.static(path.join(__dirname, '/govuk_modules/govuk_frontend_toolkit')))
 app.use('/public/images/icons', express.static(path.join(__dirname, '/govuk_modules/govuk_frontend_toolkit/images')))
 app.use('/public/codemirror', express.static(path.join(__dirname, '/node_modules/codemirror')))
+app.use('/public/highlight-within-textarea', express.static(path.join(__dirname, '/node_modules/highlight-within-textarea')))
 
 // Elements refers to icon folder instead of images folder
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'assets', 'images', 'favicon.ico')))
