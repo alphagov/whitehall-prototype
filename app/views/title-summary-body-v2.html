@@ -3,7 +3,7 @@
 
 {% block content %}
 <main id="content" role="main">
-  <form action="/document-tasks" method="post" class="form copy">
+  <form action="/document-tasks" method="post" class="form">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h1 class="form-title heading-xlarge">
@@ -20,6 +20,17 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
+        <div class="error-summary content-check" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+          <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+            This content can be improved
+          </h3>
+          <ul class="error-summary-list">
+            <li><a href="">Excessive use of the passive voice</a></li>
+            <li><a href="">Sentences are too long</a></li>
+            <li><a href="">Use of redundant words</a></li>
+            <li><a href="">Use of banned words</a></li>
+          </ul>
+        </div>
         <div class="form-group">
           <label class="form-label" for="title">
             Title
