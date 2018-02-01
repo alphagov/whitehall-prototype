@@ -13,40 +13,50 @@
               <h1 class="heading-xlarge">
                 What type of document?
               </h1>
+              <p>Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
             </legend>
 
             {% set fields = [
                 {
+                  name: 'Case study',
+                  text: '<p>Use for real examples that help users understand someone’s experience of a process or an important aspect of government policy. Do not use to promote your organisation or if it doesn’t relate to something covered on GOV.UK.</p>
+
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#case-study">case study guidance</a> in full.</p>'
+                },
+                {
                   name: 'Consultation',
-                  text: 'Use for documents requiring collective agreement across government, including calls for evidence'
-                },
-                {
-                  name: 'News article',
-                  text: 'Use for press releases, news stories and responses to media coverage including official statements'
-                },
-                {
-                  name: 'Publication',
-                  text: 'Used for stand-alone government documents'
-                },
-                {
-                  name: 'Speech',
-                  text: 'use for public speeches, ministerial statements to Parliament and bylined articles'
+                  text: 'Use for documents requiring collective agreement across government, including calls for evidence.'
                 },
                 {
                   name: 'Detailed guide',
-                  text: 'Use to tell users the steps they need to take to complete a specific task. They are usually aimed at specialist or professional audiences.'
+                  text: '<p>Use to tell users the steps they need to take to complete a clearly defined task. They are usually aimed at specialist or professional audiences.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">detailed guides guidance</a> in full.</p>'
                 },
                 {
                   name: 'Document collection',
-                  text: 'Use for continuously curated, permanent lists of closely related documents for a specific audience'
+                  text: '<p>Use for grouping closely related documents on a single page for a specific audience.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">document collection guidance</a> in full.</p>
+                  '
                 },
                 {
-                  name: 'Case study',
-                  text: 'Use for showing someone’s experience of a process covered on GOV.UK or a policy problem the government is trying to solve'
+                  name: 'Fatality notice',
+                  text: 'Use for initial fatality notices and subsequent obituaries of forces and MOD personnel. Don’t publish a news story which duplicates this announcement.'
                 },
                 {
-                  name: 'Statistical data set',
-                  text: 'Use for frequently updated statistical data files'
+                  name: 'News article',
+                  text: '<p>Use for news stories, press releases, and responses to media coverage including official statements. Do not use to promote the publication of other content.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#government-response">news article guidance</a> in full.</p>'
+                },
+                {
+                  name: 'Publication',
+                  text: '<p>Use for stand-alone government documents, issued on a specified date and usually not updated once published. This includes white papers, strategy documents, and reports.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#publications">publication guidance</a> in full.</p>'
+                },
+                {
+                  name: 'Speech',
+                  text: '<p>Use for transcripts or speaking notes for public speeches by ministers or other named spokespeople, or for statements to Parliament, or bylined articles.</p>
+                  <p>Do not publish a speech or statement unless you expect a high level of public interest in everything that was said. It’s better to publish a press release or government response for quotes or a summary.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#speech">speech guidance</a> in full.</p>'
                 }
               ]
             %}
@@ -64,7 +74,7 @@
                 <input id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}">
                 <label for="radio-part-{{ loop.index }}">
                   <span class="form-label-bold">{{ field.name }}</span>
-                  {{ field.text }}
+                  {{ field.text | safe }}
                 </label>
               </div>
             {% endfor %}
