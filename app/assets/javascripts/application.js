@@ -21,8 +21,8 @@ $(document).ready(function () {
 
   GOVUK.modalDialog.init()
 
-  if ($('#body').length > 0) {
-    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('body'), {
+  if ($('#body-with-markdown').length > 0) {
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('body-with-markdown'), {
                             lineWrapping: true,
                             viewportMargin: Infinity,
                             cursorHeight: 0.85
