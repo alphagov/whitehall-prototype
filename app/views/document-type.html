@@ -3,10 +3,16 @@
 
 {% block content %}
 
+{% if referrer() == 'format' %}
+  {% set editing = false %}
+{% else %}
+  {% set editing = true %}
+{% endif %}
+
 <main id="content" role="main">
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/title-summary-body" method="post" class="form">
+      <form action="{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">
         <div class="form-group">
           <fieldset>
             <legend>
@@ -37,7 +43,7 @@
 
             {% for field in fields %}
               <div class="multiple-choice">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="document-type" value="{{ field.name }}">
+                <input id="radio-part-{{ loop.index }}" type="radio" name="document-type" value="{{ field.name }}" {% if editing %}{{ checked("document-type", field.name) }}{% endif %}>
                 <label for="radio-part-{{ loop.index }}">
                   <span class="form-label-bold">{{ field.name }}</span>
                   {{ field.text }}
@@ -47,7 +53,8 @@
           </fieldset>
         </div>
         <div class="form-group">
-          <input type="submit" class="button" value="Save and continue">
+          <input type="submit" class="button" value="{% if editing %}Save{% else %}Continue{% endif %}">
+          {% if editing %}<a href="/document-tasks" class="button button-link add-left-margin">Cancel</a>{% endif %}
         </div>
       </form>
     </div>

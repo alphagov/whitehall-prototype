@@ -30,7 +30,7 @@
     {% block head %}{% endblock %}
   </head>
 
-  <body class="{% block body_classes %}{% endblock %}">
+  <body class="{% block body_classes %}{% endblock %}" data-module="edge">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     {% block body_start %}{% endblock %}

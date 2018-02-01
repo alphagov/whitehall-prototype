@@ -7,6 +7,8 @@ if (window.console && window.console.info) {
 }
 
 $(document).ready(function () {
+  GOVUK.modules.start();
+
   // Use GOV.UK shim-links-with-button-role.js to trigger a link styled to look like a button,
   // with role="button" when the space key is pressed.
   GOVUK.shimLinksWithButtonRole.init()
@@ -19,8 +21,8 @@ $(document).ready(function () {
 
   GOVUK.modalDialog.init()
 
-  if ($('#body').length > 0) {
-    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('body'), {
+  if ($('#body-with-markdown').length > 0) {
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('body-with-markdown'), {
                             lineWrapping: true,
                             viewportMargin: Infinity,
                             cursorHeight: 0.85
