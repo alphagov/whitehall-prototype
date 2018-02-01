@@ -56,6 +56,7 @@ $path: "/public/images/";
   position: absolute;
   border-top: 5px solid $focus-colour;
   margin-top: 1.2em;
+  width: 100%;
 }
 
 // Update highlight-within-textarea to be more like Elements
@@ -93,4 +94,17 @@ $path: "/public/images/";
 
 .task-heading-wrapper {
   overflow: hidden;
+}
+
+.document-type-guidance {
+	margin-bottom: 30px;
+	ul {
+		margin-bottom: 20px;
+		list-style-type: disc;
+		padding-left: 20px;
+		
+		li {
+			margin-bottom: 5px 0;
+		}
+	}
 }
