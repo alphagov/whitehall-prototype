@@ -21,7 +21,7 @@ router.get('/content-check', function(req, res){
 });
 
 router.post('/content-check', function(req, res){
-  checkContent(req, res, req.params['text']);
+  checkContent(req, res, req.body['text']);
 });
 
 function checkContent(req, res, text) {
