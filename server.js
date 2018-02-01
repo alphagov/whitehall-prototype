@@ -172,6 +172,14 @@ if (useAutoStoreData === 'true') {
   addCheckedFunction(documentationApp, nunjucksDocumentationEnv)
 }
 
+app.use(function (req, res, next) {
+  nunjucksAppEnv.addGlobal('referrer', function (name, value) {
+    var referrer = req.get('Referrer');
+    return referrer.split('/').pop();
+  })
+  next()
+})
+
 // Disallow search index idexing
 app.use(function (req, res, next) {
   // Setting headers stops pages being indexed even if indexed pages link to them.

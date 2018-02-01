@@ -2,6 +2,13 @@
 {% block page_title %}New news article{% endblock %}
 
 {% block content %}
+
+{% if referrer() == 'document-type' %}
+  {% set editing = false %}
+{% else %}
+  {% set editing = true %}
+{% endif %}
+
 <main id="content" role="main">
   <form action="/document-tasks" method="post" class="form">
     <div class="grid-row">
@@ -23,7 +30,7 @@
           <label class="form-label" for="title">
             Title
           </label>
-          <input type="text" name="title" class="js-check-content form-control" id="title" data-target="title-checks" value="{{data['title']}}">
+          <input type="text" name="title" class="js-check-content form-control" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
           <span class="form-hint" style="margin-top: 5px">65 characters or fewer</span>
         </div>
       </div>
@@ -43,7 +50,7 @@
           <label class="form-label" for="summary">
             Summary
           </label>
-          <textarea name="summary" class="form-control js-check-content" data-target="summary-checks" name="textarea" id="summary" rows="2">{{data['summary']}}</textarea>
+          <textarea name="summary" class="form-control js-check-content" data-target="summary-checks" name="textarea" id="summary" rows="2">{% if editing %}{{data['summary']}}{% endif %}</textarea>
         </div>
       </div>
       <div class="column-one-third">
@@ -59,7 +66,7 @@
           <label class="form-label" for="body">
             Body
           </label>
-          <textarea name="body" class="form-control js-check-content" data-target="body-checks" name="textarea" id="body" rows="20">{{data['body']}}</textarea>
+          <textarea name="body" class="form-control js-check-content" data-target="body-checks" name="textarea" id="body" rows="20">{% if editing %}{{data['body']}}{% endif %}</textarea>
         </div>
       </div>
       <div class="column-one-third">
@@ -76,7 +83,8 @@
       </div>
     </div>
     <div class="form-group">
-      <input type="submit" class="button" value="Save and continue">
+      <input type="submit" class="button" value="Save">
+      {% if editing %}<a href="/document-tasks" class="button button-link add-left-margin">Cancel</a>{% endif %}
     </div>
   </form>
 </main>
