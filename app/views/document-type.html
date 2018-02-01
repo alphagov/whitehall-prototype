@@ -3,13 +3,14 @@
 
 {% block content %}
 
-{% if referrer() == 'format' %}
+{% if referrer() == 'format' or 'title-summary-body' %}
   {% set editing = false %}
 {% else %}
   {% set editing = true %}
 {% endif %}
 
 <main id="content" role="main">
+  <a href="{% if editing %}/document-tasks{% else %}/format{% endif %}" class="link-back">Back</a>
   <div class="grid-row">
     <div class="column-two-thirds">
       <form action="{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">

@@ -10,6 +10,7 @@
 {% endif %}
 
 <main id="content" role="main">
+  <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="link-back">Back</a>
   <form action="/document-tasks" method="post" class="form">
     <div class="grid-row">
       <div class="column-two-thirds">
