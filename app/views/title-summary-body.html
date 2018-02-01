@@ -3,7 +3,7 @@
 
 {% block content %}
 <main id="content" role="main">
-  <form action="/document-tasks" method="post" class="form copy">
+  <form action="/document-tasks" method="post" class="form">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h1 class="form-title heading-xlarge">
@@ -34,11 +34,6 @@
           </label>
           <textarea name="summary" class="form-control" name="textarea" id="summary" rows="2">{{data['summary']}}</textarea>
         </div>
-      </div>
-    </div>
-
-    <div class="grid-row">
-      <div class="column-two-thirds">
         <div class="form-group">
           <label class="form-label" for="body">
             Body
@@ -47,19 +42,39 @@
         </div>
       </div>
       <div class="column-one-third">
-        <h2 style="margin-top: 2em" class="heading-small">Markdown guidance</h2>
-        <p>For details, read the guide to using Markdown</p>
-        <ul>
-          <li><a href="#">Headings</a></li>
-          <li><a href="#">Links</a></li>
-          <li><a href="#">Bullets</a></li>
-        </ul>
+        <div class="guidance">
+<!--           <section>
+            <h2 class="heading-small">Checking for content issues...</h2>
+            <h2 class="heading-small">Content issues</h2>
+            <ul class="content-issues">
+              <li>This sentence is too long</li>
+              <li class="highlight">Use of the passive voice</li>
+              <li>Banned word: <i>Innovation</i></li>
+              <li>Banned word: <i>Transformation</i></li>
+            </ul>
+          </section> -->
+          <section>
+            <h2 class="heading-small">Guidance for writing titles</h2>
+            <p>Titles should be brief and describe what the press release is about.</p>
+            <ul>
+              <li><a href="#">Learn more about titles</a></li>
+              <li><a href="#">Don't show this again</a></li>
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <input type="submit" class="button" value="Save and continue">
     </div>
   </form>
+
+<!--   <div class="content-check-bar">
+    <div class="issues-wrapper">
+      <h3 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">This content can be improved</h3>
+      <a href="">View all issues</a>
+    </div>
+  </div> -->
 </main>
 {% endblock %}
 
