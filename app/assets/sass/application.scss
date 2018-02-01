@@ -96,15 +96,16 @@ $path: "/public/images/";
   overflow: hidden;
 }
 
-.document-type-guidance {
-	margin-bottom: 30px;
-	ul {
-		margin-bottom: 20px;
-		list-style-type: disc;
-		padding-left: 20px;
-		
-		li {
-			margin-bottom: 5px 0;
-		}
+ul.recommendations {
+	margin-bottom: 20px;
+	list-style-type: disc;
+	padding-left: 20px;
+	
+	li {
+		margin-bottom: 5px 0;
 	}
+}
+
+details {
+	margin-bottom: 50px;
 }
