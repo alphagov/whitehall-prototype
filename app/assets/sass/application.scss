@@ -47,12 +47,28 @@ $path: "/public/images/";
 	width: 79%;
 }
 
+.column-one-third {
+  position: relative;
+}
+
+.contextual-guidance {
+  background: #fff;
+  position: absolute;
+  border-top: 5px solid $focus-colour;
+  margin-top: 1.2em;
+}
+
 // Update highlight-within-textarea to be more like Elements
 
 .hwt-container {
   @extend .form-control;
   display: block;
 
+  &.is-focused {
+    outline: 3px solid $focus-colour;
+  }
+
+  input[type="text"],
   textarea {
     border: none;
 

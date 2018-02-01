@@ -17,42 +17,62 @@
       </div>
     </div>
 
-    <div class="grid-row">
+    <div class="grid-row" data-module="live-content-check">
       <div class="column-two-thirds">
         <div class="form-group">
           <label class="form-label" for="title">
             Title
-            <span class="form-hint">65 characters or fewer</span>
           </label>
-          <input type="text" name="title" class="form-control" id="title" value="{{data['title']}}">
+          <input type="text" name="title" class="js-check-content form-control" id="title" data-target="title-checks" value="{{data['title']}}">
+          <span class="form-hint" style="margin-top: 5px">65 characters or fewer</span>
         </div>
-
-        <div class="form-group">
-          <label class="form-label" for="summary">
-            Summary
-          </label>
-          <textarea name="summary" class="form-control" name="textarea" id="summary" rows="2">{{data['summary']}}</textarea>
+      </div>
+      <div class="column-one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="title-checks"></div>
+          <h3 class="heading-small">Guidance for writing titles</h3>
+          <p>Titles should be brief and describe what the {{ data['document-type'] | lower }} is about.</p>
+          <a href="#">Learn more about titles</a>
         </div>
       </div>
     </div>
 
-    <div class="grid-row">
+    <div class="grid-row" data-module="live-content-check">
+      <div class="column-two-thirds">
+        <div class="form-group">
+          <label class="form-label" for="summary">
+            Summary
+          </label>
+          <textarea name="summary" class="form-control js-check-content" data-target="summary-checks" name="textarea" id="summary" rows="2">{{data['summary']}}</textarea>
+        </div>
+      </div>
+      <div class="column-one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="summary-checks"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-row" data-module="live-content-check">
       <div class="column-two-thirds">
         <div class="form-group">
           <label class="form-label" for="body">
             Body
           </label>
-          <textarea name="body" class="form-control" name="textarea" id="body" rows="20">{{data['body']}}</textarea>
+          <textarea name="body" class="form-control js-check-content" data-target="body-checks" name="textarea" id="body" rows="20">{{data['body']}}</textarea>
         </div>
       </div>
       <div class="column-one-third">
-        <h2 style="margin-top: 2em" class="heading-small">Markdown guidance</h2>
-        <p>For details, read the guide to using Markdown</p>
-        <ul>
-          <li><a href="#">Headings</a></li>
-          <li><a href="#">Links</a></li>
-          <li><a href="#">Bullets</a></li>
-        </ul>
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="body-checks"></div>
+          <h2 class="heading-small">Markdown guidance</h2>
+          <p>For details, read the guide to using Markdown</p>
+          <ul>
+            <li><a href="#">Headings</a></li>
+            <li><a href="#">Links</a></li>
+            <li><a href="#">Bullets</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="form-group">
