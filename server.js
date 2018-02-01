@@ -175,7 +175,12 @@ if (useAutoStoreData === 'true') {
 app.use(function (req, res, next) {
   nunjucksAppEnv.addGlobal('referrer', function (name, value) {
     var referrer = req.get('Referrer');
-    return referrer.split('/').pop();
+
+    if (referrer) {
+      referrer = referrer.split('/').pop();
+    }
+
+    return referrer;
   })
   next()
 })
