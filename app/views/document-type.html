@@ -3,51 +3,64 @@
 
 {% block content %}
 
+{% if referrer() == 'format' or 'title-summary-body' %}
+  {% set editing = false %}
+{% else %}
+  {% set editing = true %}
+{% endif %}
+
 <main id="content" role="main">
+  <a href="{% if editing %}/document-tasks{% else %}/format{% endif %}" class="link-back">Back</a>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form action="/title-summary-body" method="post" class="form">
+      <form action="{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">
         <div class="form-group">
           <fieldset>
             <legend>
               <h1 class="heading-xlarge form-title">
                 What type of {{ data.format | lower }}?
               </h1>
+              <p>Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
             </legend>
 
             {% set fields = [
                 {
+                  name: 'Government response',
+                  text: '<p>Government statements in response to media coverage, such as rebuttals or ‘myth busters’. Do not use for statements to Parliament. Use the “Speech” format for those.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">government response guidance</a> in full.</p>'
+                },
+                {
                   name: 'News story',
-                  text: 'News written exclusively for GOV.UK which users need, can act on and can’t get from other sources. Avoid duplicating press releases.'
+                  text: '<p>News written exclusively for GOV.UK which users need, can act on, and can’t get from other sources. Do not duplicate press releases or news published by another department.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">news story guidance</a> in full.</p>'
                 },
                 {
                   name: 'Press release',
-                  text: 'Unedited press releases as sent to the media, and official statements from the organisation or a minister.'
+                  text: '<p>Unedited press releases as sent to the media, and official statements from the organisation or a minister. Do not use for statements to Parliament. Use the “Speech” format for those.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">press release guidance</a> in full.</p>'
                 },
                 {
-                  name: 'Government response',
-                  text: 'Government statements in response to media coverage, such as rebuttals and ‘myth busters’.'
-                },
-                {
-                  name: 'World news story',
-                  text: 'Announcements specific to one or more world location. Don’t duplicate news published by another department.'
+                  name: 'Foreign language only news story',
+                  text: '<p>A news story which will only be published in a foreign language and not in English. If there is an English version add translated versions to that instead.</p>
+                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">world news story guidance</a> in full.</p>'
                 }
               ]
             %}
 
             {% for field in fields %}
               <div class="multiple-choice">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="document-type" value="{{ field.name }}">
+                <input id="radio-part-{{ loop.index }}" type="radio" name="document-type" value="{{ field.name }}" {% if editing %}{{ checked("document-type", field.name) }}{% endif %}>
                 <label for="radio-part-{{ loop.index }}">
                   <span class="form-label-bold">{{ field.name }}</span>
-                  {{ field.text }}
+                  {{ field.text | safe }}
                 </label>
               </div>
             {% endfor %}
           </fieldset>
         </div>
         <div class="form-group">
-          <input type="submit" class="button" value="Save and continue">
+          <input type="submit" class="button" value="{% if editing %}Save{% else %}Continue{% endif %}">
+          {% if editing %}<a href="/document-tasks" class="button button-link add-left-margin">Cancel</a>{% endif %}
         </div>
       </form>
     </div>

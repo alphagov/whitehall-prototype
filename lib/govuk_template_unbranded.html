@@ -30,7 +30,7 @@
     {% block head %}{% endblock %}
   </head>
 
-  <body class="{% block body_classes %}{% endblock %}">
+  <body class="{% block body_classes %}{% endblock %}" data-module="edge">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     {% block body_start %}{% endblock %}
@@ -64,8 +64,8 @@
               <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
               <nav id="proposition-menu">
                 <ul id="proposition-links">
-                  <li><a href="/format">New document</a></li>
-                  <li><a href="/documents">Documents</a></li>
+                  <!-- <li><a href="/format">New document</a></li>
+                  <li><a href="/documents">Documents</a></li> -->
                   <li><a href="#">Paul Hayes</a></li>
                   <li><a href="#">Log out</a></li>
                 </ul>

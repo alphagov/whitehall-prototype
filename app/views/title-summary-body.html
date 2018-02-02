@@ -2,7 +2,15 @@
 {% block page_title %}New news article{% endblock %}
 
 {% block content %}
+
+{% if referrer() == 'document-type' %}
+  {% set editing = false %}
+{% else %}
+  {% set editing = true %}
+{% endif %}
+
 <main id="content" role="main">
+  <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="link-back">Back</a>
   <form action="/document-tasks" method="post" class="form">
     <div class="grid-row">
       <div class="column-two-thirds">
@@ -15,57 +23,100 @@
           {% endif %} -->
           Title, summary and body copy
         </h1>
+        <h2 class="heading-medium">Guidance for writing a {{ data['document-type'] | lower }}</h2>
+        <p>
+          News written exclusively for GOV.UK which users need, can act on, and can’t get from other sources. News stories should be self-contained and can be removed from the site without affecting other content.
+        </p>
+        <details>
+          <summary><span class="summary">Keep reading</span></summary>
+          <div class="panel panel-border-narrow">
+          <ul class="recommendations">
+            <li>Don’t duplicate news published by another department - collaborate if needed.</li>
+            <li>Don’t publish guidance in new stories - it can go out of date and won’t be found by users.</li>
+            <li>Don’t publish news just to announce other GOV.UK content - it confuses users and search results.</li>
+          </ul>
+          <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">news story guidance</a> in full.</p>
+          </div>
+        </details>
       </div>
     </div>
 
-    <div class="grid-row">
+    <div class="grid-row" data-module="live-content-check">
       <div class="column-two-thirds">
         <div class="form-group">
           <label class="form-label" for="title">
             Title
-            <span class="form-hint">65 characters or fewer</span>
           </label>
-          <input type="text" name="title" class="form-control" id="title" value="{{data['title']}}">
+          <input type="text" name="title" class="js-check-content form-control" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <span class="form-hint" style="margin-top: 5px">65 characters or fewer</span>
         </div>
+      </div>
+      <div class="column-one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="title-checks"></div>
+          <h3 class="heading-small">Writing guidance</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a href="https://whitehall-admin.integration.publishing.service.gov.uk/government/admin/publications/new#js-words-to-avoid-list">Words to avoid</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
+    <div class="grid-row" data-module="live-content-check">
+      <div class="column-two-thirds">
         <div class="form-group">
           <label class="form-label" for="summary">
             Summary
           </label>
-          <textarea name="summary" class="form-control" name="textarea" id="summary" rows="2">{{data['summary']}}</textarea>
+          <textarea name="summary" class="form-control js-check-content" data-target="summary-checks" name="textarea" id="summary" rows="2">{% if editing %}{{data['summary']}}{% endif %}</textarea>
         </div>
+      </div>
+      <div class="column-one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="summary-checks"></div>
+          <h3 class="heading-small">Writing guidance</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a href="https://whitehall-admin.integration.publishing.service.gov.uk/government/admin/publications/new#js-words-to-avoid-list">Words to avoid</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-row" data-module="live-content-check">
+      <div class="column-two-thirds">
         <div class="form-group">
           <label class="form-label" for="body">
             Body
           </label>
-          <textarea name="body" class="form-control" name="textarea" id="body" rows="20">{{data['body']}}</textarea>
+          <textarea name="body" class="form-control js-check-content" data-target="body-checks" name="textarea" id="body" rows="20">{% if editing %}{{data['body']}}{% endif %}</textarea>
         </div>
       </div>
       <div class="column-one-third">
-        <div class="guidance">
-<!--           <section>
-            <h2 class="heading-small">Checking for content issues...</h2>
-            <h2 class="heading-small">Content issues</h2>
-            <ul class="content-issues">
-              <li>This sentence is too long</li>
-              <li class="highlight">Use of the passive voice</li>
-              <li>Banned word: <i>Innovation</i></li>
-              <li>Banned word: <i>Transformation</i></li>
-            </ul>
-          </section> -->
-          <section>
-            <h2 class="heading-small">Guidance for writing titles</h2>
-            <p>Titles should be brief and describe what the press release is about.</p>
-            <ul>
-              <li><a href="#">Learn more about titles</a></li>
-              <li><a href="#">Don't show this again</a></li>
-            </ul>
-          </section>
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="body-checks"></div>
+          <h3 class="heading-small">Writing guidance</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a href="https://whitehall-admin.integration.publishing.service.gov.uk/government/admin/publications/new#js-words-to-avoid-list">Words to avoid</a></li>
+          </ul>
+          <h2 class="heading-small">Markdown guidance</h2>
+          <p>For details, read the guide to using Markdown</p>
+          <ul>
+            <li><a href="#">Headings</a></li>
+            <li><a href="#">Links</a></li>
+            <li><a href="#">Bullets</a></li>
+          </ul>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <input type="submit" class="button" value="Save and continue">
+      <input type="submit" class="button" value="Save">
+      {% if editing %}<a href="/document-tasks" class="button button-link add-left-margin">Cancel</a>{% endif %}
     </div>
   </form>
 

@@ -6,6 +6,7 @@ $path: "/public/images/";
 // Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
 @import 'govuk-elements';
 @import 'node_modules/codemirror/lib/codemirror';
+@import 'node_modules/highlight-within-textarea/jquery.highlight-within-textarea';
 
 @import 'vendor/accessible-autocomplete';
 @import 'vendor/codemirror-theme';
@@ -111,4 +112,70 @@ $path: "/public/images/";
 
 		}
 	}
+}
+
+.column-one-third {
+  position: relative;
+}
+
+.contextual-guidance {
+  background: #fff;
+  position: absolute;
+  border-top: 5px solid $focus-colour;
+  margin-top: 1.2em;
+  width: 100%;
+  p {
+  	margin-bottom: 5px;
+  }
+}
+
+// Update highlight-within-textarea to be more like Elements
+
+.hwt-container {
+  @extend .form-control;
+  display: block;
+
+  &.is-focused {
+    outline: 3px solid $focus-colour;
+  }
+
+  input[type="text"],
+  textarea {
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.hwt-backdrop {
+  // left: 3px !important;
+  // top: 4px !important;
+  padding: 5px 4px 4px;
+  border: 2px solid transparent;
+  margin: -2px 0 0 -2px;
+}
+
+.hwt-content mark {
+  background-color: transparent;
+  box-shadow: inset 0 -4px 0 0 $error-colour;
+}
+
+.task-heading-wrapper {
+  overflow: hidden;
+}
+
+ul.recommendations {
+	margin-bottom: 20px;
+	list-style-type: disc;
+	padding-left: 20px;
+	
+	li {
+		margin-bottom: 5px 0;
+	}
+}
+
+details {
+	margin-bottom: 50px;
 }

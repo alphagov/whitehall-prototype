@@ -1,3 +1,15 @@
+.button-link,
+.button-link:hover,
+.button-link:active {
+  background: transparent;
+  color: $link-colour !important;
+  border: none;
+  box-shadow: none;
+  text-decoration: underline;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .button-secondary {
   background-color: $grey-1;
 
