@@ -136,9 +136,13 @@
     </div>
     <div class="form-group">
       <input type="submit" class="button" value="Save">
-      <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing">
-      {% if editing %}<a href="/document-tasks" class="button button-link add-left-margin">Cancel</a>{% endif %}
     </div>
+    <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
+    {% if editing %}
+    <div class="form-group">
+      <a href="/document-tasks" class="button button-link">Discard changes</a>
+    </div>
+    {% endif %}
   </form>
 </main>
 {% endblock %}

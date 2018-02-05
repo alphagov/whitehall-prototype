@@ -73,8 +73,12 @@
         </div>
         <div class="form-group">
           <input type="submit" class="button" value="{% if editing %}Save{% else %}Continue{% endif %}">
-          {% if editing %}<a href="/document-tasks" class="button button-link add-left-margin">Cancel</a>{% endif %}
         </div>
+        {% if editing %}
+        <div class="form-group">
+          <a href="/document-tasks" class="button button-link">Cancel</a>
+        </div>
+        {% endif %}
       </form>
     </div>
   </div>
