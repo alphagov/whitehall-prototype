@@ -11,7 +11,7 @@
 
 <main id="content" role="main">
   <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="link-back">Back</a>
-  <form action="/document-tasks" method="post" class="form">
+  <form action="/document-tasks" method="post" class="form" data-module="slug-from-title">
     <div class="grid-row">
       <div class="column-two-thirds">
         <h1 class="form-title heading-xlarge">
@@ -62,6 +62,27 @@
         </div>
       </div>
     </div>
+    <div class="grid-row js-slug">
+      <div class="column-two-thirds">
+        <div class="panel panel-border-wide add-bottom-margin">
+          <h3 class="heading-small">The web address for this content will look like:</h3>
+          <p>
+            https://www.gov.uk/government/<span class="js-dynamic-slug">this-is-the-title</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+<!--     <div class="grid-row" data-module="live-content-check">
+      <div class="column-two-thirds">
+        <div class="form-group disabled">
+          <label class="form-label" for="title">
+            Page address for this content
+          </label>
+          <input type="text" name="slug" class="js-check-content form-control" id="slug" data-target="" value="{% if editing %}{{data['title']}}{% endif %}" placeholder="https://gov.uk/this-is-the-title">
+        </div>
+      </div>
+    </div> -->
 
     <div class="grid-row" data-module="live-content-check">
       <div class="column-two-thirds">
