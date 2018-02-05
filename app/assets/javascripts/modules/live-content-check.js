@@ -9,7 +9,7 @@
       var highlights = [];
       var $input = element.find('.js-check-content').first();
 
-      element.on('keyup mouseup change', '.js-check-content', $.debounce( 250, checkContent ));
+      element.on('keyup click paste change blur focus', '.js-check-content', $.debounce( 250, checkContent ));
       element.on('focus', '.js-check-content', focus);
       element.on('blur', '.js-check-content', unFocus);
       element.on('click', 'a[data-actual]', highlightSelected);
