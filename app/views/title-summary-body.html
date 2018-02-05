@@ -46,7 +46,7 @@
           <label class="form-label" for="title">
             Title
           </label>
-          <input type="text" name="title" class="js-check-content form-control" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <input required type="text" name="title" class="js-check-content form-control" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
           <span class="form-hint" style="margin-top: 5px">65 characters or fewer</span>
         </div>
       </div>
