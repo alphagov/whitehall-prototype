@@ -60,7 +60,7 @@
 
             {% for field in fields %}
               <div class="multiple-choice"  data-target="radio-part-{{ loop.index }}-extra">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}">
+                <input required id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}">
                 <label for="radio-part-{{ loop.index }}">
                   <span class="form-label-bold">{{ field.name }}</span>
                   {{ field.text | safe }}
