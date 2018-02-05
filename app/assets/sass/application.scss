@@ -20,6 +20,10 @@ $path: "/public/images/";
 @import 'patterns/buttons';
 @import 'header';
 
+.empty {
+  color: $grey-1;
+}
+
 .form-control {
   width: 100%;
 }

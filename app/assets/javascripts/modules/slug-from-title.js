@@ -6,7 +6,7 @@
 
   GOVUK.Modules.SlugFromTitle = function () {
     this.start = function (element) {
-      element.on('change keyup', '#title', updateSlug);
+      element.on('change keyup click paste', '#title', updateSlug);
       $('#title').trigger('keyup');
 
       function updateSlug(evt) {
@@ -16,9 +16,11 @@
         element.find('.js-dynamic-slug').text(slug);
 
         if (slug.length > 0) {
-          element.find('.js-slug').show();
+          element.find('.js-slug-parent').show();
+          element.find('.empty').hide();
         } else {
-          element.find('.js-slug').hide();
+          element.find('.js-slug-parent').hide();
+          element.find('.empty').show();
         }
       }
     }
