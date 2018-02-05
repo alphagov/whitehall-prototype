@@ -3,7 +3,7 @@
 
 {% block content %}
 
-{% if referrer() == 'format' or 'title-summary-body' %}
+{% if referrer() == 'format' or referrer() == 'title-summary-body' %}
   {% set editing = false %}
 {% else %}
   {% set editing = true %}
