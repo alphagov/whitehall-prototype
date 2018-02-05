@@ -20,8 +20,8 @@
             {% set fields = [
                 {
                   name: 'Case study',
-                  text: '<p>Use for real examples that help users understand someone’s experience of a process or an important aspect of government policy. Do not use to promote your organisation or if it doesn’t relate to something covered on GOV.UK.</p>
-
+                  text: '<p>Use for real examples that help users understand someone’s experience of a process or an important aspect of government policy.',
+                  more: '<p>Do not use to promote your organisation or if it doesn’t relate to something covered on GOV.UK.</p>
                   <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#case-study">case study guidance</a> in full.</p>'
                 },
                 {
@@ -30,48 +30,46 @@
                 },
                 {
                   name: 'Detailed guide',
-                  text: '<p>Use to tell users the steps they need to take to complete a clearly defined task. They are usually aimed at specialist or professional audiences.</p>
-                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">detailed guides guidance</a> in full.</p>'
+                  text: '<p>Use to tell users the steps they need to take to complete a clearly defined task. They are usually aimed at specialist or professional audiences.</p>',
+                  more: '<p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">detailed guides guidance</a> in full.</p>'
                 },
                 {
                   name: 'Document collection',
-                  text: '<p>Use for grouping closely related documents on a single page for a specific audience.</p>
-                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">document collection guidance</a> in full.</p>
-                  '
+                  text: '<p>Use for grouping closely related documents on a single page for a specific audience.</p>',
+                  more: '<p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">document collection guidance</a> in full.</p>'
                 },
                 {
                   name: 'News article',
-                  text: '<p>Use for news stories, press releases, and responses to media coverage including official statements. Do not use to promote the publication of other content.</p>
+                  text: '<p>Use for news stories, press releases, and responses to media coverage including official statements.',
+                  more: '<p>Do not use to promote the publication of other content.</p>
                   <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#government-response">news article guidance</a> in full.</p>'
                 },
                 {
                   name: 'Publication',
-                  text: '<p>Use for stand-alone government documents, issued on a specified date and usually not updated once published. This includes white papers, strategy documents, and reports.</p>
-                  <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#publications">publication guidance</a> in full.</p>'
+                  text: '<p>Use for stand-alone government documents, issued on a specified date and usually not updated once published. This includes white papers, strategy documents, and reports.</p>',
+                  more: '<p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#publications">publication guidance</a> in full.</p>'
                 },
                 {
                   name: 'Speech',
-                  text: '<p>Use for transcripts or speaking notes for public speeches by ministers or other named spokespeople, or for statements to Parliament, or bylined articles.</p>
-                  <p>Do not publish a speech or statement unless you expect a high level of public interest in everything that was said. It’s better to publish a press release or government response for quotes or a summary.</p>
+                  text: '<p>Use for transcripts or speaking notes for public speeches by ministers or other named spokespeople, or for statements to Parliament, or bylined articles.</p>',
+                  more: '<p>Do not publish a speech or statement unless you expect a high level of public interest in everything that was said. It’s better to publish a press release or government response for quotes or a summary.</p>
                   <p>Read the <a href="https://www.gov.uk/guidance/content-design/content-types#speech">speech guidance</a> in full.</p>'
                 }
               ]
             %}
 
             {% for field in fields %}
-              <!-- <h3 class="heading-small">
-                <a href="#">{{ field.name }}</a>
-              </h3>
-              <p>{{ field.text }}</p>
-              <hr /> -->
-            {% endfor %}
-
-            {% for field in fields %}
-              <div class="multiple-choice">
+              <div class="multiple-choice"  data-target="radio-part-{{ loop.index }}-extra">
                 <input id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}">
                 <label for="radio-part-{{ loop.index }}">
                   <span class="form-label-bold">{{ field.name }}</span>
                   {{ field.text | safe }}
+
+                  {% if field.more %}
+                  <div class="panel js-hidden" id="radio-part-{{ loop.index }}-extra">
+                    {{ field.more | safe }}
+                  </div>
+                  {% endif %}
                 </label>
               </div>
             {% endfor %}
