@@ -10,7 +10,7 @@ module.exports = {
   port: '3000',
 
   // Enable or disable password protection on production
-  useAuth: 'false',
+  useAuth: 'true',
 
   // Automatically stores form data, and send to all views
   useAutoStoreData: 'true',
@@ -18,11 +18,11 @@ module.exports = {
   // Enable or disable built-in docs and examples.
   useDocumentation: 'true',
 
-  // Force HTTP to redirect to HTTPs on production
+  // Force HTTP to redirect to HTTPS on production
   useHttps: 'true',
 
   // Cookie warning - update link to service's cookie page.
-  cookieText: 'GOV.UK uses cookies to make the site simpler. <a href="#">Find out more about cookies</a>',
+  cookieText: 'GOV.UK uses cookies to make the site simpler. <a class="govuk-link" href="#">Find out more about cookies</a>',
 
   // Enable or disable Browser Sync
   useBrowserSync: 'true'

@@ -1,32 +1,27 @@
-# GOV.UK Whitehall Prototype
+# GOV.UK Prototype kit · [![Greenkeeper badge](https://badges.greenkeeper.io/alphagov/govuk_prototype_kit.svg)](https://greenkeeper.io/)
 
-https://whitehall-prototype.herokuapp.com
+Go to the [GOV.UK Prototype Kit site](https://govuk-prototype-kit.herokuapp.com/docs) to download the latest version and read the documentation.
 
-Built by the GOV.UK Publishing Workflow team using the [GOV.UK Prototype Kit](https://govuk-prototype-kit.herokuapp.com/docs).
+## About the prototype kit
 
-The prototype explores existing designs and page layouts in Whitehall re-imagined using the GOV.UK design patterns.
+The prototype kit provides a simple way to make interactive prototypes that look like pages on GOV.UK. These prototypes can be used to show ideas to people you work with, and to do user research.
 
-## Running the prototype locally
+Read the [project principles](https://govuk-prototype-kit.herokuapp.com/docs/principles).
 
-```
-npm install
-npm start
-```
+## Security
 
-## Screenshots
+If you publish your prototypes online, they **must** be protected by a [username and password](https://govuk-prototype-kit.herokuapp.com/docs/publishing-on-heroku). This is to prevent members of the public finding prototypes and thinking they are real services.
 
-### Choosing a format
+You must protect user privacy at all times, even when using prototypes. Prototypes made with the kit look like GOV.UK, but do not have the same security provisions. Always make sure you are handling user data appropriately.
 
-![Choose a format](docs/assets/images/screenshots/format-choice-view.png)
+## Installation instructions
 
-### Creating a news article
+- [Installation guide for new users (non technical)](https://govuk-prototype-kit.herokuapp.com/docs/install/introduction)
+- [Installation guide for developers (technical)](https://govuk-prototype-kit.herokuapp.com/docs/install/developer-install-instructions)
 
-![Form for creating a news article](docs/assets/images/screenshots/new-news-article-view.png)
+## Community
 
-### News article view
+We have two Slack channels for the Prototype kit. You'll need a government email address to join them.
 
-![A news article in draft state](docs/assets/images/screenshots/document-view.png)
-
-### Documents
-
-![Documents filter](docs/assets/images/screenshots/documents-view.png)
+* [Slack channel for users of the prototype kit](https://ukgovernmentdigital.slack.com/messages/prototype-kit/)
+* [Slack channel for developers of the prototype kit](https://ukgovernmentdigital.slack.com/messages/prototype-kit-dev/)

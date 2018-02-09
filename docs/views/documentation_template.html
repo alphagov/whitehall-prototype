@@ -6,24 +6,26 @@ Documentation - GOV.UK Prototype kit
 
 {% block content %}
 
-<main id="content" role="main" class="docs markdown">
-	<div class="breadcrumbs">
-	  <ol role="breadcrumbs">
-	    <li><a href="/docs">GOV.UK prototype kit</a></li>
-	    <li><a href="/docs/tutorials-and-examples">Tutorials and examples</a></li>
-	  </ol>
-	</div>
+<div class="govuk-o-width-container">
 
-	<div class="grid-row">
+  <div class="govuk-c-breadcrumbs">
+    <ol class="govuk-c-breadcrumbs__list">
+      <li class="govuk-c-breadcrumbs__list-item">
+        <a class="govuk-c-breadcrumbs__link" href="/docs">GOV.UK prototype kit</a>
+      </li>
+    </ol>
+  </div>
 
-		<div class="column-two-thirds">
+  <main role="main" class="govuk-o-main-wrapper">
 
-			{{document | safe}}
-
-		</div>
-
-	</div>
-	
-</main>
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-prose-scope">
+  			 {{document | safe}}
+        </div>
+  		</div>
+  	</div>
+  </main>
+</div>
 
 {% endblock %}

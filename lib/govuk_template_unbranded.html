@@ -16,7 +16,7 @@
     <!--[if gte IE 9]><!--><link href="{{ asset_path }}stylesheets/fonts.css?0.18.3" media="all" rel="stylesheet" /><!--<![endif]-->
     <!--[if lt IE 9]><script src="{{ asset_path }}javascripts/ie.js?0.18.3"></script><![endif]-->
 
-    <link rel="shortcut icon" href="{{ asset_path }}images/favicon.ico?0.18.3" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset_path }}images/unbranded.ico?0.18.3" type="image/x-icon" />
     <link rel="mask-icon" href="{{ asset_path }}images/gov.uk_logotype_crown.svg?0.18.3" color="#0b0c0c">
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset_path }}images/apple-touch-icon-152x152.png?0.18.3">
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ asset_path }}images/apple-touch-icon-120x120.png?0.18.3">
@@ -30,7 +30,7 @@
     {% block head %}{% endblock %}
   </head>
 
-  <body class="{% block body_classes %}{% endblock %}" data-module="edge">
+  <body class="{% block body_classes %}{% endblock %}">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     {% block body_start %}{% endblock %}
@@ -48,32 +48,8 @@
     </div>
     <!--end global-cookie-message-->
 
-    <header role="banner" id="global-header">
-      <div class="header-wrapper">
-        <div class="header-global">
-          <div class="header-logo">
-            <a href="/dashboard" id="logo" class="content">
-              <img src="/public/images/gov.uk_logotype_crown_invert_trans.png?0.23.0" width="36" height="32" alt=""> GOV.UK Whitehall
-            </a>
-            <div class="environment-label">
-              Alpha
-            </div>
-          </div>
-          <div class="header-proposition">
-            <div class="content">
-              <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
-              <nav id="proposition-menu">
-                <ul id="proposition-links">
-                  <!-- <li><a href="/format">New document</a></li>
-                  <li><a href="/documents">Documents</a></li> -->
-                  <li><a href="#">Paul Hayes</a></li>
-                  <li><a href="#">Log out</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
+
+    <header role="banner" id="global-header" class="{% block header_class %}{% endblock %}">
     </header>
     <!--end header-->
 

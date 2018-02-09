@@ -1,3 +1,15 @@
+# 7.0.0-beta.2
+
+- [#21 Update links to the design system](https://github.com/alphagov/govuk-prototype-kit-private-beta/pull/21)
+
+# 7.0.0-beta.1
+
+This is the first release of the private beta version of the GOV.UK Prototype Kit.
+
+It uses the new GOV.UK Frontend library instead of GOV.UK Elements and Frontend Toolkit.
+
+It links to the GOV.UK Design System instead of GOV.UK Elements and the GOV.UK Service Manual.
+
 # 6.3.0
 
 New features:

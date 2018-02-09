@@ -2,118 +2,62 @@
 // in the govuk frontend toolkit's url-helpers partial
 $path: "/public/images/";
 
-// Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
-// Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
-@import 'govuk-elements';
-@import 'node_modules/codemirror/lib/codemirror';
-@import 'node_modules/highlight-within-textarea/jquery.highlight-within-textarea';
+//Import GOV.UK Frontend
+@import "@govuk-frontend/all/all";
 
-@import 'vendor/accessible-autocomplete';
-@import 'vendor/codemirror-theme';
-@import 'margin-helpers';
-
+// Patterns that aren't in Frontend
 @import 'patterns/check-your-answers';
-@import 'patterns/task-list';
-@import 'patterns/document-list';
-@import 'patterns/success-summary';
-@import 'patterns/modal-dialog';
-@import 'patterns/buttons';
-@import 'header';
+@import 'patterns/related-items';
 
-.empty {
-  color: $grey-1;
+.code {
+  color: $govuk-text-colour;
+  background-color: $govuk-highlight-colour;
+
+  text-shadow: 0 1px $govuk-page-colour;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  border: 1px solid $govuk-border-colour;
+  padding: 4px 4px 2px;
 }
 
-.form-control {
-  width: 100%;
+
+// Local fixes to GOV.UK frontend
+
+.markdown hr {
+  @include govuk-responsive-margin($govuk-spacing-responsive-6, "top");
+  @include govuk-responsive-margin($govuk-spacing-responsive-6, "bottom");
 }
 
-.heading-xlarge {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
+.govuk-list + .govuk-heading-l,
+.govuk-list + .govuk-heading-m,
+.govuk-list + .govuk-heading-s,
+.govuk-prose-scope ul + h2,
+.govuk-prose-scope ul + h3,
+.govuk-prose-scope ul + h4,
+.govuk-prose-scope pre + h2,
+.govuk-prose-scope pre + h3,
+.govuk-prose-scope pre + h4 {
+  @include govuk-responsive-padding($govuk-spacing-responsive-4, "top");
 }
 
-.markdown-body {
-  max-width: 100%;
-  white-space: pre-wrap;
-}
+// Take a look at in app/assets/sass/patterns/ to see which files are imported.
+// @import 'patterns/check-your-answers';
+// @import 'patterns/task-list';
 
-.metadata dt, .metadata dd {
-	display: inline-block;
-	font-size: 16px;
-}
-
-.metadata dt {
-	width: 20%;
-}
-
-.metadata dd {
-	width: 79%;
-}
-
-.column-one-third {
-  position: relative;
-}
-
-.contextual-guidance {
-  background: #fff;
-  position: absolute;
-  border-top: 5px solid $focus-colour;
-  margin-top: 1.2em;
-  width: 100%;
-
-  .body-guidance & {
-    position: static;
-  }
-}
-
-// Update highlight-within-textarea to be more like Elements
-
-.hwt-container {
-  @extend .form-control;
-  display: block;
-
-  &.is-focused {
-    outline: 3px solid $focus-colour;
-  }
-
-  input[type="text"],
-  textarea {
-    border: none;
-
-    &:focus {
-      outline: none;
-    }
-  }
-}
-
-.hwt-backdrop {
-  // left: 3px !important;
-  // top: 4px !important;
-  padding: 5px 4px 4px;
-  border: 2px solid transparent;
-  margin: -2px 0 0 -2px;
-}
-
-.hwt-content mark {
-  background-color: transparent;
-  box-shadow: inset 0 -4px 0 0 $error-colour;
-}
-
-.task-heading-wrapper {
-  overflow: hidden;
-}
-
-ul.recommendations {
-	margin-bottom: 20px;
-	list-style-type: disc;
-	padding-left: 20px;
-
-	li {
-		margin-bottom: 5px 0;
-	}
-}
-
-details {
-	margin-bottom: 50px;
-}
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you

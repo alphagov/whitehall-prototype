@@ -4,9 +4,9 @@
   defaults wraps generate-assets, watch and server
 */
 
-var gulp = require('gulp')
-var mocha = require('gulp-mocha')
-var runSequence = require('run-sequence')
+const gulp = require('gulp')
+const mocha = require('gulp-mocha')
+const runSequence = require('run-sequence')
 
 gulp.task('default', function (done) {
   runSequence('generate-assets',
@@ -16,19 +16,19 @@ gulp.task('default', function (done) {
 
 gulp.task('generate-assets', function (done) {
   runSequence('clean',
-                'copy-govuk-modules',
+                // 'copy-govuk-modules',
                 'sass',
                 'sass-documentation',
                 'copy-assets',
                 'copy-documentation-assets', done)
 })
 
-gulp.task('copy-govuk-modules', [
-  'copy-toolkit',
-  'copy-template-assets',
-  'copy-elements-sass',
-  'copy-template'
-])
+// gulp.task('copy-govuk-modules', [
+//   // 'copy-toolkit',
+//   'copy-template-assets',
+//   'copy-frontend',
+//   'copy-template'
+// ])
 
 gulp.task('watch', function (done) {
   runSequence('watch-sass',
