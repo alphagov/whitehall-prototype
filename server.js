@@ -84,6 +84,8 @@ app.set('view engine', 'html')
 app.use('/icons', express.static(path.join(__dirname, '/node_modules/@govuk-frontend/icons')))
 app.use('/public', express.static(path.join(__dirname, '/public')))
 app.use('/public', express.static(path.join(__dirname, '/node_modules/govuk_template_jinja/assets')))
+app.use('/public/codemirror', express.static(path.join(__dirname, '/node_modules/codemirror')))
+app.use('/public/highlight-within-textarea', express.static(path.join(__dirname, '/node_modules/highlight-within-textarea')))
 // app.use('/public', express.static(path.join(__dirname, '/node_modules/govuk_frontend_toolkit')))
 // app.use('/public/images/icons', express.static(path.join(__dirname, '/node_modules/govuk_frontend_toolkit/images')))
 
@@ -145,6 +147,19 @@ if (useAutoStoreData === 'true') {
   utils.addCheckedFunction(nunjucksAppEnv)
   utils.addCheckedFunction(nunjucksDocumentationEnv)
 }
+
+app.use(function (req, res, next) {
+  nunjucksAppEnv.addGlobal('referrer', function (name, value) {
+    var referrer = req.get('Referrer');
+
+    if (referrer) {
+      referrer = referrer.split('/').pop();
+    }
+
+    return referrer;
+  })
+  next()
+})
 
 // Clear all data in session if you open /prototype-admin/clear-data
 app.get('/prototype-admin/clear-data', function (req, res) {

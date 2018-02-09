@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+{% block page_title %}New news article{% endblock %}
+
+{% block content %}
+
+{% if referrer() == 'document-type' %}
+  {% set editing = false %}
+{% else %}
+  {% set editing = true %}
+{% endif %}
+
+<a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
+<main role="main" class="govuk-o-main-wrapper">
+  <form action="/document-tasks" method="post" class="form" data-module="slug-from-title">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h1 class="form-title govuk-heading-xl">
+          <span class="govuk-caption-xl">{{ data['format'] }}</span>
+          {% if data['title'] %}
+            {{ data['title'] }}
+          {% else %}
+            Create {{ data['document-type'] | lower }}
+          {% endif %}
+        </h1>
+        <h2 class="govuk-heading-m">Guidance for writing a {{ data['document-type'] | lower }}</h2>
+        <p class="govuk-body">
+          News written exclusively for GOV.UK which users need, can act on, and can’t get from other sources. News stories should be self-contained and can be removed from the site without affecting other content.
+        </p>
+        <details class="govuk-c-details">
+          <summary class="govuk-c-details__summary"><span class="govuk-c-details__summary-text">Keep reading</span></summary>
+          <div class="govuk-c-border govuk-c-border--left-narrow">
+            <ul class="recommendations">
+              <li>Don’t duplicate news published by another department - collaborate if needed.</li>
+              <li>Don’t publish guidance in new stories - it can go out of date and won’t be found by users.</li>
+              <li>Don’t publish news just to announce other GOV.UK content - it confuses users and search results.</li>
+            </ul>
+            <p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">news story guidance</a> in full.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6">
+          <label class="govuk-c-label" for="title">
+            Title
+          </label>
+          <input required type="text" name="title" class="js-check-content govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <span class="govuk-c-label__hint" style="margin-top: -25px">65 characters or fewer</span>
+        </div>
+      </div>
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="title-checks"></div>
+          <h3 class="govuk-heading-s">Writing guidance</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a href="#">Words to avoid</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-o-grid js-slug">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6">
+          <h3 class="govuk-heading-s govuk-!-m-r0">The web address for this content will look like:</h3>
+          <span class="empty">
+            You haven’t entered a title yet.
+          </span>
+          <span class="js-slug-parent">
+            https://www.gov.uk/government/<span class="js-dynamic-slug">this-is-the-title</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+<!--     <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6 disabled">
+          <label class="govuk-c-label" for="title">
+            Page address for this content
+          </label>
+          <input type="text" name="slug" class="js-check-content form-control" id="slug" data-target="" value="{% if editing %}{{data['title']}}{% endif %}" placeholder="https://gov.uk/this-is-the-title">
+        </div>
+      </div>
+    </div> -->
+
+    <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6">
+          <label class="govuk-c-label" for="summary">
+            Summary
+          </label>
+          <textarea name="summary" class="govuk-c-textarea js-check-content" data-target="summary-checks" name="textarea" id="summary" rows="2">{% if editing %}{{data['summary']}}{% endif %}</textarea>
+        </div>
+      </div>
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="summary-checks"></div>
+          <h3 class="govuk-heading-s">Writing guidance</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a href="#">Words to avoid</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-o-grid body-guidance" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6">
+          <label class="govuk-c-label" for="body">
+            Body
+          </label>
+          <textarea name="body" class="govuk-c-textarea js-check-content" data-target="body-checks" name="textarea" id="body" rows="40">{% if editing %}{{data['body']}}{% endif %}</textarea>
+        </div>
+      </div>
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+        <div class="js-contextual-guidance contextual-guidance" style="display: none">
+          <div id="body-checks"></div>
+          <h3 class="govuk-heading-s">Writing guidance</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a href="#">Words to avoid</a></li>
+          </ul>
+          <h2 class="govuk-heading-s">Markdown guidance</h2>
+          <p class="govuk-body">For details, read the guide to using Markdown</p>
+          <ul>
+            <li><a href="#">Headings</a></li>
+            <li><a href="#">Links</a></li>
+            <li><a href="#">Bullets</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-!-mb-r6">
+      <input type="submit" class="govuk-c-button" value="Save">
+    </div>
+    <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
+    {% if editing %}
+    <div class="govuk-!-mb-r6">
+      <a href="/document-tasks" class="button button-link">Discard changes</a>
+    </div>
+    {% endif %}
+  </form>
+</main>
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('government-organisations'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
+{% endblock %}

@@ -16,4 +16,4 @@ The prototype kit provides a simple way to make interactive prototypes that look
 
 You’ll use a copy of the kit for each different prototype you want to make - they’re self contained. Once installed, the kit uses about 100mb.
 
-<a href="requirements.md" class="button">Next (requirements)</a>
+<a href="requirements.md" class="govuk-c-button">Next (requirements)</a>

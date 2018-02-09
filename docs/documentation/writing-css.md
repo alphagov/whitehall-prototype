@@ -29,9 +29,9 @@ If you look at [application.scss](../app/assets/sass/application.scss) you shoul
     ....
 
     h1 {
-      @include bold-48;
+      @include govuk-font-bold-48;
 
-The line `@import '_typography';` makes all the code in [_typography.scss](https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_typography.scss) available. The `h1` can therefore be styled in the 48pt bold form of the font by using `@include bold-48;` to call the `bold-48` mixin.
+The line `@import '_typography';` makes all the code in [_typography.scss](https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_typography.scss) available. The `h1` can therefore be styled in the 48pt bold form of the font by using `@include govuk-font-bold-48;` to call the `bold-48` mixin.
 
 ## Imports
 

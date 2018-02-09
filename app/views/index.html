@@ -5,50 +5,42 @@
 {% endblock %}
 
 {% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h2 class="govuk-heading-l">Examples</h2>
+      <p class="govuk-body-l">A collection of prototypes based on existing Whitehall pages</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a class="govuk-link" href="/dashboard">Dashboard</a></li>
+        <li><a class="govuk-link" href="/format">News article workflow</a></li>
+        <li><a class="govuk-link" href="/documents">Documents</a></li>
+      </ul>
 
-<div class="govuk-o-width-container">
-  <main role="main" class="govuk-o-main-wrapper">
-    <div class="govuk-o-grid">
-      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <h1 class="govuk-heading-xl">
-          New publication
-        </h1>
-        <p class="govuk-body">
-          Use this format for: Stand-alone government documents, issued on a specified date through GOV.UK for distribution.
-        </p>
+      <h2 class="govuk-heading-l">Patterns</h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a class="govuk-link" href="/patterns/flash-notices">Flash notices</a></li>
+        <li><a class="govuk-link" href="/patterns/modals">Modals</a></li>
+        <li><a class="govuk-link" href="/patterns/buttons">Buttons</a></li>
+        <li><a class="govuk-link" href="/patterns/document-list">Document list</a></li>
+        <li><a class="govuk-link" href="/patterns/organisation-autocomplete">Organisation autocomplete</a></li>
+        <li><a class="govuk-link" href="/patterns/markdown-editor">Markdown editor with syntax highlighting</a></li>
+        <li><a class="govuk-link" href="/patterns/content-checker">Content checker</a></li>
+      </ul>
 
-        <h1 class="govuk-heading-xl">
-          The GOV.UK prototype kit
-          <span class="govuk-caption-xl">{{releaseVersion}}</span>
-        </h1>{{releaseVersion | log }}
-        <p class="govuk-body">
-          This kit lets you rapidly create HTML prototypes of GOV.UK services.
-        </p>
+      <p class="govuk-body">
+        <a href="/prototype-admin/clear-data">Clear all data</a>
+      </p>
 
-        <p class="govuk-body">
-          It contains all you need to prototype anything from simple static pages to complex, data-driven transactions.
-        </p>
-
-        <h2 class="govuk-heading-m">About this page</h2>
-
-        <p class="govuk-body">We recommend you add links to your prototype to this page, rather than delete it.
-          You'll find this page in the kit at '/app/views/index.html'.</p>
-
-        <p class="govuk-body">You can change the service name by editing the file '/app/config.js'.</p>
-
-  			<h2 class="govuk-heading-m">Examples and documentation</h2>
-
-  			<ul class="govuk-list govuk-list--bullet">
-  				<li><a href="/docs/tutorials-and-examples">Example pages and documentation</a></li>
-  				<li>
-  					<a href="https://govuk-design-system-production.cloudapps.digital">
-  						GOV.UK Design System
-  					</a>
-  				</li>
-  			</ul>
-      </div>
+      <h2 class="govuk-heading-l">Design system</h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="/docs/tutorials-and-examples">Example pages and documentation</a></li>
+        <li>
+          <a href="https://govuk-design-system-production.cloudapps.digital">
+            GOV.UK Design System
+          </a>
+        </li>
+      </ul>
     </div>
-  </main>
-</div>
-
+  </div>
+</main>
 {% endblock %}

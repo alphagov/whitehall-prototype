@@ -1,0 +1,201 @@
+{% extends "layout.html" %}
+{% block page_title %}{{ data['title'] }}{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <!-- <div class="success-summary" role="alert" tabindex="-1">
+    <p>
+      Your draft has been saved
+    </p>
+  </div> -->
+
+  <h1 class="form-title govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ data['format'] }}</span>
+    {% if data['title'] %}
+      {{ data['title'] }}
+    {% else %}
+      Some title
+    {% endif %}
+  </h1>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <dl class="metadata">
+        <dt>Created by</dt>
+        <dd>Kamala Khan</dd>
+        <dt>Last updated</dt>
+        <dd>20 January 2018</dd>
+        <dt>Status</dt>
+        <dd>Draft</dd>
+      </dl>
+      <ol class="document-list">
+        <li>
+          <ul class="document-list-items">
+            <li class="document-list-item">
+              <div class="task-heading-wrapper">
+                <h3 class="document-task">
+                  Type of {{ data['format'] | lower }}
+                </h3>
+                <a href="/document-type" class="document-task-action">Change</a>
+              </div>
+              <div>
+                <h3 class="govuk-heading-s">{{ data['document-type'] }}</h3>
+                Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+              </div>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Title, summary and body
+              </h3>
+
+              <a class="document-task-action" id="eligibility-completed" href="/title-summary-body">Change</a>
+
+              <dl class="document-task-part">
+                <div>
+                  <dt class="document-part-label">
+                    Title
+                  </dt>
+                  <dd class="document-part-value">
+                    {% if data['title'] %}
+                      {{ data['title'] }}
+                    {% else %}
+                      Some title
+                    {% endif %}
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="document-part-label">
+                    Summary
+                  </dt>
+                  {% if data['summary'] %}
+                    <dd class="document-part-value">
+                      {{ data['summary'] }}
+                    </dd>
+                  {% else %}
+                    <dd class="document-part-value document-part-value--empty">
+                      This field is empty
+                    </dd>
+                  {% endif %}
+                </div>
+
+                <div>
+                  <dt class="document-part-label">
+                    Body
+                  </dt>
+                  {% if data['body'] %}
+                    <dd class="document-part-value">
+                      {{ data['body'] | truncate(200) }}
+                    </dd>
+                  {% else %}
+                    <dd class="document-part-value document-part-value--empty">
+                      This field is empty
+                    </dd>
+                  {% endif %}
+                </div>
+              </dl>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Images
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Attachments
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                About this content
+              </h3>
+              <a href="#" class="document-task-action">Change</a>
+              <dl class="document-task-part">
+                <div>
+                  <dt class="document-part-label">
+                    Policies
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="document-part-label">
+                    Policy areas
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="document-part-label">
+                    Ministers
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Topical events
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Location
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Lead organisations
+                  </dt>
+                  <dd class="document-part-value">
+                    Department of Health & Social Care
+                  </dd>
+                </div>
+                <div>
+                  <dt class="document-part-label">
+                    Supporting organisations
+                  </dt>
+                  <dd class="document-part-value document-part-value--empty">
+                    This field is empty
+                  </dd>
+                </div>
+              </dl>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Publish settings
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
+            </li>
+            <li class="document-list-item">
+              <h3 class="document-task">
+                Translations
+              </h3>
+              <a href="#" class="document-task-action">Add</a>
+            </li>
+          </ul>
+        </li>
+      </ol>
+      <ul class="buttons">
+        <li><a href="#" class="govuk-c-button">Request review</a></li>
+        <li><a href="#">Request fact-check</a></li>
+        <li><a href="#">Preview</a></li>
+        <li><a href="#">Force-publish</a></li>
+        <li><a href="#" class="danger">Delete this draft</a></li>
+      </ul>
+    </div>
+  </div>
+</main>
+{% endblock %}
