@@ -2,7 +2,7 @@
 {% block page_title %}{{ data['title'] }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
+<main role="main" class="govuk-o-main-wrapper">
   <div class="success-summary" role="alert" tabindex="-1">
     <p>
       Your draft has been saved
@@ -10,13 +10,13 @@
   </div>
 
   <h1 class="form-title heading-large">
-    <span class="heading-secondary">{{ data['news-article-sub-type'] }}</span>
+    <span class="govuk-caption-xl">{{ data['news-article-sub-type'] }}</span>
     {{ data['title'] }}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-        <p class="lede">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <p class="govuk-body-l">
           {{ data['summary'] }}
         </p>
         <hr />
@@ -24,12 +24,12 @@
         <pre class="markdown-body">{{data['body']}}</pre>
 
         <p class="add-top-margin">
-          <a href="/edit-news-article" class="button">Edit draft</a>
+          <a href="/edit-news-article" class="govuk-c-button">Edit draft</a>
         </p>
     </div>
-    <div class="column-one-third">
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
       <div>
-        <h2 class="heading-medium remove-top-margin">Workflow</h2>
+        <h2 class="govuk-heading-m remove-top-margin">Workflow</h2>
         <ul class="list">
           <li><a href="#">Preview on website</a></li>
           <li><a href="#">Submit for review</a></li>
@@ -39,7 +39,7 @@
           <li><a href="#">Force publish</a></li>
         </ul>
 
-        <h2 class="heading-medium remove-top-margin">Edit</h2>
+        <h2 class="govuk-heading-m remove-top-margin">Edit</h2>
         <ul class="list">
           <li><a href="#">Attachments</a></li>
           <li><a href="#">Images</a></li>
@@ -47,7 +47,7 @@
           <li><a href="#">User need</a></li>
         </ul>
 
-        <h2 class="heading-medium remove-top-margin">History</h2>
+        <h2 class="govuk-heading-m remove-top-margin">History</h2>
         <ul class="list">
           <li><a href="#">History and notes</a></li>
         </ul>

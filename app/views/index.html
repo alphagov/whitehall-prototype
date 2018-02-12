@@ -1,30 +1,45 @@
 {% extends "layout.html" %}
-{% block page_title %}Examples – GOV.UK Whitehall{% endblock %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
 {% block content %}
-<main id="content" role="main">
-  <h1 class="heading-xlarge">GOV.UK Whitehall prototype</h1>
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h2 class="heading-large">Examples</h2>
-      <p class="lede">A collection of prototypes based on existing Whitehall pages</p>
-      <ul class="list list-bullet">
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/format">News article workflow</a></li>
-        <li><a href="/documents">Documents</a></li>
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h2 class="govuk-heading-l">Examples</h2>
+      <p class="govuk-body-l">A collection of prototypes based on existing Whitehall pages</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a class="govuk-link" href="/dashboard">Dashboard</a></li>
+        <li><a class="govuk-link" href="/format">News article workflow</a></li>
+        <li><a class="govuk-link" href="/documents">Documents</a></li>
       </ul>
 
-      <h2 class="heading-large">Patterns</h2>
-      <ul class="list list-bullet">
-        <li><a href="/patterns/flash-notices">Flash notices</a></li>
-        <li><a href="/patterns/modals">Modals</a></li>
-        <li><a href="/patterns/buttons">Buttons</a></li>
-        <li><a href="/patterns/document-list">Document list</a></li>
-        <li><a href="/patterns/organisation-autocomplete">Organisation autocomplete</a></li>
-        <li><a href="/patterns/markdown-editor">Markdown editor with syntax highlighting</a></li>
-        <li><a href="/patterns/content-checker">Content checker</a></li>
+      <h2 class="govuk-heading-l">Patterns</h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a class="govuk-link" href="/patterns/flash-notices">Flash notices</a></li>
+        <li><a class="govuk-link" href="/patterns/modals">Modals</a></li>
+        <li><a class="govuk-link" href="/patterns/buttons">Buttons</a></li>
+        <li><a class="govuk-link" href="/patterns/document-list">Document list</a></li>
+        <li><a class="govuk-link" href="/patterns/organisation-autocomplete">Organisation autocomplete</a></li>
+        <li><a class="govuk-link" href="/patterns/markdown-editor">Markdown editor with syntax highlighting</a></li>
+        <li><a class="govuk-link" href="/patterns/content-checker">Content checker</a></li>
       </ul>
 
-      <a href="/prototype-admin/clear-data">Clear all data</a>
+      <p class="govuk-body">
+        <a href="/prototype-admin/clear-data">Clear all data</a>
+      </p>
+
+      <h2 class="govuk-heading-l">Design system</h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="/docs/tutorials-and-examples">Example pages and documentation</a></li>
+        <li>
+          <a href="https://govuk-design-system-production.cloudapps.digital">
+            GOV.UK Design System
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </main>

@@ -6,7 +6,7 @@
   font-weight: bold;
 }
 
-$success-green: $button-colour;
+$success-green: $govuk-button-colour;
 
 .success-summary {
   @extend .error-summary;

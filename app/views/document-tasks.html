@@ -2,15 +2,15 @@
 {% block page_title %}{{ data['title'] }}{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
+<main role="main" class="govuk-o-main-wrapper">
   <!-- <div class="success-summary" role="alert" tabindex="-1">
     <p>
       Your draft has been saved
     </p>
   </div> -->
 
-  <h1 class="form-title heading-xlarge">
-    <span class="heading-secondary">{{ data['format'] }}</span>
+  <h1 class="form-title govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ data['format'] }}</span>
     {% if data['title'] %}
       {{ data['title'] }}
     {% else %}
@@ -18,8 +18,8 @@
     {% endif %}
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
       <dl class="metadata">
         <dt>Created by</dt>
         <dd>Kamala Khan</dd>
@@ -32,14 +32,14 @@
         <li>
           <ul class="document-list-items">
             <li class="document-list-item">
-              <div class="task-heading-wrapper">
+              <div class="task-heading-wrapper govuk-!-mb-r4">
                 <h3 class="document-task">
                   Type of {{ data['format'] | lower }}
                 </h3>
                 <a href="/document-type" class="document-task-action">Change</a>
               </div>
               <div>
-                <h3 class="heading-small">{{ data['document-type'] }}</h3>
+                <h3 class="govuk-heading-s">{{ data['document-type'] }}</h3>
                 Unedited press releases as sent to the media, and official statements from the organisation or a minister.
               </div>
             </li>
@@ -188,8 +188,9 @@
           </ul>
         </li>
       </ol>
-      <ul class="buttons">
-        <li><a href="#" class="button">Request review</a></li>
+
+      <a href="#" class="govuk-c-button">Request review</a>
+      <ul class="govuk-list">
         <li><a href="#">Request fact-check</a></li>
         <li><a href="#">Preview</a></li>
         <li><a href="#">Force-publish</a></li>

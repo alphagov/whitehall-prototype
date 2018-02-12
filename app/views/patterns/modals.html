@@ -2,20 +2,20 @@
 {% block page_title %}Modals{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  <h1 class="heading-xlarge">
+<main role="main" class="govuk-o-main-wrapper">
+  <h1 class="govuk-heading-xl">
     Modals
   </h1>
 
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <p class="lede">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <p class="govuk-body-l">
         A pop-up dialogue based on work by <a href="https://github.com/hannalaakso/accessible-timeout-warning">Hanna Laakso</a> for the GOV.UK design system. The button will open the modal.
       </p>
     </div>
   </div>
 
-  <a href="#" id="openModal" class="button">Force publish</a>
+  <a href="#" id="openModal" class="govuk-c-button">Force publish</a>
 
   <dialog id="js-modal-dialog" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer">
     <div class="modal-dialog__inner">
@@ -27,8 +27,8 @@
         <div id="at-timer" class="at-timer visually-hidden" role="status"></div>
       </div>
       <div class="modal-dialog__inner__block">
-        <button class="button dialog-button modal-dialog__inner__button js-dialog-close">Force publish</button>
-        <a href="/" class="modal-dialog__inner__link js-dialog-close">Don’t publish</a>
+        <button class="govuk-c-button dialog-button modal-dialog__inner__button js-dialog-close">Force publish</button>
+        <a href="/" class="govuk-c-button govuk-c-button--link modal-dialog__inner__link js-dialog-close">Don’t publish</a>
       </div>
     </div>
   </dialog>

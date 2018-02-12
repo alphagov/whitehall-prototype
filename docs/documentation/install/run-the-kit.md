@@ -38,4 +38,4 @@ In terminal press the `ctrl` and `c` keys together.
 
 The kit is now installed. Congratulations!
 
-<!-- <a href="../../readme.md" class="button">Return to Getting Started</a> -->
+<!-- <a href="../../readme.md" class="govuk-c-button">Return to Getting Started</a> -->

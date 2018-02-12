@@ -2,10 +2,9 @@
   border-bottom: 10px solid #ffbf47;
 }
 
-.environment-label {
-  @include phase-tag;
+.govuk-c-tag--integration {
   background-color: #ffbf47;
-  color: $black;
+  color: $govuk-black;
   margin-top: 6px;
 }
 

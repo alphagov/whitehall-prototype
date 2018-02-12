@@ -2,12 +2,12 @@
 {% block page_title %}New news article{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
+<main role="main" class="govuk-o-main-wrapper">
   <form action="/news-article-created" method="post" class="form">
-    <div class="grid-row">
-      <div class="column-two-thirds">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title heading-large">
-          <span class="heading-secondary">News article</span>
+          <span class="govuk-caption-xl">News article</span>
           Create {{ data['news-article-sub-type'] | lower }}
         </h1>
         <hr />

@@ -2,17 +2,17 @@
 {% block page_title %}Dashboard{% endblock %}
 
 {% block content %}
-<main id="content" role="main">
-  <h1 class="form-title heading-xlarge">
+<main role="main" class="govuk-o-main-wrapper">
+  <h1 class="form-title govuk-heading-xl">
     Dashboard
   </h1>
   <p class="add-bottom-margin">
-    <a href="/format" class="button">New document</a>
+    <a href="/format" class="govuk-c-button">New document</a>
   </p>
-  <!-- <div class="grid-row">
-    <div class="column-one-third">
+  <!-- <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
       <div style="border: 5px solid #dee0e2; padding: 15px">
-        <h2 class="heading-medium remove-top-margin">Manage documents</h2>
+        <h2 class="govuk-heading-m remove-top-margin">Manage documents</h2>
         <ul class="list">
           <li></li>
           <li><a href="#">All documents</a></li>
@@ -20,26 +20,26 @@
           <li><a href="#">Review force-published documents</a></li>
         </ul>
 
-        <h2 class="heading-medium">Writing and publishing guidance</h2>
+        <h2 class="govuk-heading-m">Writing and publishing guidance</h2>
         <ul class="list">
           <li><a href="https://www.gov.uk/guidance/style-guide">GOV.UK style guide</a></li>
           <li><a href="https://www.gov.uk/guidance/how-to-publish-on-gov-uk">How to publish content on GOV.UK</a></li>
           <li><a href="https://www.gov.uk/guidance/content-design">Planning, writing and managing content</a></li>
         </ul>
 
-        <h2 class="heading-medium">Government Digital Service</h2>
+        <h2 class="govuk-heading-m">Government Digital Service</h2>
         <ul class="list">
           <li><a href="#">Featured documents</a></li>
           <li><a href="#">Corporate information</a></li>
         </ul>
 
-        <h2 class="heading-medium">Statistics</h2>
+        <h2 class="govuk-heading-m">Statistics</h2>
         <ul class="list">
           <li><a href="#">Statistics announcements</a></li>
         </ul>
       </div>
     </div>
-    <div class="column-two-thirds">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
       <h2 class="heading-large remove-top-margin">Your drafts</h2>
       {% set documentCount = [0,1,2,3,4,5,5,5,5,5] | random %}
       {% include "includes/document-table.html" %}

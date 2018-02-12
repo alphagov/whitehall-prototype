@@ -1,8 +1,8 @@
-.button-link,
-.button-link:hover,
-.button-link:active {
+.govuk-c-button--link,
+.govuk-c-button--link:hover,
+.govuk-c-button--link:active {
   background: transparent;
-  color: $link-colour !important;
+  color: $govuk-link-colour !important;
   border: none;
   box-shadow: none;
   text-decoration: underline;
@@ -10,26 +10,26 @@
   padding-right: 0;
 }
 
-.button-secondary {
-  background-color: $grey-1;
+.govuk-c-button--secondary {
+  background-color: $govuk-grey-1;
 
   &:hover,
   &:active {
-    background-color: $black;
+    background-color: $govuk-black;
   }
 }
 
-.button-tertiary {
-  background-color: $grey-3;
+.govuk-c-button--tertiary {
+  background-color: $govuk-grey-3;
   box-shadow: none;
 
   &:link {
-    color: $black;
+    color: $govuk-black;
   }
 
   &:hover,
   &:active {
-    background-color: $grey-2;
+    background-color: $govuk-grey-2;
   }
 }
 

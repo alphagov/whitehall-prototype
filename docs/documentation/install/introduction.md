@@ -6,7 +6,7 @@ Installation takes up to 30 minutes depending on how much you need to install.
 
 If you’re comfortable using git and the terminal, you may prefer the [developer friendly instructions](developer-install-instructions).
 
-> This guide is a work in progress. Please help [contribute](https://github.com/alphagov/govuk_prototype_kit/blob/master/CONTRIBUTING.md) to make it even better.
+This guide is a work in progress. Please help [contribute](https://github.com/alphagov/govuk_prototype_kit/blob/master/CONTRIBUTING.md) to make it even better.
 
 ## Introduction
 
@@ -16,4 +16,4 @@ The prototype kit provides a simple way to make interactive prototypes that look
 
 You’ll use a copy of the kit for each different prototype you want to make - they’re self contained. Once installed, the kit uses about 100mb.
 
-<a href="requirements.md" class="button">Next (requirements)</a>
+<a href="requirements.md" class="govuk-c-button">Next (requirements)</a>

@@ -2,15 +2,34 @@
 // in the govuk frontend toolkit's url-helpers partial
 $path: "/public/images/";
 
-// Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
-// Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
-@import 'govuk-elements';
+%contain-floats {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+// Import GOV.UK Frontend
+@import "@govuk-frontend/all/all";
+
+$govuk-gutter-two-thirds: ($govuk-gutter / 3) * 2;
+$govuk-gutter-half: ($govuk-gutter / 2);
+
+// Import from node modules
+@import 'node_modules/normalize.css/normalize.css';
 @import 'node_modules/codemirror/lib/codemirror';
 @import 'node_modules/highlight-within-textarea/jquery.highlight-within-textarea';
 
+// Patterns that aren't in Frontend
+@import 'patterns/check-your-answers';
+@import 'patterns/related-items';
+
 @import 'vendor/accessible-autocomplete';
 @import 'vendor/codemirror-theme';
-@import 'margin-helpers';
+@import 'vendor/elements-panel';
+@import 'vendor/elements-form-validation';
+//@import 'margin-helpers';
 
 @import 'patterns/check-your-answers';
 @import 'patterns/task-list';
@@ -20,15 +39,71 @@ $path: "/public/images/";
 @import 'patterns/buttons';
 @import 'header';
 
+.code {
+  color: $govuk-text-colour;
+  background-color: $govuk-highlight-colour;
+
+  text-shadow: 0 1px $govuk-page-colour;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  border: 1px solid $govuk-border-colour;
+  padding: 4px 4px 2px;
+}
+
+
+// Local fixes to GOV.UK frontend
+
+.markdown hr {
+  @include govuk-responsive-margin($govuk-spacing-responsive-6, "top");
+  @include govuk-responsive-margin($govuk-spacing-responsive-6, "bottom");
+}
+
+.govuk-list + .govuk-heading-l,
+.govuk-list + .govuk-heading-m,
+.govuk-list + .govuk-heading-s,
+.govuk-prose-scope ul + h2,
+.govuk-prose-scope ul + h3,
+.govuk-prose-scope ul + h4,
+.govuk-prose-scope pre + h2,
+.govuk-prose-scope pre + h3,
+.govuk-prose-scope pre + h4 {
+  @include govuk-responsive-padding($govuk-spacing-responsive-4, "top");
+}
+
+// Take a look at in app/assets/sass/patterns/ to see which files are imported.
+// @import 'patterns/check-your-answers';
+// @import 'patterns/task-list';
+
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 .empty {
-  color: $grey-1;
+  color: $govuk-grey-1;
+}
+
+.danger {
+  color: $govuk-error-colour !important;
 }
 
 .form-control {
   width: 100%;
 }
 
-.heading-xlarge {
+.govuk-heading-xl {
   margin-top: 1em;
   margin-bottom: 0.5em;
 }
@@ -39,27 +114,29 @@ $path: "/public/images/";
 }
 
 .metadata dt, .metadata dd {
-	display: inline-block;
-	font-size: 16px;
+  display: inline-block;
+  font-size: 16px;
 }
 
 .metadata dt {
-	width: 20%;
+  width: 20%;
 }
 
 .metadata dd {
-	width: 79%;
+  width: 79%;
+  margin-left: 0;
 }
 
-.column-one-third {
+.govuk-o-grid__item {
   position: relative;
 }
 
 .contextual-guidance {
+  @include govuk-responsive-padding($govuk-spacing-responsive-5, "top");
   background: #fff;
   position: absolute;
-  border-top: 5px solid $focus-colour;
-  margin-top: 1.2em;
+  border-top: 5px solid $govuk-focus-colour;
+  margin-top: 1.5em;
   width: 100%;
 
   .body-guidance & {
@@ -67,14 +144,27 @@ $path: "/public/images/";
   }
 }
 
-// Update highlight-within-textarea to be more like Elements
+// Update highlight-within-textarea to be more like Design System
 
 .hwt-container {
-  @extend .form-control;
+  .is-textarea & {
+    @extend .govuk-c-textarea;
+  }
+
+  .is-input & {
+    padding: 0 4px;
+    @extend .govuk-c-input;
+
+    input {
+      margin-top: -2px !important;
+      margin-left: 1px;
+    }
+  }
+
   display: block;
 
   &.is-focused {
-    outline: 3px solid $focus-colour;
+    outline: 3px solid $govuk-focus-colour;
   }
 
   input[type="text"],
@@ -90,14 +180,21 @@ $path: "/public/images/";
 .hwt-backdrop {
   // left: 3px !important;
   // top: 4px !important;
-  padding: 5px 4px 4px;
+  .is-textarea & {
+    padding: 5px 4px 4px;
+  }
+
+  .is-input & {
+    padding: 5px;
+  }
+
   border: 2px solid transparent;
   margin: -2px 0 0 -2px;
 }
 
 .hwt-content mark {
   background-color: transparent;
-  box-shadow: inset 0 -4px 0 0 $error-colour;
+  box-shadow: inset 0 -4px 0 0 $govuk-error-colour;
 }
 
 .task-heading-wrapper {
@@ -105,15 +202,15 @@ $path: "/public/images/";
 }
 
 ul.recommendations {
-	margin-bottom: 20px;
-	list-style-type: disc;
-	padding-left: 20px;
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
 
-	li {
-		margin-bottom: 5px 0;
-	}
+  li {
+    margin-bottom: 5px 0;
+  }
 }
 
 details {
-	margin-bottom: 50px;
+  margin-bottom: 50px;
 }
