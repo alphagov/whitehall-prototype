@@ -91,6 +91,10 @@ $path: "/public/images/";
   color: $govuk-grey-1;
 }
 
+.danger {
+  color: $govuk-error-colour !important;
+}
+
 .form-control {
   width: 100%;
 }

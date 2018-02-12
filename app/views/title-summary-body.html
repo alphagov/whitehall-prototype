@@ -47,7 +47,7 @@
             Title
           </label>
           <input required type="text" name="title" class="js-check-content govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
-          <span class="govuk-c-label__hint" style="margin-top: -25px">65 characters or fewer</span>
+          <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">65 characters or fewer</span>
         </div>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
@@ -64,12 +64,12 @@
     </div>
     <div class="govuk-o-grid js-slug">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <div class="govuk-!-mb-r6">
+        <div class="govuk-!-mb-r6 panel">
           <h3 class="govuk-heading-s govuk-!-m-r0">The web address for this content will look like:</h3>
-          <span class="empty">
+          <span class="govuk-body empty">
             You haven’t entered a title yet.
           </span>
-          <span class="js-slug-parent">
+          <span class="govuk-body js-slug-parent">
             https://www.gov.uk/government/<span class="js-dynamic-slug">this-is-the-title</span>
           </span>
         </div>
