@@ -25,9 +25,9 @@
   {% endif %}
 
   <form action="/patterns/content-checker" method="post" data-module="live-content-check">
-    <div class="govuk-!-mb-r6">
+    <div class="govuk-!-mb-r6 is-textarea">
       <label class="govuk-c-label" for="text">Text to check</label>
-      <textarea id="text" name="text" class="govuk-c-textarea form-control js-check-content" rows="20">{{ data['text']}}</textarea>
+      <textarea id="text" name="text" class="govuk-c-textarea js-check-content" rows="20">{{ data['text']}}</textarea>
     </div>
 
     <!-- <div class="govuk-!-mb-r6">
