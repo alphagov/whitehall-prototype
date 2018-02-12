@@ -1,7 +1,7 @@
-<table>
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
+<table class="govuk-c-table">
+  <thead class="govuk-c-table__head">
+    <tr class="govuk-c-table__row">
+      <th class="govuk-c-table__header" scope="col">Title</th>
     </tr>
   </thead>
   <tbody>
@@ -23,8 +23,8 @@
           date: '23 January 2017'
         }
       ] | random %}
-    <tr>
-      <td><a href="#" class="bold">{{ x.name }}</a><br/>{{ x.format}}, {{ x.date }}</td>
+    <tr class="govuk-c-table__row">
+      <td class="govuk-c-table__cell"><a href="#" class="govuk-heading-s govuk-!-mb-r0">{{ x.name }}</a>{{ x.format}}, {{ x.date }}</td>
     </tr>
     {%- endfor %}
   </tbody>
