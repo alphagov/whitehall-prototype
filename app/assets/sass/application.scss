@@ -121,6 +121,7 @@ $path: "/public/images/";
 }
 
 .contextual-guidance {
+  @include govuk-responsive-padding($govuk-spacing-responsive-3, "top");
   background: #fff;
   position: absolute;
   border-top: 5px solid $govuk-focus-colour;
@@ -132,10 +133,23 @@ $path: "/public/images/";
   }
 }
 
-// Update highlight-within-textarea to be more like Elements
+// Update highlight-within-textarea to be more like Design System
 
 .hwt-container {
-  @extend .govuk-c-textarea;
+  .is-textarea & {
+    @extend .govuk-c-textarea;
+  }
+
+  .is-input & {
+    padding: 0 4px;
+    @extend .govuk-c-input;
+
+    input {
+      margin-top: -2px !important;
+      margin-left: 1px;
+    }
+  }
+
   display: block;
 
   &.is-focused {
@@ -155,7 +169,14 @@ $path: "/public/images/";
 .hwt-backdrop {
   // left: 3px !important;
   // top: 4px !important;
-  padding: 5px 4px 4px;
+  .is-textarea & {
+    padding: 5px 4px 4px;
+  }
+
+  .is-input & {
+    padding: 5px;
+  }
+
   border: 2px solid transparent;
   margin: -2px 0 0 -2px;
 }
