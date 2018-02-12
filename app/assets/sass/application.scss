@@ -14,6 +14,7 @@ $path: "/public/images/";
 @import "@govuk-frontend/all/all";
 
 // Import from node modules
+@import 'node_modules/normalize.css/normalize.css';
 @import 'node_modules/codemirror/lib/codemirror';
 @import 'node_modules/highlight-within-textarea/jquery.highlight-within-textarea';
 
@@ -115,6 +116,7 @@ $path: "/public/images/";
 
 .metadata dd {
   width: 79%;
+  margin-left: 0;
 }
 
 .govuk-o-grid__item {
