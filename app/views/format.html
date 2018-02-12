@@ -13,7 +13,7 @@
               <h1 class="govuk-heading-xl">
                 What type of document?
               </h1>
-              <p class="govuk-body-l">Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
+              <p class="govuk-body">Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
             </legend>
 
             {% set fields = [
@@ -65,7 +65,7 @@
                   {{ field.text | safe }}
 
                   {% if field.more %}
-                  <div class="panel govuk-!-mt-r4 govuk-!-mb-r4 js-hidden" id="radio-part-{{ loop.index }}-extra">
+                  <div class="panel panel-border-wide govuk-!-mt-r4 govuk-!-mb-r4 js-hidden" id="radio-part-{{ loop.index }}-extra">
                     {{ field.more | safe }}
                   </div>
                   {% endif %}
