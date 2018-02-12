@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node start.js",
     "lint": "standard",
-    "test": "gulp test && npm run lint"
+    "test": "gulp test && npm run lint",
+    "heroku-prebuild": "node ./scripts/set-npmrc.js"
   },
   "dependencies": {
     "@govuk-frontend/all": "0.0.22-alpha",
