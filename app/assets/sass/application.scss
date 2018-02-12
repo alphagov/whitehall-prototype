@@ -128,11 +128,11 @@ $path: "/public/images/";
 }
 
 .contextual-guidance {
-  @include govuk-responsive-padding($govuk-spacing-responsive-3, "top");
+  @include govuk-responsive-padding($govuk-spacing-responsive-5, "top");
   background: #fff;
   position: absolute;
   border-top: 5px solid $govuk-focus-colour;
-  margin-top: 1.2em;
+  margin-top: 1.5em;
   width: 100%;
 
   .body-guidance & {
