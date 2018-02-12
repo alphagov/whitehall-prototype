@@ -9,11 +9,11 @@
 $success-green: $govuk-button-colour;
 
 .success-summary {
-  //@extend .error-summary;
+  @extend .error-summary;
   border-color: $success-green;
 
   .success-summary-list {
-    //@extend .error-summary-list;
+    @extend .error-summary-list;
 
     a {
       color: $success-green;
@@ -21,6 +21,6 @@ $success-green: $govuk-button-colour;
   }
 
   .success-summary-heading {
-    //@extend .error-summary-heading;
+    @extend .error-summary-heading;
   }
 }

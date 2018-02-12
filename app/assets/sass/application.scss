@@ -13,6 +13,9 @@ $path: "/public/images/";
 // Import GOV.UK Frontend
 @import "@govuk-frontend/all/all";
 
+$govuk-gutter-two-thirds: ($govuk-gutter / 3) * 2;
+$govuk-gutter-half: ($govuk-gutter / 2);
+
 // Import from node modules
 @import 'node_modules/normalize.css/normalize.css';
 @import 'node_modules/codemirror/lib/codemirror';
@@ -25,6 +28,7 @@ $path: "/public/images/";
 @import 'vendor/accessible-autocomplete';
 @import 'vendor/codemirror-theme';
 @import 'vendor/elements-panel';
+@import 'vendor/elements-form-validation';
 //@import 'margin-helpers';
 
 @import 'patterns/check-your-answers';
