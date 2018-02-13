@@ -9,6 +9,10 @@ router.get('/', function (req, res) {
 
 // Add your routes here - above the module.exports line
 
+router.get('/attachment/:attachmentId', function(req, res){
+  res.render('attachment', req.params)
+});
+
 router.get('/patterns/content-checker', function(req, res) {
   var text = req.session.data['text'];
   var locals = {};
