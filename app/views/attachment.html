@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block page_title %}Add attachment{% endblock %}
+
+{% block content %}
+<a href="/document-tasks" class="govuk-c-back-link">Back</a>
+<main role="main" class="govuk-o-main-wrapper">
+  <form action="/document-tasks" method="post" class="form" data-module="fake-filename-from-title">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h1 class="form-title govuk-heading-xl">
+          <span class="govuk-caption-xl">{{ data['title'] }}</span>
+          Add attachment
+        </h1>
+
+        <!-- <h2 class="govuk-heading-m">Guidance for attachments</h2>
+        <p class="govuk-body">
+          Some guidance. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p> -->
+      </div>
+    </div>
+
+    <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6 is-input">
+          <label class="govuk-c-label" for="attachment-title">
+            Attachment title
+          </label>
+          <input required type="text" name="attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data['attachment-title']}}{% endif %}">
+          <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">65 characters or fewer</span>
+
+          <input type="hidden" name="attachment-filename" class="js-dynamic-filename" value="{% if editing %}{{data['attachment-filename']}}{% endif %}">
+        </div>
+      </div>
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+        <div class="js-contextual-guidance contextual-guidance">
+          <h3 class="govuk-heading-s govuk-!-mb-r1">Attachment guidance</h3>
+          <ul class="govuk-list">
+            <li><a class="govuk-link" href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
+            <li><a class="govuk-link" href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
+            <li><a class="govuk-link" href="#">Words to avoid</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6 is-input">
+          <label class="govuk-c-label" for="attachment-file">
+            File
+          </label>
+          <input required type="file" name="attachment-file" class="govuk-c-file-upload">
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-!-mb-r6">
+      <input type="submit" class="govuk-c-button" value="Save">
+    </div>
+    <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
+    {% if editing %}
+    <div class="govuk-!-mb-r6">
+      <a href="/document-tasks" class="button button-link">Discard changes</a>
+    </div>
+    {% endif %}
+  </form>
+</main>
+{% endblock %}

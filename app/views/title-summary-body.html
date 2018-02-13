@@ -76,17 +76,6 @@
       </div>
     </div>
 
-<!--     <div class="govuk-o-grid" data-module="live-content-check">
-      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <div class="govuk-!-mb-r6 disabled">
-          <label class="govuk-c-label" for="title">
-            Page address for this content
-          </label>
-          <input type="text" name="slug" class="js-check-content form-control" id="slug" data-target="" value="{% if editing %}{{data['title']}}{% endif %}" placeholder="https://gov.uk/this-is-the-title">
-        </div>
-      </div>
-    </div> -->
-
     <div class="govuk-o-grid" data-module="live-content-check">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-textarea">
@@ -148,15 +137,4 @@
     {% endif %}
   </form>
 </main>
-{% endblock %}
-
-{% block page_scripts %}
-<script>
-  govukGovernmentOrganisationsAutocomplete({
-    selectElement: document.getElementById('government-organisations'),
-    showAllValues: false,
-    minLength: 2,
-    defaultValue: ''
-  })
-</script>
 {% endblock %}
