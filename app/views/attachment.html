@@ -25,17 +25,30 @@
           <span class="govuk-caption-xl">{{ data['title'] }}</span>
           Add attachment
         </h1>
+
+        <div class="govuk-prose-scope">
+          <p>You must upload attachments in an <a href="https://www.gov.uk/guidance/content-design/planning-content#open-formats">open standards</a> format.</p>
+          <!-- <ul>
+            <li>.odt (OpenDocument Text) for text documents</li>
+            <li>.ods (OpenDocument Spreadsheet) for spreadsheets</li>
+            <li>.odp (OpenDocument Presentation) for presentation slides</li>
+            <li>.csv (Comma-separated values) for datasets designed to be machine-readable</li>
+            <li>PDF/A for .pdf files to be archivable and accessible</li>
+          </ul>
+          <p>Most publishing software will allow you to select an open format from the Save As or Download menu.</p>
+          <p>Do not used closed formats like .docx or .xlsx.</p> -->
+        </div>
       </div>
     </div>
 
     <div class="govuk-o-grid" data-module="live-content-check">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
-          <label class="govuk-c-label" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
             Attachment title
+            <span class="govuk-c-label__hint">Use the official title of the document</span>
           </label>
           <input required type="text" name="{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[attachment_id + '-attachment-title']}}{% endif %}">
-          <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">65 characters or fewer</span>
 
           <input type="hidden" name="{{ attachment_id }}-attachment-filename" class="js-dynamic-filename" value="{% if editing %}{{data[attachment_id + '-attachment-filename']}}{% endif %}">
 
@@ -50,7 +63,7 @@
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
-          <label class="govuk-c-label" for="attachment-file">
+          <label class="govuk-c-label govuk-c-label--bold" for="attachment-file">
             File
           </label>
           <input type="file" name="attachment-file" class="govuk-c-file-upload">
