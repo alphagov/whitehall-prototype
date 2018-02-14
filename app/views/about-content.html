@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block page_title %}New news article{% endblock %}
+
+{% block content %}
+
+{% if referrer() == 'document-type' %}
+  {% set editing = false %}
+{% else %}
+  {% set editing = true %}
+{% endif %}
+
+<a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
+<main role="main" class="govuk-o-main-wrapper">
+  <form action="/document-tasks" method="post" class="form" data-module="slug-from-title">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h1 class="form-title govuk-heading-xl">
+          <span class="govuk-caption-xl">{{ data['format'] }}</span>
+          {% if data['title'] %}
+            {{ data['title'] }}
+          {% else %}
+            About this {{ data['document-type'] | lower }}
+          {% endif %}
+        </h1>
+      </div>
+    </div>
+    <div class="govuk-c-radios">
+      <fieldset class="govuk-c-fieldset">
+        <legend class="govuk-c-fieldset__legend">
+          <h2 class="govuk-heading-s">Frequency of update</h2>
+        </legend>
+        <div class="govuk-c-radios__item">
+          <input class="govuk-c-radios__input" id="changed-name-1" name="changed-name" type="radio" value="yes">
+          <label class="govuk-c-label govuk-c-radios__label" for="changed-name-1">Never, this is a one-off</label>
+        </div>
+        <div class="govuk-c-radios__item">
+          <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no" >
+          <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">Quarterly</label>
+        </div>
+        <div class="govuk-c-radios__item">
+          <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no" >
+          <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">Yearly</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6 is-input">
+          <h2 class="govuk-heading-s">Expected audience</h2>
+          <label class="govuk-c-label" for="title"></label>
+          <input required type="text" name="title" class="govuk-c-input govuk-!-width-one-quarter" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <span>views per month</span>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-o-grid" data-module="live-content-check">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6 is-input">
+          <h2 class="govuk-heading-s">Tags</h2>
+          
+          <label class="govuk-c-label" for="title">Add a new tag</label>
+          <input required type="text" name="title" class="govuk-c-input govuk-!-width-one-quarter" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <span>views per month</span>
+        </div>
+      </div>
+    </div>
+  </form>
+</main>
+{% endblock %}
