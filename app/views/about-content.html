@@ -1,15 +1,9 @@
 {% extends "layout.html" %}
-{% block page_title %}New news article{% endblock %}
+{% block page_title %}About content{% endblock %}
 
 {% block content %}
 
-{% if referrer() == 'document-type' %}
-  {% set editing = false %}
-{% else %}
-  {% set editing = true %}
-{% endif %}
-
-<a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
+<a href="/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <form action="/document-tasks" method="post" class="form about" data-module="slug-from-title">
     <div class="govuk-o-grid">
@@ -30,25 +24,27 @@
         <legend class="govuk-c-fieldset__legend">
           Frequency of update
         </legend>
-        <div class="govuk-c-radios__item">
-          <input class="govuk-c-radios__input" id="changed-name-1" name="changed-name" type="radio" value="yes">
-          <label class="govuk-c-label govuk-c-radios__label" for="changed-name-1">Never, this is a one-off</label>
-        </div>
-        <div class="govuk-c-radios__item">
-          <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no" >
-          <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">Quarterly</label>
-        </div>
-        <div class="govuk-c-radios__item">
-          <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no" >
-          <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">Yearly</label>
-        </div>
+        {% set fields = [
+            { name: 'Never, this is a one-off' },
+            { name: 'Quarterly' },
+            { name: 'Yearly' }
+          ]
+        %}
+        {% for field in fields %}
+          <div class="govuk-c-radios__item">
+            <input id="radio-part-{{ loop.index }}" type="radio" name="frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("frequency", field.name) }}>
+            <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
+              {{ field.name }}
+            </label>
+          </div>
+        {% endfor %}
       </fieldset>
     </div>
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
-          <label class="govuk-c-label" for="title">Expected audience</label>
-          <input required type="text" name="title" class="govuk-c-input govuk-!-width-one-quarter" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <span class="inline govuk-body">views per month</span>
+          <label class="govuk-c-label" for="expected-audience">Expected audience</label>
+          <input type="text" name="expected-audience" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="{{data['expected-audience']}}"> <span class="inline govuk-body">views per month</span>
         </div>
       </div>
     </div>
@@ -86,38 +82,69 @@
     </div>
     <div class="govuk-o-grid govuk-!-mb-r6">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <label class="govuk-c-label" for="title">Search for a tag</label>
-        <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <a href="" class="inline button button-link govuk-body">Select tag</a>
+        <label class="govuk-c-label" for="tag-search">Search for a tag</label>
+        <input type="text" name="tag-search" class="govuk-c-input" id="tag-search" value="{{data['tag-search']}}"> <a href="" class="inline button button-link govuk-body">Select tag</a>
       </div>
     </div>
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
           <h2 class="govuk-heading-l">Associations</h2>
-          <label class="govuk-c-label" for="title">Lead organisation</label>
-          <input required type="text" name="title" class="govuk-c-input govuk-!-mb-r1" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
-          <a href="" class="button button-link govuk-body govuk-!-mb-r6">Add another leading organisation</a>
-          <label class="govuk-c-label" for="title">Supporting organisation</label>
-          <input required type="text" name="title" class="govuk-c-input govuk-!-mb-r1" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
-          <a href="" class="button button-link govuk-body govuk-!-mb-r6">Add another supporting organisation</a>
-          <label class="govuk-c-label" for="title">Minister</label>
-          <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
-          <label class="govuk-c-label" for="title">Topical events</label>
-          <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
-          <label class="govuk-c-label" for="title">World locations</label>
-          <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
+          <select id="lead-organisation" name="lead-organisation">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+          <div class="govuk-!-mt-r2 govuk-!-mb-r6">
+            <a href="#" class="button button-link govuk-body">Add another leading organisation</a>
+          </div>
+
+          <label class="govuk-c-label" for="supporting-organisation">Supporting organisation</label>
+          <select id="supporting-organisation" name="supporting-organisation">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+          <div class="govuk-!-mt-r2 govuk-!-mb-r6">
+            <a href="#" class="button button-link govuk-body">Add another supporting organisation</a>
+          </div>
+
+          <label class="govuk-c-label" for="minister">Minister</label>
+          <input type="text" name="minister" class="govuk-c-input" id="minister" value="{{data['minister']}}">
+
+          <label class="govuk-c-label" for="topical-event">Topical events</label>
+          <input type="text" name="topical-event" class="govuk-c-input" id="topical-event" value="{{data['topical-event']}}">
+
+          <label class="govuk-c-label" for="world-locations">World locations</label>
+          <input type="text" name="world-locations" class="govuk-c-input" id="world-locations" value="{{data['world-locations']}}">
         </div>
       </div>
     </div>
     <div class="govuk-!-mb-r6">
       <input type="submit" class="govuk-c-button" value="Save">
     </div>
-    <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
-    {% if editing %}
+
     <div class="govuk-!-mb-r6">
       <a href="/document-tasks" class="button button-link govuk-body">Discard changes</a>
     </div>
-    {% endif %}
   </form>
 </main>
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  $('#lead-organisation').val('{{ data['lead-organisation'] }}');
+  $('#supporting-organisation').val('{{ data['supporting-organisation'] }}');
+
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('lead-organisation'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: '{{ data['lead-organisation'] }}'
+  })
+
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('supporting-organisation'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: '{{ data['lead-organisation'] }}'
+  })
+</script>
 {% endblock %}

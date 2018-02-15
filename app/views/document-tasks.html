@@ -130,66 +130,49 @@
               <h3 class="document-task">
                 About this content
               </h3>
-              <a href="#" class="document-task-action">Change</a>
+              <a href="/about-content" class="document-task-action">Change</a>
               <dl class="document-task-part">
-                <div>
-                  <dt class="document-part-label">
-                    Policies
-                  </dt>
-                  <dd class="document-part-value document-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
+                {%
+                  set dtags = [
+                    {
+                      name: 'Ministers',
+                      key: 'minister'
+                    },
+                    {
+                      name: 'Topical events',
+                      key: 'topical-event'
+                    },
+                    {
+                      name: 'Location',
+                      key: 'world-location'
+                    },
+                    {
+                      name: 'Lead organisations',
+                      key: 'lead-organisation'
+                    },
+                    {
+                      name: 'Supporting organisations',
+                      key: 'supporting-organisation'
+                    }
+                  ]
+                %}
 
-                <div>
-                  <dt class="document-part-label">
-                    Policy areas
-                  </dt>
-                  <dd class="document-part-value document-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-
-                <div>
-                  <dt class="document-part-label">
-                    Ministers
-                  </dt>
-                  <dd class="document-part-value document-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="document-part-label">
-                    Topical events
-                  </dt>
-                  <dd class="document-part-value document-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="document-part-label">
-                    Location
-                  </dt>
-                  <dd class="document-part-value document-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
-                <div>
-                  <dt class="document-part-label">
-                    Lead organisations
-                  </dt>
-                  <dd class="document-part-value">
-                    Department of Health & Social Care
-                  </dd>
-                </div>
-                <div>
-                  <dt class="document-part-label">
-                    Supporting organisations
-                  </dt>
-                  <dd class="document-part-value document-part-value--empty">
-                    This field is empty
-                  </dd>
-                </div>
+                {% for dtag in dtags %}
+                  <div>
+                    <dt class="document-part-label">
+                      {{ dtag.name }}
+                    </dt>
+                    {% if data[dtag.key] %}
+                      <dd class="document-part-value">
+                        {{ data[dtag.key] }}
+                      </dd>
+                    {% else %}
+                      <dd class="document-part-value document-part-value--empty">
+                        This field is empty
+                      </dd>
+                    {% endif %}
+                  </div>
+                {% endfor %}
               </dl>
             </li>
             <li class="document-list-item">
