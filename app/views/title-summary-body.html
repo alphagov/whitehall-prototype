@@ -127,6 +127,10 @@
       </div>
     </div>
     <div class="govuk-!-mb-r6">
+      {% if not editing %}
+        <input type="hidden" name="lead-organisation" value="Department for Transport">
+      {% endif %}
+
       <input type="submit" class="govuk-c-button" value="Save">
     </div>
     <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
