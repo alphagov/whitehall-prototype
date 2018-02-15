@@ -25,16 +25,35 @@
           Frequency of update
         </legend>
         {% set fields = [
-            { name: 'Never, this is a one-off' },
-            { name: 'Quarterly' },
-            { name: 'Yearly' }
+            {
+              name: 'Never, this is a one-off',
+              more: 'Because this content won\'t be updated, it will be downgraded as more recent content is published on GOV.UK'
+            },
+            {
+              name: 'Quarterly',
+              more: 'You will be reminded to update this content on the quarter after it was published.'
+            },
+            {
+              name: 'Yearly',
+              more: 'You will be reminded to update this content on the quarter after it was published.'
+            },
+            {
+              name: 'Other',
+              more: '<label class="govuk-c-label" for="">Enter the date for the expected update</label>
+              <input type="text" name="" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="">'
+            }
           ]
         %}
         {% for field in fields %}
-          <div class="govuk-c-radios__item">
+          <div class="govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
             <input id="radio-part-{{ loop.index }}" type="radio" name="frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("frequency", field.name) }}>
             <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
               {{ field.name }}
+              {% if field.more %}
+              <div class="panel panel-border-wide js-hidden govuk-!-mt-r4 govuk-!-mb-r4" id="radio-part-{{ loop.index }}-extra">
+                {{ field.more | safe }}
+              </div>
+              {% endif %}
             </label>
           </div>
         {% endfor %}
