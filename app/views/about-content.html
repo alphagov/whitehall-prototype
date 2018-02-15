@@ -18,30 +18,50 @@
         </h1>
       </div>
     </div>
-    <h2 class="govuk-heading-l">Monitoring</h2>
-    <div class="govuk-c-radios">
-      <fieldset class="govuk-c-fieldset">
-        <legend class="govuk-c-fieldset__legend">
-          Frequency of update
-        </legend>
-        {% set fields = [
-            { name: 'Never, this is a one-off' },
-            { name: 'Quarterly' },
-            { name: 'Yearly' }
-          ]
-        %}
-        {% for field in fields %}
-          <div class="govuk-c-radios__item">
-            <input id="radio-part-{{ loop.index }}" type="radio" name="frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("frequency", field.name) }}>
-            <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
-              {{ field.name }}
-            </label>
-          </div>
-        {% endfor %}
-      </fieldset>
-    </div>
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h2 class="govuk-heading-l">Monitoring</h2>
+        <div class="govuk-c-radios">
+          <fieldset class="govuk-c-fieldset">
+            <legend class="govuk-c-fieldset__legend">
+              Review frequency
+            </legend>
+            {% set fields = [
+                {
+                  name: 'Never, this is a one-off',
+                  more: 'Because this content won\'t be reviewed, it will be downgraded as more recent content is published on GOV.UK'
+                },
+                {
+                  name: 'Quarterly',
+                  more: 'You will be reminded to review this content the quarter after it was published.'
+                },
+                {
+                  name: 'Yearly',
+                  more: 'You will be reminded to review this content the year it was published.'
+                },
+                {
+                  name: 'Other',
+                  more: '<label class="govuk-c-label" for="">Enter a date to get a remider to review</label>
+                  <span class="govuk-c-label__hint govuk-body">For example, 05 June 2019</span>
+                  <input type="text" name="" class="govuk-c-input govuk-!-width-one-half" id="expected-audience" value="">'
+                }
+              ]
+            %}
+            {% for field in fields %}
+              <div class="govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
+                <input id="radio-part-{{ loop.index }}" type="radio" name="frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("frequency", field.name) }}>
+                <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
+                  {{ field.name }}
+                  {% if field.more %}
+                  <div class="panel panel-border-wide js-hidden govuk-!-mt-r4" id="radio-part-{{ loop.index }}-extra">
+                    {{ field.more | safe }}
+                  </div>
+                  {% endif %}
+                </label>
+              </div>
+            {% endfor %}
+          </fieldset>
+        </div>
         <div class="govuk-!-mb-r6 is-input">
           <label class="govuk-c-label" for="expected-audience">Expected audience</label>
           <input type="text" name="expected-audience" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="{{data['expected-audience']}}"> <span class="inline govuk-body">views per month</span>
@@ -54,7 +74,7 @@
         <p class="govuk-body">Tags help position this content in <a href="">GOV.UK</a>, they make it easier to find by relating it to existing content that is similar to it.</p>
       </div>
     </div>
-    <div class="govuk-o-grid govuk-!-mb-r6" data-module="select-tags">
+    <div class="govuk-o-grid govuk-!-mb-r7" data-module="select-tags">
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
         <div class="js-none-selected">
           <h3 class="govuk-heading-s">Selected tags</h3>
@@ -111,7 +131,7 @@
           <select id="lead-organisation" name="lead-organisation">
             {% include "includes/organisation-select-options.html" %}
           </select>
-          <div class="govuk-!-mt-r2 govuk-!-mb-r6">
+          <div class="govuk-!-mt-r2 govuk-!-mb-r1">
             <a href="#" class="button button-link govuk-body">Add another leading organisation</a>
           </div>
 
@@ -119,7 +139,7 @@
           <select id="supporting-organisation" name="supporting-organisation">
             {% include "includes/organisation-select-options.html" %}
           </select>
-          <div class="govuk-!-mt-r2 govuk-!-mb-r6">
+          <div class="govuk-!-mt-r2 govuk-!-mb-r1">
             <a href="#" class="button button-link govuk-body">Add another supporting organisation</a>
           </div>
 
