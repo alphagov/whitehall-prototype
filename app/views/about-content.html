@@ -54,38 +54,55 @@
         <p class="govuk-body">Tags help position this content in <a href="">GOV.UK</a>, they make it easier to find by relating it to existing content that is similar to it.</p>
       </div>
     </div>
-    <div class="govuk-o-grid">
+    <div class="govuk-o-grid govuk-!-mb-r6" data-module="select-tags">
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
-        <h3 class="govuk-heading-s">Selected tags</h3>
-        <p class="govuk-body empty govuk-!-mb-r6">You haven't selected any tags yet.</p>
-        <table class="govuk-c-table">
+        <div class="js-none-selected">
+          <h3 class="govuk-heading-s">Selected tags</h3>
+          <p class="govuk-body empty govuk-!-mb-r6">You haven't selected any tags yet.</p>
+        </div>
+        <table class="govuk-c-table js-selected-tags-table" style="display: none">
+          <caption class="govuk-c-table__caption">Selected tags</caption>
+          <tbody class="govuk-c-table__body">
+            <tr class="govuk-c-table__row js-selected-tag-row" style="display: none">
+              <td class="govuk-c-table__cell tag js-tag"></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-remove-tag">Remove tag</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="govuk-c-table js-suggested-tags-table">
           <caption class="govuk-c-table__caption">Suggested tags</caption>
           <tbody class="govuk-c-table__body">
             <tr class="govuk-c-table__row">
               <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving instruction and driving lessons <span class="arrow">></span> Approved Driving Instructor registration and renewals</td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">View in GOV.UK</a></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">Select tag</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
             </tr>
             <tr class="govuk-c-table__row">
               <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving instruction and driving lessons <span class="arrow">></span> Driving instructor standards and conduct</td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">View in GOV.UK</a></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">Select tag</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
             </tr>
             <tr class="govuk-c-table__row">
               <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving and road transport <span class="arrow">></span> Vehicle ownership <span class="arrow">></span> MOTs (car and motorcycle) <span class="arrow">></span> MOT status of a vehicle</td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">View in GOV.UK</a></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">Select tag</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="govuk-o-grid govuk-!-mb-r6">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <label class="govuk-c-label" for="tag-search">Search for a tag</label>
-        <input type="text" name="tag-search" class="govuk-c-input" id="tag-search" value="{{data['tag-search']}}"> <a href="" class="inline button button-link govuk-body">Select tag</a>
+        <select id="tag-search" name="tag-search">
+          {% include "includes/topics-select-options.html" %}
+        </select>
+      </div>
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third govuk-!-mt-r7">
+        <a href="" class="inline button button-link govuk-body js-add-tag">Select tag</a>
       </div>
     </div>
+
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
@@ -145,6 +162,14 @@
     showAllValues: false,
     minLength: 2,
     defaultValue: '{{ data['lead-organisation'] }}'
+  })
+
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.getElementById('tag-search'),
+    id: 'tag-search',
+    showAllValues: true,
+    minLength: 2,
+    defaultValue: ''
   })
 </script>
 {% endblock %}
