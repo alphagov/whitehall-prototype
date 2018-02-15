@@ -214,3 +214,37 @@ ul.recommendations {
 details {
   margin-bottom: 50px;
 }
+
+// tags section
+
+.tag {
+  max-width: 380px;
+}
+
+
+.about {
+  h1 {
+    margin-bottom: 70px;
+  }
+  .inline {
+    margin-left: 5px;
+  }
+  .button-link, .inline {
+    display: inline-block;
+  }
+  label, legend {
+    font-weight: bold;
+    margin-bottom: 5px;
+    &.govuk-c-radios__label {
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+  }
+  .tags-empty {
+    background:  $govuk-panel-colour;
+    padding: 20px;
+  }
+  .arrow {
+    color: $govuk-border-colour;
+  }
+}

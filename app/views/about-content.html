@@ -11,7 +11,7 @@
 
 <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
-  <form action="/document-tasks" method="post" class="form" data-module="slug-from-title">
+  <form action="/document-tasks" method="post" class="form about" data-module="slug-from-title">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
@@ -19,15 +19,16 @@
           {% if data['title'] %}
             {{ data['title'] }}
           {% else %}
-            About this {{ data['document-type'] | lower }}
+            About this news article
           {% endif %}
         </h1>
       </div>
     </div>
+    <h2 class="govuk-heading-l">Monitoring</h2>
     <div class="govuk-c-radios">
       <fieldset class="govuk-c-fieldset">
         <legend class="govuk-c-fieldset__legend">
-          <h2 class="govuk-heading-s">Frequency of update</h2>
+          Frequency of update
         </legend>
         <div class="govuk-c-radios__item">
           <input class="govuk-c-radios__input" id="changed-name-1" name="changed-name" type="radio" value="yes">
@@ -43,25 +44,80 @@
         </div>
       </fieldset>
     </div>
-    <div class="govuk-o-grid" data-module="live-content-check">
+    <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
-          <h2 class="govuk-heading-s">Expected audience</h2>
-          <label class="govuk-c-label" for="title"></label>
-          <input required type="text" name="title" class="govuk-c-input govuk-!-width-one-quarter" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <span>views per month</span>
+          <label class="govuk-c-label" for="title">Expected audience</label>
+          <input required type="text" name="title" class="govuk-c-input govuk-!-width-one-quarter" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <span class="inline govuk-body">views per month</span>
         </div>
       </div>
     </div>
-    <div class="govuk-o-grid" data-module="live-content-check">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h2 class="govuk-heading-l">Tag on GOV.UK</h2>
+        <p class="govuk-body">Tags help position this content in <a href="">GOV.UK</a>, they make it easier to find by relating it to existing content that is similar to it.</p>
+      </div>
+    </div>
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <h3 class="govuk-heading-s">Selected tags</h3>
+        <p class="govuk-body empty govuk-!-mb-r6">You haven't selected any tags yet.</p>
+        <table class="govuk-c-table">
+          <caption class="govuk-c-table__caption">Suggested tags</caption>
+          <tbody class="govuk-c-table__body">
+            <tr class="govuk-c-table__row">
+              <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving instruction and driving lessons <span class="arrow">></span> Approved Driving Instructor registration and renewals</td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">Select tag</a></td>
+            </tr>
+            <tr class="govuk-c-table__row">
+              <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving instruction and driving lessons <span class="arrow">></span> Driving instructor standards and conduct</td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">Select tag</a></td>
+            </tr>
+            <tr class="govuk-c-table__row">
+              <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving and road transport <span class="arrow">></span> Vehicle ownership <span class="arrow">></span> MOTs (car and motorcycle) <span class="arrow">></span> MOT status of a vehicle</td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="">Select tag</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="govuk-o-grid govuk-!-mb-r6">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <label class="govuk-c-label" for="title">Search for a tag</label>
+        <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <a href="" class="inline button button-link govuk-body">Select tag</a>
+      </div>
+    </div>
+    <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
-          <h2 class="govuk-heading-s">Tags</h2>
-          
-          <label class="govuk-c-label" for="title">Add a new tag</label>
-          <input required type="text" name="title" class="govuk-c-input govuk-!-width-one-quarter" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}"> <span>views per month</span>
+          <h2 class="govuk-heading-l">Associations</h2>
+          <label class="govuk-c-label" for="title">Lead organisation</label>
+          <input required type="text" name="title" class="govuk-c-input govuk-!-mb-r1" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <a href="" class="button button-link govuk-body govuk-!-mb-r6">Add another leading organisation</a>
+          <label class="govuk-c-label" for="title">Supporting organisation</label>
+          <input required type="text" name="title" class="govuk-c-input govuk-!-mb-r1" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <a href="" class="button button-link govuk-body govuk-!-mb-r6">Add another supporting organisation</a>
+          <label class="govuk-c-label" for="title">Minister</label>
+          <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <label class="govuk-c-label" for="title">Topical events</label>
+          <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <label class="govuk-c-label" for="title">World locations</label>
+          <input required type="text" name="title" class="govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
         </div>
       </div>
     </div>
+    <div class="govuk-!-mb-r6">
+      <input type="submit" class="govuk-c-button" value="Save">
+    </div>
+    <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
+    {% if editing %}
+    <div class="govuk-!-mb-r6">
+      <a href="/document-tasks" class="button button-link govuk-body">Discard changes</a>
+    </div>
+    {% endif %}
   </form>
 </main>
 {% endblock %}
