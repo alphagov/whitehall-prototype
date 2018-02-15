@@ -6,28 +6,25 @@
   <h1 class="govuk-heading-xl">
     Topics autocomplete
   </h1>
-
-  <div class="govuk-o-grid">
-    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <p class="govuk-body-l">
-        An autocomplete for taxons.
-      </p>
-      <form method="get" action="/examples">
-        <div class="govuk-!-mb-r6">
-          <label class="govuk-c-label" for="topics">Topic</label>
-          <select id="topics" name="topic">
-            {% include "../includes/topics-select-options.html" %}
-          </select>
-        </div>
-      </form>
+  <p class="govuk-body-l">
+    An autocomplete for taxons.
+  </p>
+  <form method="get" action="/examples">
+    <div class="govuk-!-mb-r6">
+      <label class="govuk-c-label" for="topics">Topic</label>
+      <select id="topics" name="topic">
+        {% include "../includes/topics-select-options.html" %}
+      </select>
     </div>
+  </form>
 </main>
 {% endblock %}
 
 {% block page_scripts %}
 <script>
-  govukGovernmentOrganisationsAutocomplete({
+  accessibleAutocomplete.enhanceSelectElement({
     selectElement: document.getElementById('topics'),
+    id: 'topics',
     showAllValues: true,
     minLength: 2,
     defaultValue: ''
