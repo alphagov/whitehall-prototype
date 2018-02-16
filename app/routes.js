@@ -20,6 +20,14 @@ router.get('/patterns/content-checker', function(req, res) {
   res.render('patterns/content-checker', locals)
 })
 
+router.get('/document-type', function(req, res) {
+  if (req.session.data['format'] == 'News article' || req.session.data['format'] == 'Speech') {
+    res.render('document-type', req.params);
+  } else {
+    res.redirect('/title-summary-body');
+  }
+});
+
 router.get('/content-check', function(req, res){
   checkContent(req, res, req.query['text']);
 });
