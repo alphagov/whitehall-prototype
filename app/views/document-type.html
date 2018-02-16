@@ -14,6 +14,7 @@
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
       <form action="{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">
+        {% if data['format'] == 'News article' or data['format'] == 'Speech' %}
         <div class="govuk-!-mb-r6">
           <fieldset>
             <legend>
@@ -109,6 +110,7 @@
             {% endfor %}
           </fieldset>
         </div>
+        {% endif %}
         <div class="govuk-!-mb-r6">
           <input type="submit" class="govuk-c-button" value="{% if editing %}Save{% else %}Continue{% endif %}">
         </div>
