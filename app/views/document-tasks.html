@@ -132,6 +132,29 @@
               </h3>
               <a href="/about-content" class="document-task-action">Change</a>
               <dl class="document-task-part">
+
+                <div>
+                  <dt class="document-part-label">
+                    Tags
+                  </dt>
+                  {% set tag_count = data['tag-count'] | int %}
+                  {% if tag_count > 0 %}
+                    <dd class="document-part-value">
+                      <ul>
+                      {% for i in range(0, tag_count) %}
+                        <li class="govuk-!-mb-r1">
+                          {{ data['selected-tag-' + (i + 1)] }}
+                        </li>
+                      {% endfor %}
+                      </ul>
+                    </dd>
+                  {% else %}
+                    <dd class="document-part-value document-part-value--empty">
+                      This field is empty
+                    </dd>
+                  {% endif %}
+                </div>
+
                 {%
                   set dtags = [
                     {

@@ -77,19 +77,38 @@
       </div>
     </div>
     <div class="govuk-o-grid govuk-!-mb-r7" data-module="select-tags">
+      {% if data['tag-count'] %}
+        {% set tag_count = (data['tag-count'] | int) %}
+      {% else %}
+        {% set tag_count = 0 %}
+      {% endif %}
+      <input type="hidden" name="tag-count" value="{{ tag_count }}" class="js-tag-count">
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
-        <div class="js-none-selected">
+        <div class="js-none-selected" {% if (tag_count > 0) %}style="display: none"{% endif %}>
           <h3 class="govuk-heading-s">Selected tags</h3>
           <p class="govuk-body empty govuk-!-mb-r6">You haven't selected any tags yet.</p>
         </div>
-        <table class="govuk-c-table js-selected-tags-table" style="display: none">
+        <table class="govuk-c-table js-selected-tags-table" {% if (tag_count == 0) %}style="display: none"{% endif %}>
           <caption class="govuk-c-table__caption">Selected tags</caption>
           <tbody class="govuk-c-table__body">
             <tr class="govuk-c-table__row js-selected-tag-row" style="display: none">
               <td class="govuk-c-table__cell tag js-tag"></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
+              <td class="govuk-c-table__cell govuk-c-table__cell--numeric">
+                <a href="#">View in GOV.UK</a>
+                <input type="hidden" value="" name="selected-tag">
+              </td>
               <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-remove-tag">Remove tag</a></td>
             </tr>
+            {% for i in range(0, tag_count) %}
+              <tr class="govuk-c-table__row">
+                <td class="govuk-c-table__cell tag">{{ data['selected-tag-' + (i + 1)] }}</td>
+                <td class="govuk-c-table__cell govuk-c-table__cell--numeric">
+                  <a href="#">View in GOV.UK</a>
+                  <input type="hidden" value="{{ data['selected-tag-' + (i + 1)] }}" name="selected-tag-{{ (i + 1) }}">
+                </td>
+                <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-remove-tag">Remove tag</a></td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
 
