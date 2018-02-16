@@ -174,14 +174,14 @@
 
   govukGovernmentOrganisationsAutocomplete({
     selectElement: document.getElementById('lead-organisation'),
-    showAllValues: false,
+    showAllValues: true,
     minLength: 2,
     defaultValue: '{{ data['lead-organisation'] }}'
   })
 
   govukGovernmentOrganisationsAutocomplete({
     selectElement: document.getElementById('supporting-organisation'),
-    showAllValues: false,
+    showAllValues: true,
     minLength: 2,
     defaultValue: '{{ data['supporting-organisation'] }}'
   })
