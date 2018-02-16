@@ -7,6 +7,11 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+router.get('/intent', function(req, res) {
+  req.session.destroy();
+  res.render('intent');
+});
+
 // Add your routes here - above the module.exports line
 
 router.get('/attachment/:attachmentId', function(req, res){
