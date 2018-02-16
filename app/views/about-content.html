@@ -115,21 +115,47 @@
         <table class="govuk-c-table js-suggested-tags-table">
           <caption class="govuk-c-table__caption">Suggested tags</caption>
           <tbody class="govuk-c-table__body">
-            <tr class="govuk-c-table__row">
-              <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving instruction and driving lessons <span class="arrow">></span> Approved Driving Instructor registration and renewals</td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
-            </tr>
-            <tr class="govuk-c-table__row">
-              <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving instruction and driving lessons <span class="arrow">></span> Driving instructor standards and conduct</td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
-            </tr>
-            <tr class="govuk-c-table__row">
-              <td class="govuk-c-table__cell tag">Transport <span class="arrow">></span> Driving and road transport <span class="arrow">></span> Vehicle ownership <span class="arrow">></span> MOTs (car and motorcycle) <span class="arrow">></span> MOT status of a vehicle</td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
-              <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
-            </tr>
+            {% set suggested_tags = [
+                {
+                  name: 'Transport > Rail > HS2 > HS2 stakeholder and community engagement',
+                  title_contains: 'hs2'
+                },
+                {
+                  name: 'Transport > Rail > HS2 > HS2 phase one',
+                  title_contains: 'hs2'
+                },
+                {
+                  name: 'Transport > Driving and road transport > Autonomous road vehicles',
+                  title_contains: 'automated'
+                },
+                {
+                  name: 'Transport > Freight and cargo > Transport of dangerous goods > Safe transport of dangerous goods > Safe transport of dangerous goods by road',
+                  title_contains: 'dangerous'
+                },
+                {
+                  name: 'Transport > Freight and cargo > Transport of dangerous goods > Dangerous goods classification',
+                  title_contains: 'dangerous'
+                },
+                {
+                  name: 'Transport > Road infrastructure > Road improvement and investment',
+                  title_contains: 'highways'
+                },
+                {
+                  name: 'Transport > Road infrastructure > Road maintenance',
+                  title_contains: 'highways'
+                }
+              ]
+            %}
+
+            {% for tag in suggested_tags %}
+              {% if tag.title_contains in (data['title'] | lower) %}
+                <tr class="govuk-c-table__row">
+                  <td class="govuk-c-table__cell tag">{{ tag.name }}</td>
+                  <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
+                  <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-select-tag">Select tag</a></td>
+                </tr>
+              {% endif %}
+            {% endfor %}
           </tbody>
         </table>
       </div>
