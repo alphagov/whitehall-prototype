@@ -40,21 +40,23 @@
                   more: 'You will be reminded to review this content the year it was published.'
                 },
                 {
-                  name: 'Other',
-                  more: '<label class="govuk-c-label" for="">Enter a date to get a remider to review</label>
-                  <span class="govuk-c-label__hint govuk-body">For example, 05 June 2019</span>
-                  <input type="text" name="" class="govuk-c-input govuk-!-width-one-half" id="expected-audience" value="">'
+                  name: 'A custom date',
+                  more: '<label class="govuk-c-label" for="review-frequency-other">Review date</label>
+                  <span class="govuk-c-label__hint govuk-body">For example, 5 June 2019</span>'
                 }
               ]
             %}
             {% for field in fields %}
               <div class="govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("frequency", field.name) }}>
+                <input id="radio-part-{{ loop.index }}" type="radio" name="review-frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("review-frequency", field.name) }}>
                 <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                   {{ field.name }}
                   {% if field.more %}
                   <div class="panel panel-border-wide js-hidden govuk-!-mt-r4" id="radio-part-{{ loop.index }}-extra">
                     {{ field.more | safe }}
+                    {% if field.name == 'A custom date' %}
+                      <input type="text" name="review-frequency-other" class="govuk-c-input govuk-!-width-one-half" id="review-frequency-other" value="{{ data['review-frequency-other']}}">
+                    {% endif %}
                   </div>
                   {% endif %}
                 </label>
