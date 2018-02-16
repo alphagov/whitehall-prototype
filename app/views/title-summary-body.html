@@ -15,11 +15,16 @@
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
-          {% if data['title'] %}
+          {% if editing and data['title'] %}
             <span class="govuk-caption-xl">{{ data['format'] }}</span>
             {{ data['title'] }}
           {% else %}
-            Create {{ data['format'] | lower }}
+            {% if data['document-type'] %}
+              <span class="govuk-caption-xl">{{ data['format'] }}</span>
+              Create {{ data['document-type'] | lower }}
+            {% else %}
+              Create {{ data['format'] | lower }}
+            {% endif %}
           {% endif %}
         </h1>
         {% if data['document-type'] == 'News story' %}
@@ -129,10 +134,6 @@
       </div>
     </div>
     <div class="govuk-!-mb-r6">
-      {% if not editing %}
-        <input type="hidden" name="lead-organisation" value="Department for Transport">
-      {% endif %}
-
       <input type="submit" class="govuk-c-button" value="Save">
     </div>
     <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
