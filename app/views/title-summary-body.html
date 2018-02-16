@@ -46,7 +46,7 @@
           <label class="govuk-c-label" for="title">
             Title
           </label>
-          <input required type="text" name="title" class="js-check-content govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
+          <input required type="text" name="title" autocomplete="off" class="js-check-content govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data['title']}}{% endif %}">
           <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">65 characters or fewer</span>
         </div>
       </div>
