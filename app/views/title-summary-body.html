@@ -15,28 +15,30 @@
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
-          <span class="govuk-caption-xl">{{ data['format'] }}</span>
           {% if data['title'] %}
+            <span class="govuk-caption-xl">{{ data['format'] }}</span>
             {{ data['title'] }}
           {% else %}
-            Create {{ data['document-type'] | lower }}
+            Create {{ data['format'] | lower }}
           {% endif %}
         </h1>
-        <h2 class="govuk-heading-m">Guidance for writing a {{ data['document-type'] | lower }}</h2>
-        <p class="govuk-body">
-          News written exclusively for GOV.UK which users need, can act on, and can’t get from other sources. News stories should be self-contained and can be removed from the site without affecting other content.
-        </p>
-        <details class="govuk-c-details">
-          <summary class="govuk-c-details__summary"><span class="govuk-c-details__summary-text">Keep reading</span></summary>
-          <div class="govuk-c-border govuk-c-border--left-narrow">
-            <ul class="recommendations">
-              <li>Don’t duplicate news published by another department - collaborate if needed.</li>
-              <li>Don’t publish guidance in new stories - it can go out of date and won’t be found by users.</li>
-              <li>Don’t publish news just to announce other GOV.UK content - it confuses users and search results.</li>
-            </ul>
-            <p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">news story guidance</a> in full.</p>
-          </div>
-        </details>
+        {% if data['document-type'] == 'News story' %}
+          <h2 class="govuk-heading-m">Guidance for writing a {{ data['document-type'] | lower }}</h2>
+          <p class="govuk-body">
+            News written exclusively for GOV.UK which users need, can act on, and can’t get from other sources. News stories should be self-contained and can be removed from the site without affecting other content.
+          </p>
+          <details class="govuk-c-details">
+            <summary class="govuk-c-details__summary"><span class="govuk-c-details__summary-text">Keep reading</span></summary>
+            <div class="govuk-c-border govuk-c-border--left-narrow">
+              <ul class="recommendations">
+                <li>Don’t duplicate news published by another department - collaborate if needed.</li>
+                <li>Don’t publish guidance in new stories - it can go out of date and won’t be found by users.</li>
+                <li>Don’t publish news just to announce other GOV.UK content - it confuses users and search results.</li>
+              </ul>
+              <p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#news-story">news story guidance</a> in full.</p>
+            </div>
+          </details>
+        {% endif %}
       </div>
     </div>
 

@@ -31,6 +31,7 @@
       <ol class="document-list">
         <li>
           <ul class="document-list-items">
+            {% if data['document-type'] %}
             <li class="document-list-item">
               <div class="task-heading-wrapper govuk-!-mb-r4">
                 <h3 class="document-task">
@@ -43,6 +44,7 @@
                 Unedited press releases as sent to the media, and official statements from the organisation or a minister.
               </div>
             </li>
+            {% endif %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Title, summary and body
