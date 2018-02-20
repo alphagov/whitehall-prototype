@@ -15,6 +15,8 @@
   {% set prefix = 'drug-safety-update' %}
 {% endif %}
 
+{% set attachment_count = data['attachment-count'] | int %}
+
 <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <form action="/document-tasks" method="post" class="form" data-module="slug-from-title" data-prefix= "{{ prefix }}">
@@ -117,6 +119,13 @@
           <label class="govuk-c-label" for="body">
             Body
           </label>
+
+          {% if attachment_count > 0 %}
+            <div class="inserts">
+              <a href="#" id="openModal">Insert attachment</a>
+            </div>
+          {% endif %}
+
           <textarea name="body" class="govuk-c-textarea js-check-content" data-target="body-checks" name="textarea" id="body" rows="40">{% if editing %}{{data['body']}}{% endif %}</textarea>
         </div>
       </div>
@@ -149,5 +158,26 @@
     </div>
     {% endif %}
   </form>
+
+  <dialog id="js-modal-dialog" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer" data-module="attachment-insert">
+    <div class="modal-dialog__inner">
+      <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
+        Insert attachment
+      </h1>
+      <div class="modal-dialog__inner__text">
+        <h2 class="govuk-heading-m">Select an attachment</h2>
+        {% include "includes/attachment-list.html" %}
+
+        <h2 class="govuk-heading-m">Or insert a new one</h2>
+      </div>
+      <div class="modal-dialog__inner__block">
+        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button">Add attachment</a>
+
+        <p class="govuk-body">
+          <a href="/" class="js-dialog-close">Cancel</a>
+        </p>
+      </div>
+    </div>
+  </dialog>
 </main>
 {% endblock %}
