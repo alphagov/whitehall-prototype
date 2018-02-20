@@ -7,6 +7,11 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+router.get('/dashboard', function(req, res) {
+  req.session.destroy();
+  res.render('dashboard');
+});
+
 router.get('/intent', function(req, res) {
   req.session.destroy();
   res.render('intent');
@@ -26,7 +31,9 @@ router.get('/patterns/content-checker', function(req, res) {
 })
 
 router.get('/document-type', function(req, res) {
-  if (req.session.data['format'] == 'News article' || req.session.data['format'] == 'Speech') {
+  if (req.session.data['format'] == 'News article'
+        || req.session.data['format'] == 'Speech'
+        || req.session.data['format'] == 'Medical safety alert') {
     res.render('document-type', req.params);
   } else {
     res.redirect('/title-summary-body');

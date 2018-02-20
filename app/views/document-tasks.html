@@ -41,7 +41,9 @@
               </div>
               <div>
                 <h3 class="govuk-heading-s">{{ data['document-type'] }}</h3>
-                Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+                {% if data['document-type'] == 'Press release' %}
+                  Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+                {% endif %}
               </div>
             </li>
             {% endif %}
@@ -190,7 +192,7 @@
                       }
                     ]
                   %}
-                {% elseif data['format'] == 'Medical safety alert' %}
+                {% elseif data['format'] == 'Drug safety update' %}
                   {%
                     set dtags = [
                       {
@@ -214,10 +216,6 @@
                 {% else %}
                   {%
                     set dtags = [
-                      {
-                        name: 'Alert type',
-                        key: 'alert-type'
-                      },
                       {
                         name: 'Medical specialism',
                         key: 'medical-specialism'

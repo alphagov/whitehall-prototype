@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    {% if data['format'] == 'Medical safety alert' %}
+    {% if data['format'] == 'Drug safety update' %}
     <div class="govuk-o-grid govuk-!-mb-r6">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h2 class="govuk-heading-l">About this update</h2>
@@ -30,42 +30,10 @@
     </div>
     {% endif %}
 
-    {% if data['format'] == 'Drug safety update' %}
+    {% if data['format'] == 'Medical safety alert' %}
     <div class="govuk-o-grid govuk-!-mb-r6">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h2 class="govuk-heading-l">About this alert</h2>
-
-        <div class="govuk-c-radios">
-          <fieldset class="govuk-c-fieldset">
-            <legend class="govuk-c-fieldset__legend">
-              Alert type
-            </legend>
-
-            {% set fields = [
-                {
-                  name: 'Drug alert'
-                },
-                {
-                  name: 'Drug alert: company led'
-                },
-                {
-                  name: 'Medical device alert'
-                },
-                {
-                  name: 'Field safety notice'
-                }
-              ]
-            %}
-            {% for field in fields %}
-              <div class="govuk-c-radios__item">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="alert-type" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("alert-type", field.name) }}>
-                <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
-                  {{ field.name }}
-                </label>
-              </div>
-            {% endfor %}
-          </fieldset>
-        </div>
 
         <label class="govuk-c-label" for="medical-specialism">Medical specialism</label>
         <input type="text" name="medical-specialism" class="govuk-c-input" id="medical-specialism" value="{{data['medical-specialism']}}">
