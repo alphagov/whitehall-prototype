@@ -3,25 +3,33 @@
 
 {% block content %}
 
-{% if referrer() == 'format' or referrer() == 'title-summary-body' %}
+{% if referrer() == 'format' or referrer() == 'specialist-format' or referrer() == 'title-summary-body' %}
   {% set editing = false %}
 {% else %}
   {% set editing = true %}
 {% endif %}
 
-<a href="{% if editing %}/document-tasks{% else %}/format{% endif %}" class="govuk-c-back-link">Back</a>
+{% if data['specialist'] %}
+  {% set back = '/specialist-format' %}
+{% else %}
+  {% set back = '/format' %}
+{% endif %}
+
+<a href="{% if editing %}/document-tasks{% else %}{{ back }}{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
       <form action="{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">
-        {% if data['format'] == 'News article' or data['format'] == 'Speech' %}
         <div class="govuk-!-mb-r6">
           <fieldset>
             <legend>
               <h1 class="govuk-heading-xl form-title">
                 What type of {{ data.format | lower }}?
               </h1>
-              <p class="govuk-body">Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
+
+              {% if not data['specialist'] %}
+                <p class="govuk-body">Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
+              {% endif %}
             </legend>
 
             {% set fields = [
@@ -87,6 +95,22 @@
                   name: 'Authored article',
                   format: 'Speech',
                   text: '<p class="govuk-body">Bylined articles written in the name of a minister or official (usually re-published from elsewhere).</p>'
+                },
+                {
+                  name: 'Drug alert',
+                  format: 'Medical safety alert'
+                },
+                {
+                  name: 'Drug alert: company led',
+                  format: 'Medical safety alert'
+                },
+                {
+                  name: 'Medical device alert',
+                  format: 'Medical safety alert'
+                },
+                {
+                  name: 'Field safety notice',
+                  format: 'Medical safety alert'
                 }
               ]
             %}
@@ -110,7 +134,6 @@
             {% endfor %}
           </fieldset>
         </div>
-        {% endif %}
         <div class="govuk-!-mb-r6">
           <input type="submit" class="govuk-c-button" value="{% if editing %}Save{% else %}Continue{% endif %}">
         </div>

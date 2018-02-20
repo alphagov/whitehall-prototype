@@ -24,7 +24,7 @@
         <dt>Created by</dt>
         <dd>Kamala Khan</dd>
         <dt>Last updated</dt>
-        <dd>20 January 2018</dd>
+        <dd>20 February 2018</dd>
         <dt>Status</dt>
         <dd>Draft</dd>
       </dl>
@@ -41,7 +41,9 @@
               </div>
               <div>
                 <h3 class="govuk-heading-s">{{ data['document-type'] }}</h3>
-                Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+                {% if data['document-type'] == 'Press release' %}
+                  Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+                {% endif %}
               </div>
             </li>
             {% endif %}
@@ -97,12 +99,14 @@
                 </div>
               </dl>
             </li>
-            <li class="document-list-item">
-              <h3 class="document-task">
-                Images
-              </h3>
-              <a href="#" class="document-task-action">Add</a>
-            </li>
+            {% if not data['specialist'] %}
+              <li class="document-list-item">
+                <h3 class="document-task">
+                  Images
+                </h3>
+                <a href="#" class="document-task-action">Add</a>
+              </li>
+            {% endif %}
             <li class="document-list-item">
               <div style="overflow: hidden">
                 <h3 class="document-task">
@@ -134,61 +138,107 @@
               </h3>
               <a href="/about-content" class="document-task-action">Change</a>
               <dl class="document-task-part">
-
-                <div>
-                  <dt class="document-part-label">
-                    Tags
-                  </dt>
-                  {% set tag_count = data['tag-count'] | int %}
-                  {% if tag_count > 0 %}
-                    <dd class="document-part-value">
-                      <ul>
-                      {% for i in range(0, tag_count) %}
-                        <li class="govuk-!-mb-r1">
-                          {{ data['selected-tag-' + (i + 1)] }}
-                        </li>
-                      {% endfor %}
-                      </ul>
-                    </dd>
-                  {% else %}
-                    <dd class="document-part-value document-part-value--empty">
-                      This field is empty
-                    </dd>
-                  {% endif %}
-                </div>
-
-                {%
-                  set dtags = [
-                    {
-                      name: 'Review frequency',
-                      key: 'review-frequency'
-                    },
-                    {
-                      name: 'Expected audience',
-                      key: 'expected-audience'
-                    },
-                    {
-                      name: 'Lead organisations',
-                      key: 'lead-organisation'
-                    },
-                    {
-                      name: 'Supporting organisations',
-                      key: 'supporting-organisation'
-                    },
-                    {
-                      name: 'Ministers',
-                      key: 'minister'
-                    },
-                    {
-                      name: 'Topical events',
-                      key: 'topical-event'
-                    },
-                    {
-                      name: 'World locations',
-                      key: 'world-location'
-                    }
-                  ]
-                %}
+                {% if not data['specialist'] %}
+                  <div>
+                    <dt class="document-part-label">
+                      Tags
+                    </dt>
+                    {% set tag_count = data['tag-count'] | int %}
+                    {% if tag_count > 0 %}
+                      <dd class="document-part-value">
+                        <ul>
+                        {% for i in range(0, tag_count) %}
+                          <li class="govuk-!-mb-r1">
+                            {{ data['selected-tag-' + (i + 1)] }}
+                          </li>
+                        {% endfor %}
+                        </ul>
+                      </dd>
+                    {% else %}
+                      <dd class="document-part-value document-part-value--empty">
+                        This field is empty
+                      </dd>
+                    {% endif %}
+                  </div>
+                  {%
+                    set dtags = [
+                      {
+                        name: 'Review frequency',
+                        key: 'review-frequency'
+                      },
+                      {
+                        name: 'Expected audience',
+                        key: 'expected-audience'
+                      },
+                      {
+                        name: 'Lead organisations',
+                        key: 'lead-organisation'
+                      },
+                      {
+                        name: 'Supporting organisations',
+                        key: 'supporting-organisation'
+                      },
+                      {
+                        name: 'Ministers',
+                        key: 'minister'
+                      },
+                      {
+                        name: 'Topical events',
+                        key: 'topical-event'
+                      },
+                      {
+                        name: 'World locations',
+                        key: 'world-location'
+                      }
+                    ]
+                  %}
+                {% elseif data['format'] == 'Drug safety update' %}
+                  {%
+                    set dtags = [
+                      {
+                        name: 'Therapeutic area',
+                        key: 'therapeutic-area'
+                      },
+                      {
+                        name: 'Review frequency',
+                        key: 'review-frequency'
+                      },
+                      {
+                        name: 'Expected audience',
+                        key: 'expected-audience'
+                      },
+                      {
+                        name: 'Lead organisation',
+                        key: 'lead-organisation'
+                      }
+                    ]
+                  %}
+                {% else %}
+                  {%
+                    set dtags = [
+                      {
+                        name: 'Medical specialism',
+                        key: 'medical-specialism'
+                      },
+                      {
+                        name: 'Issue date',
+                        key: 'issue-date-year'
+                      },
+                      {
+                        name: 'Review frequency',
+                        key: 'review-frequency'
+                      },
+                      {
+                        name: 'Expected audience',
+                        key: 'expected-audience'
+                      },
+                      {
+                        name: 'Lead organisation',
+                        key: 'lead-organisation'
+                      }
+                    ]
+                  %}
+                {% endif %}
 
                 {% for dtag in dtags %}
                   <div>
@@ -197,7 +247,11 @@
                     </dt>
                     {% if data[dtag.key] %}
                       <dd class="document-part-value">
-                        {{ data[dtag.key] }}
+                        {% if dtag.key == 'issue-date-year' %}
+                          {{ data[dtag.key] }}-{{ data['issue-date-month'] }}-{{ data['issue-date-day'] }}
+                        {% else %}
+                          {{ data[dtag.key] }}
+                        {% endif %}
                       </dd>
                     {% else %}
                       <dd class="document-part-value document-part-value--empty">
@@ -208,6 +262,8 @@
                 {% endfor %}
               </dl>
             </li>
+
+            {% if not data['specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Publish settings
@@ -220,6 +276,7 @@
               </h3>
               <a href="#" class="document-task-action">Add</a>
             </li>
+            {% endif %}
           </ul>
         </li>
       </ol>

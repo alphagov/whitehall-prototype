@@ -18,6 +18,53 @@
         </h1>
       </div>
     </div>
+
+    {% if data['format'] == 'Drug safety update' %}
+    <div class="govuk-o-grid govuk-!-mb-r6">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h2 class="govuk-heading-l">About this update</h2>
+
+        <label class="govuk-c-label" for="therapeutic-area">Therapeutic area</label>
+        <input type="text" name="therapeutic-area" class="govuk-c-input" id="therapeutic-area" value="{{data['therapeutic-area']}}">
+      </div>
+    </div>
+    {% endif %}
+
+    {% if data['format'] == 'Medical safety alert' %}
+    <div class="govuk-o-grid govuk-!-mb-r6">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h2 class="govuk-heading-l">About this alert</h2>
+
+        <label class="govuk-c-label" for="medical-specialism">Medical specialism</label>
+        <input type="text" name="medical-specialism" class="govuk-c-input" id="medical-specialism" value="{{data['medical-specialism']}}">
+
+        {{ govukDateInput({
+          fieldset: {
+            legendText: 'Issue date',
+            legendHintText: 'For example, 31 3 2017'
+          },
+          id: 'issue-date',
+          name: 'issue-date',
+          items:[
+            {
+              name: 'day',
+              value: data['issue-date-day']
+            },
+            {
+              name: 'month',
+              value: data['issue-date-month']
+            },
+            {
+              name: 'year',
+              value: data['issue-date-year']
+            }
+          ]
+          })
+        }}
+      </div>
+    </div>
+    {% endif %}
+
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h2 class="govuk-heading-l">Monitoring</h2>
@@ -70,12 +117,15 @@
         </div>
       </div>
     </div>
+
+    {% if not data['specialist'] %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h2 class="govuk-heading-l">Tag on GOV.UK</h2>
         <p class="govuk-body">Tags help position this content in <a href="">GOV.UK</a>, they make it easier to find by relating it to existing content that is similar to it.</p>
       </div>
     </div>
+
     <div class="govuk-o-grid govuk-!-mb-r7" data-module="select-tags">
       {% if data['tag-count'] %}
         {% set tag_count = (data['tag-count'] | int) %}
@@ -169,11 +219,17 @@
         <a href="" class="inline button button-link govuk-body js-add-tag">Select tag</a>
       </div>
     </div>
+    {% endif %}
 
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
           <h2 class="govuk-heading-l">Associations</h2>
+
+          {% if data['specialist'] %}
+            <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
+            <p class="govuk-body">{{ data['lead-organisation'] }}</p>
+          {% else %}
           <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
           <select id="lead-organisation" name="lead-organisation">
             {% include "includes/organisation-select-options.html" %}
@@ -198,6 +254,7 @@
 
           <label class="govuk-c-label" for="world-locations">World locations</label>
           <input type="text" name="world-location" class="govuk-c-input" id="world-locations" value="{{data['world-location']}}">
+          {% endif %}
         </div>
       </div>
     </div>

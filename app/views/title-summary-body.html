@@ -9,9 +9,15 @@
   {% set editing = true %}
 {% endif %}
 
+{% if data['format'] == 'Medical safety alert' %}
+  {% set prefix = 'drug-device-alerts' %}
+{% elseif data['format'] == 'Drug safety update' %}
+  {% set prefix = 'drug-safety-update' %}
+{% endif %}
+
 <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
-  <form action="/document-tasks" method="post" class="form" data-module="slug-from-title">
+  <form action="/document-tasks" method="post" class="form" data-module="slug-from-title" data-prefix= "{{ prefix }}">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
@@ -77,7 +83,7 @@
             You haven’t entered a title yet.
           </span>
           <span class="govuk-body js-slug-parent">
-            https://www.gov.uk/government/<span class="js-dynamic-slug">this-is-the-title</span>
+            https://www.gov.uk/<span class="js-dynamic-slug">government/this-is-the-title</span>
           </span>
         </div>
       </div>
