@@ -223,9 +223,6 @@ details {
 
 
 .about {
-  h1 {
-    margin-bottom: 70px;
-  }
   .inline {
     margin-left: 5px;
   }
@@ -246,5 +243,22 @@ details {
   }
   .arrow {
     color: $govuk-border-colour;
+  }
+}
+
+.pipe {
+  color: $govuk-border-colour;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.attachment {
+  p {
+    display: inline-block;
+    width: 80%;
+    margin: 0 0 5px 0;
+  }
+  .document-task-action {
+    padding: 0;
   }
 }
