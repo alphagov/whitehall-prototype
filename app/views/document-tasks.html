@@ -24,7 +24,7 @@
         <dt>Created by</dt>
         <dd>Kamala Khan</dd>
         <dt>Last updated</dt>
-        <dd>20 January 2018</dd>
+        <dd>20 February 2018</dd>
         <dt>Status</dt>
         <dd>Draft</dd>
       </dl>
@@ -97,12 +97,14 @@
                 </div>
               </dl>
             </li>
-            <li class="document-list-item">
-              <h3 class="document-task">
-                Images
-              </h3>
-              <a href="#" class="document-task-action">Add</a>
-            </li>
+            {% if not data['specialist'] %}
+              <li class="document-list-item">
+                <h3 class="document-task">
+                  Images
+                </h3>
+                <a href="#" class="document-task-action">Add</a>
+              </li>
+            {% endif %}
             <li class="document-list-item">
               <div style="overflow: hidden">
                 <h3 class="document-task">
@@ -214,12 +216,14 @@
               </h3>
               <a href="#" class="document-task-action">Add</a>
             </li>
+            {% if not data['specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Translations
               </h3>
               <a href="#" class="document-task-action">Add</a>
             </li>
+            {% endif %}
           </ul>
         </li>
       </ol>
