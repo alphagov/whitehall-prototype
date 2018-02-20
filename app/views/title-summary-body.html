@@ -160,7 +160,7 @@
   </form>
 
   <dialog id="js-modal-dialog" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer" data-module="attachment-insert">
-    <div class="modal-dialog__inner">
+    <div class="modal-dialog__inner js-select-form">
       <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
         Insert attachment
       </h1>
@@ -171,10 +171,36 @@
         <h2 class="govuk-heading-m">Or insert a new one</h2>
       </div>
       <div class="modal-dialog__inner__block">
-        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button">Add attachment</a>
+        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-upload-attachment">Add attachment</a>
 
         <p class="govuk-body">
           <a href="/" class="js-dialog-close">Cancel</a>
+        </p>
+      </div>
+    </div>
+    <div class="modal-dialog__inner js-upload-form" style="display: none">
+      <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
+        Upload an attachment
+      </h1>
+      <div class="modal-dialog__inner__text">
+        <div class="govuk-!-mb-r3 is-input">
+          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
+            Attachment title
+            <span class="govuk-c-label__hint">Use the official title of the document</span>
+          </label>
+          <input required type="text" name="{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[attachment_id + '-attachment-title']}}{% endif %}">
+        </div>
+
+        <label class="govuk-c-label govuk-c-label--bold" for="attachment-file">
+          File
+        </label>
+        <input type="file" name="attachment-file" class="govuk-c-file-upload">
+      </div>
+      <div class="modal-dialog__inner__block">
+        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-edge">Upload</a>
+
+        <p class="govuk-body">
+          <a href="/" class="js-upload-close">Cancel</a>
         </p>
       </div>
     </div>

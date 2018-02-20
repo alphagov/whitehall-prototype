@@ -7,6 +7,8 @@
   GOVUK.Modules.AttachmentInsert = function () {
     this.start = function (element) {
       element.on('click', '.js-attachment', insertAttachment);
+      element.on('click', '.js-upload-attachment', showForm);
+      element.on('click', '.js-upload-close', hideForm);
 
       // https://stackoverflow.com/questions/11076975
       function insertAttachment(evt) {
@@ -22,6 +24,18 @@
         var textBefore = v.substring(0,  cursorPos);
         var textAfter  = v.substring(cursorPos, v.length);
         $('#body').val(textBefore + '\n' + markdown + textAfter);
+      }
+
+      function showForm(evt) {
+        evt.preventDefault();
+        element.find('.js-upload-form').show();
+        element.find('.js-select-form').hide();
+      }
+
+      function hideForm(evt) {
+        evt.preventDefault();
+        element.find('.js-upload-form').hide();
+        element.find('.js-select-form').show();
       }
     }
   }
