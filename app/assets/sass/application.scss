@@ -131,6 +131,10 @@ $govuk-gutter-half: ($govuk-gutter / 2);
   position: relative;
 }
 
+.govuk-c-button {
+  color: $govuk-white !important;
+}
+
 .contextual-guidance {
   @include govuk-responsive-padding($govuk-spacing-responsive-5, "top");
   background: #fff;
