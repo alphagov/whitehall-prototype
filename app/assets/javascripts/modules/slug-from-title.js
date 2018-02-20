@@ -6,6 +6,8 @@
 
   GOVUK.Modules.SlugFromTitle = function () {
     this.start = function (element) {
+      var prefix = element.data('prefix') || 'government';
+
       element.on('change keyup click paste', '#title', updateSlug);
       $('#title').trigger('keyup');
 
@@ -13,7 +15,7 @@
         var title = $(this).val(),
             slug = title.replace(/ +/g, '-').toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-        element.find('.js-dynamic-slug').text(slug);
+        element.find('.js-dynamic-slug').text(prefix + '/' + slug);
 
         if (slug.length > 0) {
           element.find('.js-slug-parent').show();
