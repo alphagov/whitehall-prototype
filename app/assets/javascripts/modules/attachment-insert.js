@@ -23,7 +23,7 @@
         var v = $('#body').val();
         var textBefore = v.substring(0,  cursorPos);
         var textAfter  = v.substring(cursorPos, v.length);
-        $('#body').val(textBefore + '\n' + markdown + textAfter);
+        $('#body').val(textBefore + '\n' + markdown + textAfter).focus();
       }
 
       function showForm(evt) {
