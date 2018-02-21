@@ -114,6 +114,11 @@
         <div class="govuk-!-mb-r6 is-input">
           <label class="govuk-c-label" for="expected-audience">Expected audience</label>
           <input type="text" name="expected-audience" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="{{data['expected-audience']}}"> <span class="inline govuk-body">views per month</span>
+
+          {% if not data['specialist'] %}
+            <label class="govuk-c-label" for="expert">Subject matter expert</label>
+            <input type="text" name="expert" class="govuk-c-input" id="expert" value="{{data['expert']}}">
+          {% endif %}
         </div>
       </div>
     </div>
