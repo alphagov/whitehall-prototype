@@ -154,7 +154,7 @@
     </div>
     <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
     {% if editing %}
-    <div class="govuk-!-mb-r6">
+    <div class="govuk-!-mb-r6 govuk-body">
       <a href="/document-tasks" class="button button-link">Discard changes</a>
     </div>
     {% endif %}
@@ -165,42 +165,42 @@
       <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
         Insert attachment
       </h1>
-      <div class="modal-dialog__inner__text">
-        <h2 class="govuk-heading-m">Select an attachment</h2>
+      <div class="modal-dialog__inner__text govuk-!-mb-r2">
+        <h2 class="govuk-heading-m govuk-!-mb-r2">Select an attachment</h2>
         {% include "includes/attachment-list.html" %}
 
-        <h2 class="govuk-heading-m">Or insert a new one</h2>
+        <h2 class="govuk-heading-m govuk-!-mb-r2">Or insert a new one</h2>
       </div>
       <div class="modal-dialog__inner__block">
-        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-upload-attachment">Add attachment</a>
+        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-upload-attachment">Insert new attachment</a>
 
-        <p class="govuk-body">
+        <p class="govuk-body govuk-!-mb-r0">
           <a href="/" class="js-dialog-close">Cancel</a>
         </p>
       </div>
     </div>
     <div class="modal-dialog__inner js-upload-form" style="display: none">
       <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
-        Upload an attachment
+        Insert a new attachment
       </h1>
       <div class="modal-dialog__inner__text">
-        <div class="govuk-!-mb-r3 is-input">
+        <div class="is-input">
           <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
             Attachment title
             <span class="govuk-c-label__hint">Use the official title of the document</span>
           </label>
-          <input required type="text" name="{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[attachment_id + '-attachment-title']}}{% endif %}">
+          <input required type="text" name="{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input govuk-!-mb-r3" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[attachment_id + '-attachment-title']}}{% endif %}">
         </div>
 
         <label class="govuk-c-label govuk-c-label--bold" for="attachment-file">
           File
         </label>
-        <input type="file" name="attachment-file" class="govuk-c-file-upload">
+        <input type="file" name="attachment-file" class="govuk-c-file-upload govuk-!-mb-r0">
       </div>
       <div class="modal-dialog__inner__block">
-        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-edge">Upload</a>
+        <a href="/attachment" class="govuk-c-button  govuk-!-mb-r6 dialog-button modal-dialog__inner__button js-edge ">Insert attachment</a>
 
-        <p class="govuk-body">
+        <p class="govuk-body govuk-!-mb-r0">
           <a href="/" class="js-upload-close">Cancel</a>
         </p>
       </div>
