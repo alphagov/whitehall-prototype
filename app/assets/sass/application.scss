@@ -138,11 +138,11 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 .inserts {
   @include govuk-font-regular-19;
 
-  background-color: $govuk-grey-4;
+  background-color:  $govuk-grey-4;
   border: 2px solid $govuk-black;
-  border-bottom-color: $govuk-border-colour;
-  padding: 10px;
-  margin-bottom: -2px;
+  border-bottom: 0;
+  padding: 7px;
+  margin-top: 5px;
   position: relative;
   z-index: 1;
 }
