@@ -221,15 +221,12 @@
     </div>
     {% endif %}
 
+    {% if not data['specialist'] %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
           <h2 class="govuk-heading-l">Associations</h2>
 
-          {% if data['specialist'] %}
-            <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
-            <p class="govuk-body">{{ data['lead-organisation'] }}</p>
-          {% else %}
           <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
           <select id="lead-organisation" name="lead-organisation">
             {% include "includes/organisation-select-options.html" %}
@@ -254,10 +251,11 @@
 
           <label class="govuk-c-label" for="world-locations">World locations</label>
           <input type="text" name="world-location" class="govuk-c-input" id="world-locations" value="{{data['world-location']}}">
-          {% endif %}
+
         </div>
       </div>
     </div>
+    {% endif %}
     <div class="govuk-!-mb-r6">
       <input type="submit" class="govuk-c-button" value="Save">
     </div>
