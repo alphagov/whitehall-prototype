@@ -62,7 +62,7 @@
     setFocusOnLastFocusedEl: function () {
       if (GOVUK.modalDialog.$lastFocusedEl) {
         window.setTimeout(function () {
-          GOVUK.modalDialog.$lastFocusedEl.focus()
+          //GOVUK.modalDialog.$lastFocusedEl.focus()
         }, 0)
       }
     },

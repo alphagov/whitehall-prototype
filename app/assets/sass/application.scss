@@ -131,6 +131,22 @@ $govuk-gutter-half: ($govuk-gutter / 2);
   position: relative;
 }
 
+.govuk-c-button {
+  color: $govuk-white !important;
+}
+
+.inserts {
+  @include govuk-font-regular-19;
+
+  background-color: $govuk-grey-4;
+  border: 2px solid $govuk-black;
+  border-bottom-color: $govuk-border-colour;
+  padding: 10px;
+  margin-bottom: -2px;
+  position: relative;
+  z-index: 1;
+}
+
 .contextual-guidance {
   @include govuk-responsive-padding($govuk-spacing-responsive-5, "top");
   background: #fff;

@@ -15,6 +15,8 @@
   {% set prefix = 'drug-safety-update' %}
 {% endif %}
 
+{% set attachment_count = data['attachment-count'] | int %}
+
 <a href="{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <form action="/document-tasks" method="post" class="form" data-module="slug-from-title" data-prefix= "{{ prefix }}">
@@ -114,9 +116,17 @@
     <div class="govuk-o-grid body-guidance" data-module="live-content-check">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-textarea">
-          <label class="govuk-c-label" for="body">
+          <label class="govuk-c-label" for="body" id="body-label">
             Body
           </label>
+
+          {% if attachment_count > 0 %}
+            <div class="inserts">
+              <a href="#" id="openModal">Insert attachment</a>
+              <a href="#" style="margin-left: 20px">Insert image</a>
+            </div>
+          {% endif %}
+
           <textarea name="body" class="govuk-c-textarea js-check-content" data-target="body-checks" name="textarea" id="body" rows="40">{% if editing %}{{data['body']}}{% endif %}</textarea>
         </div>
       </div>
@@ -149,5 +159,52 @@
     </div>
     {% endif %}
   </form>
+
+  <dialog id="js-modal-dialog" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer" data-module="attachment-insert">
+    <div class="modal-dialog__inner js-select-form">
+      <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
+        Insert attachment
+      </h1>
+      <div class="modal-dialog__inner__text">
+        <h2 class="govuk-heading-m">Select an attachment</h2>
+        {% include "includes/attachment-list.html" %}
+
+        <h2 class="govuk-heading-m">Or insert a new one</h2>
+      </div>
+      <div class="modal-dialog__inner__block">
+        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-upload-attachment">Add attachment</a>
+
+        <p class="govuk-body">
+          <a href="/" class="js-dialog-close">Cancel</a>
+        </p>
+      </div>
+    </div>
+    <div class="modal-dialog__inner js-upload-form" style="display: none">
+      <h1 id="dialog-title" class="heading-large govuk-!-mb-r6">
+        Upload an attachment
+      </h1>
+      <div class="modal-dialog__inner__text">
+        <div class="govuk-!-mb-r3 is-input">
+          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
+            Attachment title
+            <span class="govuk-c-label__hint">Use the official title of the document</span>
+          </label>
+          <input required type="text" name="{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[attachment_id + '-attachment-title']}}{% endif %}">
+        </div>
+
+        <label class="govuk-c-label govuk-c-label--bold" for="attachment-file">
+          File
+        </label>
+        <input type="file" name="attachment-file" class="govuk-c-file-upload">
+      </div>
+      <div class="modal-dialog__inner__block">
+        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-edge">Upload</a>
+
+        <p class="govuk-body">
+          <a href="/" class="js-upload-close">Cancel</a>
+        </p>
+      </div>
+    </div>
+  </dialog>
 </main>
 {% endblock %}
