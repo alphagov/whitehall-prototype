@@ -280,7 +280,22 @@
               <h3 class="document-task">
                 Publish settings
               </h3>
-              <a href="#" class="document-task-action">Add</a>
+              {% if data['schedule-time'] %}
+                <a href="/publish-settings" class="document-task-action">Change</a>
+
+                <dl class="document-task-part">
+                  <div>
+                    <dt class="document-part-label">
+                      Scheduled
+                    </dt>
+                    <dd class="document-part-value">
+                      {{ data['schedule-time']}} {{ data['schedule-day']}}-{{ data['schedule-month']}}-{{ data['schedule-year']}}
+                    </dd>
+                  </div>
+                </dl>
+              {% else %}
+                <a href="/publish-settings" class="document-task-action">Add</a>
+              {% endif %}
             </li>
             <li class="document-list-item">
               <h3 class="document-task">
