@@ -18,6 +18,42 @@ router.get('/intent', function(req, res) {
   res.render('intent');
 });
 
+router.get('/submit-for-review', function(req, res) {
+  var data = req.session.data;
+  var errors = [];
+  var locals = {};
+
+  if (!data.body) {
+    errors.push({
+      title: 'Please provide body text',
+      link: '/title-summary-body#body-label'
+    })
+  }
+
+  if (!data.summary) {
+    errors.push({
+      title: 'Please provide a summary',
+      link: '/title-summary-body'
+    })
+  }
+
+
+  if (!data['lead-organisation']) {
+    errors.push({
+      title: 'Please provide a lead organisation',
+      link: '/about-content'
+    })
+  }
+
+  if (errors.length > 0) {
+    locals.errors = errors;
+  } else {
+    locals.success = true;
+  }
+  
+  res.render('document-tasks', locals);
+});
+
 // Add your routes here - above the module.exports line
 
 router.get('/attachment/:attachmentId', function(req, res){

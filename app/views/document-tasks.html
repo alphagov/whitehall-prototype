@@ -3,11 +3,27 @@
 
 {% block content %}
 <main role="main" class="govuk-o-main-wrapper">
-  <!-- <div class="success-summary" role="alert" tabindex="-1">
-    <p>
-      Your draft has been saved
-    </p>
-  </div> -->
+
+  {% if errors %}
+  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
+      There was a problem sending your content to review
+    </h3>
+    <ul class="error-summary-list">
+      {% for error in errors %}
+      <li><a href="{{ error.link }}">{{ error.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if success %}
+    <div class="success-summary" role="alert" tabindex="-1">
+      <p>
+        Your draft has been submitted for review
+      </p>
+    </div>
+  {% endif %}
 
   <h1 class="form-title govuk-heading-xl">
     <span class="govuk-caption-xl">{{ data['format'] }}</span>
@@ -277,7 +293,7 @@
         </li>
       </ol>
 
-      <a href="#" class="govuk-c-button">Request review</a>
+      <a href="/submit-for-review" class="govuk-c-button">Request review</a>
       <ul class="govuk-list">
         <li><a href="#">Request fact-check</a></li>
         <li><a href="/preview">Preview</a></li>
