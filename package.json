@@ -34,7 +34,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.7",
     "highlight-within-textarea": "^2.0.4",
-    "marked": "^0.3.6",
+    "marked": "^0.3.16",
     "minimist": "1.2.0",
     "normalize.css": "^8.0.0",
     "notifications-node-client": "^3.0.0",

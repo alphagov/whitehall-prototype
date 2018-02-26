@@ -13,8 +13,8 @@
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <p class="govuk-body-l">{{ data['summary'] }}</p>
-        <div class="govuk-prose">
-          {{ data['body'] }}
+        <div class="govuk-prose-scope">
+          {{ body_html | safe }}
         </div>
       </div>
     </div>
