@@ -1,5 +1,6 @@
 const express = require('express')
 const retext = require('../lib/retext.js')
+const marked = require('../lib/marked.js')
 const router = express.Router()
 
 // Route index page
@@ -28,6 +29,13 @@ router.get('/patterns/content-checker', function(req, res) {
   var locals = {};
   retext.checkText(text, locals);
   res.render('patterns/content-checker', locals)
+})
+
+router.get('/preview', function(req, res) {
+  var text = req.session.data['body'];
+  var locals = {};
+  marked.convertMarkdownToHTML(text, locals);
+  res.render('preview', locals)
 })
 
 router.get('/document-type', function(req, res) {
