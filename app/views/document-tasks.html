@@ -280,18 +280,46 @@
               <h3 class="document-task">
                 Publish settings
               </h3>
-              {% if data['schedule-time'] %}
+              {% if data['schedule-time'] or data['published-before'] %}
                 <a href="/publish-settings" class="document-task-action">Change</a>
 
                 <dl class="document-task-part">
-                  <div>
-                    <dt class="document-part-label">
-                      Scheduled
-                    </dt>
-                    <dd class="document-part-value">
-                      {{ data['schedule-time']}} {{ data['schedule-day']}}-{{ data['schedule-month']}}-{{ data['schedule-year']}}
-                    </dd>
-                  </div>
+                  {%
+                    set ptags = [
+                      {
+                        name: 'Scheduled',
+                        key: 'schedule-year'
+                      },
+                      {
+                        name: 'Published before',
+                        key: 'published-before'
+                      }
+                    ]
+                  %}
+                  {% for ptag in ptags %}
+                    <div>
+                      <dt class="document-part-label">
+                        {{ ptag.name }}
+                      </dt>
+                      {% if data[ptag.key] %}
+                        <dd class="document-part-value">
+                          {% if ptag.key == 'schedule-year' %}
+                            {{ data[ptag.key] }}-{{ data['issue-date-month'] }}-{{ data['issue-date-day'] }}
+                          {% else %}
+                            {{ data[ptag.key] }}
+                          {% endif %}
+                        </dd>
+                      {% else %}
+                        <dd class="document-part-value document-part-value--empty">
+                          {% if ptag.key == 'schedule-year' %}
+                            This post has not been scheduled
+                          {% else %}
+                            This field is empty
+                          {% endif %}
+                        </dd>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
                 </dl>
               {% else %}
                 <a href="/publish-settings" class="document-task-action">Add</a>
