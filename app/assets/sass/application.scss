@@ -237,6 +237,11 @@ details {
   max-width: 380px;
 }
 
+.full-wrapper {
+  background: #fff;
+  padding: $govuk-gutter;
+}
+
 .tabs {
   padding-left: 0;
   border-bottom: 1px solid $govuk-border-colour;
