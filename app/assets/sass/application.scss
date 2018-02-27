@@ -237,6 +237,32 @@ details {
   max-width: 380px;
 }
 
+.tabs {
+  padding-left: 0;
+  border-bottom: 1px solid $govuk-border-colour;
+
+  li {
+    margin-bottom: -1px;
+    display: inline-block;
+    margin-right: $govuk-gutter / 3;
+  }
+
+  a {
+    display: block;
+    padding: $govuk-gutter / 2;
+  }
+
+  .active a {
+    border: 1px solid $govuk-border-colour;
+    border-bottom-color: #fff;
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+      color: $govuk-text-colour;
+    }
+  }
+}
 
 .about {
   .inline {

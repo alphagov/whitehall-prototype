@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block page_title %}{{ data['title'] }}{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <h1 class="form-title govuk-heading-xl">
+    <span class="govuk-caption-xl">{{ data['format'] }}</span>
+    {% if data['title'] %}
+      {{ data['title'] }}
+    {% else %}
+      Some title
+    {% endif %}
+  </h1>
+
+  <ul class="tabs">
+    <li>
+      <a href="/document-tasks">Edit document</a>
+    </li>
+    <li class="active">
+      <a href="/document-history">Document history</a>
+    </li>
+  </ul>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+    </div>
+  </div>
+</main>
+{% endblock %}
