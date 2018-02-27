@@ -50,7 +50,7 @@ router.get('/submit-for-review', function(req, res) {
   } else {
     locals.success = true;
   }
-  
+
   res.render('document-tasks', locals);
 });
 
@@ -96,6 +96,23 @@ function checkContent(req, res, text) {
   var obj = {};
 
   retext.checkText(text, obj);
+  res.header('Content-type','application/json');
+  res.header('Charset','utf8');
+  res.send(JSON.stringify(obj));
+}
+
+router.get('/live-preview', function(req, res){
+  livePreview(req, res, req.query['text']);
+});
+
+router.post('/live-preview', function(req, res){
+  livePreview(req, res, req.body['text']);
+});
+
+function livePreview(req, res, text) {
+  var obj = {};
+  text = text || "";
+  marked.convertMarkdownToHTML(text, obj);
   res.header('Content-type','application/json');
   res.header('Charset','utf8');
   res.send(JSON.stringify(obj));
