@@ -280,6 +280,7 @@
   govukGovernmentOrganisationsAutocomplete({
     selectElement: document.getElementById('lead-organisation'),
     showAllValues: true,
+    autoselect: false,
     minLength: 2,
     defaultValue: '{{ data['lead-organisation'] }}'
   })
@@ -287,6 +288,7 @@
   govukGovernmentOrganisationsAutocomplete({
     selectElement: document.getElementById('supporting-organisation'),
     showAllValues: true,
+    autoselect: false,
     minLength: 2,
     defaultValue: '{{ data['supporting-organisation'] }}'
   })
