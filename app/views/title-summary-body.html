@@ -141,10 +141,19 @@
           </ul>
           <h2 class="govuk-heading-s govuk-!-mb-r1">Markdown guidance</h2>
           <p class="govuk-body">For details, read the guide to using Markdown</p>
-          <ul class="govuk-list">
-            <li><a class="govuk-link" href="#">Headings</a></li>
-            <li><a class="govuk-link" href="#">Links</a></li>
-            <li><a class="govuk-link" href="#">Bullets</a></li>
+          <ul class="govuk-list" data-module="toggle">
+            <li>
+              <a class="govuk-link" href="#markdown-headings" data-controls="markdown-headings" data-expanded="false">Headings</a>
+              <div style="display: none" id="markdown-headings">Content</div>
+            </li>
+            <li>
+              <a class="govuk-link" href="#markdown-links" data-controls="markdown-links" data-expanded="false">Links</a>
+              <div style="display: none" id="markdown-links">Content</div>
+            </li>
+            <li>
+              <a class="govuk-link" href="#markdown-bullets" data-controls="markdown-bullets" data-expanded="false">Bullets</a>
+              <div style="display: none" id="markdown-bullets">Content</div>
+            </li>
           </ul>
         </div>
       </div>
