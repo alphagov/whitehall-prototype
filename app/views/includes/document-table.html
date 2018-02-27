@@ -8,6 +8,12 @@
     {% for i in range(0, documentCount) -%}
       {% set x = [
         {
+          name: data['title'] or 'Custom title',
+          format: data['format'] or 'News article',
+          date: '14 March 2018',
+          link: '/document-tasks'
+        },
+        {
           name: 'Improving social mobility through education',
           format: 'Detailed guidance',
           date: '10 August 2017'
@@ -24,7 +30,7 @@
         }
       ] | random %}
     <tr class="govuk-c-table__row">
-      <td class="govuk-c-table__cell"><a href="#" class="govuk-heading-s govuk-!-mb-r0">{{ x.name }}</a>{{ x.format}}, {{ x.date }}</td>
+      <td class="govuk-c-table__cell"><a href="{% if x.link %}{{ x.link }}{% else %}#{% endif %}" class="govuk-heading-s govuk-!-mb-r0">{{ x.name }}</a>{{ x.format}}, {{ x.date }}</td>
     </tr>
     {%- endfor %}
   </tbody>
