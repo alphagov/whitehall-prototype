@@ -17,7 +17,7 @@
     Search for a document
   </h2>
   <div class="govuk-o-grid">
-    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
       <form action="/docs/tutorials-and-examples" method="post" class="form">
         <h3 class="govuk-heading-s">Filter by</h3>
         <label class="govuk-c-label" for="title">
@@ -26,22 +26,13 @@
         <input type="text" class="govuk-c-input" id="title">
 
         <label class="govuk-c-label" for="author">
-          Format
+          Document type
+        </label>
+        <input type="text" class="govuk-c-input" id="doc-type">
+        <label class="govuk-c-label" for="status">
+          Status
         </label>
         <input type="text" class="govuk-c-input" id="format">
-        <div class="multiple-choice govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-          <input required id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}" class="govuk-c-radios__input">
-          <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
-            <span class="govuk-c-label--bold">{{ field.name }}</span>
-            {{ field.text | safe }}
-
-            {% if field.more %}
-            <div class="panel panel-border-wide govuk-!-mt-r4 govuk-!-mb-r4 js-hidden" id="radio-part-{{ loop.index }}-extra">
-              {{ field.more | safe }}
-            </div>
-            {% endif %}
-          </label>
-        </div>
         <label class="govuk-c-label" for="author">
           Editor
         </label>
@@ -53,14 +44,48 @@
         <select id="government-organisations" name="organisation">
           {% include "includes/organisation-select-options.html" %}
         </select>
+
+        <label class="govuk-c-label" for="author">
+          Internal theme
+        </label>
+        <span class="govuk-c-label__hint">For example, EU Exit</span>
+        <input type="text" class="govuk-c-input" id="author">
+        <label class="govuk-c-label" for="author">
+          Subject matter expert
+        </label>
+        <input type="text" class="govuk-c-input" id="author">
+        <div class="govuk-c-checkboxes">
+          <div class="govuk-o-form-group">
+            <fieldset class="govuk-c-fieldset">
+              <div class="govuk-c-checkboxes__item">
+              <input class="govuk-c-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british">
+              <label class="govuk-c-label govuk-c-checkboxes__label" for="nationality-1">
+                Show only documents with broken links
+              </label>
+            </div>
+          </fieldset>
+          </div>
+        </div>
+        <input value="Search" type="submit" class="govuk-c-button">
+        <ul class="govuk-list">
+          <li><a href="#">Clear filters</a></li>
+        </ul>
       </form>
     </div>
-  </div>
-  <div class="govuk-o-grid">
-    <div class="govuk-o-grid__item govuk-o-grid__item--full">
-      <h3 class="govuk-heading-s">Documents</h3>
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds extra-gutter">
+      <h3 class="govuk-heading-s">106 documents found</h3>
       {% set documentCount = 50 %}
-      {% include "includes/document-table.html" %}
+      {% include "includes/document-list.html" %}
+      <div class="pagination">
+        <p class="govuk-body">Displaying documents 1 - 20 of 106 in total</p>
+        <p class="govuk-body pages">
+          <span class="active-page">1</span>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+          <a href="">Next</a>
+        </p>
+      </div>
     </div>
   </div>
   <!-- <div class="govuk-o-grid">
