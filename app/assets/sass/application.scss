@@ -476,3 +476,22 @@ ul.documents {
 .date-divider {
   padding: 0 10px;
 }
+
+.dropdown {
+  position: relative;
+  &:after {
+    position: relative;
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 10px solid $govuk-text-colour;
+    left: 275px;
+    top: -55px;
+  }
+  &.organisation:after {
+    top: -24px;
+  }
+}

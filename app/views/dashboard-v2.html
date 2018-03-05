@@ -28,11 +28,11 @@
         <label class="govuk-c-label" for="author">
           Document type
         </label>
-        <input type="text" class="govuk-c-input" id="doc-type">
+        <span class="dropdown"><input type="text" class="govuk-c-input" id="doc-type"></span>
         <label class="govuk-c-label" for="status">
           Status
         </label>
-        <input type="text" class="govuk-c-input" id="format">
+        <span class="dropdown"><input type="text" class="govuk-c-input" id="format"></span>
         <label class="govuk-c-label" for="author">
           Editor
         </label>
@@ -45,19 +45,19 @@
         <label class="govuk-c-label" for="government-organisations">
           Organisation
         </label>
-        <select id="government-organisations" name="organisation">
+        <span class="dropdown organisation"><select id="government-organisations" name="organisation">
           {% include "includes/organisation-select-options.html" %}
-        </select>
+        </select></span>
 
         <label class="govuk-c-label govuk-!-mt-r6" for="author">
           Internal theme
         </label>
         <span class="govuk-c-label__hint">For example, EU Exit</span>
-        <input type="text" class="govuk-c-input" id="author">
+        <span class="dropdown"><input type="text" class="govuk-c-input" id="author"></span>
         <label class="govuk-c-label" for="author">
           Subject matter expert
         </label>
-        <input type="text" class="govuk-c-input" id="author">
+        <span class="dropdown"><input type="text" class="govuk-c-input" id="author"></span>
         <div class="govuk-c-checkboxes">
           <div class="govuk-o-form-group">
             <fieldset class="govuk-c-fieldset">
