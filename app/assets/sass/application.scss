@@ -92,7 +92,7 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
-.govuk-list a:visited, .govuk-prose-scope ul a:visited, .govuk-prose-scope ol a:visited {
+a:visited, .govuk-list a:visited, .govuk-prose-scope ul a:visited, .govuk-prose-scope ol a:visited {
   color: $govuk-link-colour;
 }
 
