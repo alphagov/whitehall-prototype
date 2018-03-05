@@ -37,7 +37,11 @@
           Editor
         </label>
         <input type="text" class="govuk-c-input" id="author">
-
+        <label class="govuk-c-label" for="author">
+          Last updated date
+        </label>
+        <span class="govuk-c-label__hint">For example, 31/12/2017 to 31/12/2018</span>
+        <input type="text" class="govuk-c-input date-filter" id="author"> <span class="govuk-body date-divider">to</span> <input type="text" class="govuk-c-input date-filter" id="author">
         <label class="govuk-c-label" for="government-organisations">
           Organisation
         </label>
@@ -45,7 +49,7 @@
           {% include "includes/organisation-select-options.html" %}
         </select>
 
-        <label class="govuk-c-label" for="author">
+        <label class="govuk-c-label govuk-!-mt-r6" for="author">
           Internal theme
         </label>
         <span class="govuk-c-label__hint">For example, EU Exit</span>
@@ -66,14 +70,17 @@
           </fieldset>
           </div>
         </div>
-        <input value="Search" type="submit" class="govuk-c-button">
+        <input value="Apply filters" type="submit" class="govuk-c-button">
         <ul class="govuk-list">
           <li><a href="#">Clear filters</a></li>
         </ul>
       </form>
     </div>
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds extra-gutter">
-      <h3 class="govuk-heading-s">106 documents found</h3>
+      <div class="results-sort">
+        <h3 class="govuk-heading-s">106 documents found</h3>
+        <span class="sort govuk-body">Sort by last updated</span>
+      </div>
       {% set documentCount = 50 %}
       {% include "includes/document-list.html" %}
       <div class="pagination">

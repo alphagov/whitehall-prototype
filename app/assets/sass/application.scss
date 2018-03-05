@@ -328,7 +328,9 @@ ul.documents {
   list-style-type: none;
   li {
     padding: 25px 0;
-    // border-bottom: 1px solid $govuk-border-colour;
+    &:first-child {
+      padding-top: 0;
+    }
     dl.metadata dt, dl.metadata dd {
       font-size: 19px;
       margin-bottom: 5px;
@@ -402,7 +404,7 @@ ul.documents {
   padding-left: 0;
   list-style-type: none;
   .edition h2 {
-    margin-bottom: 40px;
+    margin: 60px 0 40px 0;
   }
   .edition-timeline {
     padding-left: 0;
@@ -414,7 +416,7 @@ ul.documents {
   }
   .timeline-day {
     margin-bottom: 40px;
-    padding-left: 20px;
+    padding-left: 30px;
     position: relative;
     top: -10px;
     &:before {
@@ -445,4 +447,32 @@ ul.documents {
     display: inline-block;
     margin-bottom: 5px;
   }
+}
+
+.results-sort {
+  overflow: hidden;
+  h3 {
+    float: left;
+  }
+  .sort {
+    float: right;
+    font-weight: bold;
+    &:after {
+      display: inline-block;
+      content: " ";
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 10px solid $govuk-text-colour;
+      margin-left: 5px;
+    }
+  }
+}
+.date-filter {
+  width: 42%;
+}
+
+.date-divider {
+  padding: 0 10px;
 }
