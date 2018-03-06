@@ -150,6 +150,12 @@ a:visited, .govuk-list a:visited, .govuk-prose-scope ul a:visited, .govuk-prose-
   margin-top: 5px;
   position: relative;
   z-index: 1;
+  &.preview {
+    border: none;
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding: 0;
+  }
 }
 
 .contextual-guidance {
@@ -499,4 +505,11 @@ ul.documents {
   &.organisation:after {
     top: -24px;
   }
+}
+
+.draft {
+  background-image: url(../images/draft-watermark.png);
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-size: contain;
 }
