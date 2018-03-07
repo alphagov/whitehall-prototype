@@ -94,7 +94,7 @@
     <div class="govuk-o-grid" data-module="live-content-check">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-textarea">
-          <label class="govuk-c-label" for="summary" id="summary">
+          <label class="govuk-c-label" for="summary">
             Summary
           </label>
           <textarea name="summary" class="govuk-c-textarea js-check-content" data-target="summary-checks" name="textarea" id="summary" rows="2">{% if editing %}{{data['summary']}}{% endif %}</textarea>
@@ -116,17 +116,17 @@
     <div class="govuk-o-grid body-guidance" data-module="live-content-check">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-textarea">
-          <label class="govuk-c-label" for="body" id="body-label">
-            Body
-          </label>
-          <div class="inserts" id="edit-body">
-            <a href="/markdown-preview#preview" target="blank">Preview markdown</a>
-            {% if attachment_count > 0 %}
-              <a href="#" id="openModal" style="margin-left: 20px">Insert attachment</a>
-              <a href="#" style="margin-left: 20px">Insert image</a>
-            {% endif %}
+          <div class="inserts preview" id="preview">
+            <a href="/title-summary-body#edit-body" target="blank">Continue editing</a>
           </div>
-          <textarea name="body" class="govuk-c-textarea js-check-content" data-target="body-checks" name="textarea" id="body" rows="40">{% if editing %}{{data['body']}}{% endif %}</textarea>
+          <div class="govuk-prose-scope">
+            <h2 class="govuk-heading-m">This is a heading</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus nisi. Duis odio orci, congue sit amet lorem ut, semper bibendum neque. Morbi tincidunt dolor quis enim ullamcorper, ac auctor dolor sodales. Praesent dignissim nibh tortor, non placerat velit feugiat quis.</p>
+            <p>Vivamus fringilla mauris at mauris cursus, nec luctus purus dictum. Nunc tempor leo diam, euismod rhoncus eros imperdiet sed. Donec ac lectus rutrum, cursus nisi et, lobortis dui. Pellentesque mollis ipsum at mauris consequat fringilla. Etiam sit amet pharetra erat. Sed quis placerat augue.</p>
+            <h3 class="govuk-heading-s">This is a subheading</h3>
+            <p>Phasellus tincidunt neque vitae mauris efficitur molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi id odio leo. Donec eget aliquet diam. Vivamus ac cursus odio, id aliquam mauris. Nunc gravida mi eros, ac imperdiet lorem malesuada fringilla. Nam cursus pellentesque ante, sed scelerisque nulla posuere non. Nunc nec vulputate est. Proin nec neque non turpis sagittis dapibus nec ac felis. Donec ut congue felis.</p>
+            <p class="govuk-!-mb-r9">Suspendisse et porta erat, a tristique metus. Phasellus tempor tortor ut justo scelerisque maximus et ac leo. Duis viverra tellus sit amet tellus dictum, eget fringilla odio rutrum. Sed dapibus felis dolor, vel gravida eros ornare ut. Phasellus vestibulum sagittis nisl sit amet scelerisque.</p>
+          </div>
         </div>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
