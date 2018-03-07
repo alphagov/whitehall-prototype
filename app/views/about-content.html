@@ -230,16 +230,19 @@
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
-          <h2 class="govuk-heading-l">Associations</h2>
-
-          <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
-          <select id="lead-organisation" name="lead-organisation">
-            {% include "includes/organisation-select-options.html" %}
-          </select>
+          <h2 class="govuk-heading-l" id="lead-organisation-label">Associations</h2>
+          <div class="govuk-o-form-group govuk-o-form-group--error">
+            <label class="govuk-c-label" for="lead-organisation">
+              Lead organisation
+              <span class="govuk-c-error-message">Enter a lead organisation</span>
+            </label>
+            <select id="lead-organisation" name="lead-organisation">
+              {% include "includes/organisation-select-options.html" %}
+            </select>
+          </div>
           <div class="govuk-!-mt-r2 govuk-!-mb-r1">
             <a href="#" class="button button-link govuk-body">Add another leading organisation</a>
           </div>
-
           <label class="govuk-c-label" for="supporting-organisation">Supporting organisation</label>
           <select id="supporting-organisation" name="supporting-organisation">
             {% include "includes/organisation-select-options.html" %}

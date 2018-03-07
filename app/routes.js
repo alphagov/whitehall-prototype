@@ -23,25 +23,24 @@ router.get('/submit-for-review', function(req, res) {
   var errors = [];
   var locals = {};
 
+  if (!data.summary) {
+    errors.push({
+      title: 'Enter a summary',
+      link: '/title-summary-body#summary'
+    })
+  }
+
   if (!data.body) {
     errors.push({
-      title: 'Please provide body text',
+      title: 'Enter body copy',
       link: '/title-summary-body#body-label'
     })
   }
 
-  if (!data.summary) {
-    errors.push({
-      title: 'Please provide a summary',
-      link: '/title-summary-body'
-    })
-  }
-
-
   if (!data['lead-organisation']) {
     errors.push({
-      title: 'Please provide a lead organisation',
-      link: '/about-content'
+      title: 'Enter a lead organisation',
+      link: '/about-content#lead-organisation-label'
     })
   }
 

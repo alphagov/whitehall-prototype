@@ -1,0 +1,30 @@
+{% extends "govuk-layout.html" %}
+{% block page_title %}Preview{% endblock %}
+
+{% block body_classes %}
+  govuk-preview
+{% endblock %}
+
+{% block content %}
+<div class="govuk-o-width-container">
+  <main role="main" class="govuk-o-main-wrapper draft">
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">News article</span>
+      This is a title
+    </h1>
+
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <p class="govuk-body-l">{{ data['summary'] }}</p>
+        <div class="govuk-prose-scope">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus nisi. Duis odio orci, congue sit amet lorem ut, semper bibendum neque. Morbi tincidunt dolor quis enim ullamcorper, ac auctor dolor sodales. Praesent dignissim nibh tortor, non placerat velit feugiat quis.</p>
+          <p>Vivamus fringilla mauris at mauris cursus, nec luctus purus dictum. Nunc tempor leo diam, euismod rhoncus eros imperdiet sed. Donec ac lectus rutrum, cursus nisi et, lobortis dui. Pellentesque mollis ipsum at mauris consequat fringilla. Etiam sit amet pharetra erat. Sed quis placerat augue.</p>
+          <p>Phasellus tincidunt neque vitae mauris efficitur molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi id odio leo. Donec eget aliquet diam. Vivamus ac cursus odio, id aliquam mauris. Nunc gravida mi eros, ac imperdiet lorem malesuada fringilla. Nam cursus pellentesque ante, sed scelerisque nulla posuere non. Nunc nec vulputate est. Proin nec neque non turpis sagittis dapibus nec ac felis. Donec ut congue felis.</p>
+          <p class="govuk-!-mb-r9">Suspendisse et porta erat, a tristique metus. Phasellus tempor tortor ut justo scelerisque maximus et ac leo. Duis viverra tellus sit amet tellus dictum, eget fringilla odio rutrum. Sed dapibus felis dolor, vel gravida eros ornare ut. Phasellus vestibulum sagittis nisl sit amet scelerisque.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %}
