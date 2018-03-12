@@ -2,7 +2,7 @@
 {% block page_title %}Publish settings{% endblock %}
 
 {% block content %}
-<a href="/document-tasks" class="govuk-c-back-link">Back</a>
+<a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <form action="/document-tasks" method="post" class="form">
     <div class="govuk-o-grid">
@@ -97,7 +97,7 @@
         </div>
 
         <div class="govuk-!-mb-r6">
-          <a href="/document-tasks" class="button button-link govuk-body">Discard changes</a>
+          <a href="{{ urlPrefix }}/document-tasks" class="button button-link govuk-body">Discard changes</a>
         </div>
       </div>
     </div>

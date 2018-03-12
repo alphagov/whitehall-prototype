@@ -16,7 +16,7 @@
   {% set attachment_id = attachment_count %}
 {% endif %}
 
-<a href="/document-tasks" class="govuk-c-back-link">Back</a>
+<a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <form action="{% if editing %} /attachment-edit-done {% else %} /attachment-done {% endif %}" method="post" class="form" data-module="fake-filename-from-title">
     <div class="govuk-o-grid">
@@ -78,7 +78,7 @@
     {% if editing %}
       <input type="submit" class="govuk-c-button" value="Save">
       <div class="govuk-!-mb-r6">
-        <a href="/document-tasks" class="button button-link govuk-body">Discard changes</a>
+        <a href="{{ urlPrefix }}/document-tasks" class="button button-link govuk-body">Discard changes</a>
       </div>
     {% else %}
       <div class="govuk-!-mb-r6">

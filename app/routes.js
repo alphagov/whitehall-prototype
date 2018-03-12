@@ -118,4 +118,14 @@ function livePreview(req, res, text) {
   res.send(JSON.stringify(obj));
 }
 
+router.get('/:state/:page', function(req, res) {
+  var states = ['new', 'published'];
+
+  if (states.includes(req.params.state)) {
+    res.render(req.params.page, { state: req.params.state })
+  } else {
+    res.status(404).send('Not found');
+  }
+});
+
 module.exports = router

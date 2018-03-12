@@ -164,7 +164,7 @@
     <!-- <input type="submit" class="button add-left-margin" formaction="?saved" value="Save and continue editing"> -->
     {% if editing %}
     <div class="govuk-!-mb-r6 govuk-body">
-      <a href="/document-tasks" class="button button-link">Discard changes</a>
+      <a href="{{ urlPrefix }}/document-tasks" class="button button-link">Discard changes</a>
     </div>
     {% endif %}
   </form>
@@ -181,10 +181,10 @@
         <h2 class="govuk-heading-m govuk-!-mb-r2">Or insert a new one</h2>
       </div>
       <div class="modal-dialog__inner__block">
-        <a href="/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-upload-attachment">Insert new attachment</a>
+        <a href="{{ urlPrefix }}/attachment" class="govuk-c-button dialog-button modal-dialog__inner__button js-upload-attachment">Insert new attachment</a>
 
         <p class="govuk-body govuk-!-mb-r0">
-          <a href="/" class="js-dialog-close">Cancel</a>
+          <a href="{{ urlPrefix }}/" class="js-dialog-close">Cancel</a>
         </p>
       </div>
     </div>
@@ -207,10 +207,10 @@
         <input type="file" name="attachment-file" class="govuk-c-file-upload govuk-!-mb-r0">
       </div>
       <div class="modal-dialog__inner__block">
-        <a href="/attachment" class="govuk-c-button  govuk-!-mb-r6 dialog-button modal-dialog__inner__button js-edge ">Insert attachment</a>
+        <a href="{{ urlPrefix }}/attachment" class="govuk-c-button  govuk-!-mb-r6 dialog-button modal-dialog__inner__button js-edge ">Insert attachment</a>
 
         <p class="govuk-body govuk-!-mb-r0">
-          <a href="/" class="js-upload-close">Cancel</a>
+          <a href="{{ urlPrefix }}/" class="js-upload-close">Cancel</a>
         </p>
       </div>
     </div>
