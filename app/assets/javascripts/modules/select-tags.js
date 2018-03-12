@@ -7,6 +7,8 @@
   GOVUK.Modules.SelectTags = function () {
     this.start = function (element) {
       var $count = element.find('.js-tag-count');
+      var prefix = element.data('prefix') || '';
+
       element.on('click', '.js-add-tag', addTag);
       element.on('click', '.js-remove-tag', removeTag);
       element.on('click', '.js-select-tag', selectTag);
@@ -66,7 +68,7 @@
 
       function numberTagInputs() {
         $('.js-selected-tags-table').find('tr:visible input').each(function(i) {
-          $(this).attr('name', 'selected-tag-' + (i + 1));
+          $(this).attr('name', prefix + 'selected-tag-' + (i + 1));
         });
       }
 

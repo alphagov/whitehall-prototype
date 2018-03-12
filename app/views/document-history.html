@@ -1,29 +1,127 @@
 {% extends "layout.html" %}
-{% block page_title %}{{ data['title'] }}{% endblock %}
+{% block page_title %}{{ data[prefix + 'title'] }}{% endblock %}
 
 {% block content %}
 <main role="main" class="govuk-o-main-wrapper">
   <h1 class="form-title govuk-heading-xl">
-    <span class="govuk-caption-xl">{{ data['format'] }}</span>
-    {% if data['title'] %}
-      {{ data['title'] }}
+    <span class="govuk-caption-xl">{{ data[prefix + 'format'] }}</span>
+    {% if data[prefix + 'title'] %}
+      {{ data[prefix + 'title'] }}
     {% else %}
       Some title
     {% endif %}
   </h1>
-
+  <dl class="metadata govuk-!-mb-r6">
+    <dt>Created by</dt>
+    <dd>Kamala Khan</dd>
+    <dt>Last updated</dt>
+    <dd>20 February 2018</dd>
+    <dt>Status</dt>
+    <dd>Draft</dd>
+  </dl>
   <ul class="tabs">
     <li>
-      <a href="/document-tasks">Edit document</a>
+      <a href="{{ urlPrefix }}/document-tasks">Edit document</a>
     </li>
     <li class="active">
-      <a href="/document-history">Document history</a>
+      <a href="{{ urlPrefix }}/document-history">Document history</a>
     </li>
   </ul>
 
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-
+      <ul class="timeline">
+        <li class="edition">
+          <h2 class="govuk-heading-l">Draft - 2nd edition</h2>
+          <ul class="edition-timeline">
+            <div class="timeline-day-wrapper">
+              <li class="timeline-day">
+                <h3 class="govuk-heading-m">17 November 2017</h3>
+                <ul class="events">
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Note added</h4>
+                    <span class="metadata">15:13 by Kamala Khan</span>
+                    <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec aliquam odio. Vivamus fringilla ante euismod diam fringilla aliquet. Aenean luctus ultrices rhoncus. Nam quis elementum felis, venenatis varius dolor.</p>
+                  </li>
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Changes made</h4>
+                    <span class="metadata">14:15 by Lunella Lafayette</span>
+                  </li>
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Changes made</h4>
+                    <span class="metadata">14:15 by Kamala Khan</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="timeline-day">
+                <h3 class="govuk-heading-m">17 November 2017</h3>
+                <ul class="events">
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Changes made</h4>
+                    <span class="metadata">14:15 by Kamala Khan</span>
+                  </li>
+                </ul>
+              </li>
+            </div>
+          </ul>
+        </li>
+        <li class="edition">
+          <h2 class="govuk-heading-l">1st edition</h2>
+          <ul class="edition-timeline">
+            <div class="timeline-day-wrapper">
+              <li class="timeline-day">
+              <h3 class="govuk-heading-m">20 October 2017</h3>
+              <ul class="events">
+                <li class="event">
+                  <h4 class="govuk-heading-s">Changes made</h4>
+                  <span class="metadata">14:15 by Miles Morales</span>
+                </li>
+                <li class="event">
+                  <h4 class="govuk-heading-s">Note added</h4>
+                  <span class="metadata">15:13 by Gwen Stacy</span>
+                  <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec aliquam odio. Vivamus fringilla ante euismod?</p>
+                </li>
+                <li class="event">
+                  <h4 class="govuk-heading-s">Changes made</h4>
+                  <span class="metadata">14:15 by Lunella Lafayette</span>
+                </li>
+                <li class="event">
+                  <h4 class="govuk-heading-s">Published</h4>
+                  <span class="metadata">14:15 by Kamala Khan</span>
+                </li>
+              </ul>
+            </li>
+              <li class="timeline-day">
+                <h3 class="govuk-heading-m">14 August 2017</h3>
+                <ul class="events">
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Changes made</h4>
+                    <span class="metadata">14:15 by Miles Morales</span>
+                  </li>
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Changes made</h4>
+                    <span class="metadata">14:15 by Lunella Lafayette</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="timeline-day">
+                <h3 class="govuk-heading-m">14 May 2017</h3>
+                <ul class="events">
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Note added</h4>
+                    <span class="metadata">15:13 by Gwen Stacy</span>
+                    <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec aliquam odio. Vivamus fringilla ante euismod?</p>
+                  </li>
+                  <li class="event">
+                    <h4 class="govuk-heading-s">Draft created</h4>
+                    <span class="metadata">14:15 by Kamala Khan</span>
+                  </li>
+                </ul>
+              </li>
+            </div>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </main>

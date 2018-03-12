@@ -9,25 +9,25 @@
   {% set editing = true %}
 {% endif %}
 
-{% if data['specialist'] %}
+{% if data[prefix + 'specialist'] %}
   {% set back = '/specialist-format' %}
 {% else %}
   {% set back = '/format' %}
 {% endif %}
 
-<a href="{% if editing %}/document-tasks{% else %}{{ back }}{% endif %}" class="govuk-c-back-link">Back</a>
+<a href="{{ urlPrefix }}{% if editing %}/document-tasks{% else %}{{ back }}{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <form action="{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">
+      <form action="{{ urlPrefix }}{% if editing %}/document-tasks{% else %}/title-summary-body{% endif %}" method="post" class="form">
         <div class="govuk-!-mb-r6">
           <fieldset>
             <legend>
               <h1 class="govuk-heading-xl form-title">
-                What type of {{ data.format | lower }}?
+                What type of {{ data[prefix + 'format'] | lower }}?
               </h1>
 
-              {% if not data['specialist'] %}
+              {% if not data[prefix + 'specialist'] %}
                 <p class="govuk-body">Read the full guidance on choosing the right <a href="https://www.gov.uk/guidance/content-design/content-types">GOV.UK content type</a> for users.</p>
               {% endif %}
             </legend>
@@ -116,9 +116,9 @@
             %}
 
             {% for field in fields %}
-              {% if data['format'] == field.format %}
+              {% if data[prefix + 'format'] == field.format %}
               <div class="multiple-choice govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input required id="radio-part-{{ loop.index }}" type="radio" name="document-type" value="{{ field.name }}" {% if editing %}{{ checked("document-type", field.name) }}{% endif %} class="govuk-c-radios__input">
+                <input required id="radio-part-{{ loop.index }}" type="radio" name="{{ prefix }}document-type" value="{{ field.name }}" {% if editing %}{{ checked(prefix + "document-type", field.name) }}{% endif %} class="govuk-c-radios__input">
                 <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                   <span class="govuk-c-label--bold">{{ field.name }}</span>
                   {{ field.text | safe }}
@@ -139,7 +139,7 @@
         </div>
         {% if editing %}
         <div class="govuk-!-mb-r6">
-          <a href="/document-tasks" class="button button-link">Cancel</a>
+          <a href="{{ urlPrefix }}/document-tasks" class="button button-link">Cancel</a>
         </div>
         {% endif %}
       </form>

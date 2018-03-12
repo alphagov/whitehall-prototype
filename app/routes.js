@@ -9,12 +9,10 @@ router.get('/', function (req, res) {
 })
 
 router.get('/dashboard', function(req, res) {
-  req.session.destroy();
   res.render('dashboard');
 });
 
 router.get('/intent', function(req, res) {
-  req.session.destroy();
   res.render('intent');
 });
 
@@ -56,7 +54,7 @@ router.get('/submit-for-review', function(req, res) {
 
 // Add your routes here - above the module.exports line
 
-router.get('/attachment/:attachmentId', function(req, res){
+router.get('/:state/attachment/:attachmentId', function(req, res){
   res.render('attachment', req.params)
 });
 
@@ -67,20 +65,23 @@ router.get('/patterns/content-checker', function(req, res) {
   res.render('patterns/content-checker', locals)
 })
 
-router.get('/preview', function(req, res) {
-  var text = req.session.data['body'];
-  var locals = {};
+router.get('/:state/preview', function(req, res) {
+  var state = req.params.state;
+  var text = req.session.data[state + '-body'] || '';
+  var locals = { state: state };
   marked.convertMarkdownToHTML(text, locals);
   res.render('preview', locals)
 })
 
-router.get('/document-type', function(req, res) {
-  if (req.session.data['format'] == 'News article'
-        || req.session.data['format'] == 'Speech'
-        || req.session.data['format'] == 'Medical safety alert') {
+router.get('/:state/document-type', function(req, res) {
+  var state = req.params.state;
+
+  if (req.session.data[state + '-format'] == 'News article'
+        || req.session.data[state + '-format'] == 'Speech'
+        || req.session.data[state + '-format'] == 'Medical safety alert') {
     res.render('document-type', req.params);
   } else {
-    res.redirect('/title-summary-body');
+    res.redirect('/' + state + '/title-summary-body');
   }
 });
 
@@ -117,5 +118,15 @@ function livePreview(req, res, text) {
   res.header('Charset','utf8');
   res.send(JSON.stringify(obj));
 }
+
+router.get('/:state/:page', function(req, res) {
+  var states = ['new', 'draft', 'submitted', 'published'];
+
+  if (states.includes(req.params.state)) {
+    res.render(req.params.page, { state: req.params.state })
+  } else {
+    res.status(404).send('Not found');
+  }
+});
 
 module.exports = router

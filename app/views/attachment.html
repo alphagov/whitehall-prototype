@@ -3,8 +3,8 @@
 
 {% block content %}
 
-{% if data['attachment-count'] %}
-  {% set attachment_count = (data['attachment-count'] | int) + 1 %}
+{% if data[prefix + 'attachment-count'] %}
+  {% set attachment_count = (data[prefix + 'attachment-count'] | int) + 1 %}
 {% else %}
   {% set attachment_count = 1 %}
 {% endif %}
@@ -16,13 +16,13 @@
   {% set attachment_id = attachment_count %}
 {% endif %}
 
-<a href="/document-tasks" class="govuk-c-back-link">Back</a>
+<a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
-  <form action="{% if editing %} /attachment-edit-done {% else %} /attachment-done {% endif %}" method="post" class="form" data-module="fake-filename-from-title">
+  <form action="{{ urlPrefix }}{% if editing %}/attachment-edit-done{% else %}/attachment-done{% endif %}" method="post" class="form" data-module="fake-filename-from-title">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
-          <span class="govuk-caption-xl">{{ data['title'] }}</span>
+          <span class="govuk-caption-xl">{{ data[prefix + 'title'] }}</span>
           {% if editing %}
             Edit attachment
           {% else %}
@@ -45,20 +45,20 @@
       </div>
     </div>
 
-    <div class="govuk-o-grid" data-module="live-content-check">
+    <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
           <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
             Attachment title
             <span class="govuk-c-label__hint">Use the official title of the document</span>
           </label>
-          <input required type="text" name="{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[attachment_id + '-attachment-title']}}{% endif %}">
+          <input required type="text" name="{{ prefix }}{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[prefix + attachment_id + '-attachment-title']}}{% endif %}">
 
-          <input type="hidden" name="{{ attachment_id }}-attachment-filename" class="js-dynamic-filename" value="{% if editing %}{{data[attachment_id + '-attachment-filename']}}{% endif %}">
+          <input type="hidden" name="{{ prefix }}{{ attachment_id }}-attachment-filename" class="js-dynamic-filename" value="{% if editing %}{{data[prefix + attachment_id + '-attachment-filename']}}{% endif %}">
 
           {% if editing %}
           {% else %}
-            <input type="hidden" name="attachment-count" value="{{ attachment_count }}">
+            <input type="hidden" name="{{ prefix }}attachment-count" value="{{ attachment_count }}">
           {% endif %}
         </div>
       </div>
@@ -70,7 +70,7 @@
           <label class="govuk-c-label govuk-c-label--bold" for="attachment-file">
             File
           </label>
-          <input type="file" name="attachment-file" class="govuk-c-file-upload">
+          <input type="file" name="{{ prefix }}attachment-file" class="govuk-c-file-upload">
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
     {% if editing %}
       <input type="submit" class="govuk-c-button" value="Save">
       <div class="govuk-!-mb-r6">
-        <a href="/document-tasks" class="button button-link govuk-body">Discard changes</a>
+        <a href="{{ urlPrefix }}/document-tasks" class="button button-link govuk-body">Discard changes</a>
       </div>
     {% else %}
       <div class="govuk-!-mb-r6">

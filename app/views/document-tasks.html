@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block page_title %}{{ data['title'] }}{% endblock %}
+{% block page_title %}{{ data[prefix + 'title'] }}{% endblock %}
 
 {% block content %}
 <main role="main" class="govuk-o-main-wrapper">
@@ -26,47 +26,48 @@
   {% endif %}
 
   <h1 class="form-title govuk-heading-xl">
-    <span class="govuk-caption-xl">{{ data['format'] }}</span>
-    {% if data['title'] %}
-      {{ data['title'] }}
+    <span class="govuk-caption-xl">{{ data[prefix + 'format'] }}</span>
+    {% if data[prefix + 'title'] %}
+      {{ data[prefix + 'title'] }}
     {% else %}
       Some title
     {% endif %}
   </h1>
 
+  <dl class="metadata govuk-!-mb-r6">
+    <dt>Created by</dt>
+    <dd>Kamala Khan</dd>
+    <dt>Last updated</dt>
+    <dd>20 February 2018</dd>
+    <dt>Status</dt>
+    <dd>Draft - 2nd edition</dd>
+  </dl>
+
   <ul class="tabs">
     <li class="active">
-      <a href="/document-tasks">Edit document</a>
+      <a href="{{ urlPrefix }}/document-tasks">Edit document</a>
     </li>
     <li>
-      <a href="/document-history">Document history</a>
+      <a href="{{ urlPrefix }}/document-history">Document history</a>
     </li>
   </ul>
 
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <dl class="metadata">
-        <dt>Created by</dt>
-        <dd>Kamala Khan</dd>
-        <dt>Last updated</dt>
-        <dd>20 February 2018</dd>
-        <dt>Status</dt>
-        <dd>Draft</dd>
-      </dl>
       <ol class="document-list">
         <li>
           <ul class="document-list-items">
-            {% if data['document-type'] %}
+            {% if data[prefix + 'document-type'] %}
             <li class="document-list-item">
               <div class="task-heading-wrapper govuk-!-mb-r4">
                 <h3 class="document-task">
-                  Type of {{ data['format'] | lower }}
+                  Type of {{ data[prefix + 'format'] | lower }}
                 </h3>
-                <a href="/document-type" class="document-task-action">Change</a>
+                <a href="{{ urlPrefix }}/document-type" class="document-task-action">Change</a>
               </div>
               <div>
-                <h3 class="govuk-heading-s">{{ data['document-type'] }}</h3>
-                {% if data['document-type'] == 'Press release' %}
+                <h3 class="govuk-heading-s">{{ data[prefix + 'document-type'] }}</h3>
+                {% if data[prefix + 'document-type'] == 'Press release' %}
                   Unedited press releases as sent to the media, and official statements from the organisation or a minister.
                 {% endif %}
               </div>
@@ -77,7 +78,7 @@
                 Title, summary and body
               </h3>
 
-              <a class="document-task-action" id="eligibility-completed" href="/title-summary-body">Change</a>
+              <a class="document-task-action" id="eligibility-completed" href="{{ urlPrefix }}/title-summary-body">Change</a>
 
               <dl class="document-task-part">
                 <div>
@@ -85,8 +86,8 @@
                     Title
                   </dt>
                   <dd class="document-part-value">
-                    {% if data['title'] %}
-                      {{ data['title'] }}
+                    {% if data[prefix + 'title'] %}
+                      {{ data[prefix + 'title'] }}
                     {% else %}
                       Some title
                     {% endif %}
@@ -97,9 +98,9 @@
                   <dt class="document-part-label">
                     Summary
                   </dt>
-                  {% if data['summary'] %}
+                  {% if data[prefix + 'summary'] %}
                     <dd class="document-part-value">
-                      {{ data['summary'] }}
+                      {{ data[prefix + 'summary'] }}
                     </dd>
                   {% else %}
                     <dd class="document-part-value document-part-value--empty">
@@ -112,9 +113,9 @@
                   <dt class="document-part-label">
                     Body
                   </dt>
-                  {% if data['body'] %}
+                  {% if data[prefix + 'body'] %}
                     <dd class="document-part-value">
-                      {{ data['body'] | truncate(200) }}
+                      {{ data[prefix + 'body'] | truncate(200) }}
                     </dd>
                   {% else %}
                     <dd class="document-part-value document-part-value--empty">
@@ -124,7 +125,7 @@
                 </div>
               </dl>
             </li>
-            {% if not data['specialist'] %}
+            {% if not data[prefix + 'specialist'] %}
               <li class="document-list-item">
                 <h3 class="document-task">
                   Images
@@ -137,9 +138,9 @@
                 <h3 class="document-task">
                   Attachments
                 </h3>
-                <a href="/attachment" class="document-task-action">Add</a>
+                <a href="{{ urlPrefix }}/attachment" class="document-task-action">Add</a>
               </div>
-              {% set attachment_count = data['attachment-count'] | int %}
+              {% set attachment_count = data[prefix + 'attachment-count'] | int %}
 
               {% if attachment_count > 0 %}
                 <div style="clear: both">
@@ -147,10 +148,10 @@
                 {% for i in range(0, attachment_count) %}
                     <li class="attachment">
                       <p>
-                          {{ data[ (i + 1) + '-attachment-title'] }} (<a class="govuk-link" href="/attachment/{{ data[ (i + 1) + '-attachment-filename'] }}"><span class="js-edge">{{ data[ (i + 1) + '-attachment-filename'] }}</span>
+                          {{ data[ prefix + (i + 1) + '-attachment-title'] }} (<a class="govuk-link" href="{{ urlPrefix }}/attachment/{{ data[ prefix + (i + 1) + '-attachment-filename'] }}"><span class="js-edge">{{ data[ prefix + (i + 1) + '-attachment-filename'] }}</span>
                         </a>)
                       </p>
-                      <a href="/attachment/{{ i + 1 }}" class="document-task-action">Change</a>
+                      <a href="{{ urlPrefix }}/attachment/{{ i + 1 }}" class="document-task-action">Change</a>
                     </li>
                 {% endfor %}
                   </ul>
@@ -161,20 +162,20 @@
               <h3 class="document-task">
                 About this content
               </h3>
-              <a href="/about-content" class="document-task-action">Change</a>
+              <a href="{{ urlPrefix }}/about-content" class="document-task-action">Change</a>
               <dl class="document-task-part">
-                {% if not data['specialist'] %}
+                {% if not data[prefix + 'specialist'] %}
                   <div>
                     <dt class="document-part-label">
                       Tags
                     </dt>
-                    {% set tag_count = data['tag-count'] | int %}
+                    {% set tag_count = data[prefix + 'tag-count'] | int %}
                     {% if tag_count > 0 %}
                       <dd class="document-part-value">
                         <ul>
                         {% for i in range(0, tag_count) %}
                           <li class="govuk-!-mb-r1">
-                            {{ data['selected-tag-' + (i + 1)] }}
+                            {{ data[prefix + 'selected-tag-' + (i + 1)] }}
                           </li>
                         {% endfor %}
                         </ul>
@@ -221,7 +222,7 @@
                       }
                     ]
                   %}
-                {% elseif data['format'] == 'Drug safety update' %}
+                {% elseif data[prefix + 'format'] == 'Drug safety update' %}
                   {%
                     set dtags = [
                       {
@@ -266,12 +267,12 @@
                     <dt class="document-part-label">
                       {{ dtag.name }}
                     </dt>
-                    {% if data[dtag.key] %}
+                    {% if data[prefix + dtag.key] %}
                       <dd class="document-part-value">
                         {% if dtag.key == 'issue-date-year' %}
-                          {{ data[dtag.key] }}-{{ data['issue-date-month'] }}-{{ data['issue-date-day'] }}
+                          {{ data[prefix + dtag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
                         {% else %}
-                          {{ data[dtag.key] }}
+                          {{ data[prefix + dtag.key] }}
                         {% endif %}
                       </dd>
                     {% else %}
@@ -284,13 +285,13 @@
               </dl>
             </li>
 
-            {% if not data['specialist'] %}
+            {% if not data[prefix + 'specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Publish settings
               </h3>
-              {% if data['schedule-time'] or data['published-before'] %}
-                <a href="/publish-settings" class="document-task-action">Change</a>
+              {% if data[prefix + 'schedule-time'] or data[prefix + 'published-before'] %}
+                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Change</a>
 
                 <dl class="document-task-part">
                   {%
@@ -310,12 +311,12 @@
                       <dt class="document-part-label">
                         {{ ptag.name }}
                       </dt>
-                      {% if data[ptag.key] %}
+                      {% if data[prefix + ptag.key] %}
                         <dd class="document-part-value">
                           {% if ptag.key == 'schedule-year' %}
-                            {{ data[ptag.key] }}-{{ data['issue-date-month'] }}-{{ data['issue-date-day'] }}
+                            {{ data[prefix + ptag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
                           {% else %}
-                            {{ data[ptag.key] }}
+                            {{ data[prefix + ptag.key] }}
                           {% endif %}
                         </dd>
                       {% else %}
@@ -331,7 +332,7 @@
                   {% endfor %}
                 </dl>
               {% else %}
-                <a href="/publish-settings" class="document-task-action">Add</a>
+                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Add</a>
               {% endif %}
             </li>
             <li class="document-list-item">
@@ -345,13 +346,51 @@
         </li>
       </ol>
 
-      <a href="/submit-for-review" class="govuk-c-button">Request review</a>
+      <!-- <a href="{{ urlPrefix }}/submit-for-review" class="govuk-c-button">Request review</a>
       <ul class="govuk-list">
         <li><a href="#">Request fact-check</a></li>
-        <li><a href="/preview">Preview</a></li>
-        <li><a href="/submit-for-review">Force-publish</a></li>
+        <li><a href="{{ urlPrefix }}/preview">Preview</a></li>
+        <li><a href="{{ urlPrefix }}/submit-for-review">Force-publish</a></li>
         <li><a href="#" class="danger">Delete this draft</a></li>
-      </ul>
+      </ul> -->
+    </div>
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third extra-gutter">
+      <div class="side-column">
+        {% if state == 'published' %}
+          <h3 class="govuk-heading-s govuk-!-mb-r1">This document has been published</h3>
+          <p class="govuk-body govuk-!-mb-r0">
+            Go to the <a href="{{ urlPrefix }}/document-history">document history</a> to see the changes or <a href="">view it on GOV.UK</a>.
+          </p>
+        {% endif %}
+        {% if state == 'draft' %}
+          <div class="draft-info">
+            <h3 class="govuk-heading-s govuk-!-mb-r1">This is a draft of a new edition</h3>
+            <p class="govuk-body govuk-!-mb-r0">
+              Go to the <a href="{{ urlPrefix }}/document-history">document history</a> to see the changes or view the <a href="">last published edition</a> on GOV.UK.
+            </p>
+          </div>
+        {% endif %}
+        <div class="actions">
+          {% if state == 'draft' or state == 'new' %}
+            <a href="{{ urlPrefix }}/submit-for-review" class="govuk-c-button">Request review</a>
+            <ul class="govuk-list">
+              <li><a href="#">Request fact-check</a></li>
+              <li><a href="{{ urlPrefix }}/preview">Preview</a></li>
+              <li><a href="{{ urlPrefix }}/submit-for-review">Force-publish</a></li>
+              <li><a href="#" class="danger">Delete this draft</a></li>
+            </ul>
+          {% endif %}
+          {% if state == 'submitted' %}
+            <a href="{{ urlPrefix }}/submit-for-review" class="govuk-c-button">Publish</a>
+            <ul class="govuk-list">
+              <li><a href="#">Reject</a></li>
+              <li><a href="#" class="danger">Delete this draft</a></li>
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
     </div>
   </div>
 </main>

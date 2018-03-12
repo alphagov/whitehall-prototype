@@ -2,7 +2,7 @@
 {% block page_title %}Attachments{% endblock %}
 
 {% block content %}
-<a href="/document-tasks" class="govuk-c-back-link">Back</a>
+<a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
@@ -13,6 +13,6 @@
     </div>
   </div>
 
-  <a href="/add-attachment" class="govuk-c-button">Add attachment</a>
+  <a href="{{ urlPrefix }}/add-attachment" class="govuk-c-button">Add attachment</a>
 </main>
 {% endblock %}

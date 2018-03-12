@@ -3,9 +3,9 @@
 
 {% block content %}
 
-<a href="/document-tasks" class="govuk-c-back-link">Back</a>
+<a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
-  <form action="/document-tasks" method="post" class="form about" data-module="slug-from-title">
+  <form action="{{ urlPrefix }}/document-tasks" method="post" class="form about" data-module="slug-from-title">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
@@ -14,11 +14,11 @@
       </div>
     </div>
 
-    {% if data['format'] == 'Drug safety update' %}
+    {% if data[prefix + 'format'] == 'Drug safety update' %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <label class="govuk-c-label" for="therapeutic-area">Therapeutic area</label>
-        <input type="text" name="therapeutic-area" class="govuk-c-input govuk-!-mb-r0" id="therapeutic-area" value="{{data['therapeutic-area']}}">
+        <input type="text" name="{{ prefix }}therapeutic-area" class="govuk-c-input govuk-!-mb-r0" id="therapeutic-area" value="{{data[prefix + 'therapeutic-area']}}">
         <div class="govuk-!-mt-r2 govuk-!-mb-r1">
           <a href="#" class="button button-link govuk-body">Add another therapeutic area</a>
         </div>
@@ -26,11 +26,11 @@
     </div>
     {% endif %}
 
-    {% if data['format'] == 'Medical safety alert' %}
+    {% if data[prefix + 'format'] == 'Medical safety alert' %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <label class="govuk-c-label" for="medical-specialism">Medical specialism</label>
-        <input type="text" name="medical-specialism" class="govuk-c-input govuk-!-mb-r0" id="medical-specialism" value="{{data['medical-specialism']}}">
+        <input type="text" name="{{ prefix }}medical-specialism" class="govuk-c-input govuk-!-mb-r0" id="medical-specialism" value="{{data[prefix + 'medical-specialism']}}">
         <div class="govuk-!-mt-r2 govuk-!-mb-r1">
             <a href="#" class="button button-link govuk-body">Add another medical specialism</a>
         </div>
@@ -43,19 +43,19 @@
             legendHintText: 'For example, 31 3 2017'
           },
           id: 'issue-date',
-          name: 'issue-date',
+          name: prefix + 'issue-date',
           items:[
             {
               name: 'day',
-              value: data['issue-date-day']
+              value: data[prefix + 'issue-date-day']
             },
             {
               name: 'month',
-              value: data['issue-date-month']
+              value: data[prefix + 'issue-date-month']
             },
             {
               name: 'year',
-              value: data['issue-date-year']
+              value: data[prefix + 'issue-date-year']
             }
           ]
           })
@@ -67,7 +67,7 @@
 
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        {% if not data['specialist'] %}<h2 class="govuk-heading-l">Monitoring</h2>{% endif %}
+        {% if not data[prefix + 'specialist'] %}<h2 class="govuk-heading-l">Monitoring</h2>{% endif %}
         <div class="govuk-c-radios">
           <fieldset class="govuk-c-fieldset">
             <legend class="govuk-c-fieldset__legend">
@@ -95,14 +95,14 @@
             %}
             {% for field in fields %}
               <div class="govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="review-frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("review-frequency", field.name) }}>
+                <input id="radio-part-{{ loop.index }}" type="radio" name="{{ prefix }}review-frequency" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked(prefix + "review-frequency", field.name) }}>
                 <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                   {{ field.name }}
                   {% if field.more %}
                   <div class="panel panel-border-wide js-hidden govuk-!-mt-r4" id="radio-part-{{ loop.index }}-extra">
                     {{ field.more | safe }}
                     {% if field.name == 'A custom date' %}
-                      <input type="text" name="review-frequency-other" class="govuk-c-input govuk-!-width-one-half" id="review-frequency-other" value="{{ data['review-frequency-other']}}">
+                      <input type="text" name="{{ prefix }}review-frequency-other" class="govuk-c-input govuk-!-width-one-half" id="review-frequency-other" value="{{ data[prefix + 'review-frequency-other']}}">
                     {% endif %}
                   </div>
                   {% endif %}
@@ -113,17 +113,17 @@
         </div>
         <div class="govuk-!-mb-r6 is-input">
           <label class="govuk-c-label" for="expected-audience">Expected audience</label>
-          <input type="text" name="expected-audience" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="{{data['expected-audience']}}"> <span class="inline govuk-body">views per month</span>
+          <input type="text" name="{{ prefix }}expected-audience" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="{{data[prefix + 'expected-audience']}}"> <span class="inline govuk-body">views per month</span>
 
-          {% if not data['specialist'] %}
+          {% if not data[prefix + 'specialist'] %}
             <label class="govuk-c-label" for="expert">Subject matter expert</label>
-            <input type="text" name="expert" class="govuk-c-input" id="expert" value="{{data['expert']}}">
+            <input type="text" name="{{ prefix }}expert" class="govuk-c-input" id="expert" value="{{data[prefix + 'expert']}}">
           {% endif %}
         </div>
       </div>
     </div>
 
-    {% if not data['specialist'] %}
+    {% if not data[prefix + 'specialist'] %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h2 class="govuk-heading-l">Tag on GOV.UK</h2>
@@ -131,13 +131,13 @@
       </div>
     </div>
 
-    <div class="govuk-o-grid govuk-!-mb-r7" data-module="select-tags">
-      {% if data['tag-count'] %}
-        {% set tag_count = (data['tag-count'] | int) %}
+    <div class="govuk-o-grid govuk-!-mb-r7" data-module="select-tags" data-prefix="{{ prefix }}">
+      {% if data[prefix + 'tag-count'] %}
+        {% set tag_count = (data[prefix + 'tag-count'] | int) %}
       {% else %}
         {% set tag_count = 0 %}
       {% endif %}
-      <input type="hidden" name="tag-count" value="{{ tag_count }}" class="js-tag-count">
+      <input type="hidden" name="{{ prefix }}tag-count" value="{{ tag_count }}" class="js-tag-count">
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
         <div class="js-none-selected" {% if (tag_count > 0) %}style="display: none"{% endif %}>
           <h3 class="govuk-heading-s">Selected tags</h3>
@@ -150,16 +150,16 @@
               <td class="govuk-c-table__cell tag js-tag"></td>
               <td class="govuk-c-table__cell govuk-c-table__cell--numeric">
                 <a href="#">View in GOV.UK</a>
-                <input type="hidden" value="" name="selected-tag">
+                <input type="hidden" value="" name="{{ prefix }}selected-tag">
               </td>
               <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-remove-tag">Remove tag</a></td>
             </tr>
             {% for i in range(0, tag_count) %}
               <tr class="govuk-c-table__row">
-                <td class="govuk-c-table__cell tag">{{ data['selected-tag-' + (i + 1)] }}</td>
+                <td class="govuk-c-table__cell tag">{{ data[prefix + 'selected-tag-' + (i + 1)] }}</td>
                 <td class="govuk-c-table__cell govuk-c-table__cell--numeric">
                   <a href="#">View in GOV.UK</a>
-                  <input type="hidden" value="{{ data['selected-tag-' + (i + 1)] }}" name="selected-tag-{{ (i + 1) }}">
+                  <input type="hidden" value="{{ data[prefix + 'selected-tag-' + (i + 1)] }}" name="{{ prefix }}selected-tag-{{ (i + 1) }}">
                 </td>
                 <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="" class="js-remove-tag">Remove tag</a></td>
               </tr>
@@ -203,7 +203,7 @@
             %}
 
             {% for tag in suggested_tags %}
-              {% if tag.title_contains in (data['title'] | lower) %}
+              {% if tag.title_contains in (data[prefix + 'title'] | lower) %}
                 <tr class="govuk-c-table__row">
                   <td class="govuk-c-table__cell tag">{{ tag.name }}</td>
                   <td class="govuk-c-table__cell govuk-c-table__cell--numeric"><a href="#">View in GOV.UK</a></td>
@@ -216,7 +216,7 @@
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <label class="govuk-c-label" for="tag-search">Search for a tag</label>
-        <select id="tag-search" name="tag-search">
+        <select id="tag-search" name="{{ prefix }}tag-search">
           {% include "includes/topics-select-options.html" %}
         </select>
       </div>
@@ -226,14 +226,14 @@
     </div>
     {% endif %}
 
-    {% if not data['specialist'] %}
+    {% if not data[prefix + 'specialist'] %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="govuk-!-mb-r6 is-input">
           <h2 class="govuk-heading-l">Associations</h2>
 
           <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
-          <select id="lead-organisation" name="lead-organisation">
+          <select id="lead-organisation" name="{{ prefix }}lead-organisation">
             {% include "includes/organisation-select-options.html" %}
           </select>
           <div class="govuk-!-mt-r2 govuk-!-mb-r1">
@@ -241,7 +241,7 @@
           </div>
 
           <label class="govuk-c-label" for="supporting-organisation">Supporting organisation</label>
-          <select id="supporting-organisation" name="supporting-organisation">
+          <select id="supporting-organisation" name="{{ prefix }}supporting-organisation">
             {% include "includes/organisation-select-options.html" %}
           </select>
           <div class="govuk-!-mt-r2 govuk-!-mb-r1">
@@ -249,13 +249,13 @@
           </div>
 
           <label class="govuk-c-label" for="minister">Minister</label>
-          <input type="text" name="minister" class="govuk-c-input" id="minister" value="{{data['minister']}}">
+          <input type="text" name="{{ prefix }}minister" class="govuk-c-input" id="minister" value="{{data[prefix + 'minister']}}">
 
           <label class="govuk-c-label" for="topical-event">Topical events</label>
-          <input type="text" name="topical-event" class="govuk-c-input" id="topical-event" value="{{data['topical-event']}}">
+          <input type="text" name="{{ prefix }}topical-event" class="govuk-c-input" id="topical-event" value="{{data[prefix + 'topical-event']}}">
 
           <label class="govuk-c-label" for="world-locations">World locations</label>
-          <input type="text" name="world-location" class="govuk-c-input" id="world-locations" value="{{data['world-location']}}">
+          <input type="text" name="{{ prefix }}world-location" class="govuk-c-input" id="world-locations" value="{{data[prefix + 'world-location']}}">
 
         </div>
       </div>
@@ -266,7 +266,7 @@
     </div>
 
     <div class="govuk-!-mb-r6">
-      <a href="/document-tasks" class="button button-link govuk-body">Discard changes</a>
+      <a href="{{ urlPrefix }}/document-tasks" class="button button-link govuk-body">Discard changes</a>
     </div>
   </form>
 </main>
@@ -274,15 +274,15 @@
 
 {% block page_scripts %}
 <script>
-  $('#lead-organisation').val('{{ data['lead-organisation'] }}');
-  $('#supporting-organisation').val('{{ data['supporting-organisation'] }}');
+  $('#lead-organisation').val('{{ data[prefix + 'lead-organisation'] }}');
+  $('#supporting-organisation').val('{{ data[prefix + 'supporting-organisation'] }}');
 
   govukGovernmentOrganisationsAutocomplete({
     selectElement: document.getElementById('lead-organisation'),
     showAllValues: true,
     autoselect: false,
     minLength: 2,
-    defaultValue: '{{ data['lead-organisation'] }}'
+    defaultValue: '{{ data[prefix + 'lead-organisation'] }}'
   })
 
   govukGovernmentOrganisationsAutocomplete({
@@ -290,7 +290,7 @@
     showAllValues: true,
     autoselect: false,
     minLength: 2,
-    defaultValue: '{{ data['supporting-organisation'] }}'
+    defaultValue: '{{ data[prefix + 'supporting-organisation'] }}'
   })
 
   accessibleAutocomplete.enhanceSelectElement({
