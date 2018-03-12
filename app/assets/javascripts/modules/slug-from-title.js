@@ -6,7 +6,7 @@
 
   GOVUK.Modules.SlugFromTitle = function () {
     this.start = function (element) {
-      var prefix = element.data('slug-prefix') || 'government';
+      var prefix = element.data('prefix') || 'government';
 
       element.on('change keyup click paste', '#title', updateSlug);
       $('#title').trigger('keyup');
