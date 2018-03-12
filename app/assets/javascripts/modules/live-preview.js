@@ -10,10 +10,11 @@
       var $input = element.find('.js-preview-input').first();
 
       element.on('keyup click paste change blur focus', '.js-preview-input', $.debounce( 250, showPreview ));
+      element.find('.js-preview-input').trigger('click');
 
       function showPreview(evt) {
         var $el = $(this);
-        var text = $(this).val();
+        var text = $(this).val() || '';
         var previous = $(this).data('previous');
 
         if (text == previous) {
