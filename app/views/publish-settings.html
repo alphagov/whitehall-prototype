@@ -4,7 +4,7 @@
 {% block content %}
 <a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
-  <form action="/document-tasks" method="post" class="form">
+  <form action="{{ urlPrefix }}/document-tasks" method="post" class="form">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
@@ -23,7 +23,7 @@
                   <label class="govuk-c-label govuk-c-date-input__label" for="schedule-time">
                     Time
                   </label>
-                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-time" name="schedule-time" type="text" value="{{ data['schedule-time'] }}">
+                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-time" name="{{ prefix }}schedule-time" type="text" value="{{ data[prefix + 'schedule-time'] }}">
                 </div>
               </div>
 
@@ -32,7 +32,7 @@
                   <label class="govuk-c-label govuk-c-date-input__label" for="schedule-day">
                     Day
                   </label>
-                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-day" name="schedule-day" type="text" value="{{ data['schedule-day'] }}">
+                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-day" name="{{ prefix }}schedule-day" type="text" value="{{ data[prefix + 'schedule-day'] }}">
                 </div>
               </div>
 
@@ -41,7 +41,7 @@
                   <label class="govuk-c-label govuk-c-date-input__label" for="schedule-month">
                     Month
                   </label>
-                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-month" name="schedule-month" type="text" value="{{ data['schedule-month'] }}">
+                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-month" name="{{ prefix }}schedule-month" type="text" value="{{ data[prefix + 'schedule-month'] }}">
                 </div>
               </div>
 
@@ -50,7 +50,7 @@
                   <label class="govuk-c-label govuk-c-date-input__label" for="schedule-year">
                     Year
                   </label>
-                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-year" name="schedule-year" type="text" value="{{ data['schedule-year'] }}">
+                  <input class="govuk-c-input govuk-c-date-input__input" id="schedule-year" name="{{ prefix }}schedule-year" type="text" value="{{ data[prefix + 'schedule-year'] }}">
                 </div>
               </div>
             </div>
@@ -75,14 +75,14 @@
             %}
             {% for field in fields %}
               <div class="govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="published-before" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("published-before", field.name) }}>
+                <input id="radio-part-{{ loop.index }}" type="radio" name="{{ prefix }}published-before" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("published-before", field.name) }}>
                 <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                   {{ field.name }}
                   {% if field.more %}
                   <div class="panel panel-border-wide js-hidden govuk-!-mt-r4" id="radio-part-{{ loop.index }}-extra">
                     {{ field.more | safe }}
                     {% if field.name == 'Yes, it’s been published on another website' %}
-                      <input type="text" name="published-before-date" class="govuk-c-input govuk-!-width-one-half" id="published-before-date" value="{{ data['published-before-date']}}">
+                      <input type="text" name="{{ prefix }}published-before-date" class="govuk-c-input govuk-!-width-one-half" id="published-before-date" value="{{ data[prefix + 'published-before-date']}}">
                     {% endif %}
                   </div>
                   {% endif %}

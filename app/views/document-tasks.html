@@ -148,7 +148,7 @@
                 {% for i in range(0, attachment_count) %}
                     <li class="attachment">
                       <p>
-                          {{ data[ (i + 1) + '-attachment-title'] }} (<a class="govuk-link" href="{{ urlPrefix }}/attachment/{{ data[ (i + 1) + '-attachment-filename'] }}"><span class="js-edge">{{ data[ (i + 1) + '-attachment-filename'] }}</span>
+                          {{ data[ prefix + (i + 1) + '-attachment-title'] }} (<a class="govuk-link" href="{{ urlPrefix }}/attachment/{{ data[ prefix + (i + 1) + '-attachment-filename'] }}"><span class="js-edge">{{ data[ prefix + (i + 1) + '-attachment-filename'] }}</span>
                         </a>)
                       </p>
                       <a href="{{ urlPrefix }}/attachment/{{ i + 1 }}" class="document-task-action">Change</a>
@@ -267,12 +267,12 @@
                     <dt class="document-part-label">
                       {{ dtag.name }}
                     </dt>
-                    {% if data[dtag.key] %}
+                    {% if data[prefix + dtag.key] %}
                       <dd class="document-part-value">
                         {% if dtag.key == 'issue-date-year' %}
-                          {{ data[dtag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
+                          {{ data[prefix + dtag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
                         {% else %}
-                          {{ data[dtag.key] }}
+                          {{ data[prefix + dtag.key] }}
                         {% endif %}
                       </dd>
                     {% else %}
@@ -311,12 +311,12 @@
                       <dt class="document-part-label">
                         {{ ptag.name }}
                       </dt>
-                      {% if data[ptag.key] %}
+                      {% if data[prefix + ptag.key] %}
                         <dd class="document-part-value">
                           {% if ptag.key == 'schedule-year' %}
-                            {{ data[ptag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
+                            {{ data[prefix + ptag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
                           {% else %}
-                            {{ data[ptag.key] }}
+                            {{ data[prefix + ptag.key] }}
                           {% endif %}
                         </dd>
                       {% else %}

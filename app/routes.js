@@ -56,7 +56,7 @@ router.get('/submit-for-review', function(req, res) {
 
 // Add your routes here - above the module.exports line
 
-router.get('/attachment/:attachmentId', function(req, res){
+router.get('/:state/attachment/:attachmentId', function(req, res){
   res.render('attachment', req.params)
 });
 
@@ -74,13 +74,15 @@ router.get('/preview', function(req, res) {
   res.render('preview', locals)
 })
 
-router.get('/document-type', function(req, res) {
-  if (req.session.data['format'] == 'News article'
-        || req.session.data['format'] == 'Speech'
-        || req.session.data['format'] == 'Medical safety alert') {
+router.get('/:state/document-type', function(req, res) {
+  var state = req.params.state;
+
+  if (req.session.data[state + '-format'] == 'News article'
+        || req.session.data[state + '-format'] == 'Speech'
+        || req.session.data[state + '-format'] == 'Medical safety alert') {
     res.render('document-type', req.params);
   } else {
-    res.redirect('/title-summary-body');
+    res.redirect('/' + state + '/title-summary-body');
   }
 });
 

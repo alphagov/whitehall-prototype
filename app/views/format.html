@@ -6,7 +6,7 @@
 <main role="main" class="govuk-o-main-wrapper">
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <form action="/document-type" method="post" class="form">
+      <form action="{{ urlPrefix }}/document-type" method="post" class="form">
         <div class="govuk-!-mb-r6">
           <fieldset>
             <legend>
@@ -67,7 +67,7 @@
             {% for field in fields %}
               {% if field.intent.includes(data['intent']) %}
                 <div class="multiple-choice govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                  <input required id="radio-part-{{ loop.index }}" type="radio" name="format" value="{{ field.name }}" class="govuk-c-radios__input">
+                  <input required id="radio-part-{{ loop.index }}" type="radio" name="{{ prefix }}format" value="{{ field.name }}" class="govuk-c-radios__input">
                   <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                     <span class="govuk-c-label--bold">{{ field.name }}</span>
                     {{ field.text | safe }}
