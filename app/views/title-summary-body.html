@@ -119,14 +119,13 @@
           <label class="govuk-c-label" for="body" id="body-label">
             Body
           </label>
-
-          {% if attachment_count > 0 %}
-            <div class="inserts">
-              <a href="#" id="openModal">Insert attachment</a>
-              <a href="#" style="margin-left: 20px">Insert image</a>
-            </div>
-          {% endif %}
-
+          <div class="inserts">
+            <a href="#">Preview markdown</a>
+            {% if attachment_count > 0 %}
+            <a href="#" id="openModal">Insert attachment</a>
+            <a href="#" style="margin-left: 20px">Insert image</a>
+            {% endif %}
+          </div>
           <textarea name="{{ prefix }}body" class="govuk-c-textarea js-check-content" data-target="body-checks" name="{{ prefix }}textarea" id="body" rows="40">{% if editing %}{{data[prefix + 'body']}}{% endif %}</textarea>
         </div>
       </div>
