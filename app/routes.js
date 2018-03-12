@@ -9,12 +9,10 @@ router.get('/', function (req, res) {
 })
 
 router.get('/dashboard', function(req, res) {
-  req.session.destroy();
   res.render('dashboard');
 });
 
 router.get('/intent', function(req, res) {
-  req.session.destroy();
   res.render('intent');
 });
 
@@ -121,7 +119,7 @@ function livePreview(req, res, text) {
 }
 
 router.get('/:state/:page', function(req, res) {
-  var states = ['new', 'published'];
+  var states = ['new', 'draft', 'published'];
 
   if (states.includes(req.params.state)) {
     res.render(req.params.page, { state: req.params.state })

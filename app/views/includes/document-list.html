@@ -2,13 +2,22 @@
   {% for i in range(0, documentCount) -%}
     {% set x = [
       {
-        name: data['title'] or 'Custom title',
-        format: data['format'] or 'News article',
+        name: data['draft-title'] or 'Custom title',
+        format: data['draft-format'] or 'News article',
         status: 'Draft',
         date: '14 March 2018',
         editor: 'Peter Parker',
         organisation: 'Office for National Statistics (ONS)',
-        link: '/document-tasks'
+        link: '/draft/document-tasks'
+      },
+      {
+        name: data['published-title'] or 'Custom title',
+        format: data['published-format'] or 'News article',
+        status: 'Published - 1st edition',
+        date: '10 August 2017',
+        editor: 'Peter Parker',
+        organisation: 'Government Digital Service (GDS)',
+        link: '/published/document-tasks'
       },
       {
         name: 'Improving social mobility through education',
@@ -50,11 +59,6 @@
       <dd> {{ x.date }}</dd>
     </dl>
     <p class="govuk-body govuk-!-mb-r0"><a href="">View on GOV.UK</a></p>
-      <!-- <p class="doc-metadata govuk-body">{{ x.format }} <span class="pipe">|</span> {{ x.status }} <span class="pipe">|</span> Updated by {{ x.editor }} on</p>
-    </div>
-    <div class="action">
-      <a href="{% if x.link %}{{ x.link }}{% else %}#{% endif %}">{{ x.edit }}</a>
-    </div> -->
   </li>
   {%- endfor %}
 </ul>
