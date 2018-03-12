@@ -63,6 +63,17 @@
         </div>
       </div>
     </div>
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div class="govuk-!-mb-r6 is-input">
+          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
+            Print ISBN (optional)
+            <span class="govuk-c-label__hint">Use the official title of the document</span>
+          </label>
+          <input required type="text" name="{{ prefix }}{{ attachment_id }}-attachment-title" class="js-check-content govuk-c-input" id="attachment-title" data-target="attachment-title-checks" value="{% if editing %}{{data[prefix + attachment_id + '-attachment-title']}}{% endif %}">
+        </div>
+      </div>
+    </div>
 
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
