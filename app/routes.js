@@ -119,7 +119,7 @@ function livePreview(req, res, text) {
 }
 
 router.get('/:state/:page', function(req, res) {
-  var states = ['new', 'draft', 'published'];
+  var states = ['new', 'draft', 'submitted', 'published'];
 
   if (states.includes(req.params.state)) {
     res.render(req.params.page, { state: req.params.state })
