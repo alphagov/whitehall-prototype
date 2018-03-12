@@ -114,19 +114,29 @@
     </div>
 
     <div class="govuk-o-grid body-guidance" data-module="live-content-check">
-      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <div class="govuk-!-mb-r6 is-textarea">
-          <label class="govuk-c-label" for="body" id="body-label">
-            Body
-          </label>
-          <div class="inserts">
-            <a href="#">Preview markdown</a>
-            {% if attachment_count > 0 %}
-            <a href="#" id="openModal">Insert attachment</a>
-            <a href="#" style="margin-left: 20px">Insert image</a>
-            {% endif %}
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds" data-module="live-preview" data-target="preview">
+        <div data-module="toggle-markdown-preview">
+          <div class="govuk-!-mb-r6 is-textarea">
+            <div class="js-markdown-preview-target">
+              <label class="govuk-c-label" for="body" id="body-label">
+                Body
+              </label>
+              <div class="inserts">
+                <a href="/toggle" class="js-toggle-markdown-preview">Preview markdown</a>
+                {% if attachment_count > 0 %}
+                <a href="#" id="openModal">Insert attachment</a>
+                <a href="#" style="margin-left: 20px">Insert image</a>
+                {% endif %}
+              </div>
+              <textarea name="{{ prefix }}body" class="govuk-c-textarea js-check-content js-preview-input" data-target="body-checks" name="{{ prefix }}textarea" id="body" rows="40">{% if editing %}{{data[prefix + 'body']}}{% endif %}</textarea>
+            </div>
           </div>
-          <textarea name="{{ prefix }}body" class="govuk-c-textarea js-check-content" data-target="body-checks" name="{{ prefix }}textarea" id="body" rows="40">{% if editing %}{{data[prefix + 'body']}}{% endif %}</textarea>
+          <div class="js-markdown-preview-target" style="display: none">
+            <p class="govuk-body">
+              <a href="/toggle" class="js-toggle-markdown-preview">Continue editing</a>
+            </p>
+            <div id="preview" class="govuk-prose-scope"></div>
+          </div>
         </div>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
