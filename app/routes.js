@@ -65,9 +65,10 @@ router.get('/patterns/content-checker', function(req, res) {
   res.render('patterns/content-checker', locals)
 })
 
-router.get('/preview', function(req, res) {
-  var text = req.session.data['body'];
-  var locals = {};
+router.get('/:state/preview', function(req, res) {
+  var state = req.params.state;
+  var text = req.session.data[state + '-body'] || '';
+  var locals = { state: state };
   marked.convertMarkdownToHTML(text, locals);
   res.render('preview', locals)
 })
