@@ -500,3 +500,10 @@ ul.documents {
     top: -24px;
   }
 }
+
+.draft {
+  background-image: url(../images/draft-watermark.png);
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-size: contain;
+}
