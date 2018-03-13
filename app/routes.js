@@ -56,6 +56,7 @@ router.get('/:state/document-type', function(req, res) {
 
   if (req.session.data[state + '-format'] == 'News article'
         || req.session.data[state + '-format'] == 'Speech'
+        || req.session.data[state + '-format'] == 'Publication'
         || req.session.data[state + '-format'] == 'Medical safety alert') {
     res.render('document-type', req.params);
   } else {
