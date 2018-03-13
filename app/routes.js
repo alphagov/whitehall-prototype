@@ -106,33 +106,42 @@ router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
 function validateEdition(req, locals) {
   var state = req.params.state;
   var data = req.session.data;
-  var errors = [];
+  var title_summary_body_errors = [];
+  var about_content_errors = [];
+  var errors;
 
   locals.state = state;
 
   if (!data[state + '-body']) {
-    errors.push({
+    title_summary_body_errors.push({
       title: 'Please provide body text',
-      link: '/title-summary-body#body-label'
+      page: 'title-summary-body',
+      anchor: '#body-label'
     })
   }
 
   if (!data[state + '-summary']) {
-    errors.push({
+    title_summary_body_errors.push({
       title: 'Please provide a summary',
-      link: '/title-summary-body'
+      page: 'title-summary-body',
+      anchor: '#summary'
     })
   }
 
   if (!data[state + '-lead-organisation']) {
-    errors.push({
+    about_content_errors.push({
       title: 'Please provide a lead organisation',
-      link: '/about-content'
+      page: 'about-content',
+      anchor: '#lead-organisation'
     })
   }
 
+  errors = [].concat(title_summary_body_errors).concat(about_content_errors);
+
   if (errors.length > 0) {
     locals.errors = errors;
+    locals.title_summary_body_errors = title_summary_body_errors;
+    locals.about_content_errors = about_content_errors;
   } else {
     locals.success = true;
   }

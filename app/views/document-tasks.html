@@ -11,7 +11,7 @@
     </h3>
     <ul class="error-summary-list">
       {% for error in errors %}
-      <li><a href="{{ urlPrefix }}{{ error.link }}">{{ error.title }}</a></li>
+      <li><a href="{{ urlPrefix }}/{{ error.page }}{{ error.anchor }}">{{ error.title }}</a></li>
       {% endfor %}
     </ul>
   </div>

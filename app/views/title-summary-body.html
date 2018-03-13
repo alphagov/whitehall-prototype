@@ -19,6 +19,20 @@
 
 <a href="{{ urlPrefix }}{% if editing %}/document-tasks{% else %}/document-type{% endif %}" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
+
+  {% if data[prefix + 'show-errors'] and title_summary_body_errors and title_summary_body_errors.length > 0 %}
+  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
+      There was a problem sending your content to review
+    </h3>
+    <ul class="error-summary-list">
+      {% for error in title_summary_body_errors %}
+      <li><a href="{{ urlPrefix }}/{{ error.page }}{{ error.anchor }}">{{ error.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
   <form action="{{ urlPrefix }}/document-tasks" method="post" class="form" data-module="slug-from-title" data-prefix= "{{ slugPrefix }}">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
