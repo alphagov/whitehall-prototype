@@ -126,8 +126,43 @@
           </fieldset>
         </div>
         <div class="govuk-!-mb-r6 is-input">
-          <label class="govuk-c-label" for="expected-audience">Expected audience</label>
-          <input type="text" name="{{ prefix }}expected-audience" class="govuk-c-input govuk-!-width-one-quarter" id="expected-audience" value="{{data[prefix + 'expected-audience']}}"> <span class="inline govuk-body">views per month</span>
+          <div class="govuk-c-radios">
+            <div class="govuk-o-form-group">
+              <fieldset class="govuk-c-fieldset">
+                <legend class="govuk-c-fieldset__legend">
+                  Expected traffic
+                </legend>
+                <div class="govuk-c-radios__item">
+                <input class="govuk-c-radios__input" id="changed-name-1" name="changed-name" type="radio" value="yes">
+                <label class="govuk-c-label govuk-c-radios__label" for="changed-name-1">
+                  <span class="govuk-c-label--bold">Immediate interest</span>
+                  <p class="govuk-body">You expect traffic to decline after a few days</p>
+                </label>
+              </div>
+              <div class="govuk-c-radios__item">
+                <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no">
+                <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">
+                  <span class="govuk-c-label--bold">Defined interest</span>
+                  <p class="govuk-body">You expect traffic to decline after a known period</p>
+                </label>
+              </div>
+              <div class="govuk-c-radios__item">
+                <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no">
+                <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">
+                  <span class="govuk-c-label--bold">Constant interest</span>
+                  <p class="govuk-body">You expect continuous traffic</p>
+                </label>
+              </div>
+              <div class="govuk-c-radios__item">
+                <input class="govuk-c-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no">
+                <label class="govuk-c-label govuk-c-radios__label" for="changed-name-2">
+                  <span class="govuk-c-label--bold">Repeat interest</span>
+                  <p class="govuk-body">You expect traffic to rise for a regular event</p>
+                </label>
+              </div>
+            </fieldset>
+            </div>
+          </div>
 
           {% if not data[prefix + 'specialist'] %}
             <label class="govuk-c-label" for="expert">Subject matter expert</label>
