@@ -14,7 +14,7 @@
           There was a problem sending your content to review
         </h3>
         <ul class="error-summary-list">
-          {% for error in title_summary_body_errors %}
+          {% for error in about_content_errors %}
           <li><a href="{{ urlPrefix }}/{{ error.page }}#{{ error.field }}">{{ error.title }}</a></li>
           {% endfor %}
         </ul>
@@ -138,7 +138,7 @@
             <input type="text" name="{{ prefix }}expert" class="govuk-c-input" id="expert" value="{{data[prefix + 'expert']}}">
           {% endif %}
 
-          <div class="govuk-c-radios {% if data[prefix + 'show-errors'] and field_errors['lead-organisation'] %}govuk-o-form-group--error{% endif %}">
+          <div class="govuk-c-radios {% if data[prefix + 'show-errors'] and field_errors['published-before'] %}govuk-o-form-group--error{% endif %}">
             <fieldset class="govuk-c-fieldset">
               <legend class="govuk-c-fieldset__legend">
                 <h2 class="govuk-heading-s">Has this content been published before?</h2>

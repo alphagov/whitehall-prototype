@@ -12,7 +12,7 @@
           There was a problem sending your content to review
         </h3>
         <ul class="error-summary-list">
-          {% for error in title_summary_body_errors %}
+          {% for error in errors %}
           <li><a href="{{ urlPrefix }}/{{ error.page }}#{{ error.field }}">{{ error.title }}</a></li>
           {% endfor %}
         </ul>
