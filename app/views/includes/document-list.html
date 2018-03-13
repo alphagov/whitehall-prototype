@@ -2,22 +2,13 @@
   {% for i in range(0, documentCount) -%}
     {% set x = [
       {
-        name: data['draft-title'] or 'Custom title',
-        format: data['draft-format'] or 'News article',
-        status: 'Draft',
-        date: '14 March 2018',
-        editor: 'Peter Parker',
-        organisation: 'Office for National Statistics (ONS)',
+        name: 'UK air and space doctrine (JDP 0-30)',
+        format: data['draft-format'] or 'Guidance',
+        status: 'Draft - 2nd edition',
+        date: '15 December 2017 ',
+        editor: 'Kamala Khan',
+        organisation: 'Ministry of Defence',
         link: '/draft/document-tasks'
-      },
-      {
-        name: data['published-title'] or 'Custom title',
-        format: data['published-format'] or 'News article',
-        status: 'Published - 1st edition',
-        date: '10 August 2017',
-        editor: 'Peter Parker',
-        organisation: 'Government Digital Service (GDS)',
-        link: '/published/document-tasks'
       },
       {
         name: 'Improving social mobility through education',
