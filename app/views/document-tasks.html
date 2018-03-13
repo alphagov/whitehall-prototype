@@ -40,7 +40,9 @@
     <dt>Last updated</dt>
     <dd>20 February 2018</dd>
     <dt>Status</dt>
-    <dd>Draft - 2nd edition</dd>
+    <dd>
+      {{ data[prefix + 'state'] }} – {{ data[prefix + 'edition'] }}
+    </dd>
   </dl>
 
   <ul class="tabs">
@@ -356,13 +358,13 @@
     </div>
     <div class="govuk-o-grid__item govuk-o-grid__item--one-third extra-gutter">
       <div class="side-column">
-        {% if state == 'published' %}
+        {% if data[prefix + 'state'] == 'Published' %}
           <h3 class="govuk-heading-s govuk-!-mb-r1">This document has been published</h3>
           <p class="govuk-body govuk-!-mb-r0">
             Go to the <a href="{{ urlPrefix }}/document-history">document history</a> to see the changes or <a href="">view it on GOV.UK</a>.
           </p>
         {% endif %}
-        {% if state == 'draft' %}
+        {% if data[prefix + 'state'] == 'Draft' and data[prefix + 'edition'] == '2nd edition' %}
           <div class="draft-info">
             <h3 class="govuk-heading-s govuk-!-mb-r1">This is a draft of a new edition</h3>
             <p class="govuk-body govuk-!-mb-r0">
@@ -371,7 +373,7 @@
           </div>
         {% endif %}
         <div class="actions">
-          {% if state == 'draft' or state == 'new' %}
+          {% if data[prefix + 'state'] == 'Draft' %}
             <a href="{{ urlPrefix }}/submit-for-review" class="govuk-c-button">Request review</a>
             <ul class="govuk-list">
               <li><a href="#">Request fact-check</a></li>
@@ -380,7 +382,7 @@
               <li><a href="#" class="danger">Delete this draft</a></li>
             </ul>
           {% endif %}
-          {% if state == 'submitted' %}
+          {% if data[prefix + 'state'] == 'Submitted' %}
             <a href="{{ urlPrefix }}/submit-for-review" class="govuk-c-button">Publish</a>
             <ul class="govuk-list">
               <li><a href="#">Reject</a></li>

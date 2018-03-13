@@ -16,19 +16,20 @@ router.get('/intent', function(req, res) {
   res.render('intent');
 });
 
-router.get('/submit-for-review', function(req, res) {
+router.get('/:state/submit-for-review', function(req, res) {
+  var state = req.params.state;
   var data = req.session.data;
   var errors = [];
-  var locals = {};
+  var locals = { state: state };
 
-  if (!data.body) {
+  if (!data[state + '-body']) {
     errors.push({
       title: 'Please provide body text',
       link: '/title-summary-body#body-label'
     })
   }
 
-  if (!data.summary) {
+  if (!data[state + '-summary']) {
     errors.push({
       title: 'Please provide a summary',
       link: '/title-summary-body'
@@ -36,7 +37,7 @@ router.get('/submit-for-review', function(req, res) {
   }
 
 
-  if (!data['lead-organisation']) {
+  if (!data[state + '-lead-organisation']) {
     errors.push({
       title: 'Please provide a lead organisation',
       link: '/about-content'
@@ -46,6 +47,7 @@ router.get('/submit-for-review', function(req, res) {
   if (errors.length > 0) {
     locals.errors = errors;
   } else {
+    data[state + '-state'] = 'Submitted';
     locals.success = true;
   }
 
