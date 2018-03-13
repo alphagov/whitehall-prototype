@@ -13,7 +13,7 @@
     </h3>
     <ul class="error-summary-list">
       {% for error in about_content_errors %}
-      <li><a href="{{ urlPrefix }}/{{ error.page }}{{ error.anchor }}">{{ error.title }}</a></li>
+      <li><a href="{{ urlPrefix }}/{{ error.page }}#{{ error.field }}">{{ error.title }}</a></li>
       {% endfor %}
     </ul>
   </div>
@@ -246,10 +246,13 @@
         <div class="govuk-!-mb-r6 is-input">
           <h2 class="govuk-heading-l">Associations</h2>
 
-          <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
-          <select id="lead-organisation" name="{{ prefix }}lead-organisation">
-            {% include "includes/organisation-select-options.html" %}
-          </select>
+          <div class="{% if data[prefix + 'show-errors'] and field_errors['lead-organisation'] %}govuk-o-form-group--error{% endif %}">
+            <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
+            {% if data[prefix + 'show-errors'] and field_errors['lead-organisation'] %}<span class="govuk-c-error-message">{{ field_errors['lead-organisation'] }}</span>{% endif %}
+            <select id="lead-organisation" name="{{ prefix }}lead-organisation">
+              {% include "includes/organisation-select-options.html" %}
+            </select>
+          </div>
           <div class="govuk-!-mt-r2 govuk-!-mb-r1">
             <a href="#" class="button button-link govuk-body">Add another leading organisation</a>
           </div>

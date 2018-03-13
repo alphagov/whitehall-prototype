@@ -116,7 +116,7 @@ function validateEdition(req, locals) {
     title_summary_body_errors.push({
       title: 'Please provide body text',
       page: 'title-summary-body',
-      anchor: '#body-label'
+      field: 'body'
     })
   }
 
@@ -124,7 +124,7 @@ function validateEdition(req, locals) {
     title_summary_body_errors.push({
       title: 'Please provide a summary',
       page: 'title-summary-body',
-      anchor: '#summary'
+      field: 'summary'
     })
   }
 
@@ -132,7 +132,7 @@ function validateEdition(req, locals) {
     about_content_errors.push({
       title: 'Please provide a lead organisation',
       page: 'about-content',
-      anchor: '#lead-organisation'
+      field: 'lead-organisation'
     })
   }
 
@@ -142,6 +142,10 @@ function validateEdition(req, locals) {
     locals.errors = errors;
     locals.title_summary_body_errors = title_summary_body_errors;
     locals.about_content_errors = about_content_errors;
+    locals.field_errors = errors.reduce(function(map, obj) {
+      map[obj.field] = obj.title;
+      return map;
+    }, {});
   } else {
     locals.success = true;
   }
