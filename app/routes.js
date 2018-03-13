@@ -16,40 +16,18 @@ router.get('/intent', function(req, res) {
   res.render('intent');
 });
 
-router.get('/submit-for-review', function(req, res) {
-  var data = req.session.data;
-  var errors = [];
+router.get('/:state/submit-for-review', function(req, res) {
   var locals = {};
+  validateEdition(req, locals);
 
-  if (!data.body) {
-    errors.push({
-      title: 'Please provide body text',
-      link: '/title-summary-body#body-label'
-    })
-  }
-
-  if (!data.summary) {
-    errors.push({
-      title: 'Please provide a summary',
-      link: '/title-summary-body'
-    })
-  }
-
-
-  if (!data['lead-organisation']) {
-    errors.push({
-      title: 'Please provide a lead organisation',
-      link: '/about-content'
-    })
-  }
-
-  if (errors.length > 0) {
-    locals.errors = errors;
+  if (locals.success) {
+    req.session.data[locals.state + '-state'] = 'Submitted';
+    req.session.data[locals.state + '-show-errors'] = false;
   } else {
-    locals.success = true;
+    req.session.data[locals.state + '-show-errors'] = true;
   }
 
-  res.render('document-tasks', locals);
+  res.redirect('/' + locals.state + '/document-tasks');
 });
 
 // Add your routes here - above the module.exports line
@@ -120,7 +98,57 @@ function livePreview(req, res, text) {
 }
 
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
-  res.render(req.params.page, { state: req.params.state })
+  var locals = {}
+  validateEdition(req, locals);
+  res.render(req.params.page, locals)
 });
+
+function validateEdition(req, locals) {
+  var state = req.params.state;
+  var data = req.session.data;
+  var title_summary_body_errors = [];
+  var about_content_errors = [];
+  var errors;
+
+  locals.state = state;
+
+  if (!data[state + '-summary']) {
+    title_summary_body_errors.push({
+      title: 'Enter a summary',
+      page: 'title-summary-body',
+      field: 'summary'
+    })
+  }
+
+  if (!data[state + '-body']) {
+    title_summary_body_errors.push({
+      title: 'Enter body copy',
+      page: 'title-summary-body',
+      field: 'body'
+    })
+  }
+
+  if (!data[state + '-lead-organisation']) {
+    about_content_errors.push({
+      title: 'Enter a lead organisation',
+      page: 'about-content',
+      field: 'lead-organisation'
+    })
+  }
+
+  errors = [].concat(title_summary_body_errors).concat(about_content_errors);
+
+  if (errors.length > 0) {
+    locals.errors = errors;
+    locals.title_summary_body_errors = title_summary_body_errors;
+    locals.about_content_errors = about_content_errors;
+    locals.field_errors = errors.reduce(function(map, obj) {
+      map[obj.field] = obj.title;
+      return map;
+    }, {});
+  } else {
+    locals.success = true;
+  }
+}
 
 module.exports = router

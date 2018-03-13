@@ -5,6 +5,20 @@
 
 <a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
+
+  {% if data[prefix + 'show-errors'] and about_content_errors and about_content_errors.length > 0 %}
+  <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
+      There was a problem sending your content to review
+    </h3>
+    <ul class="error-summary-list">
+      {% for error in about_content_errors %}
+      <li><a href="{{ urlPrefix }}/{{ error.page }}#{{ error.field }}">{{ error.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
   <form action="{{ urlPrefix }}/document-tasks" method="post" class="form about" data-module="slug-from-title">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
@@ -232,10 +246,13 @@
         <div class="govuk-!-mb-r6 is-input">
           <h2 class="govuk-heading-l">Associations</h2>
 
-          <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
-          <select id="lead-organisation" name="{{ prefix }}lead-organisation">
-            {% include "includes/organisation-select-options.html" %}
-          </select>
+          <div class="{% if data[prefix + 'show-errors'] and field_errors['lead-organisation'] %}govuk-o-form-group--error{% endif %}">
+            <label class="govuk-c-label" for="lead-organisation">Lead organisation</label>
+            {% if data[prefix + 'show-errors'] and field_errors['lead-organisation'] %}<span class="govuk-c-error-message">{{ field_errors['lead-organisation'] }}</span>{% endif %}
+            <select id="lead-organisation" name="{{ prefix }}lead-organisation">
+              {% include "includes/organisation-select-options.html" %}
+            </select>
+          </div>
           <div class="govuk-!-mt-r2 govuk-!-mb-r1">
             <a href="#" class="button button-link govuk-body">Add another leading organisation</a>
           </div>
