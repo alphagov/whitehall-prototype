@@ -112,25 +112,25 @@ function validateEdition(req, locals) {
 
   locals.state = state;
 
-  if (!data[state + '-body']) {
-    title_summary_body_errors.push({
-      title: 'Please provide body text',
-      page: 'title-summary-body',
-      field: 'body'
-    })
-  }
-
   if (!data[state + '-summary']) {
     title_summary_body_errors.push({
-      title: 'Please provide a summary',
+      title: 'Enter a summary',
       page: 'title-summary-body',
       field: 'summary'
     })
   }
 
+  if (!data[state + '-body']) {
+    title_summary_body_errors.push({
+      title: 'Enter body copy',
+      page: 'title-summary-body',
+      field: 'body'
+    })
+  }
+
   if (!data[state + '-lead-organisation']) {
     about_content_errors.push({
-      title: 'Please provide a lead organisation',
+      title: 'Enter a lead organisation',
       page: 'about-content',
       field: 'lead-organisation'
     })
