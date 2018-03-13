@@ -4,20 +4,20 @@
 {% block content %}
 <main role="main" class="govuk-o-main-wrapper">
 
-  {% if errors %}
+  {% if data[prefix + 'show-errors'] and errors %}
   <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
     <h3 class="govuk-heading-m error-summary-heading" id="error-summary-heading-example-1">
       There was a problem sending your content to review
     </h3>
     <ul class="error-summary-list">
       {% for error in errors %}
-      <li><a href="{{ error.link }}">{{ error.title }}</a></li>
+      <li><a href="{{ urlPrefix }}{{ error.link }}">{{ error.title }}</a></li>
       {% endfor %}
     </ul>
   </div>
   {% endif %}
 
-  {% if success %}
+  {% if not data[prefix + 'show-errors'] and success %}
     <div class="success-summary" role="alert" tabindex="-1">
       <p>
         Your draft has been submitted for review

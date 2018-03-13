@@ -17,41 +17,17 @@ router.get('/intent', function(req, res) {
 });
 
 router.get('/:state/submit-for-review', function(req, res) {
-  var state = req.params.state;
-  var data = req.session.data;
-  var errors = [];
-  var locals = { state: state };
+  var locals = {};
+  validateEdition(req, locals);
 
-  if (!data[state + '-body']) {
-    errors.push({
-      title: 'Please provide body text',
-      link: '/title-summary-body#body-label'
-    })
-  }
-
-  if (!data[state + '-summary']) {
-    errors.push({
-      title: 'Please provide a summary',
-      link: '/title-summary-body'
-    })
-  }
-
-
-  if (!data[state + '-lead-organisation']) {
-    errors.push({
-      title: 'Please provide a lead organisation',
-      link: '/about-content'
-    })
-  }
-
-  if (errors.length > 0) {
-    locals.errors = errors;
+  if (locals.success) {
+    req.session.data[locals.state + '-state'] = 'Submitted';
+    req.session.data[locals.state + '-show-errors'] = false;
   } else {
-    data[state + '-state'] = 'Submitted';
-    locals.success = true;
+    req.session.data[locals.state + '-show-errors'] = true;
   }
 
-  res.render('document-tasks', locals);
+  res.redirect('/' + locals.state + '/document-tasks');
 });
 
 // Add your routes here - above the module.exports line
@@ -122,7 +98,44 @@ function livePreview(req, res, text) {
 }
 
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
-  res.render(req.params.page, { state: req.params.state })
+  var locals = {}
+  validateEdition(req, locals);
+  res.render(req.params.page, locals)
 });
+
+function validateEdition(req, locals) {
+  var state = req.params.state;
+  var data = req.session.data;
+  var errors = [];
+
+  locals.state = state;
+
+  if (!data[state + '-body']) {
+    errors.push({
+      title: 'Please provide body text',
+      link: '/title-summary-body#body-label'
+    })
+  }
+
+  if (!data[state + '-summary']) {
+    errors.push({
+      title: 'Please provide a summary',
+      link: '/title-summary-body'
+    })
+  }
+
+  if (!data[state + '-lead-organisation']) {
+    errors.push({
+      title: 'Please provide a lead organisation',
+      link: '/about-content'
+    })
+  }
+
+  if (errors.length > 0) {
+    locals.errors = errors;
+  } else {
+    locals.success = true;
+  }
+}
 
 module.exports = router
