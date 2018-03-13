@@ -8,7 +8,7 @@
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h1 class="form-title govuk-heading-xl">
-          Publish settings
+          Scheduling
         </h1>
 
         <div class="govuk-o-form-group">
@@ -54,41 +54,6 @@
                 </div>
               </div>
             </div>
-          </fieldset>
-        </div>
-
-        <div class="govuk-c-radios">
-          <fieldset class="govuk-c-fieldset">
-            <legend class="govuk-c-fieldset__legend">
-              <h2 class="govuk-heading-l">Has this content been published before?</h2>
-            </legend>
-            {% set fields = [
-                {
-                  name: 'No, this content is new'
-                },
-                {
-                  name: 'Yes, it’s been published on another website',
-                  more: '<label class="govuk-c-label" for="published-before-date">Enter its previous publication date</label>
-                  <span class="govuk-c-label__hint govuk-body">For example, 5 June 2019</span>'
-                }
-              ]
-            %}
-            {% for field in fields %}
-              <div class="govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input id="radio-part-{{ loop.index }}" type="radio" name="{{ prefix }}published-before" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("published-before", field.name) }}>
-                <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
-                  {{ field.name }}
-                  {% if field.more %}
-                  <div class="panel panel-border-wide js-hidden govuk-!-mt-r4" id="radio-part-{{ loop.index }}-extra">
-                    {{ field.more | safe }}
-                    {% if field.name == 'Yes, it’s been published on another website' %}
-                      <input type="text" name="{{ prefix }}published-before-date" class="govuk-c-input govuk-!-width-one-half" id="published-before-date" value="{{ data[prefix + 'published-before-date']}}">
-                    {% endif %}
-                  </div>
-                  {% endif %}
-                </label>
-              </div>
-            {% endfor %}
           </fieldset>
         </div>
 

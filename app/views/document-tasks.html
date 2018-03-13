@@ -203,6 +203,10 @@
                         key: 'expert'
                       },
                       {
+                        name: 'Published before',
+                        key: 'published-before'
+                      },
+                      {
                         name: 'Lead organisations',
                         key: 'lead-organisation'
                       },
@@ -290,9 +294,9 @@
             {% if not data[prefix + 'specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
-                Publish settings
+                Scheduling
               </h3>
-              {% if data[prefix + 'schedule-time'] or data[prefix + 'published-before'] %}
+              {% if data[prefix + 'schedule-time'] %}
                 <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Change</a>
 
                 <dl class="document-task-part">
@@ -301,10 +305,6 @@
                       {
                         name: 'Scheduled',
                         key: 'schedule-year'
-                      },
-                      {
-                        name: 'Published before',
-                        key: 'published-before'
                       }
                     ]
                   %}
@@ -334,7 +334,7 @@
                   {% endfor %}
                 </dl>
               {% else %}
-                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Add</a>
+                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Schedule</a>
               {% endif %}
             </li>
             <li class="document-list-item">

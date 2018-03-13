@@ -128,6 +128,14 @@ function validateEdition(req, locals) {
     })
   }
 
+  if (!data[state + '-published-before']) {
+    about_content_errors.push({
+      title: 'Indicate if this content is new or has been published elsewhere',
+      page: 'about-content',
+      field: 'published-before'
+    })
+  }
+
   if (!data[state + '-lead-organisation']) {
     about_content_errors.push({
       title: 'Enter a lead organisation',
