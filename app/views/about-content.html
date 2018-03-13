@@ -135,6 +135,7 @@
 
           {% if not data[prefix + 'specialist'] %}
             <label class="govuk-c-label" for="expert">Subject matter expert</label>
+            <span class="govuk-c-label__hint">Policy person or team who must check the accuracy of this content</span>
             <input type="text" name="{{ prefix }}expert" class="govuk-c-input" id="expert" value="{{data[prefix + 'expert']}}">
           {% endif %}
 
