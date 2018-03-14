@@ -116,7 +116,7 @@
             Summary
           </label>
           {% if data[prefix + 'show-errors'] and field_errors['summary'] %}<span class="govuk-c-error-message">{{ field_errors['summary'] }}</span>{% endif %}
-          <textarea name="{{ prefix }}summary" class="govuk-c-textarea js-check-content" data-target="summary-checks" id="summary" rows="2">{% if editing %}{{data[prefix + 'summary']}}{% endif %}</textarea>
+          <textarea name="{{ prefix }}summary" class="govuk-c-textarea js-check-content" data-target="summary-checks" id="summary" rows="3">{% if editing %}{{data[prefix + 'summary']}}{% endif %}</textarea>
         </div>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
