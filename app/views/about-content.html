@@ -138,6 +138,7 @@
             <input type="text" name="{{ prefix }}expert" class="govuk-c-input" id="expert" value="{{data[prefix + 'expert']}}">
           {% endif %}
 
+          {% if prefix != 'draft-' %}
           <div class="govuk-c-radios {% if data[prefix + 'show-errors'] and field_errors['published-before'] %}govuk-o-form-group--error{% endif %}">
             <fieldset class="govuk-c-fieldset" id="published-before">
               <legend class="govuk-c-fieldset__legend">
@@ -173,6 +174,7 @@
               {% endfor %}
             </fieldset>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
