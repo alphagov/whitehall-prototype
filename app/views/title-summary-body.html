@@ -173,15 +173,36 @@
           <ul class="govuk-list" data-module="toggle">
             <li>
               <a class="govuk-link" href="#markdown-headings" data-controls="markdown-headings" data-expanded="false">Headings</a>
-              <div style="display: none" id="markdown-headings">Content</div>
+              <div style="display: none" id="markdown-headings">
+                <pre>
+## Top level heading – H2
+### Second level heading – H3
+                </pre>
+              </div>
             </li>
             <li>
               <a class="govuk-link" href="#markdown-links" data-controls="markdown-links" data-expanded="false">Links</a>
-              <div style="display: none" id="markdown-links">Content</div>
+              <div style="display: none" id="markdown-links">
+                <p class="govuk-body">Add:</p>
+                <ul class="govuk-list">
+                  <li>[ ] brackets around the clickable link text</li>
+                  <li>( ) brackets around the full destination page address (URL)</li>
+                </ul>
+                <p class="govuk-body">Don’t put a space between the link text and the address.</p>
+                <pre>
+[link text](http://www.example.com)
+                </pre>
+              </div>
             </li>
             <li>
               <a class="govuk-link" href="#markdown-bullets" data-controls="markdown-bullets" data-expanded="false">Bullets</a>
-              <div style="display: none" id="markdown-bullets">Content</div>
+              <div style="display: none" id="markdown-bullets">
+                <pre>
+* item 1
+* item 2
+* item 3
+                </pre>
+              </div>
             </li>
           </ul>
         </div>
