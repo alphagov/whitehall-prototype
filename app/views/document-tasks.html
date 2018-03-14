@@ -153,16 +153,45 @@
                   <ul class="govuk-!-mt-r6 govuk-list">
                 {% for i in range(0, attachment_count) %}
                     <li class="attachment">
-                      <p>
-                          {{ data[ prefix + (i + 1) + '-attachment-title'] }} (<a class="govuk-link" href="{{ urlPrefix }}/attachment/{{ data[ prefix + (i + 1) + '-attachment-filename'] }}"><span class="js-edge">{{ data[ prefix + (i + 1) + '-attachment-filename'] }}</span>
-                        </a>)
-                      </p>
+                      <div class="govuk-!-mb-r4">
+                        <h3 class="govuk-heading-s govuk-!-mt-r0 govuk-!-mb-r1">{{ data[ prefix + (i + 1) + '-attachment-title'] }}</h3>
+                        <a class="govuk-link js-edge" href="{{ urlPrefix }}/attachment/{{ data[ prefix + (i + 1) + '-attachment-filename'] }}">{{ data[ prefix + (i + 1) + '-attachment-filename'] }}</a>
+                      </div>
                       <a href="{{ urlPrefix }}/attachment/{{ i + 1 }}" class="document-task-action">Change</a>
                     </li>
                 {% endfor %}
                   </ul>
                 </div>
+                {% if attachment_count > 1 and data[prefix + 'format'] == 'Publication' %}
+                  <a href="{{ urlPrefix }}/reorder-attachment" class="govuk-body">Change attachment order</a>
+                {% endif %}
               {% endif %}
+              <!-- <div style="clear: both">
+                <ul class="govuk-!-mt-r6 govuk-!-mb-r0 govuk-list">
+                  <li class="attachment">
+                    <div class="govuk-!-mb-r4">
+                      <h3 class="govuk-heading-s govuk-!-mt-r0 govuk-!-mb-r1">Minutes meeting January 2018</h3>
+                      <a class="govuk-link" href="">minutes-meeting-january-2018.pdf</a>
+                    </div>
+                    <a href="" class="document-task-action">Change</a>
+                  </li>
+                  <li class="attachment">
+                    <div class="govuk-!-mb-r4">
+                      <h3 class="govuk-heading-s govuk-!-mt-r0 govuk-!-mb-r1">Address February 2018</h3>
+                      <a class="govuk-link" href="">address-february-2018.pdf</a>
+                    </div>
+                    <a href="" class="document-task-action">Change</a>
+                  </li>
+                  <li class="attachment">
+                    <div class="govuk-!-mb-r4">
+                      <h3 class="govuk-heading-s govuk-!-mt-r0 govuk-!-mb-r1">Speech transcript March 2018</h3>
+                      <a class="govuk-link" href="">speech-transcript-march-2018.pdf</a>
+                    </div>
+                    <a href="" class="document-task-action">Change</a>
+                  </li>
+                </ul>
+
+              </div> -->
             </li>
             <li class="document-list-item">
               <h3 class="document-task">

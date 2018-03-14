@@ -305,13 +305,22 @@ details {
 }
 
 .attachment {
-  p {
+  div {
     display: inline-block;
     width: 80%;
     margin: 0 0 5px 0;
   }
   .document-task-action {
     padding: 0;
+  }
+}
+
+.reorder .attachment {
+  padding: 15px;
+  background: $govuk-grey-4;
+  margin-bottom: 30px;
+  &:last-child {
+    margin-bottom: 50px;
   }
 }
 
@@ -495,6 +504,9 @@ ul.documents {
     border-top: 10px solid $govuk-text-colour;
     left: 275px;
     top: -55px;
+  }
+  &.wide:after {
+    left: 290px;
   }
   &.organisation:after {
     top: -24px;
