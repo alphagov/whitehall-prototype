@@ -78,7 +78,7 @@
         </div>
         <div class="govuk-c-checkboxes__item">
         <div class="is-input govuk-!-mb-r7">
-          <input class="govuk-c-checkboxes__input" id="accessible" name="accessible" type="checkbox" value="british">
+          <input class="govuk-c-checkboxes__input" id="accessible" name="{{ prefix }}{{ attachment_id }}-accessible" type="checkbox" value="british">
           <label class="govuk-c-label govuk-c-checkboxes__label" for="accessible">
             This attachment is accessible.
           </label>
@@ -86,54 +86,57 @@
         </div>
       </div>
     </div>
+
+    {% if data[prefix + 'format'] == 'Publication' %}
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold" for="print-isbn">
             Print ISBN
           </label>
-          <input required type="text" name="" class="govuk-c-input" id="" data-target="" value="">
+          <input type="text" name="{{ prefix }}{{ attachment_id }}-print-isbn" id="print-isbn" class="govuk-c-input" value="{% if editing %}{{data[prefix + attachment_id + '-print-isbn']}}{% endif %}">
         </div>
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold" for="unique-reference">
             Unique reference
           </label>
-          <input required type="text" name="" class="govuk-c-input" id="" data-target="" value="">
+          <input type="text" name="{{ prefix }}{{ attachment_id }}-unique-reference" class="govuk-c-input" id="unique-reference" value="{% if editing %}{{data[prefix + attachment_id + '-unique-reference']}}{% endif %}">
         </div>
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="paper-number">
             Command paper number
           </label>
-          <input required type="text" name="" class="govuk-c-input govuk-!-width-one-half" id="" data-target="" value="">
+          <input type="text" name="{{ prefix }}{{ attachment_id }}-paper-number" class="govuk-c-input govuk-!-width-one-half" id="paper-number" value="{% if editing %}{{data[prefix + attachment_id + '-paper-number']}}{% endif %}">
         </div>
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="hc-paper-number">
             House of Commons paper number
           </label>
-          <input required type="text" name="" class="govuk-c-input govuk-!-width-one-half" id="" data-target="" value="">
+          <input type="text" name="{{ prefix }}{{ attachment_id }}-hc-paper-number" class="govuk-c-input govuk-!-width-one-half" id="hc-paper-number" value="{% if editing %}{{data[prefix + attachment_id + '-hc-paper-number']}}{% endif %}">
         </div>
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="parl-session">
             Parliamentary session
           </label>
           <span class="dropdown wide">
-            <input required type="text" name="" class="govuk-c-input govuk-!-width-one-half" id="" data-target="" value="">
+            <input type="text" name="{{ prefix }}{{ attachment_id }}-parl-session" id="parl-session" class="govuk-c-input govuk-!-width-one-half" value="{% if editing %}{{data[prefix + attachment_id + '-parl-session']}}{% endif %}">
           </span>
         </div>
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold" for="order-url">
             Order URL
           </label>
-          <input required type="text" name="" class="govuk-c-input" id="" data-target="" value="">
+          <input type="text" name="{{ prefix }}{{ attachment_id }}-order-url" class="govuk-c-input" id="order-url" value="{% if editing %}{{data[prefix + attachment_id + '-order-url']}}{% endif %}">
         </div>
         <div class="is-input">
-          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="attachment-title">
+          <label class="govuk-c-label govuk-c-label--bold govuk-!-width-one-half" for="price">
             Price in £s
           </label>
-          <input required type="text" name="" class="govuk-c-input" id="" data-target="" value="">
+          <input type="text" name="{{ prefix }}{{ attachment_id }}-price" class="govuk-c-input" id="price" value="{% if editing %}{{data[prefix + attachment_id + '-price']}}{% endif %}">
         </div>
       </div>
     </div>
+    {% endif %}
 
     {% if editing %}
       <input type="submit" class="govuk-c-button" value="Save">

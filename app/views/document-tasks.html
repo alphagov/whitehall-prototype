@@ -140,7 +140,27 @@
                 </h3>
                 <a href="{{ urlPrefix }}/attachment" class="document-task-action">Add</a>
               </div>
-              <div style="clear: both">
+              {% set attachment_count = data[prefix + 'attachment-count'] | int %}
+
+              {% if attachment_count > 0 %}
+                <div style="clear: both">
+                  <ul class="govuk-!-mt-r6 govuk-list">
+                {% for i in range(0, attachment_count) %}
+                    <li class="attachment">
+                      <div class="govuk-!-mb-r4">
+                        <h3 class="govuk-heading-s govuk-!-mt-r0 govuk-!-mb-r1">{{ data[ prefix + (i + 1) + '-attachment-title'] }}</h3>
+                        <a class="govuk-link js-edge" href="{{ urlPrefix }}/attachment/{{ data[ prefix + (i + 1) + '-attachment-filename'] }}">{{ data[ prefix + (i + 1) + '-attachment-filename'] }}</a>
+                      </div>
+                      <a href="{{ urlPrefix }}/attachment/{{ i + 1 }}" class="document-task-action">Change</a>
+                    </li>
+                {% endfor %}
+                  </ul>
+                </div>
+                {% if attachment_count > 1 %}
+                  <a href="" class="govuk-body">Change attachment order</a>
+                {% endif %}
+              {% endif %}
+              <!-- <div style="clear: both">
                 <ul class="govuk-!-mt-r6 govuk-!-mb-r0 govuk-list">
                   <li class="attachment">
                     <div class="govuk-!-mb-r4">
@@ -164,8 +184,8 @@
                     <a href="" class="document-task-action">Change</a>
                   </li>
                 </ul>
-                <a href="" class="govuk-body">Change attachment order</a>
-              </div>
+
+              </div> -->
             </li>
             <li class="document-list-item">
               <h3 class="document-task">
