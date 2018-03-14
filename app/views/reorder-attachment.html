@@ -2,20 +2,6 @@
 {% block page_title %}Add attachment{% endblock %}
 
 {% block content %}
-
-{% if data[prefix + 'attachment-count'] %}
-  {% set attachment_count = (data[prefix + 'attachment-count'] | int) + 1 %}
-{% else %}
-  {% set attachment_count = 1 %}
-{% endif %}
-
-{% if attachmentId %}
-  {% set editing = true %}
-  {% set attachment_id = attachmentId %}
-{% else %}
-  {% set attachment_id = attachment_count %}
-{% endif %}
-
 <a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <form action="{{ urlPrefix }}{% if editing %}/attachment-edit-done{% else %}/attachment-done{% endif %}" method="post" class="form" data-module="fake-filename-from-title">
