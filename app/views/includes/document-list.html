@@ -11,10 +11,10 @@
     {
       name: data['draft-title'] or 'Custom title',
       format: data['draft-format'] or 'News article',
-      status: 'Draft',
+      status: data['draft-state'] + ' - ' + data['draft-edition'],
       date: '14 March 2018',
       editor: 'Peter Parker',
-      organisation: 'Office for National Statistics (ONS)',
+      organisation: data['draft-lead-organisation'],
       link: '/draft/document-tasks'
     },
     {
