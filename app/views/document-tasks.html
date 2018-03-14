@@ -21,7 +21,7 @@
   </div>
   {% endif %}
 
-  {% if not data[prefix + 'show-errors'] and success %}
+  {% if data[prefix + 'show-success'] and success %}
     <div class="success-summary" role="alert" tabindex="-1">
       <p>
         Your draft has been submitted for review

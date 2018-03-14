@@ -23,8 +23,10 @@ router.get('/:state/submit-for-review', function(req, res) {
   if (locals.success) {
     req.session.data[locals.state + '-state'] = 'Submitted';
     req.session.data[locals.state + '-show-errors'] = false;
+    req.session.data[locals.state + '-show-success'] = true;
   } else {
     req.session.data[locals.state + '-show-errors'] = true;
+    req.session.data[locals.state + '-show-success'] = false;
   }
 
   res.redirect('/' + locals.state + '/document-tasks');
@@ -111,6 +113,7 @@ function validateEdition(req, locals) {
   var about_content_errors = [];
   var errors;
 
+  data[locals.state + '-show-success'] = false;
   locals.state = state;
 
   if (!data[state + '-summary']) {
