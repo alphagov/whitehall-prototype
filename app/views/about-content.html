@@ -139,7 +139,7 @@
           {% endif %}
 
           <div class="govuk-c-radios {% if data[prefix + 'show-errors'] and field_errors['published-before'] %}govuk-o-form-group--error{% endif %}">
-            <fieldset class="govuk-c-fieldset">
+            <fieldset class="govuk-c-fieldset" id="published-before">
               <legend class="govuk-c-fieldset__legend">
                 <h2 class="govuk-heading-s">Has this content been published before?</h2>
                 {% if data[prefix + 'show-errors'] and field_errors['published-before'] %}<span class="govuk-c-error-message">{{ field_errors['published-before'] }}</span>{% endif %}
