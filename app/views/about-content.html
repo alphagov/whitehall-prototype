@@ -178,7 +178,7 @@
     </div>
 
     {% if not data[prefix + 'specialist'] %}
-    <div class="govuk-o-grid">
+    <div class="govuk-o-grid" id="tag-on-govuk">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
         <h2 class="govuk-heading-l">Tag on GOV.UK</h2>
         <p class="govuk-body">Tags help position this content in <a href="">GOV.UK</a>, they make it easier to find by relating it to existing content that is similar to it.</p>
@@ -281,12 +281,15 @@
         </table>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <label class="govuk-c-label" for="tag-search">Search for a tag</label>
-        <select id="tag-search" name="{{ prefix }}tag-search">
-          {% include "includes/topics-select-options.html" %}
-        </select>
+        <div class="{% if data[prefix + 'show-errors'] and field_errors['tag-on-govuk'] %}govuk-o-form-group--error{% endif %}">
+          <label class="govuk-c-label" for="tag-search">Search for a tag</label>
+          {% if data[prefix + 'show-errors'] and field_errors['tag-on-govuk'] %}<span class="govuk-c-error-message">{{ field_errors['tag-on-govuk'] }}</span>{% endif %}
+          <select id="tag-search" name="{{ prefix }}tag-search">
+            {% include "includes/topics-select-options.html" %}
+          </select>
+        </div>
       </div>
-      <div class="govuk-o-grid__item govuk-o-grid__item--one-third govuk-!-mt-r7">
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third {% if data[prefix + 'show-errors'] and field_errors['tag-on-govuk'] %}govuk-!-mt-r9{% else %}govuk-!-mt-r7{% endif %}">
         <a href="" class="inline button button-link govuk-body js-add-tag">Select tag</a>
       </div>
     </div>

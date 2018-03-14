@@ -137,6 +137,14 @@ function validateEdition(req, locals) {
     })
   }
 
+  if (!data[state + '-tag-count'] || data[state + '-tag-count'] < 1) {
+    about_content_errors.push({
+      title: 'Enter at least one tag',
+      page: 'about-content',
+      field: 'tag-on-govuk'
+    })
+  }
+
   if (!data[state + '-lead-organisation']) {
     about_content_errors.push({
       title: 'Enter a lead organisation',
