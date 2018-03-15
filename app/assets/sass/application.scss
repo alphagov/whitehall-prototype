@@ -222,6 +222,10 @@ a:visited, .govuk-list a:visited, .govuk-prose-scope ul a:visited, .govuk-prose-
   overflow: hidden;
 }
 
+textarea#summary {
+  height: 180px;
+}
+
 ul.recommendations {
   margin-bottom: 20px;
   list-style-type: disc;
