@@ -26,7 +26,7 @@
   <form action="{{ urlPrefix }}/document-tasks" method="post" class="form about" data-module="slug-from-title">
     <div class="govuk-o-grid">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <h1 class="form-title govuk-heading-xl">
+        <h1 class="form-title govuk-heading-xl govuk-!-mb-r9">
           About this content
         </h1>
       </div>
@@ -89,25 +89,25 @@
         <div class="govuk-c-radios">
           <fieldset class="govuk-c-fieldset">
             <legend class="govuk-c-fieldset__legend">
-              Review frequency
+              Review reminder
             </legend>
             {% set fields = [
                 {
-                  name: 'Never, this is a one-off',
-                  more: 'Because this content won\'t be reviewed, it will be downgraded as more recent content is published on GOV.UK'
+                  name: 'In one month'
                 },
                 {
-                  name: 'Quarterly',
-                  more: 'You will be reminded to review this content the quarter after it was published.'
+                  name: 'In 6 months'
                 },
                 {
-                  name: 'Yearly',
-                  more: 'You will be reminded to review this content the year it was published.'
+                  name: 'In 11 months'
                 },
                 {
-                  name: 'A custom date',
+                  name: 'Other',
                   more: '<label class="govuk-c-label" for="review-frequency-other">Enter a date to get a reminder to review</label>
                   <span class="govuk-c-label__hint govuk-body">For example, 5 June 2019</span>'
+                },
+                {
+                  name: 'I don’t need to review this document'
                 }
               ]
             %}
@@ -119,7 +119,7 @@
                   {% if field.more %}
                   <div class="panel panel-border-wide js-hidden govuk-!-mt-r4" id="radio-part-{{ loop.index }}-extra">
                     {{ field.more | safe }}
-                    {% if field.name == 'A custom date' %}
+                    {% if field.name == 'Other' %}
                       <input type="text" name="{{ prefix }}review-frequency-other" class="govuk-c-input govuk-!-width-one-half" id="review-frequency-other" value="{{ data[prefix + 'review-frequency-other']}}">
                     {% endif %}
                   </div>
@@ -183,7 +183,7 @@
     {% if not data[prefix + 'specialist'] %}
     <div class="govuk-o-grid" id="tag-on-govuk">
       <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <h2 class="govuk-heading-l">Tag on GOV.UK</h2>
+        <h2 class="govuk-heading-l govuk-!-mt-r4">Tag on GOV.UK</h2>
         <p class="govuk-body">Tags help position this content in <a href="">GOV.UK</a>, they make it easier to find by relating it to existing content that is similar to it.</p>
       </div>
     </div>
