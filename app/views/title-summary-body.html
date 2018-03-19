@@ -80,17 +80,18 @@
             Title
           </label>
           <input required type="text" name="{{ prefix }}title" autocomplete="off" class="js-check-content govuk-c-input" id="title" data-target="title-checks" value="{% if editing %}{{data[prefix + 'title']}}{% endif %}">
-          <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">65 characters or fewer</span>
+          <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">65 characters or fewer. Current length: ##</span>
         </div>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
         <div class="js-contextual-guidance contextual-guidance" style="display: none">
           <div id="title-checks"></div>
-          <h3 class="govuk-heading-s govuk-!-mb-r1">Writing guidance</h3>
+          <h3 class="govuk-heading-s govuk-!-mb-r1">Writing a news title</h3>
           <ul class="govuk-list">
+            <li>The title must make clear what the content offers users. Use the words your users do to help them find this. Avoid wordplay or teases.</li>
+            <li><a href="">Read more on titles</a></li>
             <li><a class="govuk-link" href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
             <li><a class="govuk-link" href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
-            <li><a class="govuk-link" href="#">Words to avoid</a></li>
           </ul>
         </div>
       </div>
@@ -117,16 +118,18 @@
           </label>
           {% if data[prefix + 'show-errors'] and field_errors['summary'] %}<span class="govuk-c-error-message">{{ field_errors['summary'] }}</span>{% endif %}
           <textarea name="{{ prefix }}summary" class="govuk-c-textarea js-check-content" data-target="summary-checks" id="summary" rows="3">{% if editing %}{{data[prefix + 'summary']}}{% endif %}</textarea>
+          <span class="govuk-c-label__hint govuk-body" style="margin-top: -25px">160 characters or fewer. Current length: ##</span>
         </div>
       </div>
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
         <div class="js-contextual-guidance contextual-guidance" style="display: none">
           <div id="summary-checks"></div>
-          <h3 class="govuk-heading-s govuk-!-mb-r1">Writing guidance</h3>
+          <h3 class="govuk-heading-s govuk-!-mb-r1">Writing a news summary</h3>
           <ul class="govuk-list">
+            <li>The summary should explain the main point of the story. It is the first line of the story so don’t repeat it below and end with a full stop.</li>
+            <li><a class="govuk-link" href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#summaries">Read more on summaries.</a></li>
             <li><a class="govuk-link" href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
             <li><a class="govuk-link" href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
-            <li><a class="govuk-link" href="#">Words to avoid</a></li>
           </ul>
         </div>
       </div>
@@ -162,11 +165,12 @@
       <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
         <div class="js-contextual-guidance contextual-guidance" style="display: none">
           <div id="body-checks"></div>
-          <h3 class="govuk-heading-s govuk-!-mb-r1">Writing guidance</h3>
+          <h3 class="govuk-heading-s govuk-!-mb-r1">Writing news</h3>
           <ul class="govuk-list">
+            <li>Tell the story in the first lines with the most important information at the top. Use short words, short sentences, and short paragraphs. Use subheadings in longer content.</li>
+            <li><a href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#structuring-content">Read more on structuring content</a></li>
             <li><a class="govuk-link" href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english">Using plain English</a></li>
             <li><a class="govuk-link" href="https://www.gov.uk/guidance/style-guide">The style guide</a></li>
-            <li><a class="govuk-link" href="#">Words to avoid</a></li>
           </ul>
           <h2 class="govuk-heading-s govuk-!-mb-r1">Markdown guidance</h2>
           <p class="govuk-body">For details, read the guide to using Markdown</p>
