@@ -8,7 +8,7 @@ The prototype explores a new way of writing and editing content using concepts f
 
 ## Running the prototype locally
 
-The prototype uses a private npm package for the design system. The GOV.UK Design System team can provide the npm login details. Heroku uses a token to retrieve this package, see 48da520.
+The prototype uses a private npm package for the design system. The GOV.UK Design System team can provide the npm login details. Heroku uses a token to retrieve this package, see [48da520](https://github.com/alphagov/whitehall-prototype/commit/48da520).
 
 ```
 npm install
