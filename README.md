@@ -6,6 +6,8 @@ Built by the [GOV.UK Publishing Workflow team](https://gov-uk.atlassian.net/wiki
 
 The prototype explores a new way of writing and editing content using concepts familiar to Whitehall users.
 
+The prototype was tested in [3 rounds of user research, documented in the prototype releases](https://github.com/alphagov/whitehall-prototype/releases).
+
 ## Running the prototype locally
 
 The prototype uses a private npm package for the design system. The GOV.UK Design System team can provide the npm login details. Heroku uses a token to retrieve this package, see [48da520](https://github.com/alphagov/whitehall-prototype/commit/48da520).
