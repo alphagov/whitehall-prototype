@@ -215,7 +215,8 @@ a:visited, .govuk-list a:visited, .govuk-prose-scope ul a:visited, .govuk-prose-
 
 .hwt-content mark {
   background-color: transparent;
-  box-shadow: inset 0 -4px 0 0 $govuk-error-colour;
+  background-image: url(../images/content-underline.svg);
+  background-position: 0px -3px;
 }
 
 .task-heading-wrapper {
@@ -531,4 +532,10 @@ ul.documents {
   background-repeat: repeat-y;
   background-position: 50% 0;
   background-size: contain;
+}
+
+.content-issues span {
+  float: right;
+  display: inline-block;
+  font-weight: normal;
 }

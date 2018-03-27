@@ -56,7 +56,7 @@
 
         function reportContentChecks(data) {
           var $target = $('#' + $el.data('target'));
-          var $h3 = $('<h3 class="govuk-heading-s govuk-!-mb-r1">Content issues</h3>');
+          var $h3 = $('<h3 class="govuk-heading-s govuk-!-mb-r1 content-issues">Content issues<span><a href="">Hide issues</a></span></h3>');
           var $list = $('<ul class="govuk-list govuk-!-mb-r7">');
           var $div = $('<div>').append($h3).append($list);
           var messages = [];
