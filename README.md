@@ -19,18 +19,38 @@ npm start
 
 ## Screenshots
 
-### Choosing a format
+### Dashboard
 
-![Choose a format](docs/assets/images/screenshots/format-choice-view.png)
+![Dashboard](docs/assets/images/screenshots/dashboard.png)
 
-### Creating a news article
+### Choose an intent
 
-![Form for creating a news article](docs/assets/images/screenshots/new-news-article-view.png)
+![Choose an intent](docs/assets/images/screenshots/intent.png)
 
-### News article view
+### Choosing format
 
-![A news article in draft state](docs/assets/images/screenshots/document-view.png)
+![Choose a format](docs/assets/images/screenshots/format.png)
 
-### Documents
+### Choose a document type
 
-![Documents filter](docs/assets/images/screenshots/documents-view.png)
+![Choose a document type](docs/assets/images/screenshots/document-type.png)
+
+### Form to add a title, summary and body
+
+![Form to add a title, summary and body](docs/assets/images/screenshots/title-summary-body.png)
+
+### Document page
+
+![Document page](docs/assets/images/screenshots/document-tasks.png)
+
+### Add an attachment
+
+![Add an attachment](docs/assets/images/screenshots/add-attachment.png)
+
+### Add details about the content
+
+![Form to gather information about the content](docs/assets/images/screenshots/about-content.png)
+
+### Document history
+
+![Document history](docs/assets/images/screenshots/document-history.png)
