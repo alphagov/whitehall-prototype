@@ -1,6 +1,7 @@
 const express = require('express')
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
+const manager_api = require('../lib/prototype-manager/api.js')
 const router = express.Router()
 
 // Route index page
@@ -177,5 +178,17 @@ function validateEdition(req, locals) {
     locals.success = true;
   }
 }
+
+// Routes for the Manager
+router.get('/manage/', function(req, res) {
+  const api = new manager_api();
+
+  api.metricsFor('www.gov.uk/vat-rates', (err, data) => {
+    if (!err) {
+      console.log(data);
+      res.render('/manage/test', data);
+    }
+  });
+});
 
 module.exports = router
