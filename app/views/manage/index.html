@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">Metrics for /{{ slug }}</h1>
+      {% for metric_name, metric_values in data %}
+        <h2 class="heading-large">{{ metric_name }}</h2>
+          <ul class="govuk-list govuk-list--bullet">
+          {% for prop_name, prop_value in metric_values %}
+            <li>{{ prop_name }}: {{ prop_value }}</li>
+          {% endfor %}
+          </ul>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</main>
+{% endblock %}

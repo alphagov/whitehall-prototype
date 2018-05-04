@@ -1,6 +1,7 @@
 const express = require('express')
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
+const Manager_api = require('../lib/prototype-manager/api.js')
 const router = express.Router()
 
 // Route index page
@@ -177,5 +178,45 @@ function validateEdition(req, locals) {
     locals.success = true;
   }
 }
+
+// Routes for the Manager
+router.get('/manage', function(req, res) {
+  const api = new Manager_api();
+
+  function setContentTo (url) {
+    return () => {
+      return api.setContent(url);
+    };
+  };
+
+  function getAggregations (options) {
+    return () => {
+      return api.getAggregations(options.metric, options.from, options.to);
+    };
+  };
+
+  function getTimeSeries (options) {
+    return () => {
+      return api.getTimeSeries(options.metric, options.from, options.to);
+    };
+  };
+
+  api.getMetrics()
+    .then(setContentTo('www.gov.uk/vat-rates'))
+    .then(getAggregations({
+      'metric': 'pageviews',
+      'from': '2018-02-26',
+      'to': '2018-02-27'
+     }))
+    .then((data) => {
+      res.render('manage/index', {
+        'slug': 'vat-rates',
+        'data': data
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 module.exports = router
