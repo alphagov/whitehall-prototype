@@ -222,22 +222,6 @@
                   {%
                     set dtags = [
                       {
-                        name: 'Review frequency',
-                        key: 'review-frequency'
-                      },
-                      {
-                        name: 'Expected audience',
-                        key: 'expected-audience'
-                      },
-                      {
-                        name: 'Subject matter expert',
-                        key: 'expert'
-                      },
-                      {
-                        name: 'Published before',
-                        key: 'published-before'
-                      },
-                      {
                         name: 'Lead organisations',
                         key: 'lead-organisation'
                       },
@@ -322,52 +306,63 @@
               </dl>
             </li>
 
-            {% if not data[prefix + 'specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
-                Scheduling
+                Content settings
               </h3>
-              {% if data[prefix + 'schedule-time'] %}
-                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Change</a>
-
-                <dl class="document-task-part">
-                  {%
-                    set ptags = [
-                      {
-                        name: 'Scheduled',
-                        key: 'schedule-year'
-                      }
-                    ]
-                  %}
-                  {% for ptag in ptags %}
-                    <div>
-                      <dt class="document-part-label">
-                        {{ ptag.name }}
-                      </dt>
-                      {% if data[prefix + ptag.key] %}
-                        <dd class="document-part-value">
-                          {% if ptag.key == 'schedule-year' %}
-                            {{ data[prefix + ptag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
-                          {% else %}
-                            {{ data[prefix + ptag.key] }}
-                          {% endif %}
-                        </dd>
-                      {% else %}
-                        <dd class="document-part-value document-part-value--empty">
-                          {% if ptag.key == 'schedule-year' %}
-                            This post has not been scheduled
-                          {% else %}
-                            This field is empty
-                          {% endif %}
-                        </dd>
-                      {% endif %}
-                    </div>
-                  {% endfor %}
-                </dl>
-              {% else %}
-                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Schedule</a>
-              {% endif %}
+              <a href="{{ urlPrefix }}/content-settings" class="document-task-action">Change</a>
+              <dl class="document-task-part">
+                {%
+                  set ctags = [
+                    {
+                      name: 'Review frequency',
+                      key: 'review-frequency'
+                    },
+                    {
+                      name: 'Expected audience',
+                      key: 'expected-audience'
+                    },
+                    {
+                      name: 'Subject matter expert',
+                      key: 'expert'
+                    },
+                    {
+                      name: 'Published before',
+                      key: 'published-before'
+                    },
+                    {
+                      name: 'Format',
+                      key: 'format'
+                    },
+                    {
+                      name: 'Scheduling',
+                      key: 'scheduling'
+                    }
+                  ]
+                %}
+                {% for ctag in ctags %}
+                  <div>
+                    <dt class="document-part-label">
+                      {{ ctag.name }}
+                    </dt>
+                    {% if data[prefix + ctag.key] %}
+                      <dd class="document-part-value">
+                        {{ data[prefix + ctag.key] }}
+                      </dd>
+                    {% else %}
+                      <dd class="document-part-value document-part-value--empty">
+                        {% if ctag.key == 'format' %}
+                          {{ data['inferred-format'] }}
+                        {% else %}
+                          This field is empty
+                        {% endif %}
+                      </dd>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </dl>
             </li>
+            {% if not data[prefix + 'specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Translations
