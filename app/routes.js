@@ -111,6 +111,7 @@ function livePreview(req, res, text) {
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
   var locals = {}
   validateEdition(req, locals);
+  console.log(req.session.data);
   res.render(req.params.page, locals)
 });
 
@@ -182,6 +183,7 @@ function validateEdition(req, locals) {
 // Routes for the Manager
 router.get('/manage', function(req, res) {
   const api = new Manager_api();
+  const base_path = req.query.base_path || 'government/news/resistant-gonorrhoea-case-reminds-importance-of-safe-sex';
 
   function setContentTo (url) {
     return () => {
@@ -202,17 +204,18 @@ router.get('/manage', function(req, res) {
   };
 
   api.getMetrics()
-    .then(setContentTo('www.gov.uk/vat-rates'))
+    .then(setContentTo(`www.gov.uk/${base_path}`))
     .then(getAggregations({
-      'metric': 'pageviews',
-      'from': '2018-02-26',
-      'to': '2018-02-27'
+      'metric': 'readability_score',
+      'from': '2018-01-01',
+      'to': '2018-05-08'
      }))
     .then((data) => {
       res.render('manage/index', {
-        'slug': 'vat-rates',
+        'slug': base_path,
         'data': data
       });
+      console.log(data);
     })
     .catch((err) => {
       console.log(err);
