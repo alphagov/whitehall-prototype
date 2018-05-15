@@ -61,19 +61,6 @@ router.get('/publishing-guidance', function(req, res) {
   res.render('publishing-guidance', locals);
 })
 
-router.get('/:state/document-type', function(req, res) {
-  var state = req.params.state;
-
-  if (req.session.data[state + '-format'] == 'News article'
-        || req.session.data[state + '-format'] == 'Speech'
-        || req.session.data[state + '-format'] == 'Publication'
-        || req.session.data[state + '-format'] == 'Medical safety alert') {
-    res.render('document-type', req.params);
-  } else {
-    res.redirect('/' + state + '/title-summary-body');
-  }
-});
-
 router.get('/content-check', function(req, res){
   checkContent(req, res, req.query['text']);
 });
