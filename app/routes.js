@@ -95,8 +95,24 @@ function livePreview(req, res, text) {
   res.send(JSON.stringify(obj));
 }
 
+function inferrFormat(req) {
+  if (req.session.data.intent === 'Help users to do something') {
+    req.session.data['inferred-format'] = 'Detailed guide';
+  }
+  else if (req.session.data.intent === 'Tell users about something') {
+    req.session.data['inferred-format'] = 'Publication';
+  }
+  else {
+    req.session.data['inferred-format'] = 'Publication';
+  }
+}
+
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
   var locals = {}
+
+  if (req.params.page === 'title-summary-body') {
+    inferrFormat(req);
+  }
   validateEdition(req, locals);
   console.log(req.session.data);
   res.render(req.params.page, locals)
