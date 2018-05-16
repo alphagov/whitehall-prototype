@@ -110,7 +110,7 @@ function inferrDocumentType(req) {
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
   var locals = {}
 
-  if (req.params.page === 'title-summary-body') {
+  if (req.params.page === 'document-tasks') {
     inferrDocumentType(req);
   }
 

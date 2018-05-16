@@ -169,9 +169,9 @@
         <div class="govuk-!-mb-r6 is-input">
 
           {% if data[prefix + 'document-type'] %}
-            {% set setDocumentType = data[prefix + 'document-type'] %}
+            {% set documentTypeSet = data[prefix + 'document-type'] %}
           {% else %}
-            {% set setDocumentType = data['inferred-document-type'] %}
+            {% set documentTypeSet = data['inferred-document-type'] %}
           {% endif %}
 
           <div class="govuk-c-radios">
@@ -208,9 +208,9 @@
                           Alternative formats
                         </legend>
                         {% for field in data['document-types'] %}
-                          {% if field.name != setFormat %}
+                          {% if field.name != documentTypeSet %}
                             <div class="multiple-choice govuk-c-radios__item" data-target="document-type-part-{{ loop.index }}-extra">
-                              <input required id="document-type-part-{{ loop.index }}" type="radio" name="{{ prefix }}document-type" value="{{ field.name }}" class="govuk-c-radios__input">
+                              <input id="document-type-part-{{ loop.index }}" type="radio" name="{{ prefix }}document-type" value="{{ field.name }}" class="govuk-c-radios__input">
                               <label for="document-type-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                                 <span class="govuk-c-label--bold">{{ field.name }}</span>
                                 {{ field.text | safe }}
