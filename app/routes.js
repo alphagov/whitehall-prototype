@@ -95,15 +95,15 @@ function livePreview(req, res, text) {
   res.send(JSON.stringify(obj));
 }
 
-function inferrFormat(req) {
+function inferrDocumentType(req) {
   if (req.session.data.intent === 'Help users to do something') {
-    req.session.data['inferred-format'] = 'Detailed guide';
+    req.session.data['inferred-document-type'] = 'Detailed guide';
   }
   else if (req.session.data.intent === 'Tell users about something') {
-    req.session.data['inferred-format'] = 'Publication';
+    req.session.data['inferred-document-type'] = 'Publication';
   }
   else {
-    req.session.data['inferred-format'] = 'Publication';
+    req.session.data['inferred-document-type'] = 'Publication';
   }
 }
 
@@ -111,8 +111,9 @@ router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
   var locals = {}
 
   if (req.params.page === 'title-summary-body') {
-    inferrFormat(req);
+    inferrDocumentType(req);
   }
+
   validateEdition(req, locals);
   console.log(req.session.data);
   res.render(req.params.page, locals)
