@@ -15,12 +15,12 @@
       function showPreview(evt) {
         var $el = $(this);
         var text = $(this).val() || '';
-        var previous = $(this).data('previous');
+        var previous = $(this).data('previous-preview-content');
 
         if (text == previous) {
           return;
         } else {
-          $(this).data('previous', text);
+          $(this).data('previous-preview-content', text);
         }
 
         $.ajax({
