@@ -358,27 +358,25 @@
                     <dt class="document-part-label">
                       {{ ctag.name }}
                     </dt>
-                    {% if data[prefix + ctag.key] %}
+                    {% if ctag.key == 'scheduling' %}
                       <dd class="document-part-value">
-                        {{ data[prefix + ctag.key] }}
-                      </dd>
+                      {{ dateTime }}
+                    {% elif ctag.key == 'document-type' %}
+                      {% if data[prefix + 'document-type'] %}
+                      <dd class="document-part-value">
+                        {{ data[prefix + 'document-type'] }}
+                      {% else %}
+                        <dd class="document-part-value">
+                        {{ data[prefix + 'inferred-document-type'] }}
+                      {% endif %}
+                    {% elif data[prefix + ctag.key] %}
+                      <dd class="document-part-value">
+                      {{ data[prefix + ctag.key] }}
                     {% else %}
                       <dd class="document-part-value document-part-value--empty">
-                        {% if ctag.key == 'scheduling' %}
-                          {{ dateTime }}
-                        {% elif ctag.key == 'document-type' %}
-                          {% if data[prefix + 'document-type'] %}
-                            {{ data[prefix + 'document-type'] }}
-                          {% else %}
-                            {{ data[prefix + 'inferred-document-type'] }}
-                          {% endif %}
-                        {% elif data[prefix + ctag.key] %}
-                          {{ data[prefix + ctag.key] }}
-                        {% else %}
-                          This field is empty
-                        {% endif %}
-                      </dd>
+                        This field is empty
                     {% endif %}
+                      </dd>
                   </div>
                 {% endfor %}
               </dl>

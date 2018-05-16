@@ -96,14 +96,21 @@ function livePreview(req, res, text) {
 }
 
 function inferrDocumentType(req) {
+  var inference;
+
   if (req.session.data.intent === 'Help users to do something') {
-    req.session.data['inferred-document-type'] = 'Detailed guide';
+    inference = 'Detailed guide';
   }
   else if (req.session.data.intent === 'Tell users about something') {
-    req.session.data['inferred-document-type'] = 'Publication';
+    inference = 'Publication';
   }
   else {
-    req.session.data['inferred-document-type'] = 'Publication';
+    inference = 'Publication';
+  }
+
+  req.session.data['inferred-document-type'] = inference;
+  if (req.session.data[req.params.state + '-correct-document-type']) {
+    req.session.data[req.params.state + '-document-type'] = inference;
   }
 }
 
