@@ -114,11 +114,29 @@ function inferrDocumentType(req) {
   }
 }
 
+function formatScheduling(req) {
+  var units = ['time', 'day', 'month', 'year'];
+  var str = [];
+
+  units.forEach((unit) => {
+    var key = req.params.state + '-schedule-' + unit;
+
+    if ((key in req.session.data) && (req.session.data[key] !== '')) {
+      str.push(req.session.data[key]);
+    }
+  });
+
+  if (str.length) {
+    req.session.data[req.params.state + '-scheduling'] = str.join(' ');
+  }
+}
+
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
   var locals = {}
 
   if (req.params.page === 'document-tasks') {
     inferrDocumentType(req);
+    formatScheduling(req);
   }
 
   validateEdition(req, locals);

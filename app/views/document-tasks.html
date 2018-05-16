@@ -310,19 +310,10 @@
               <h3 class="document-task">
                 Content settings
               </h3>
-              {% if data[prefix + 'schedule-day'] and
-                    data[prefix + 'schedule-day'] and
-                    data[prefix + 'schedule-month'] and
-                    data[prefix + 'schedule-year'] %}
-                {% set dateTime = data[prefix + 'schedule-time'] + ' ' + data[prefix + 'schedule-day'] + ' ' + data[prefix + 'schedule-month'] + ' ' + data[prefix + 'schedule-year'] %}
-              {% else %}
-                {% set dateTime = '' %}
-              {% endif %}
-
               {% if data[prefix + 'review-frequency'] or
                     data[prefix + 'expected-audience'] or
                     data[prefix + 'expert'] or
-                    dateTime != '' %}
+                    data[prefix + 'scheduling'] %}
               <a href="{{ urlPrefix }}/content-settings" class="document-task-action">Change</a>
               <dl class="document-task-part">
                 {%
@@ -358,10 +349,7 @@
                     <dt class="document-part-label">
                       {{ ctag.name }}
                     </dt>
-                    {% if ctag.key == 'scheduling' %}
-                      <dd class="document-part-value">
-                      {{ dateTime }}
-                    {% elif ctag.key == 'document-type' %}
+                    {% if ctag.key == 'document-type' %}
                       {% if data[prefix + 'document-type'] %}
                       <dd class="document-part-value">
                         {{ data[prefix + 'document-type'] }}

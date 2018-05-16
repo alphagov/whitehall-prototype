@@ -188,13 +188,13 @@
                 {% endif %}
 
                 <div class="multiple-choice govuk-c-radios__item">
-                  <input required id="correct-document-type-yes" type="radio" name="{{ prefix }}correct-document-type" value="yes" class="govuk-c-radios__input">
+                  <input required id="correct-document-type-yes" type="radio" name="{{ prefix }}correct-document-type" value="yes" class="govuk-c-radios__input" {{ checked(prefix + "correct-document-type", "yes") }}>
                   <label for="correct-document-type-yes" class="govuk-c-label govuk-c-radios__label">
                     Yes, this is correct
                   </label>
                 </div>
                 <div class="multiple-choice govuk-c-radios__item" data-target="alt-document-types">
-                  <input required id="correct-document-type-no" type="radio" name="{{ prefix }}correct-document-type" value="no" class="govuk-c-radios__input">
+                  <input required id="correct-document-type-no" type="radio" name="{{ prefix }}correct-document-type" value="no" class="govuk-c-radios__input" {{ checked(prefix + "correct-document-type", "no") }}>
                   <label for="correct-document-type-no" class="govuk-c-label govuk-c-radios__label">
                     No, I need to choose another format
                   </label>
