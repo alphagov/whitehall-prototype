@@ -39,6 +39,10 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 @import 'patterns/buttons';
 @import 'header';
 
+/* Patterns for manage */
+@import 'patterns/manage/featured-links';
+@import 'patterns/manage/activity-navigation';
+
 .code {
   color: $govuk-text-colour;
   background-color: $govuk-highlight-colour;
