@@ -204,6 +204,14 @@ function validateEdition(req, locals) {
     })
   }
 
+  if (!data[state + '-document-type']) {
+    content_settings_errors.push({
+      title: 'Chose a format for this content',
+      page: 'content-settings',
+      field: 'document-type'
+    })
+  }
+
   errors = [].concat(title_summary_body_errors, about_content_errors, content_settings_errors);
 
   if (errors.length > 0) {

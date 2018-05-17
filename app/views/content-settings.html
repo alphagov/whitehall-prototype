@@ -6,7 +6,7 @@
 <a href="{{ urlPrefix }}/document-tasks" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
 
-  {% if data[prefix + 'show-errors'] and about_content_errors and about_content_errors.length > 0 %}
+  {% if data[prefix + 'show-errors'] and content_settings_errors and content_settings_errors.length > 0 %}
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
       <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -14,7 +14,7 @@
           You need to complete the following sections before you can send to review:
         </h3>
         <ul class="error-summary-list">
-          {% for error in about_content_errors %}
+          {% for error in content_settings_errors %}
           <li><a href="{{ urlPrefix }}/{{ error.page }}#{{ error.field }}">{{ error.title }}</a></li>
           {% endfor %}
         </ul>
@@ -221,11 +221,12 @@
             {% set chosenDocumentType = data['inferred-document-type'] %}
           {% endif %}
 
-          <div class="govuk-c-radios">
+          <div class="govuk-c-radios {% if data[prefix + 'show-errors'] and field_errors['document-type'] %}govuk-o-form-group--error{% endif %}">
             <div class="govuk-o-form-group">
-              <fieldset class="govuk-c-fieldset">
+              <fieldset class="govuk-c-fieldset" id="document-type">
                 <legend class="govuk-c-fieldset__legend govuk-visually-hidden">
                   <h2 class="govuk-heading-l">Format</h2>
+                  {% if data[prefix + 'show-errors'] and field_errors['document-type'] %}<span class="govuk-c-error-message">{{ field_errors['document-type'] }}</span>{% endif %}
                 </legend>
 
                 {% if data[prefix + 'document-type'] %}
