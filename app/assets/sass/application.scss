@@ -69,6 +69,10 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 
 // Local fixes to GOV.UK frontend
 
+em.govuk-\!-w-bold {
+  font-style: normal;
+}
+
 .markdown hr {
   @include govuk-responsive-margin($govuk-spacing-responsive-6, "top");
   @include govuk-responsive-margin($govuk-spacing-responsive-6, "bottom");

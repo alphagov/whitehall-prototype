@@ -3,11 +3,17 @@
 
 {% block content %}
 
+{% if data[prefix + 'title'] and data[prefix + 'summary'] and data[prefix + 'body'] %}
+  {% set url = urlPrefix + '/document-tasks' %}
+{% else %}
+  {% set url = urlPrefix + '/title-summary-body' %}
+{% endif %}
+
 <a href="/dashboard" class="govuk-c-back-link">Back</a>
 <main role="main" class="govuk-o-main-wrapper">
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <form action="{{ urlPrefix }}/format" method="post" class="form">
+      <form action="{{ url }}" method="post" class="form">
         <div class="govuk-!-mb-r6">
           <fieldset>
             <legend>
@@ -34,7 +40,7 @@
 
             {% for field in fields %}
               <div class="multiple-choice govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input required id="radio-part-{{ loop.index }}" type="radio" name="intent" value="{{ field.name }}" class="govuk-c-radios__input">
+                <input required id="radio-part-{{ loop.index }}" type="radio" name="intent" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("intent", field.name) }}>
                 <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                   <span class="govuk-c-label--bold">{{ field.name }}</span>
                   {{ field.text | safe }}

@@ -63,22 +63,20 @@
       <ol class="document-list">
         <li>
           <ul class="document-list-items">
-            {% if data[prefix + 'document-type'] %}
             <li class="document-list-item">
               <div class="task-heading-wrapper govuk-!-mb-r4">
                 <h3 class="document-task">
-                  Type of {{ data[prefix + 'format'] | lower }}
+                  What is this content for?
                 </h3>
-                <a href="{{ urlPrefix }}/document-type" class="document-task-action">Change</a>
+                <a href="{{ urlPrefix }}/intent" class="document-task-action">Change</a>
               </div>
               <div>
-                <h3 class="govuk-heading-s">{{ data[prefix + 'document-type'] }}</h3>
-                {% if data[prefix + 'document-type'] == 'Press release' %}
-                  Unedited press releases as sent to the media, and official statements from the organisation or a minister.
+                <h3 class="govuk-heading-s">{{ data['intent'] }}</h3>
+                {% if data['intent'] == 'Help users to do something' %}
+                  This content will help users to complete a task with government.
                 {% endif %}
               </div>
             </li>
-            {% endif %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Title, summary and body
@@ -224,22 +222,6 @@
                   {%
                     set dtags = [
                       {
-                        name: 'Review frequency',
-                        key: 'review-frequency'
-                      },
-                      {
-                        name: 'Expected audience',
-                        key: 'expected-audience'
-                      },
-                      {
-                        name: 'Subject matter expert',
-                        key: 'expert'
-                      },
-                      {
-                        name: 'Published before',
-                        key: 'published-before'
-                      },
-                      {
                         name: 'Lead organisations',
                         key: 'lead-organisation'
                       },
@@ -324,52 +306,66 @@
               </dl>
             </li>
 
-            {% if not data[prefix + 'specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
-                Scheduling
+                Content settings
               </h3>
-              {% if data[prefix + 'schedule-time'] %}
-                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Change</a>
-
-                <dl class="document-task-part">
-                  {%
-                    set ptags = [
-                      {
-                        name: 'Scheduled',
-                        key: 'schedule-year'
-                      }
-                    ]
-                  %}
-                  {% for ptag in ptags %}
-                    <div>
-                      <dt class="document-part-label">
-                        {{ ptag.name }}
-                      </dt>
-                      {% if data[prefix + ptag.key] %}
-                        <dd class="document-part-value">
-                          {% if ptag.key == 'schedule-year' %}
-                            {{ data[prefix + ptag.key] }}-{{ data[prefix + 'issue-date-month'] }}-{{ data[prefix + 'issue-date-day'] }}
-                          {% else %}
-                            {{ data[prefix + ptag.key] }}
-                          {% endif %}
-                        </dd>
-                      {% else %}
-                        <dd class="document-part-value document-part-value--empty">
-                          {% if ptag.key == 'schedule-year' %}
-                            This post has not been scheduled
-                          {% else %}
-                            This field is empty
-                          {% endif %}
-                        </dd>
-                      {% endif %}
-                    </div>
-                  {% endfor %}
-                </dl>
+              {% if data[prefix + 'review-frequency'] or
+                    data[prefix + 'expected-audience'] or
+                    data[prefix + 'expert'] or
+                    data[prefix + 'scheduling'] %}
+              <a href="{{ urlPrefix }}/content-settings" class="document-task-action">Change</a>
+              <dl class="document-task-part">
+                {%
+                  set ctags = [
+                    {
+                      name: 'Review frequency',
+                      key: 'review-frequency'
+                    },
+                    {
+                      name: 'Expected audience',
+                      key: 'expected-audience'
+                    },
+                    {
+                      name: 'Subject matter expert',
+                      key: 'expert'
+                    },
+                    {
+                      name: 'Published before',
+                      key: 'published-before'
+                    },
+                    {
+                      name: 'Format',
+                      key: 'document-type'
+                    },
+                    {
+                      name: 'Scheduling',
+                      key: 'scheduling'
+                    }
+                  ]
+                %}
+                {% for ctag in ctags %}
+                  <div>
+                    <dt class="document-part-label">
+                      {{ ctag.name }}
+                    </dt>
+                    {% if data[prefix + ctag.key] %}
+                      <dd class="document-part-value">
+                        {{ data[prefix + ctag.key] }}
+                      </dd>
+                    {% else %}
+                      <dd class="document-part-value document-part-value--empty">
+                        This field is empty
+                      </dd>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </dl>
               {% else %}
-                <a href="{{ urlPrefix }}/publish-settings" class="document-task-action">Schedule</a>
+              <a href="{{ urlPrefix }}/content-settings" class="document-task-action">Add</a>
               {% endif %}
             </li>
+            {% if not data[prefix + 'specialist'] %}
             <li class="document-list-item">
               <h3 class="document-task">
                 Translations

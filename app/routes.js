@@ -61,19 +61,6 @@ router.get('/publishing-guidance', function(req, res) {
   res.render('publishing-guidance', locals);
 })
 
-router.get('/:state/document-type', function(req, res) {
-  var state = req.params.state;
-
-  if (req.session.data[state + '-format'] == 'News article'
-        || req.session.data[state + '-format'] == 'Speech'
-        || req.session.data[state + '-format'] == 'Publication'
-        || req.session.data[state + '-format'] == 'Medical safety alert') {
-    res.render('document-type', req.params);
-  } else {
-    res.redirect('/' + state + '/title-summary-body');
-  }
-});
-
 router.get('/content-check', function(req, res){
   checkContent(req, res, req.query['text']);
 });
@@ -108,8 +95,59 @@ function livePreview(req, res, text) {
   res.send(JSON.stringify(obj));
 }
 
+function inferrDocumentType(req) {
+  var inference;
+  var state = req.params.state;
+  var inferenceChoice = req.session.data[state + '-correct-document-type'];
+
+  if (req.session.data.intent === 'Help users to do something') {
+    inference = 'Detailed guide';
+  }
+  else if (req.session.data.intent === 'Tell users about something') {
+    inference = 'Publication';
+  }
+  else {
+    inference = 'Publication';
+  }
+
+  req.session.data['inferred-document-type'] = inference;
+
+  if (inferenceChoice) {
+    // inferred format is correct so set format to that
+    if (inferenceChoice === 'yes') {
+      req.session.data[req.params.state + '-document-type'] = inference;
+    }
+    else { // inferred format is incorrect, user has set the right one
+      req.session.data[state + '-correct-document-type'] = 'yes';
+    }
+  }
+}
+
+function formatScheduling(req) {
+  var units = ['time', 'day', 'month', 'year'];
+  var str = [];
+
+  units.forEach((unit) => {
+    var key = req.params.state + '-schedule-' + unit;
+
+    if ((key in req.session.data) && (req.session.data[key] !== '')) {
+      str.push(req.session.data[key]);
+    }
+  });
+
+  if (str.length) {
+    req.session.data[req.params.state + '-scheduling'] = str.join(' ');
+  }
+}
+
 router.get('/:state(new|draft|submitted|published)/:page', function(req, res) {
   var locals = {}
+
+  if (req.params.page === 'document-tasks') {
+    inferrDocumentType(req);
+    formatScheduling(req);
+  }
+
   validateEdition(req, locals);
   console.log(req.session.data);
   res.render(req.params.page, locals)
@@ -120,6 +158,7 @@ function validateEdition(req, locals) {
   var data = req.session.data;
   var title_summary_body_errors = [];
   var about_content_errors = [];
+  var content_settings_errors = [];
   var errors;
 
   data[locals.state + '-show-success'] = false;
@@ -141,14 +180,6 @@ function validateEdition(req, locals) {
     })
   }
 
-  if (!data[state + '-published-before']) {
-    about_content_errors.push({
-      title: 'Indicate if this content is new or has been published elsewhere',
-      page: 'about-content',
-      field: 'published-before'
-    })
-  }
-
   if (!data[state + '-tag-count'] || data[state + '-tag-count'] < 1) {
     about_content_errors.push({
       title: 'Enter at least one tag',
@@ -165,12 +196,29 @@ function validateEdition(req, locals) {
     })
   }
 
-  errors = [].concat(title_summary_body_errors).concat(about_content_errors);
+  if (!data[state + '-published-before']) {
+    content_settings_errors.push({
+      title: 'Indicate if this content is new or has been published elsewhere',
+      page: 'content-settings',
+      field: 'published-before'
+    })
+  }
+
+  if (!data[state + '-document-type']) {
+    content_settings_errors.push({
+      title: 'Chose a format for this content',
+      page: 'content-settings',
+      field: 'document-type'
+    })
+  }
+
+  errors = [].concat(title_summary_body_errors, about_content_errors, content_settings_errors);
 
   if (errors.length > 0) {
     locals.errors = errors;
     locals.title_summary_body_errors = title_summary_body_errors;
     locals.about_content_errors = about_content_errors;
+    locals.content_settings_errors = content_settings_errors;
     locals.field_errors = errors.reduce(function(map, obj) {
       map[obj.field] = obj.title;
       return map;
