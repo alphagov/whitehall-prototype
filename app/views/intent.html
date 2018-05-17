@@ -40,7 +40,7 @@
 
             {% for field in fields %}
               <div class="multiple-choice govuk-c-radios__item" data-target="radio-part-{{ loop.index }}-extra">
-                <input required id="radio-part-{{ loop.index }}" type="radio" name="intent" value="{{ field.name }}" class="govuk-c-radios__input">
+                <input required id="radio-part-{{ loop.index }}" type="radio" name="intent" value="{{ field.name }}" class="govuk-c-radios__input" {{ checked("intent", field.name) }}>
                 <label for="radio-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">
                   <span class="govuk-c-label--bold">{{ field.name }}</span>
                   {{ field.text | safe }}
