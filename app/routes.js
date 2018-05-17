@@ -158,6 +158,7 @@ function validateEdition(req, locals) {
   var data = req.session.data;
   var title_summary_body_errors = [];
   var about_content_errors = [];
+  var content_settings_errors = [];
   var errors;
 
   data[locals.state + '-show-success'] = false;
@@ -179,14 +180,6 @@ function validateEdition(req, locals) {
     })
   }
 
-  if (!data[state + '-published-before']) {
-    about_content_errors.push({
-      title: 'Indicate if this content is new or has been published elsewhere',
-      page: 'about-content',
-      field: 'published-before'
-    })
-  }
-
   if (!data[state + '-tag-count'] || data[state + '-tag-count'] < 1) {
     about_content_errors.push({
       title: 'Enter at least one tag',
@@ -203,12 +196,21 @@ function validateEdition(req, locals) {
     })
   }
 
-  errors = [].concat(title_summary_body_errors).concat(about_content_errors);
+  if (!data[state + '-published-before']) {
+    content_settings_errors.push({
+      title: 'Indicate if this content is new or has been published elsewhere',
+      page: 'content-settings',
+      field: 'published-before'
+    })
+  }
+
+  errors = [].concat(title_summary_body_errors, about_content_errors, content_settings_errors);
 
   if (errors.length > 0) {
     locals.errors = errors;
     locals.title_summary_body_errors = title_summary_body_errors;
     locals.about_content_errors = about_content_errors;
+    locals.content_settings_errors = content_settings_errors;
     locals.field_errors = errors.reduce(function(map, obj) {
       map[obj.field] = obj.title;
       return map;
