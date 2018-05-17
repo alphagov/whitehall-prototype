@@ -313,6 +313,8 @@
               {% if data[prefix + 'review-frequency'] or
                     data[prefix + 'expected-audience'] or
                     data[prefix + 'expert'] or
+                    data[prefix + 'published-before'] or
+                    data[prefix + 'document-type'] or
                     data[prefix + 'scheduling'] %}
               <a href="{{ urlPrefix }}/content-settings" class="document-task-action">Change</a>
               <dl class="document-task-part">
