@@ -349,22 +349,15 @@
                     <dt class="document-part-label">
                       {{ ctag.name }}
                     </dt>
-                    {% if ctag.key == 'document-type' %}
-                      {% if data[prefix + 'document-type'] %}
+                    {% if data[prefix + ctag.key] %}
                       <dd class="document-part-value">
-                        {{ data[prefix + 'document-type'] }}
-                      {% else %}
-                        <dd class="document-part-value">
-                        {{ data[prefix + 'inferred-document-type'] }}
-                      {% endif %}
-                    {% elif data[prefix + ctag.key] %}
-                      <dd class="document-part-value">
-                      {{ data[prefix + ctag.key] }}
+                        {{ data[prefix + ctag.key] }}
+                      </dd>
                     {% else %}
                       <dd class="document-part-value document-part-value--empty">
                         This field is empty
-                    {% endif %}
                       </dd>
+                    {% endif %}
                   </div>
                 {% endfor %}
               </dl>

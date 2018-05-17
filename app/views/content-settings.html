@@ -168,10 +168,57 @@
 
         <div class="govuk-!-mb-r6 is-input">
 
+          {% set documentTypes = [
+            {
+              name: 'Case study',
+              text: '<p class="govuk-body">Use for real examples that help users understand someone’s experience of a process or an important aspect of government policy.</p>',
+              more: '<p class="govuk-body">Do not use to promote your organisation or if it doesn’t relate to something covered on GOV.UK.</p>' + 
+                    '<p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#case-study">case study guidance</a> in full.</p>',
+              intent: ['Tell users about something']
+            },
+            {
+              name: 'Consultation',
+              text: '<p class="govuk-body">Use for documents requiring collective agreement across government, including calls for evidence.</p>',
+              intent: ['Help users to do something']
+            },
+            {
+              name: 'Detailed guide',
+              text: '<p class="govuk-body">Use to tell users the steps they need to take to complete a clearly defined task. They are usually aimed at specialist or professional audiences.</p>',
+              more: '<p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">detailed guides guidance</a> in full.</p>',
+              intent: ['Help users to do something']
+            },
+            {
+              name: 'Document collection',
+              text: '<p class="govuk-body">Use for grouping closely related documents on a single page for a specific audience.</p>',
+              more: '<p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#detailed-guide">document collection guidance</a> in full.</p>',
+              intent: ['Make something available']
+            },
+            {
+              name: 'News article',
+              text: '<p class="govuk-body">Use for news stories, press releases, and responses to media coverage including official statements.',
+              more: '<p class="govuk-body">Do not use to promote the publication of other content.</p>' +
+                    '<p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#government-response">news article guidance</a> in full.</p>',
+              intent: ['Tell users about something']
+            },
+            {
+              name: 'Publication',
+              text: '<p class="govuk-body">Use for stand-alone government documents, issued on a specified date and usually not updated once published. This includes white papers, strategy documents, and reports.</p>',
+              more: '<p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#publications">publication guidance</a> in full.</p>',
+              intent: ['Help users to do something', 'Tell users about something', 'Make something available']
+            },
+            {
+              name: 'Speech',
+              text: '<p class="govuk-body">Use for transcripts or speaking notes for public speeches by ministers or other named spokespeople, or for statements to Parliament, or bylined articles.</p>',
+              more: '<p class="govuk-body">Do not publish a speech or statement unless you expect a high level of public interest in everything that was said. It’s better to publish a press release or government response for quotes or a summary.</p>' +
+                    '<p class="govuk-body">Read the <a href="https://www.gov.uk/guidance/content-design/content-types#speech">speech guidance</a> in full.</p>',
+              intent: ['Tell users about something']
+            }
+          ] %}
+
           {% if data[prefix + 'document-type'] %}
-            {% set documentTypeSet = data[prefix + 'document-type'] %}
+            {% set chosenDocumentType = data[prefix + 'document-type'] %}
           {% else %}
-            {% set documentTypeSet = data['inferred-document-type'] %}
+            {% set chosenDocumentType = data['inferred-document-type'] %}
           {% endif %}
 
           <div class="govuk-c-radios">
@@ -207,8 +254,8 @@
                         <legend class="govuk-c-fieldset__legend govuk-visually-hidden">
                           Alternative formats
                         </legend>
-                        {% for field in data['document-types'] %}
-                          {% if field.name != documentTypeSet %}
+                        {% for field in documentTypes %}
+                          {% if field.name != chosenDocumentType %}
                             <div class="multiple-choice govuk-c-radios__item" data-target="document-type-part-{{ loop.index }}-extra">
                               <input id="document-type-part-{{ loop.index }}" type="radio" name="{{ prefix }}document-type" value="{{ field.name }}" class="govuk-c-radios__input">
                               <label for="document-type-part-{{ loop.index }}" class="govuk-c-label govuk-c-radios__label">

@@ -97,6 +97,8 @@ function livePreview(req, res, text) {
 
 function inferrDocumentType(req) {
   var inference;
+  var state = req.params.state;
+  var inferenceChoice = req.session.data[state + '-correct-document-type'];
 
   if (req.session.data.intent === 'Help users to do something') {
     inference = 'Detailed guide';
@@ -109,8 +111,15 @@ function inferrDocumentType(req) {
   }
 
   req.session.data['inferred-document-type'] = inference;
-  if (req.session.data[req.params.state + '-correct-document-type']) {
-    req.session.data[req.params.state + '-document-type'] = inference;
+
+  if (inferenceChoice) {
+    // inferred format is correct so set format to that
+    if (inferenceChoice === 'yes') {
+      req.session.data[req.params.state + '-document-type'] = inference;
+    }
+    else { // inferred format is incorrect, user has set the right one
+      req.session.data[state + '-correct-document-type'] = 'yes';
+    }
   }
 }
 
