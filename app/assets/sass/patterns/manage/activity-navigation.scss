@@ -1,0 +1,57 @@
+.activity-navigation {
+  border-bottom: 1px solid $govuk-border-colour;
+  float: left;
+  width: 100%;
+  margin: 0 ($govuk-gutter * -1 + 2px);
+  padding: 0 ($govuk-gutter - 2px);
+  box-sizing: border-box;
+
+  // styles needed due to lack of older GOVUK reset
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    list-style: none;
+    float: left;
+    width: (100%/3);
+    padding: 0;
+
+    a {
+      display: block;
+			@include govuk-font-regular-24;
+      padding: $govuk-gutter-half 0 $govuk-gutter-half ($govuk-gutter-half + 2px);
+      margin: 0 2px;
+      background: $govuk-grey-3;
+      color: $govuk-text-colour;
+
+      @include mq($from: tablet) {
+        margin-bottom: 4px;
+      }
+
+      &:hover,
+      &:focus {
+        background: $govuk-grey-3;
+      }
+      &.current {
+        position: relative;
+        margin-bottom: -1px;
+				@include govuk-font-regular-24;
+        padding: $govuk-gutter-half 0 ($govuk-gutter-half + 4px) ($govuk-gutter-half + 1px);
+        border: 1px solid $govuk-border-colour;
+        border-bottom: none;
+        background: white;
+        text-decoration: none;
+      }
+
+    }
+
+    &:first-child a {
+      margin-left: 0;
+    }
+    &:last-child a {
+      margin-right: 0;
+    }
+  }
+}
