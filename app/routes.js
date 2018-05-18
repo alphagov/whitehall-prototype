@@ -100,15 +100,7 @@ function inferrDocumentType(req) {
   var state = req.params.state;
   var inferenceChoice = req.session.data[state + '-correct-document-type'];
 
-  if (req.session.data.intent === 'Help users to do something') {
-    inference = 'Detailed guide';
-  }
-  else if (req.session.data.intent === 'Tell users about something') {
-    inference = 'Publication';
-  }
-  else {
-    inference = 'Publication';
-  }
+  inference = 'News article';
 
   req.session.data['inferred-document-type'] = inference;
 
@@ -196,6 +188,14 @@ function validateEdition(req, locals) {
     })
   }
 
+  if (!data[state + '-document-type']) {
+    about_content_errors.push({
+      title: 'Chose a format for this content',
+      page: 'about-content',
+      field: 'document-type'
+    })
+  }
+
   if (!data[state + '-published-before']) {
     content_settings_errors.push({
       title: 'Indicate if this content is new or has been published elsewhere',
@@ -204,13 +204,6 @@ function validateEdition(req, locals) {
     })
   }
 
-  if (!data[state + '-document-type']) {
-    content_settings_errors.push({
-      title: 'Chose a format for this content',
-      page: 'content-settings',
-      field: 'document-type'
-    })
-  }
 
   errors = [].concat(title_summary_body_errors, about_content_errors, content_settings_errors);
 

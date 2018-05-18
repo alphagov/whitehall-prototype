@@ -18,22 +18,34 @@
           <fieldset>
             <legend>
               <h1 class="govuk-heading-xl form-title govuk-!-mb-r7">
-                What is this content for?
+                Content type
               </h1>
             </legend>
 
             {% set fields = [
                 {
-                  name: 'Help users to do something',
-                  text: '<p class="govuk-body">This content will help users to complete a task with government.</p>'
+                  name: 'News',
+                  text: '<p class="govuk-body">To tell users about something government has done or will do. For example, news stories, speeches, statements, or notices.</p>'
                 },
                 {
-                  name: 'Tell users about something',
-                  text: '<p class="govuk-body">This content will inform users about something government has done or will do.</p>'
+                  name: 'Transparency',
+                  text: '<p class="govuk-body">To provide information that helps users hold government to account. For example, statistics, FOI data, decisions, or reports.</p>'
+                },
+								{
+                  name: 'Guidance',
+                  text: '<p class="govuk-body">To help the user do something or understand what they need to do. For example, manuals or statutory guidance.</p>'
+                },
+                {
+                  name: 'Policy',
+                  text: '<p class="govuk-body">To explain the government’s position on something. For example, policy papers, impact assessments, independent reports, or case studies.</p>'
+                },
+                {
+                  name: 'Consultations',
+                  text: '<p class="govuk-body">To request users views or evidence on an issue and to build collective agreement. </p>'
                 },
                 {
                   name: 'I’m not sure if this should be on GOV.UK',
-                  more: '<p class="govuk-body">View this guide to <a href="/publishing-guidance">what should go on GOV.UK and where else we can publish content</a></p>'
+                  text: '<p class="govuk-body">View this guide to <a href="/publishing-guidance">what should go on GOV.UK and where else we can publish content</a></p>'
                 }
               ]
             %}
