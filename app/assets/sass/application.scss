@@ -42,6 +42,7 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 /* Patterns for manage */
 @import 'patterns/manage/featured-links';
 @import 'patterns/manage/activity-navigation';
+@import 'patterns/manage/publisher-metadata';
 
 .code {
   color: $govuk-text-colour;
