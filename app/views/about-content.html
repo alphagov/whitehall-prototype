@@ -329,15 +329,12 @@
 
 {% block page_scripts %}
 <script>
-  $('#lead-organisation').val('{{ data[prefix + 'lead-organisation'] }}');
-  $('#supporting-organisation').val('{{ data[prefix + 'supporting-organisation'] }}');
-
   govukGovernmentOrganisationsAutocomplete({
     selectElement: document.getElementById('lead-organisation'),
     showAllValues: true,
     autoselect: false,
     minLength: 2,
-    defaultValue: '{{ data[prefix + 'lead-organisation'] }}'
+    defaultValue: ''
   })
 
   govukGovernmentOrganisationsAutocomplete({
@@ -345,7 +342,7 @@
     showAllValues: true,
     autoselect: false,
     minLength: 2,
-    defaultValue: '{{ data[prefix + 'supporting-organisation'] }}'
+    defaultValue: ''
   })
 
   accessibleAutocomplete.enhanceSelectElement({
