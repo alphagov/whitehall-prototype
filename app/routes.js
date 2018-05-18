@@ -100,15 +100,7 @@ function inferrDocumentType(req) {
   var state = req.params.state;
   var inferenceChoice = req.session.data[state + '-correct-document-type'];
 
-  if (req.session.data.intent === 'Help users to do something') {
-    inference = 'Detailed guide';
-  }
-  else if (req.session.data.intent === 'Tell users about something') {
-    inference = 'Publication';
-  }
-  else {
-    inference = 'Publication';
-  }
+  inference = 'News article';
 
   req.session.data['inferred-document-type'] = inference;
 
