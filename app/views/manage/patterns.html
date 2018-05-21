@@ -49,6 +49,37 @@
 				Showing <span class="result-count">1 - 50</span> of <strong>1,599</strong> items
 			</p>
 		</div>
+
+    {% set sampleTable = {
+      'headings': [ 'Title', 'Content type', 'First published', 'Last updated', 'Page view', 'unique pageviews' ],
+      'rows': [
+        ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445']
+      ],
+      'sortBy': 'Title',
+      'sortDirection': 'asc'
+    } %}
+    <div class="table-scroll">
+      <table class="register-data-table">
+        <thead>
+          <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
+            {% for heading in sampleTable.headings %}
+            <th>
+              <a{% if heading == sampleTable.sortBy %} class="sort-link {{ sampleTable.sortDirection }}"{% endif %} href="#">{{ heading }}</a>
+            </th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody id="records-tbody">
+          {% for row in sampleTable.rows %}
+          <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
 {% endblock %}
