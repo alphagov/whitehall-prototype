@@ -45,6 +45,7 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 @import 'patterns/manage/publisher-metadata';
 @import 'patterns/manage/result-info';
 @import 'patterns/manage/data-table';
+@import 'patterns/manage/download-link';
 
 .code {
   color: $govuk-text-colour;
