@@ -1,0 +1,10 @@
+.result-info {
+  @include govuk-font-regular-16;
+  vertical-align: baseline;
+  margin-bottom: 0;
+  padding-bottom: $govuk-gutter-half;
+
+  .result-count {
+    @include govuk-font-bold-16;
+  }
+}

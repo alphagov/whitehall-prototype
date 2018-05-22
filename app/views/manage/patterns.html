@@ -60,15 +60,17 @@
 					<li><a href="#">Analytics</a></li>
 				</ul>
 			</nav>
+    </div>
 
-      {% set pagination = {
-        'currentRange': {
-          'from': 1,
-          'to': 100
-        },
-        'total': 195
-      } %}
+    {% set pagination = {
+      'currentRange': {
+        'from': 1,
+        'to': 100
+      },
+      'total': 195
+    } %}
 
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
       <div aria-live="assertive" id="js-search-results-info">
         <p class="result-info">
           Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
