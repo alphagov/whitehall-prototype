@@ -1,0 +1,22 @@
+.app-c-download-link {
+  display: inline-block;
+  @include govuk-font-bold-19;
+  margin-top: $govuk-gutter-half / 2;
+  margin-bottom: $govuk-gutter-half;
+
+  @include mq($from: tablet) {
+    margin-top: $govuk-gutter-half;
+  }
+}
+
+.app-c-download-link__icon {
+  margin-right: 0.5em;
+  height: 1.31578947368em; // 25 / 19
+  width: 1.31578947368em;
+  vertical-align: middle;
+}
+
+/* Additions for use alongside results info */
+.app-c-download-link {
+  float: right;
+}

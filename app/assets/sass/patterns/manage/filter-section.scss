@@ -1,0 +1,36 @@
+.filter-section {
+  background-color: #DEE0E2;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow: hidden;
+
+  .govuk-c-label {
+    @include govuk-font-bold-16;
+  }
+
+  .govuk-c-hint {
+    @include govuk-font-regular-16;
+  }
+
+  .govuk-c-input,
+  .govuk-c-select,
+  .govuk-c-button {
+    @include mq($from: tablet) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.filter-section-customers {
+  min-height: 100px;
+}
+
+.filter-button-2 {
+  @include mq($from: tablet) {
+    margin-top: 44px;
+  }
+
+  width: 100%;
+}

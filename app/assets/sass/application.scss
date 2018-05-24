@@ -39,6 +39,15 @@ $govuk-gutter-half: ($govuk-gutter / 2);
 @import 'patterns/buttons';
 @import 'header';
 
+/* Patterns for manage */
+@import 'patterns/manage/featured-links';
+@import 'patterns/manage/activity-navigation';
+@import 'patterns/manage/publisher-metadata';
+@import 'patterns/manage/result-info';
+@import 'patterns/manage/data-table';
+@import 'patterns/manage/download-link';
+@import 'patterns/manage/filter-section';
+
 .code {
   color: $govuk-text-colour;
   background-color: $govuk-highlight-colour;

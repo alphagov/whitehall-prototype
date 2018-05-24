@@ -1,0 +1,23 @@
+// styles needed due to lack of older GOVUK reset
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+.app-c-publisher-metadata {
+	margin-bottom: $govuk-gutter-half;
+	@include mq($from: tablet) {
+		margin-bottom: $govuk-gutter * 1.5;
+	}
+  @include govuk-font-regular-16;
+  padding-top: $govuk-gutter-half;
+}
+
+.app-c-publisher-metadata__other a {
+  font-weight: bold;
+}
+
+.app-c-publisher-metadata__term {
+  float: left;
+  padding-right: $govuk-spacing-scale-1;
+}

@@ -1,0 +1,198 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">Existing GDS patterns</h1>
+      <p class="govuk-body-l">Lead paragraph example.</p>
+
+      {% set metaData = {
+        'organisation': 'Ministry of Defence',
+        'format': 'Detailed Guide',
+        'firstPublished': '4 May 2017',
+        'lastPublished': '26 April 2018'
+      } %}
+
+			<div class="app-c-publisher-metadata">
+				<div class="app-c-published-dates ">
+					<a href="/government/organisations/ministry-of-defence">{{ metaData.organisation }}</a>
+					<br>
+					{{ metaData.format }}
+        </div>
+        <div class="app-c-publisher-metadata__other">
+          <dl data-module="track-click">
+              <dt class="app-c-publisher-metadata__term">First published: </dt>
+              <dd class="app-c-publisher-metadata__definition">{{ metaData.firstPublished }}</dd>
+              <dt class="app-c-publisher-metadata__term">Last published: </dt>
+              <dd class="app-c-publisher-metadata__definition">{{ metaData.lastPublished }}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    {% set featuredLinks = [
+      { 'url': '#', 'text': 'View live URL' },
+      { 'url': '#', 'text': 'Edit content' },
+      { 'url': '#', 'text': 'Item in publisher' }
+    ] %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<aside class="heading-extra">
+				<ul class="featured-links govuk-body-s">
+          {% for featuredLink in featuredLinks %}
+					<li><a href="{{ featuredLink.url }}">{{ featuredLink.text }}</a></li>
+          {% endfor %}
+				</ul>
+			</aside> 
+    </div>
+  </div>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+			<nav class="activity-navigation">
+				<ul>
+					<li><a class="current" href="#">Overview</a></li>
+					<li><a href="#">Analytics</a></li>
+				</ul>
+			</nav>
+    </div>
+
+    {% set pagination = {
+      'currentRange': {
+        'from': 1,
+        'to': 100
+      },
+      'total': 195
+    } %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <div aria-live="assertive" id="js-search-results-info">
+        <p class="result-info">
+          Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
+        </p>
+      </div>
+    </div>
+
+		{% set downloadLink = {
+			'href': '#',
+			'text': 'Download this data'
+		} %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<a class="app-c-download-link" href="{{ downloadLink.href }}">
+				<svg class="app-c-download-link__icon"
+					aria-hidden="true"
+					viewBox="0 0 25 25"
+					height="25"
+					width="25"
+					xmlns="http://www.w3.org/2000/svg">
+					<g>
+					<path d="M23 5h2v20H5v-2h18V5z"/>
+					<path d="M0 0h20v20H0z"/>
+					</g>
+				</svg>
+				{{ downloadLink.text }}
+			</a> 
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+
+      <div class="filter-section filter-section-customers">
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Mandate reference
+              </label>
+              <span class="govuk-c-hint">Enter full or partial reference</span>
+              <input class="govuk-c-input" id="full-name" name="full-name" type="text">
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Payer name
+              </label>
+              <span class="govuk-c-hint">Enter full or partial name</span>
+              <input class="govuk-c-input" id="full-name" name="full-name" type="text">
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Mandate status
+              </label>
+              <span class="govuk-c-hint">Select an option</span>
+              <select name="select" class="govuk-c-select" id="full-name">
+                <option value="value1" selected>All</option>
+                <option value="value4">Active</option>
+                <option value="value1">Inactive</option>
+                <option value="value5">Pending</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+      {% set sampleTable = {
+        'headings': [ 'Title', 'Content type', 'First published', 'Last updated', 'Page view', 'unique pageviews' ],
+        'rows': [
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445'],
+          ['VAT', 'Guide', '1 April 2018', '4th April 2018', '221', '445']
+        ],
+        'sortBy': 'Title',
+        'sortDirection': 'asc'
+      } %}
+
+      <div class="table-scroll">
+        <table class="register-data-table">
+          <thead>
+            <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
+              {% for heading in sampleTable.headings %}
+              <th>
+                <a{% if heading == sampleTable.sortBy %} class="sort-link {{ sampleTable.sortDirection }}"{% endif %} href="#">{{ heading }}</a>
+              </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody id="records-tbody">
+            {% for row in sampleTable.rows %}
+            <tr>
+              {% for cell in row %}
+              <td>{{ cell }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
