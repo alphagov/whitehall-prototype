@@ -101,6 +101,52 @@
     </div>
 
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
+
+      <div class="filter-section filter-section-customers">
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Mandate reference
+              </label>
+              <span class="govuk-c-hint">Enter full or partial reference</span>
+              <input class="govuk-c-input" id="full-name" name="full-name" type="text">
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Payer name
+              </label>
+              <span class="govuk-c-hint">Enter full or partial name</span>
+              <input class="govuk-c-input" id="full-name" name="full-name" type="text">
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Mandate status
+              </label>
+              <span class="govuk-c-hint">Select an option</span>
+              <select name="select" class="govuk-c-select" id="full-name">
+                <option value="value1" selected>All</option>
+                <option value="value4">Active</option>
+                <option value="value1">Inactive</option>
+                <option value="value5">Pending</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
       {% set sampleTable = {
         'headings': [ 'Title', 'Content type', 'First published', 'Last updated', 'Page view', 'unique pageviews' ],
         'rows': [
