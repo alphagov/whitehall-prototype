@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">Organisation</h1>
+      <p class="govuk-body-l">Your data was last updated 30 minutes ago.</p>
+
+    {% set featuredLinks = [
+      { 'url': '#', 'text': 'Share URL to this page' }
+    ] %}
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<aside class="heading-extra">
+				<ul class="featured-links govuk-body-s">
+          {% for featuredLink in featuredLinks %}
+					<li><a href="{{ featuredLink.url }}">{{ featuredLink.text }}</a></li>
+          {% endfor %}
+				</ul>
+			</aside> 
+    </div>
+  </div>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+			<nav class="activity-navigation">
+				<ul>
+					<li><a href="#">Overview</a></li>
+					<li><a class="current" href="#">Your content estate</a></li>
+				</ul>
+			</nav>
+    </div>
+
+    {% set pagination = {
+      'currentRange': {
+        'from': 1,
+        'to': 100
+      },
+      'total': 195
+    } %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <div aria-live="assertive" id="js-search-results-info">
+        <p class="result-info">
+          Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
+        </p>
+      </div>
+    </div>
+
+		{% set downloadLink = {
+			'href': '#',
+			'text': 'Download this data'
+		} %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<a class="app-c-download-link" href="{{ downloadLink.href }}">
+				<svg class="app-c-download-link__icon"
+					aria-hidden="true"
+					viewBox="0 0 25 25"
+					height="25"
+					width="25"
+					xmlns="http://www.w3.org/2000/svg">
+					<g>
+					<path d="M23 5h2v20H5v-2h18V5z"/>
+					<path d="M0 0h20v20H0z"/>
+					</g>
+				</svg>
+				{{ downloadLink.text }}
+			</a> 
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+
+      <div class="filter-section filter-section-customers">
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="date-from">
+                Date from
+              </label>
+              <input class="govuk-c-input" id="date-from" name="date-from" type="text">
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="date-to">
+                Date to
+              </label>
+              <input class="govuk-c-input" id="date-to" name="date-to" type="text">
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="full-name">
+                Content type
+              </label>
+              <span class="govuk-c-hint">Select an option</span>
+              <select name="select" class="govuk-c-select" id="full-name">
+                <option value="value1" selected>All</option>
+                <option value="value4">Active</option>
+                <option value="value1">Inactive</option>
+                <option value="value5">Pending</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+            <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+      {% set headings = [ 'Title', 'Content type', 'First published', 'Last updated', 'Page view', 'Unique pageviews' ] %}
+      <div class="table-scroll">
+        <table class="register-data-table">
+          <thead>
+            <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
+              {% for heading in headings %}
+              <th>
+                <a{% if heading == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="#">{{ heading }}</a>
+              </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody id="records-tbody">
+            {% for row in contentItems.rows %}
+            <tr>
+              {% for cell in row %}
+                {% if loop.index == 1 %}
+                  {% set contentId = cell %}
+                {% else %}
+                  <td>
+                    {% if loop.index == 2 %}
+                    <a href="/manage/content-item/{{ contentId }}">{{ cell }}</a>
+                    {% elif loop.index == 3 %}
+                    {{ cell | title | replace("_", " ") }}
+                    {% else %}
+                    {{ cell }}
+                    {% endif %}
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,4 +1,7 @@
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
+
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
@@ -261,6 +264,24 @@ router.get('/manage', function(req, res) {
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.get('/manage/content-estate', function(req, res) {
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
+  const contentItems = JSON.parse(contentItemsFile);
+  const table = {};
+
+  const sortBy = ('sortBy' in req.query) ? decodeURIComponent(req.query.sortBy) : "Unique pageviews";
+  const sortDirection = ('sortDirection' in req.query) ? decodeURIComponent(req.query.sortDirection) : "asc";
+
+  contentItems.shift();
+  table.rows = contentItems;
+  table.sortBy = sortBy;
+  table.sortDirection = sortDirection;
+
+  res.render('manage/content-estate', {
+    'contentItems': table
+  });
 });
 
 module.exports = router
