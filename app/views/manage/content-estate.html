@@ -102,7 +102,6 @@
               <label class="govuk-c-label" for="full-name">
                 Content type
               </label>
-              <span class="govuk-c-hint">Select an option</span>
               <select name="select" class="govuk-c-select" id="full-name">
                 <option value="value1" selected>All</option>
                 <option value="value4">Active</option>
@@ -144,6 +143,8 @@
                     <a href="/manage/content-item/{{ contentId }}">{{ cell }}</a>
                     {% elif loop.index == 3 %}
                     {{ cell | title | replace("_", " ") }}
+                    {% elif loop.index == 4 or loop.index == 5 %}
+                    {{ cell | date("DD/MM/YYYY") }}
                     {% else %}
                     {{ cell }}
                     {% endif %}
