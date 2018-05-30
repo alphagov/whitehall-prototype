@@ -1,0 +1,15 @@
+.card {
+  margin-top: $govuk-gutter;
+  padding: $govuk-gutter;
+  border: solid 2px $govuk-black;
+
+  .card-period {
+    float: right;
+    margin: 0;
+  
+    .govuk-c-select {
+      width: auto;
+    }
+
+  }
+}

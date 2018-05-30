@@ -267,8 +267,8 @@ router.get('/manage', function(req, res) {
 });
 
 router.get('/manage/content-estate', function(req, res) {
-  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
-  const contentItems = JSON.parse(contentItemsFile);
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
+  const contentItems = JSON.parse(contentItemsEstateFile);
   const table = {};
 
   const sortBy = ('sortBy' in req.query) ? decodeURIComponent(req.query.sortBy) : "Unique pageviews";
@@ -281,6 +281,31 @@ router.get('/manage/content-estate', function(req, res) {
 
   res.render('manage/content-estate', {
     'contentItems': table
+  });
+});
+
+router.get('/manage/content-item/:content_id', function(req, res) {
+  const contentId = req.params.content_id;
+
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
+  const contentItemsEstate = JSON.parse(contentItemsEstateFile);
+
+  const itemData = contentItemsEstate.filter(item => { return item[0] === contentId })[0];
+
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_item_data_2017_05_29-2018_05_29.json'));
+  const contentItemData = JSON.parse(contentItemsFile)[contentId];
+  const metrics = Object.keys(contentItemData);
+
+  console.log(contentItemData);
+  res.render('manage/content-item', {
+    'heading': itemData[1],
+    'meta': {
+      'format': itemData[2],
+      'firstPublished': itemData[3],
+      'lastPublished': itemData[4]
+    },
+    'metrics': metrics,
+    'contentItemData': contentItemData
   });
 });
 
