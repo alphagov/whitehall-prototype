@@ -76,12 +76,12 @@
           <p>Graph goes here</p>
         </div>
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-          <p class="govuk-heading-s">
-            <span>{{ metric | title | replace("_", " ") }}</span>
-            <span>{{ contentItemData[metric].aggregation.latest }} </span>
+          <p class="card-big-metric">
+            <span class="card-big-metric-name">{{ metric | title | replace("_", " ") }}</span>
+            <span class="card-big-metric-latest">{{ contentItemData[metric].aggregation.latest }} </span>
           </p>
-          <p class="metric-difference">
-            <span class="metric-difference-icon"></span>10 since last date.
+          <p class="card-metric-difference">
+            <span class="card-metric-difference-icon"></span>{{ differences[metric] }} since last date.
           </p>
         </div>
       </div>

@@ -4,6 +4,7 @@ const express = require('express')
 
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
+const dates = require('../lib/dates.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const router = express.Router()
 
@@ -271,8 +272,8 @@ router.get('/manage/content-estate', function(req, res) {
   const contentItems = JSON.parse(contentItemsEstateFile);
   const table = {};
 
-  const sortBy = ('sortBy' in req.query) ? decodeURIComponent(req.query.sortBy) : "Unique pageviews";
-  const sortDirection = ('sortDirection' in req.query) ? decodeURIComponent(req.query.sortDirection) : "asc";
+  const sortBy = ('sortBy' in req.query) ? req.query.sortBy : "Unique pageviews";
+  const sortDirection = ('sortDirection' in req.query) ? req.query.sortDirection : "asc";
 
   contentItems.shift();
   table.rows = contentItems;
@@ -286,6 +287,7 @@ router.get('/manage/content-estate', function(req, res) {
 
 router.get('/manage/content-item/:content_id', function(req, res) {
   const contentId = req.params.content_id;
+  const period = ('period' in req.query) ? req.query.period : 'year';
 
   const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
   const contentItemsEstate = JSON.parse(contentItemsEstateFile);
@@ -296,7 +298,10 @@ router.get('/manage/content-item/:content_id', function(req, res) {
   const contentItemData = JSON.parse(contentItemsFile)[contentId];
   const metrics = Object.keys(contentItemData);
 
-  console.log(contentItemData);
+  const differences = {};
+  metrics.forEach(metric => { differences[metric] = Math.floor(Math.random() * 10) });
+
+  console.log(differences);
   res.render('manage/content-item', {
     'heading': itemData[1],
     'meta': {
@@ -305,7 +310,8 @@ router.get('/manage/content-item/:content_id', function(req, res) {
       'lastPublished': itemData[4]
     },
     'metrics': metrics,
-    'contentItemData': contentItemData
+    'contentItemData': contentItemData,
+    'differences': differences
   });
 });
 

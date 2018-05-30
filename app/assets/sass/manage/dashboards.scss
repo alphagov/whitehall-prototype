@@ -10,6 +10,25 @@
     .govuk-c-select {
       width: auto;
     }
+  }
 
+  .card-big-metric,
+  .card-metric-difference {
+    margin: 0;
+  }
+
+  .card-big-metric {
+    .card-big-metric-name,
+    .card-big-metric-name {
+      display: block;
+    }
+
+    .card-big-metric-name {
+      @include govuk-font-bold-19;
+    }
+
+    .card-big-metric-latest {
+      @include govuk-font-bold-48;
+    }
   }
 }
