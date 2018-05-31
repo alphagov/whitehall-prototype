@@ -274,12 +274,12 @@ router.get('/manage/content-estate', function(req, res) {
 
   const table = new ContentEstateTable(contentItems, {
     'sorting': {
-      'sortBy': req.query.sortBy,
-      'sortDirection': req.query.sortDirection
+      'sortBy': req.query['sort-by'],
+      'sortDirection': req.query['sort-direction']
     },
     'filtering': {
-      'startDate': req.query['date-from'],
-      'endDate': req.query['date-to'],
+      'startDate': req.query['start-date'],
+      'endDate': req.query['end-date'],
       'contentType': req.query['content-type']
     }
   });

@@ -82,19 +82,19 @@
           <form action="" method="get">
             <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
               <div class="govuk-form-group">
-                <label class="govuk-c-label" for="date-from">
+                <label class="govuk-c-label" for="start-date">
                   Date from
                 </label>
-                <input class="govuk-c-input" id="date-from" name="date-from" type="date" value="{{ contentItems.startDate }}">
+                <input class="govuk-c-input" id="start-date" name="start-date" type="date" value="{{ contentItems.startDate }}">
               </div>
             </div>
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
               <div class="govuk-form-group">
-                <label class="govuk-c-label" for="date-to">
+                <label class="govuk-c-label" for="end-date">
                   Date to
                 </label>
-                <input class="govuk-c-input" id="date-to" name="date-to" type="date" value="{{ contentItems.endDate }}">
+                <input class="govuk-c-input" id="end-date" name="end-date" type="date" value="{{ contentItems.endDate }}">
               </div>
             </div>
 
@@ -104,6 +104,7 @@
                   Content type
                 </label>
                 <select name="content-type" class="govuk-c-select" id="content-type">
+                  <option value=""></option>
                   {% for contentType in contentItems.contentTypes %}
                     <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
                   {% endfor %}
@@ -114,29 +115,23 @@
             <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
               <button class="govuk-c-button filter-button filter-button-2">Filter</button>
             </div>
+
+            <!-- sorting values for table headers -->
+            <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
+            <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
           </form>
         </div>
 
     </div>
 
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
-      {% set headings = [ 'Title', 'Content type', 'First published', 'Last updated', 'Page views', 'Unique pageviews' ] %}
       <div class="table-scroll">
         <table class="register-data-table">
           <thead>
             <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
               {% for heading in contentItems.headings %}
               <th>
-                {% if heading.key == contentItems.sortBy %}
-                  {% if contentItems.sortDirection == 'asc' %}
-                    {% set oppositeSortDirection = 'desc' %}
-                  {% else %}
-                    {% set oppositeSortDirection = 'asc' %}
-                  {% endif %}
-                {% else %}
-                  {% set oppositeSortDirection = 'asc' %}
-                {% endif %}
-                <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="?sortBy={{ heading.key }}&sortDirection={{ oppositeSortDirection }}">{{ heading.label }}</a>
+                <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
               </th>
               {% endfor %}
             </tr>
