@@ -276,6 +276,11 @@ router.get('/manage/content-estate', function(req, res) {
     'sorting': {
       'sortBy': req.query.sortBy,
       'sortDirection': req.query.sortDirection
+    },
+    'filtering': {
+      'startDate': req.query['date-from'],
+      'endDate': req.query['date-to'],
+      'contentType': req.query['content-type']
     }
   });
 
