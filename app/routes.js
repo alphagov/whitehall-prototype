@@ -319,4 +319,34 @@ router.get('/manage/content-item/:content_id', function(req, res) {
   });
 });
 
+router.get('/manage/organisation-performance', function(req, res) {
+  const contentId = '3bb72f74-cd92-4930-923a-aa70f35a42d9';
+  const period = ('period' in req.query) ? req.query.period : 'year';
+
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
+  const contentItemsEstate = JSON.parse(contentItemsEstateFile);
+
+  const itemData = contentItemsEstate.filter(item => { return item[0] === contentId })[0];
+
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_item_data_2017_05_29-2018_05_29.json'));
+  const contentItemData = JSON.parse(contentItemsFile)[contentId];
+  const metrics = Object.keys(contentItemData);
+
+  const differences = {};
+  metrics.forEach(metric => { differences[metric] = Math.floor(Math.random() * 10) });
+
+  console.log(differences);
+  res.render('manage/organisation-performance', {
+    'heading': itemData[1],
+    'meta': {
+      'format': itemData[2],
+      'firstPublished': itemData[3],
+      'lastPublished': itemData[4]
+    },
+    'metrics': metrics,
+    'contentItemData': contentItemData,
+    'differences': differences
+  });
+});
+
 module.exports = router

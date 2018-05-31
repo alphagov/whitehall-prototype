@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">Organisation</h1>
+      <p class="govuk-body-l">Your data was last updated 30 minutes ago.</p>
+
+    {% set featuredLinks = [
+      { 'url': '#', 'text': 'Share URL to this page' }
+    ] %}
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<aside class="heading-extra">
+				<ul class="featured-links govuk-body-s">
+          {% for featuredLink in featuredLinks %}
+					<li><a href="{{ featuredLink.url }}">{{ featuredLink.text }}</a></li>
+          {% endfor %}
+				</ul>
+			</aside> 
+    </div>
+  </div>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+			<nav class="activity-navigation">
+				<ul>
+					<li><a href="#">Overview</a></li>
+					<li><a href="/manage/content-estate">Your content estate</a></li>
+					<li><a class="current" href="/manage/organisation-performance">Performance</a></li>
+				</ul>
+			</nav>
+    </div>
+
+    {% for metric in metrics %}
+    <div class="govuk-o-grid__item govuk-o-grid__item--full card">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+          <h2 class="govuk-heading-m">{{ metric | title | replace("_", " ") }}</h2> 
+        </div>
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+          <p class="card-period">
+            Show data for
+            <select name="{{ metric }}-time-period" class="govuk-c-select" id="{{ metric }}-time-period">
+              <option value="year" selected>Last year</option>
+              <option value="month">Last month</option>
+              <option value="week">Last week</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+          <p>Graph goes here</p>
+        </div>
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <p class="card-big-metric">
+            <span class="card-big-metric-name">{{ metric | title | replace("_", " ") }}</span>
+            <span class="card-big-metric-latest">{{ contentItemData[metric].aggregation.latest }} </span>
+          </p>
+          <p class="card-metric-difference">
+            <span class="card-metric-difference-icon"></span>{{ differences[metric] }} since last date.
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}
