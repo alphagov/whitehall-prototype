@@ -37,44 +37,6 @@
 			</nav>
     </div>
 
-    {% set pagination = {
-      'currentRange': {
-        'from': 1,
-        'to': 100
-      },
-      'total': 195
-    } %}
-
-    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <div aria-live="assertive" id="js-search-results-info">
-        <p class="result-info">
-          Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
-        </p>
-      </div>
-    </div>
-
-		{% set downloadLink = {
-			'href': '#',
-			'text': 'Download this data'
-		} %}
-
-    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-			<a class="app-c-download-link" href="{{ downloadLink.href }}">
-				<svg class="app-c-download-link__icon"
-					aria-hidden="true"
-					viewBox="0 0 25 25"
-					height="25"
-					width="25"
-					xmlns="http://www.w3.org/2000/svg">
-					<g>
-					<path d="M23 5h2v20H5v-2h18V5z"/>
-					<path d="M0 0h20v20H0z"/>
-					</g>
-				</svg>
-				{{ downloadLink.text }}
-			</a> 
-    </div>
-
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
 
       <div class="filter-section filter-section-customers">
@@ -124,6 +86,44 @@
 
     </div>
 
+    {% set pagination = {
+      'currentRange': {
+        'from': 1,
+        'to': 20
+      },
+      'total': 195
+    } %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <div aria-live="assertive" id="js-search-results-info">
+        <p class="result-info">
+          Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
+        </p>
+      </div>
+    </div>
+
+		{% set downloadLink = {
+			'href': '#',
+			'text': 'Download this data'
+		} %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<a class="app-c-download-link" href="{{ downloadLink.href }}">
+				<svg class="app-c-download-link__icon"
+					aria-hidden="true"
+					viewBox="0 0 25 25"
+					height="25"
+					width="25"
+					xmlns="http://www.w3.org/2000/svg">
+					<g>
+					<path d="M23 5h2v20H5v-2h18V5z"/>
+					<path d="M0 0h20v20H0z"/>
+					</g>
+				</svg>
+				{{ downloadLink.text }}
+			</a> 
+    </div>
+
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
       <div class="table-scroll">
         <table class="register-data-table">
@@ -138,21 +138,23 @@
           </thead>
           <tbody id="records-tbody">
             {% for row in contentItems.rows %}
-            <tr>
-              {% for cell in row.cells %}
-                <td>
-                  {% if loop.index == 1 %}
-                  <a href="/manage/content-item/{{ row.contentId }}">{{ cell }}</a>
-                  {% elif loop.index == 2 %}
-                  {{ cell | title | replace("_", " ") }}
-                  {% elif loop.index == 3 or loop.index == 4 %}
-                  {{ cell | date("DD/MM/YYYY") }}
-                  {% else %}
-                  {{ cell }}
-                  {% endif %}
-                </td>
-              {% endfor %}
-            </tr>
+              {% if loop.index < 20 %}
+                <tr>
+                  {% for cell in row.cells %}
+                    <td>
+                      {% if loop.index == 1 %}
+                      <a href="/manage/content-item/{{ row.contentId }}">{{ cell }}</a>
+                      {% elif loop.index == 2 %}
+                      {{ cell | title | replace("_", " ") }}
+                      {% elif loop.index == 3 or loop.index == 4 %}
+                      {{ cell | date("DD/MM/YYYY") }}
+                      {% else %}
+                      {{ cell }}
+                      {% endif %}
+                    </td>
+                  {% endfor %}
+                </tr>
+              {% endif %}
             {% endfor %}
           </tbody>
         </table>
