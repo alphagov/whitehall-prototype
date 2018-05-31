@@ -6,6 +6,7 @@ const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
 const dates = require('../lib/dates.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
+const ContentEstateTable = require('../lib/prototype-manager/data_tables.js').ContentEstateTable;
 const router = express.Router()
 
 // Route index page
@@ -270,15 +271,13 @@ router.get('/manage', function(req, res) {
 router.get('/manage/content-estate', function(req, res) {
   const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
   const contentItems = JSON.parse(contentItemsEstateFile);
-  const table = {};
 
-  const sortBy = ('sortBy' in req.query) ? req.query.sortBy : "Unique pageviews";
-  const sortDirection = ('sortDirection' in req.query) ? req.query.sortDirection : "asc";
-
-  contentItems.shift();
-  table.rows = contentItems;
-  table.sortBy = sortBy;
-  table.sortDirection = sortDirection;
+  const table = new ContentEstateTable(contentItems, {
+    'sorting': {
+      'sortBy': req.query.sortBy,
+      'sortDirection': req.query.sortDirection
+    }
+  });
 
   res.render('manage/content-estate', {
     'contentItems': table

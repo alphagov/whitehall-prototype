@@ -119,14 +119,23 @@
     </div>
 
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
-      {% set headings = [ 'Title', 'Content type', 'First published', 'Last updated', 'Page view', 'Unique pageviews' ] %}
+      {% set headings = [ 'Title', 'Content type', 'First published', 'Last updated', 'Page views', 'Unique pageviews' ] %}
       <div class="table-scroll">
         <table class="register-data-table">
           <thead>
             <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
-              {% for heading in headings %}
+              {% for heading in contentItems.headings %}
               <th>
-                <a{% if heading == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="#">{{ heading }}</a>
+                {% if heading.key == contentItems.sortBy %}
+                  {% if contentItems.sortDirection == 'asc' %}
+                    {% set oppositeSortDirection = 'desc' %}
+                  {% else %}
+                    {% set oppositeSortDirection = 'asc' %}
+                  {% endif %}
+                {% else %}
+                  {% set oppositeSortDirection = 'asc' %}
+                {% endif %}
+                <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="?sortBy={{ heading.key }}&sortDirection={{ oppositeSortDirection }}">{{ heading.label }}</a>
               </th>
               {% endfor %}
             </tr>
@@ -134,22 +143,18 @@
           <tbody id="records-tbody">
             {% for row in contentItems.rows %}
             <tr>
-              {% for cell in row %}
-                {% if loop.index == 1 %}
-                  {% set contentId = cell %}
-                {% else %}
-                  <td>
-                    {% if loop.index == 2 %}
-                    <a href="/manage/content-item/{{ contentId }}">{{ cell }}</a>
-                    {% elif loop.index == 3 %}
-                    {{ cell | title | replace("_", " ") }}
-                    {% elif loop.index == 4 or loop.index == 5 %}
-                    {{ cell | date("DD/MM/YYYY") }}
-                    {% else %}
-                    {{ cell }}
-                    {% endif %}
-                  </td>
-                {% endif %}
+              {% for cell in row.cells %}
+                <td>
+                  {% if loop.index == 1 %}
+                  <a href="/manage/content-item/{{ row.contentId }}">{{ cell }}</a>
+                  {% elif loop.index == 2 %}
+                  {{ cell | title | replace("_", " ") }}
+                  {% elif loop.index == 3 or loop.index == 4 %}
+                  {{ cell | date("DD/MM/YYYY") }}
+                  {% else %}
+                  {{ cell }}
+                  {% endif %}
+                </td>
               {% endfor %}
             </tr>
             {% endfor %}
