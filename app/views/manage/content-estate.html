@@ -129,9 +129,9 @@
                     <td>
                       {% if loop.index == 1 %}
                       <a href="/manage/content-item/{{ row.contentId }}">{{ cell }}</a>
-                      {% elif loop.index == 2 %}
-                      {{ cell | title | replace("_", " ") }}
                       {% elif loop.index == 3 or loop.index == 4 %}
+                      {{ cell | title | replace("_", " ") }}
+                      {% elif loop.index == 6 or loop.index == 7 %}
                       {{ cell | date("DD/MM/YYYY") }}
                       {% else %}
                       {{ cell }}
