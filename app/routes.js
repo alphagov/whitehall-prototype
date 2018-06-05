@@ -268,8 +268,8 @@ router.get('/manage', function(req, res) {
     });
 });
 
-router.get('/manage/content-estate', function(req, res) {
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/dwp_raw_data.json'));
+router.get('/manage/content-estate/:org', function(req, res) {
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
   const table = new Table(contentItems, {
@@ -285,7 +285,8 @@ router.get('/manage/content-estate', function(req, res) {
   });
 
   res.render('manage/content-estate', {
-    'contentItems': table
+    'contentItems': table,
+    'org': req.params.org
   });
 });
 
@@ -319,7 +320,7 @@ router.get('/manage/content-item/:content_id', function(req, res) {
   });
 });
 
-router.get('/manage/organisation-performance', function(req, res) {
+router.get('/manage/organisation-performance/:org', function(req, res) {
   const contentId = '3bb72f74-cd92-4930-923a-aa70f35a42d9';
   const period = ('period' in req.query) ? req.query.period : 'year';
 
@@ -345,7 +346,8 @@ router.get('/manage/organisation-performance', function(req, res) {
     },
     'metrics': metrics,
     'contentItemData': contentItemData,
-    'differences': differences
+    'differences': differences,
+    'org': req.params.org
   });
 });
 
