@@ -25,31 +25,40 @@
     {% for metric in metrics %}
     <div class="govuk-o-grid__item govuk-o-grid__item--full card">
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
-        <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+        <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
           <h2 class="govuk-heading-m">{{ metric | title | replace("_", " ") }}</h2> 
         </div>
-        <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <p class="card-period">
-            Show data for
-            <select name="{{ metric }}-time-period" class="govuk-c-select" id="{{ metric }}-time-period">
-              <option value="year" selected>Last year</option>
-              <option value="month">Last month</option>
-              <option value="week">Last week</option>
-            </select>
+            <a class="app-c-download-link" href="{{ downloadLink.href }}">
+              <svg class="app-c-download-link__icon"
+                aria-hidden="true"
+                viewBox="0 0 25 25"
+                height="25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg">
+                <g>
+                <path d="M23 5h2v20H5v-2h18V5z"/>
+                <path d="M0 0h20v20H0z"/>
+                </g>
+              </svg>
+              Download this data
+            </a> 
+          </p>
         </div>
       </div>
 
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
         <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-          <p>Graph goes here</p>
+          <img src="/public/images/fake_graph.png" alt="" width="640" />
         </div>
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <p class="card-big-metric">
-            <span class="card-big-metric-name">{{ metric | title | replace("_", " ") }}</span>
+            <span class="card-big-metric-name"></span>
             <span class="card-big-metric-latest">{{ contentItemData[metric].aggregation.latest }} </span>
           </p>
           <p class="card-metric-difference">
-            <span class="card-metric-difference-icon"></span>{{ differences[metric] }} since last date.
+            <span class="card-metric-difference-icon"></span>Total {{ metric | title | lower | replace("_", " ") }} since first published.
           </p>
         </div>
       </div>

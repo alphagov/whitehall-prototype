@@ -1,10 +1,12 @@
 .card {
   margin-top: $govuk-gutter;
-  padding: $govuk-gutter;
-  border: solid 2px $govuk-black;
+  padding: $govuk-gutter 0;
+
+  main > div > &:first-child {
+    margin-top: 0;
+  }
 
   .card-period {
-    float: right;
     margin: 0;
   
     .govuk-c-select {
@@ -12,12 +14,13 @@
     }
   }
 
-  .card-big-metric,
   .card-metric-difference {
     margin: 0;
   }
 
   .card-big-metric {
+    margin: $govuk-gutter * 1.5 0 0;
+
     .card-big-metric-name,
     .card-big-metric-name {
       display: block;
