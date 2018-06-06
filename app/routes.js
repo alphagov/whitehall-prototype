@@ -7,6 +7,7 @@ const marked = require('../lib/marked.js')
 const dates = require('../lib/dates.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const Table = require('../lib/prototype-manager/data_tables.js').Table;
+const prerenderRows = require('../lib/prototype-manager/data_tables.js').prerenderRows;
 const router = express.Router()
 
 // Route index page
@@ -268,7 +269,7 @@ router.get('/manage', function(req, res) {
     });
 });
 
-router.get('/manage/content-estate/:org', function(req, res) {
+router.get('/manage/:org/content-estate/', function(req, res) {
   const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
@@ -290,37 +291,32 @@ router.get('/manage/content-estate/:org', function(req, res) {
   });
 });
 
-router.get('/manage/content-item/:content_id', function(req, res) {
+router.get('/manage/:org/content-item/:content_id', function(req, res) {
   const contentId = req.params.content_id;
-  const period = ('period' in req.query) ? req.query.period : 'year';
 
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
-  const contentItemsEstate = JSON.parse(contentItemsEstateFile);
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
+  const contentItemsData = JSON.parse(contentItemsFile);
 
-  const itemData = contentItemsEstate.filter(item => { return item[0] === contentId })[0];
+  let contentItemData = contentItemsData.filter(item => item['content_id'] === contentId)[0];
 
-  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_item_data_2017_05_29-2018_05_29.json'));
-  const contentItemData = JSON.parse(contentItemsFile)[contentId];
-  const metrics = Object.keys(contentItemData);
+  contentItemData = prerenderRows([contentItemData])[0];
+  const notMetrics = ['title', 'content_id', 'base_path', 'document_type', 'content_purpose', 'primary_organisation_title', 'first_published_at', 'public_updated_at', 'timeline_of_unique_pageviews'];
+  const metrics = Object.keys(contentItemData).filter(key => !notMetrics.includes(key));
 
-  const differences = {};
-  metrics.forEach(metric => { differences[metric] = Math.floor(Math.random() * 10) });
-
-  console.log(differences);
   res.render('manage/content-item', {
-    'heading': itemData[1],
+    'heading': contentItemData['title'],
     'meta': {
-      'format': itemData[2],
-      'firstPublished': itemData[3],
-      'lastPublished': itemData[4]
+      'format': contentItemData['document-type'],
+      'firstPublished': contentItemData['first_published_at'],
+      'lastPublished': contentItemData['public_updated_at']
     },
     'metrics': metrics,
     'contentItemData': contentItemData,
-    'differences': differences
+    'org': req.params.org
   });
 });
 
-router.get('/manage/organisation-performance/:org', function(req, res) {
+router.get('/manage/:org/organisation-performance/', function(req, res) {
   const contentId = '3bb72f74-cd92-4930-923a-aa70f35a42d9';
   const period = ('period' in req.query) ? req.query.period : 'year';
 

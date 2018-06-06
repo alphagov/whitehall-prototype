@@ -16,8 +16,8 @@
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
 			<nav class="activity-navigation">
 				<ul>
-					<li><a class="current" href="/manage/content-estate/{{ org }}">Your content estate</a></li>
-					<li><a href="/manage/organisation-performance/{{ org }}">Performance</a></li>
+					<li><a class="current" href="/manage/{{ org }}/content-estate">Your content estate</a></li>
+					<li><a href="/manage/{{ org }}/organisation-performance">Performance</a></li>
 				</ul>
 			</nav>
     </div>
@@ -128,7 +128,7 @@
                   {% for cell in row.cells %}
                     <td>
                       {% if loop.index == 1 %}
-                      <a href="/manage/content-item/{{ row.contentId }}">{{ cell }}</a>
+                      <a href="/manage/{{ org }}/content-item/{{ row.contentId }}">{{ cell }}</a>
                       {% elif loop.index == 3 or loop.index == 4 %}
                       {{ cell | title | replace("_", " ") }}
                       {% elif loop.index == 6 or loop.index == 7 %}
