@@ -8,7 +8,7 @@
 <main role="main" class="govuk-o-main-wrapper">
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <h1 class="govuk-heading-l">Organisation</h1>
+      <h1 class="govuk-heading-l">{{ org.label }}</h1>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
 			<nav class="activity-navigation">
 				<ul>
-					<li><a href="/manage/{{ org }}/content-estate">Your content estate</a></li>
+					<li><a href="/manage/{{ org.url }}/content-estate">Your content estate</a></li>
 					<li><a class="current" href="">Performance</a></li>
 				</ul>
 			</nav>

@@ -297,6 +297,7 @@ router.get('/manage/:org/content-estate/', function(req, res) {
 });
 
 router.get('/manage/:org/content-item/:content_id', function(req, res) {
+  const org = new Org(req.params.org);
   const contentId = req.params.content_id;
 
   const contentItemsFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
@@ -322,11 +323,12 @@ router.get('/manage/:org/content-item/:content_id', function(req, res) {
     'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
     'startDateYearAgo': moment(req.query['start-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(2, 'year').format('YYYY-MM-DD'),
     'endDateYearAgo': moment(req.query['end-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(1, 'year').format('YYYY-MM-DD'),
-    'org': req.params.org
+    'org': org
   });
 });
 
 router.get('/manage/:org/organisation-performance/', function(req, res) {
+  const org = new Org(req.params.org);
   const contentId = '3bb72f74-cd92-4930-923a-aa70f35a42d9';
   const period = ('period' in req.query) ? req.query.period : 'year';
 
@@ -353,7 +355,7 @@ router.get('/manage/:org/organisation-performance/', function(req, res) {
     'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
     'startDateYearAgo': moment(req.query['start-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(2, 'year').format('YYYY-MM-DD'),
     'endDateYearAgo': moment(req.query['end-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(1, 'year').format('YYYY-MM-DD'),
-    'org': req.params.org
+    'org': org
   });
 });
 
