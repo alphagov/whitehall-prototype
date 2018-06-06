@@ -17,7 +17,7 @@
 			<nav class="activity-navigation">
 				<ul>
 					<li><a href="/manage/{{ org }}/content-estate">Your content estate</a></li>
-					<li><a class="current" href="/manage/{{ org }}/organisation-performance">Performance</a></li>
+					<li><a class="current" href="">Performance</a></li>
 				</ul>
 			</nav>
     </div>
@@ -31,7 +31,10 @@
         </div>
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <p class="card-period">
-            <a class="app-c-download-link" href="{{ downloadLink.href }}">
+            Showing data for:<br />
+            {{ startDate | date("DD MMM YYYY") }} to {{ endDate | date("DD MMM YYYY") }}
+            <a class="card-period-date-change" href="#">Change these dates</a>
+            <a class="app-c-download-link" href="#">
               <svg class="app-c-download-link__icon"
                 aria-hidden="true"
                 viewBox="0 0 25 25"
