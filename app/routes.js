@@ -318,8 +318,10 @@ router.get('/manage/:org/content-item/:content_id', function(req, res) {
     'metrics': metrics,
     'metricDescriptions': metricDescriptions,
     'contentItemData': contentItemData,
-    'startDate': req.query['start-date'] || moment(moment().subtract(1, 'month')).format('YYYY-MM-DD'),
+    'startDate': req.query['start-date'] || moment().subtract(1, 'month').format('YYYY-MM-DD'),
     'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
+    'startDateYearAgo': moment(req.query['start-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(2, 'year').format('YYYY-MM-DD'),
+    'endDateYearAgo': moment(req.query['end-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(1, 'year').format('YYYY-MM-DD'),
     'org': req.params.org
   });
 });
@@ -347,6 +349,10 @@ router.get('/manage/:org/organisation-performance/', function(req, res) {
     'metrics': metrics,
     'contentItemData': contentItemData,
     'metricDescriptions': metricDescriptions,
+    'startDate': req.query['start-date'] || moment().subtract(1, 'month').format('YYYY-MM-DD'),
+    'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
+    'startDateYearAgo': moment(req.query['start-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(2, 'year').format('YYYY-MM-DD'),
+    'endDateYearAgo': moment(req.query['end-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(1, 'year').format('YYYY-MM-DD'),
     'org': req.params.org
   });
 });

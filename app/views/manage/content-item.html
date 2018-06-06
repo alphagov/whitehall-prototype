@@ -79,6 +79,10 @@
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
         <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
           <img src="/public/images/fake_graph.png" alt="" width="610" />
+          <p class="card-graph-key">
+            <span></span> {{ startDateYearAgo | date("DD MMM YYYY") }} to {{ endDateYearAgo | date("DD MMM YYYY") }}
+            <span></span> {{ startDate | date("DD MMM YYYY") }} to {{ endDate | date("DD MMM YYYY") }}
+          </p>
         </div>
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <p class="card-big-metric">

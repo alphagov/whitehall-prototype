@@ -41,6 +41,23 @@
       @include govuk-font-bold-48;
     }
   }
+
+  .card-graph-key {
+    text-align: center;
+
+    span {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      background-color: #e02d31;
+      margin: 0 $govuk-gutter / 6 0 $govuk-gutter;
+
+      &:first-child {
+        background-color: #278dc5;
+        margin: 0 $govuk-gutter / 6;
+      }
+    }
+  }
 }
 
 /* extensions to data-tables styles */
