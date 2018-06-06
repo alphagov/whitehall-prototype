@@ -66,6 +66,30 @@
                 </label>
                 <select name="topic" class="govuk-c-select" id="topic">
                   <option value="" selected>All</option>
+                  {% for topic in [
+                    "government",
+                    "transport",
+                    "going-and-being-abroad-old",
+                    "life-circumstances",
+                    "work",
+                    "entering-staying-uk",
+                    "international",
+                    "health-and-social-care",
+                    "welfare",
+                    "business",
+                    "housing-local-and-community",
+                    "crime-justice-and-law",
+                    "defence",
+                    "education",
+                    "money",
+                    "regional-and-local-government",
+                    "environment",
+                    "society-and-culture",
+                    "childcare-parenting",
+                    "corporate-information"
+                  ] %}
+                    <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
+                  {% endfor %}
                 </select>
               </div>
             </div>
