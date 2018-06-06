@@ -115,7 +115,14 @@
           <thead>
             <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
               {% for heading in contentItems.headings %}
-              <th>
+              {% if heading.key == 'title' %}
+                {% set headingWidth = 'heading-width-400' %}
+              {% elif heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
+                {% set headingWidth = 'heading-width-100' %}
+              {% else %}
+                {% set headingWidth = null %}
+              {% endif %}
+              <th{% if headingWidth %} class="{{ headingWidth }}"{% endif %}>
                 <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
               </th>
               {% endfor %}
@@ -129,10 +136,8 @@
                     <td>
                       {% if loop.index == 1 %}
                       <a href="/manage/{{ org }}/content-item/{{ row.contentId }}">{{ cell }}</a>
-                      {% elif loop.index == 3 or loop.index == 4 %}
+                      {% elif loop.index == 2 or loop.index == 3 %}
                       {{ cell | title | replace("_", " ") }}
-                      {% elif loop.index == 6 or loop.index == 7 %}
-                      {{ cell | date("DD/MM/YYYY") }}
                       {% else %}
                       {{ cell }}
                       {% endif %}
