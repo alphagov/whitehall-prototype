@@ -1,12 +1,14 @@
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
+const moment = require('moment');
 
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
 const dates = require('../lib/dates.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const Table = require('../lib/prototype-manager/data_tables.js').Table;
+const Org = require('../lib/prototype-manager/data_tables.js').Org;
 const prerenderRows = require('../lib/prototype-manager/data_tables.js').prerenderRows;
 const metricDescriptions = require('../lib/prototype-manager/data_tables.js').metricDescriptions;
 const router = express.Router()
@@ -271,6 +273,7 @@ router.get('/manage', function(req, res) {
 });
 
 router.get('/manage/:org/content-estate/', function(req, res) {
+  const org = new Org(req.params.org);
   const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
@@ -283,12 +286,13 @@ router.get('/manage/:org/content-estate/', function(req, res) {
       'startDate': req.query['start-date'],
       'endDate': req.query['end-date'],
       'contentType': req.query['content-type']
-    }
+    },
+    'org': org
   });
 
   res.render('manage/content-estate', {
     'contentItems': table,
-    'org': req.params.org
+    'org': org
   });
 });
 
@@ -314,6 +318,8 @@ router.get('/manage/:org/content-item/:content_id', function(req, res) {
     'metrics': metrics,
     'metricDescriptions': metricDescriptions,
     'contentItemData': contentItemData,
+    'startDate': req.query['start-date'] || moment(moment().subtract(1, 'month')).format('YYYY-MM-DD'),
+    'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
     'org': req.params.org
   });
 });
