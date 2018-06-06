@@ -50,3 +50,11 @@
 .heading-width-100 {
   min-width: 100px;
 }
+
+.content-item-ctas {
+  margin-bottom: 0;
+
+  a:first-child {
+    margin-right: $govuk-gutter-half;
+  }
+}

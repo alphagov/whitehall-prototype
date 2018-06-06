@@ -135,12 +135,16 @@
                   {% for cell in row.cells %}
                     <td>
                       {% if loop.index == 1 %}
-                      <a href="/manage/{{ org }}/content-item/{{ row.contentId }}">{{ cell }}</a>
+                      <a href="https://www.gov.uk{{ row.basePath }}">{{ cell }}</a>
                       {% elif loop.index == 2 or loop.index == 3 %}
                       {{ cell | title | replace("_", " ") }}
                       {% else %}
                       {{ cell }}
                       {% endif %}
+                      <p class="content-item-ctas">
+                        <a href="/manage/{{ org }}/content-item/{{ row.contentId }}">View data</a>
+                        <a href="#">Edit page</a>
+                      </p>
                     </td>
                   {% endfor %}
                 </tr>
