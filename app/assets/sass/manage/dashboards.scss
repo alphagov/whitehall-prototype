@@ -6,6 +6,11 @@
     margin-top: 0;
   }
 
+  .card-description {
+    @include govuk-font-regular-19;
+    margin-top: 0;
+  }
+
   .card-period {
     margin: 0;
   
@@ -14,8 +19,9 @@
     }
   }
 
-  .card-metric-difference {
-    margin: 0;
+  .card-metric-total-description {
+    margin: $govuk-gutter / 6 0 0;
+    @include govuk-font-regular-19;
   }
 
   .card-big-metric {

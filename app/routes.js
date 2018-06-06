@@ -8,6 +8,7 @@ const dates = require('../lib/dates.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const Table = require('../lib/prototype-manager/data_tables.js').Table;
 const prerenderRows = require('../lib/prototype-manager/data_tables.js').prerenderRows;
+const metricDescriptions = require('../lib/prototype-manager/data_tables.js').metricDescriptions;
 const router = express.Router()
 
 // Route index page
@@ -311,6 +312,7 @@ router.get('/manage/:org/content-item/:content_id', function(req, res) {
       'lastPublished': contentItemData['public_updated_at']
     },
     'metrics': metrics,
+    'metricDescriptions': metricDescriptions,
     'contentItemData': contentItemData,
     'org': req.params.org
   });
@@ -329,10 +331,6 @@ router.get('/manage/:org/organisation-performance/', function(req, res) {
   const contentItemData = JSON.parse(contentItemsFile)[contentId];
   const metrics = Object.keys(contentItemData);
 
-  const differences = {};
-  metrics.forEach(metric => { differences[metric] = Math.floor(Math.random() * 10) });
-
-  console.log(differences);
   res.render('manage/organisation-performance', {
     'heading': itemData[1],
     'meta': {
@@ -342,7 +340,7 @@ router.get('/manage/:org/organisation-performance/', function(req, res) {
     },
     'metrics': metrics,
     'contentItemData': contentItemData,
-    'differences': differences,
+    'metricDescriptions': metricDescriptions,
     'org': req.params.org
   });
 });

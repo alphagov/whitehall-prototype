@@ -27,6 +27,7 @@
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
         <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
           <h2 class="govuk-heading-m">{{ metric | title | replace("_", " ") }}</h2> 
+          <p class="card-description">{{ metricDescriptions[metric] }}</p>
         </div>
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <p class="card-period">
@@ -50,15 +51,15 @@
 
       <div class="govuk-o-grid__item govuk-o-grid__item--full">
         <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-          <img src="/public/images/fake_graph.png" alt="" width="640" />
+          <img src="/public/images/fake_graph.png" alt="" width="610" />
         </div>
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <p class="card-big-metric">
             <span class="card-big-metric-name"></span>
             <span class="card-big-metric-latest">{{ contentItemData[metric].aggregation.latest }} </span>
           </p>
-          <p class="card-metric-difference">
-            <span class="card-metric-difference-icon"></span>Total {{ metric | title | lower | replace("_", " ") }} since first published.
+          <p class="card-metric-total-description">
+            Total {{ metric | title | lower | replace("_", " ") }} since first published.
           </p>
         </div>
       </div>
