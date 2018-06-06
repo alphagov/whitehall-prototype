@@ -85,7 +85,7 @@
     {% set pagination = {
       'currentRange': {
         'from': 1,
-        'to': 20
+        'to': contentItems.rows | length
       },
       'total': 195
     } %}
