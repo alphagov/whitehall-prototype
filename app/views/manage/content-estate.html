@@ -51,7 +51,7 @@
                   Content type
                 </label>
                 <select name="content-type" class="govuk-c-select" id="content-type">
-                  <option value=""></option>
+                  <option value="">All</option>
                   {% for contentType in contentItems.contentTypes %}
                     <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
                   {% endfor %}
@@ -60,6 +60,17 @@
             </div>
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="topic">
+                  Topic
+                </label>
+                <select name="topic" class="govuk-c-select" id="topic">
+                  <option value="" selected>All</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields-button">
               <button class="govuk-c-button filter-button filter-button-2">Filter</button>
             </div>
 
