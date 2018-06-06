@@ -153,6 +153,8 @@
                       </p>
                       {% elif loop.index == 2 or loop.index == 3 %}
                       {{ cell | title | replace("_", " ") }}
+                      {% elif loop.index == 6 %}
+                      <img src="/public/images/fake_sparkline_{{ [1,2,3,4] | random }}.png" alt="" width="138" />
                       {% else %}
                       {{ cell }}
                       {% endif %}
