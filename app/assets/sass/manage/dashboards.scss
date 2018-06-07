@@ -61,8 +61,8 @@
 }
 
 /* extensions to data-tables styles */
-.heading-width-400 {
-  min-width: 400px;
+.heading-width-340 {
+  min-width: 340px;
 }
 
 .heading-width-100 {
@@ -75,6 +75,40 @@
   a:first-child {
     margin-right: $govuk-gutter-half;
   }
+}
+
+/* Hack to make the first column fixed. From: https://codepen.io/paulobrien/pen/gWoVzN */
+.table-scroll {
+  position: relative;
+	overflow: hidden;
+
+	.table-wrap {
+		overflow: auto;
+	}
+
+  .clone {
+		position: absolute;
+		top: 0;
+		left: 0;
+		pointer-events: none; 
+  }
+
+	.clone th, .clone td {
+		visibility: hidden
+	}
+
+	.clone tbody th {
+		visibility: visible;
+	}
+
+	.clone .fixed-side {
+		visibility: visible;
+		background: white;
+	}
+
+	.clone thead, .clone tfoot{
+		background: transparent;
+	}
 }
 
 /* extensions to filter-fields */

@@ -146,18 +146,65 @@
 
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
       <div class="table-scroll">
-        <table class="register-data-table">
+        <div class="table-wrap">
+          <table class="register-data-table">
+            <thead>
+              <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
+                {% for heading in contentItems.headings %}
+                {% if heading.key == 'title' %}
+                  {% set headingWidth = 'heading-width-340' %}
+                {% elif heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
+                  {% set headingWidth = 'heading-width-100' %}
+                {% else %}
+                  {% set headingWidth = null %}
+                {% endif %}
+                <th{% if headingWidth %} class="{{ headingWidth }}"{% endif %}>
+                  <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
+                </th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody id="records-tbody">
+              {% for row in contentItems.rows %}
+                {% if loop.index < 20 %}
+                  <tr>
+                    {% for cell in row.cells %}
+                      <td>
+                        {% if loop.index == 1 %}
+                        <a href="https://www.gov.uk{{ row.basePath }}">{{ cell }}</a>
+                        <p class="content-item-ctas">
+                          <a href="{{ row.viewDataUrl }}">View data</a>
+                          <a href="#">Edit page</a>
+                        </p>
+                        {% elif loop.index == 2 or loop.index == 3 %}
+                        {{ cell | title | replace("_", " ") }}
+                        {% elif loop.index == 6 %}
+                        <img src="/public/images/fake_sparkline_{{ [1,2,3,4] | random }}.png" alt="" width="138" />
+                        {% else %}
+                        {{ cell }}
+                        {% endif %}
+                      </td>
+                    {% endfor %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- fake table use for fixing the left-most column -->
+        <table class="register-data-table clone">
           <thead>
             <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
               {% for heading in contentItems.headings %}
               {% if heading.key == 'title' %}
-                {% set headingWidth = 'heading-width-400' %}
+                {% set headingWidth = 'heading-width-340' %}
               {% elif heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
                 {% set headingWidth = 'heading-width-100' %}
               {% else %}
                 {% set headingWidth = null %}
               {% endif %}
-              <th{% if headingWidth %} class="{{ headingWidth }}"{% endif %}>
+                <th class="{% if headingWidth %}{{ headingWidth }}{% endif %}{% if loop.index == 1 %} fixed-side{% endif %}">
                 <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
               </th>
               {% endfor %}
@@ -168,7 +215,7 @@
               {% if loop.index < 20 %}
                 <tr>
                   {% for cell in row.cells %}
-                    <td>
+                    <td{% if loop.index == 1 %} class="fixed-side"{% endif %}>
                       {% if loop.index == 1 %}
                       <a href="https://www.gov.uk{{ row.basePath }}">{{ cell }}</a>
                       <p class="content-item-ctas">
