@@ -274,7 +274,7 @@ router.get('/manage', function(req, res) {
 
 router.get('/manage/:org/content-estate/', function(req, res) {
   const org = new Org(req.params.org);
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/data/${req.params.org}_raw_data.json`));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
   const table = new Table(contentItems, {
@@ -300,7 +300,7 @@ router.get('/manage/:org/content-item/:content_id', function(req, res) {
   const org = new Org(req.params.org);
   const contentId = req.params.content_id;
 
-  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/${req.params.org}_raw_data.json`));
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/data/${req.params.org}_raw_data.json`));
   const contentItemsData = JSON.parse(contentItemsFile);
 
   let contentItemData = contentItemsData.filter(item => item['content_id'] === contentId)[0];
@@ -332,12 +332,12 @@ router.get('/manage/:org/organisation-performance/', function(req, res) {
   const contentId = '3bb72f74-cd92-4930-923a-aa70f35a42d9';
   const period = ('period' in req.query) ? req.query.period : 'year';
 
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_data_2017_05_29-2018_05_29_top_1000.json'));
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/content_data_2017_05_29-2018_05_29_top_1000.json'));
   const contentItemsEstate = JSON.parse(contentItemsEstateFile);
 
   const itemData = contentItemsEstate.filter(item => { return item[0] === contentId })[0];
 
-  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/content_item_data_2017_05_29-2018_05_29.json'));
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/content_item_data_2017_05_29-2018_05_29.json'));
   const contentItemData = JSON.parse(contentItemsFile)[contentId];
   const metrics = Object.keys(contentItemData);
 
