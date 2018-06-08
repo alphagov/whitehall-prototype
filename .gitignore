@@ -5,6 +5,7 @@
 .port.tmp
 public
 lib/govuk_template.html
+lib/prototype-manager/data/*
 govuk_modules
 node_modules/*
 .tmuxp.*
