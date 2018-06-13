@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">Performance</span>
+        {{ heading }}
+      </h1>
+			<div class="app-c-publisher-metadata">
+				<div class="app-c-published-dates ">
+					From: <a href="#">{{ org.label }}</a>
+					<br>
+					Content type: {{ meta.format | title | replace("_", " ") }}
+        </div>
+        <div class="app-c-publisher-metadata__other">
+          <dl data-module="track-click">
+              <dt class="app-c-publisher-metadata__term">First published: </dt>
+              <dd class="app-c-publisher-metadata__definition">{{ meta.firstPublished | date("DD MMM YYYY") }}</dd>
+              <dt class="app-c-publisher-metadata__term">Last published: </dt>
+              <dd class="app-c-publisher-metadata__definition">{{ meta.lastPublished  | date("DD MMM YYYY") }}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    {% set featuredLinks = [
+      { 'url': '#', 'text': 'View live URL' },
+      { 'url': '#', 'text': 'Edit content' }
+    ] %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<aside class="heading-extra">
+				<ul class="featured-links govuk-body-s">
+          {% for featuredLink in featuredLinks %}
+					<li><a href="{{ featuredLink.url }}">{{ featuredLink.text }}</a></li>
+          {% endfor %}
+				</ul>
+			</aside> 
+    </div>
+  </div>
+
+  <div class="govuk-o-grid">
+    {% for metric in metrics %}
+    <div class="govuk-o-grid__item govuk-o-grid__item--full card">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+          <h2 class="govuk-heading-m">{{ metric | title | replace("_", " ") }}</h2> 
+          <p class="card-description">{{ metricDescriptions[metric] }}</p>
+        </div>
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <p class="card-period">
+            Showing data for:<br />
+            {{ startDate | date("DD MMM YYYY") }} to {{ endDate | date("DD MMM YYYY") }}
+            <a class="card-period-date-change" href="#">Change these dates</a>
+            <a class="app-c-download-link" href="#">
+              <svg class="app-c-download-link__icon"
+                aria-hidden="true"
+                viewBox="0 0 25 25"
+                height="25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg">
+                <g>
+                <path d="M23 5h2v20H5v-2h18V5z"/>
+                <path d="M0 0h20v20H0z"/>
+                </g>
+              </svg>
+              Download this data
+            </a> 
+          </p>
+        </div>
+      </div>
+
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+          <img src="/public/images/fake_graph.png" alt="" width="610" />
+          <p class="card-graph-key">
+            <span></span> {{ startDateYearAgo | date("DD MMM YYYY") }} to {{ endDateYearAgo | date("DD MMM YYYY") }}
+            <span></span> {{ startDate | date("DD MMM YYYY") }} to {{ endDate | date("DD MMM YYYY") }}
+          </p>
+        </div>
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <p class="card-big-metric">
+            <span class="card-big-metric-name"></span>
+            <span class="card-big-metric-latest">{{ contentItemData[metric] }} </span>
+          </p>
+          <p class="card-metric-difference">
+            <span class="card-metric-difference-icon"></span>Total {{ metric | title | lower | replace("_", " ") }} since first published.
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

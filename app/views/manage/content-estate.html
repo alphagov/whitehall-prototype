@@ -1,0 +1,243 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">{{ org.label }}</h1>
+    </div>
+  </div>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+			<nav class="activity-navigation">
+				<ul>
+					<li><a class="current" href="">Your content estate</a></li>
+					<li><a href="/manage/{{ org.url }}/organisation-performance?start-date={{ contentItems.startDate }}&end-date={{ contentItems.endDate}}">Performance</a></li>
+				</ul>
+			</nav>
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+
+      <div class="filter-section filter-section-customers">
+
+          <form action="" method="get">
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="start-date">
+                  Date from
+                </label>
+                <input class="govuk-c-input" id="start-date" name="start-date" type="date" value="{{ contentItems.startDate }}">
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="end-date">
+                  Date to
+                </label>
+                <input class="govuk-c-input" id="end-date" name="end-date" type="date" value="{{ contentItems.endDate }}">
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="content-type">
+                  Content type
+                </label>
+                <select name="content-type" class="govuk-c-select" id="content-type">
+                  <option value="">All</option>
+                  {% for contentType in contentItems.contentTypes %}
+                    <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="topic">
+                  Topic
+                </label>
+                <select name="topic" class="govuk-c-select" id="topic">
+                  <option value="" selected>All</option>
+                  {% for topic in [
+                    "government",
+                    "transport",
+                    "going-and-being-abroad-old",
+                    "life-circumstances",
+                    "work",
+                    "entering-staying-uk",
+                    "international",
+                    "health-and-social-care",
+                    "welfare",
+                    "business",
+                    "housing-local-and-community",
+                    "crime-justice-and-law",
+                    "defence",
+                    "education",
+                    "money",
+                    "regional-and-local-government",
+                    "environment",
+                    "society-and-culture",
+                    "childcare-parenting",
+                    "corporate-information"
+                  ] %}
+                    <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields-button">
+              <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+            </div>
+
+            <!-- sorting values for table headers -->
+            <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
+            <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
+          </form>
+        </div>
+
+    </div>
+
+    {% set pagination = {
+      'currentRange': {
+        'from': 1,
+        'to': contentItems.rows | length
+      },
+      'total': 195
+    } %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <div aria-live="assertive" id="js-search-results-info">
+        <p class="result-info">
+          Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
+        </p>
+      </div>
+    </div>
+
+		{% set downloadLink = {
+			'href': '#',
+			'text': 'Download this data'
+		} %}
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+			<a class="app-c-download-link" href="{{ downloadLink.href }}">
+				<svg class="app-c-download-link__icon"
+					aria-hidden="true"
+					viewBox="0 0 25 25"
+					height="25"
+					width="25"
+					xmlns="http://www.w3.org/2000/svg">
+					<g>
+					<path d="M23 5h2v20H5v-2h18V5z"/>
+					<path d="M0 0h20v20H0z"/>
+					</g>
+				</svg>
+				{{ downloadLink.text }}
+			</a> 
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+      <div class="table-scroll">
+        <div class="table-wrap">
+          <table class="register-data-table">
+            <thead>
+              <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
+                {% for heading in contentItems.headings %}
+                {% if heading.key == 'title' %}
+                  {% set headingWidth = 'heading-width-340' %}
+                {% elif heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
+                  {% set headingWidth = 'heading-width-100' %}
+                {% else %}
+                  {% set headingWidth = null %}
+                {% endif %}
+                <th{% if headingWidth %} class="{{ headingWidth }}"{% endif %}>
+                  <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
+                </th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody id="records-tbody">
+              {% for row in contentItems.rows %}
+                {% if loop.index < 20 %}
+                  <tr>
+                    {% for cell in row.cells %}
+                      <td>
+                        {% if loop.index == 1 %}
+                        <a href="https://www.gov.uk{{ row.basePath }}">{{ cell }}</a>
+                        <p class="content-item-ctas">
+                          <a href="{{ row.viewDataUrl }}">View data</a>
+                          <a href="#">Edit page</a>
+                        </p>
+                        {% elif loop.index == 2 or loop.index == 3 %}
+                        {{ cell | title | replace("_", " ") }}
+                        {% elif loop.index == 6 %}
+                        <img src="/public/images/fake_sparkline_{{ [1,2,3,4] | random }}.png" alt="" width="138" />
+                        {% else %}
+                        {{ cell }}
+                        {% endif %}
+                      </td>
+                    {% endfor %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- fake table use for fixing the left-most column -->
+        <table class="register-data-table clone">
+          <thead>
+            <tr data-click-action="Sort" data-click-category="Register Table" data-click-events="">
+              {% for heading in contentItems.headings %}
+              {% if heading.key == 'title' %}
+                {% set headingWidth = 'heading-width-340' %}
+              {% elif heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
+                {% set headingWidth = 'heading-width-100' %}
+              {% else %}
+                {% set headingWidth = null %}
+              {% endif %}
+                <th class="{% if headingWidth %}{{ headingWidth }}{% endif %}{% if loop.index == 1 %} fixed-side{% endif %}">
+                <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
+              </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody id="records-tbody">
+            {% for row in contentItems.rows %}
+              {% if loop.index < 20 %}
+                <tr>
+                  {% for cell in row.cells %}
+                    <td{% if loop.index == 1 %} class="fixed-side"{% endif %}>
+                      {% if loop.index == 1 %}
+                      <a href="https://www.gov.uk{{ row.basePath }}">{{ cell }}</a>
+                      <p class="content-item-ctas">
+                        <a href="{{ row.viewDataUrl }}">View data</a>
+                        <a href="#">Edit page</a>
+                      </p>
+                      {% elif loop.index == 2 or loop.index == 3 %}
+                      {{ cell | title | replace("_", " ") }}
+                      {% elif loop.index == 6 %}
+                      <img src="/public/images/fake_sparkline_{{ [1,2,3,4] | random }}.png" alt="" width="138" />
+                      {% else %}
+                      {{ cell }}
+                      {% endif %}
+                    </td>
+                  {% endfor %}
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

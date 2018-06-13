@@ -6,6 +6,8 @@
   padding-bottom: 15px;
   overflow: hidden;
 
+  margin-top: $govuk-gutter-half;
+
   .govuk-c-label {
     @include govuk-font-bold-16;
   }
@@ -23,13 +25,9 @@
   }
 }
 
-.filter-section-customers {
-  min-height: 100px;
-}
-
 .filter-button-2 {
   @include mq($from: tablet) {
-    margin-top: 44px;
+    margin-top: 20px;
   }
 
   width: 100%;

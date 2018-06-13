@@ -1,0 +1,118 @@
+.card {
+  margin-top: $govuk-gutter;
+  padding: $govuk-gutter 0;
+
+  main > div > &:first-child {
+    margin-top: 0;
+  }
+
+  .card-description {
+    @include govuk-font-regular-19;
+    margin-top: 0;
+  }
+
+  .card-period {
+    margin: 0;
+
+    .card-period-date-change {
+      text-align: right;
+      display: block;
+    }
+  }
+
+  .card-metric-total-description {
+    margin: $govuk-gutter / 6 0 0;
+    @include govuk-font-regular-19;
+  }
+
+  .card-big-metric {
+    margin: $govuk-gutter * 1.5 0 0;
+
+    .card-big-metric-name,
+    .card-big-metric-name {
+      display: block;
+    }
+
+    .card-big-metric-name {
+      @include govuk-font-bold-19;
+    }
+
+    .card-big-metric-latest {
+      @include govuk-font-bold-48;
+    }
+  }
+
+  .card-graph-key {
+    text-align: center;
+
+    span {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      background-color: #e02d31;
+      margin: 0 $govuk-gutter / 6 0 $govuk-gutter;
+
+      &:first-child {
+        background-color: #278dc5;
+        margin: 0 $govuk-gutter / 6;
+      }
+    }
+  }
+}
+
+/* extensions to data-tables styles */
+.heading-width-340 {
+  min-width: 340px;
+}
+
+.heading-width-100 {
+  min-width: 100px;
+}
+
+.content-item-ctas {
+  margin-bottom: 0;
+
+  a:first-child {
+    margin-right: $govuk-gutter-half;
+  }
+}
+
+/* Hack to make the first column fixed. From: https://codepen.io/paulobrien/pen/gWoVzN */
+.table-scroll {
+  position: relative;
+	overflow: hidden;
+
+	.table-wrap {
+		overflow: auto;
+	}
+
+  .clone {
+		position: absolute;
+		top: 0;
+		left: 0;
+    pointer-events: none;
+  }
+
+	.clone th, .clone td {
+		visibility: hidden
+	}
+
+	.clone tbody th {
+		visibility: visible;
+	}
+
+	.clone .fixed-side {
+		visibility: visible;
+		background: white;
+    pointer-events: auto;
+	}
+
+	.clone thead, .clone tfoot{
+		background: transparent;
+	}
+}
+
+/* extensions to filter-fields */
+.filter-fields-button {
+  float: right;
+}

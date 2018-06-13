@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-o-main-wrapper">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">{{ org.label }}</h1>
+    </div>
+  </div>
+
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+			<nav class="activity-navigation">
+				<ul>
+					<li><a href="/manage/{{ org.url }}/content-estate">Your content estate</a></li>
+					<li><a class="current" href="">Performance</a></li>
+				</ul>
+			</nav>
+    </div>
+
+    {% for metric in metrics %}
+    <div class="govuk-o-grid__item govuk-o-grid__item--full card">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+          <h2 class="govuk-heading-m">{{ metric | title | replace("_", " ") }}</h2> 
+          <p class="card-description">{{ metricDescriptions[metric] }}</p>
+        </div>
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <p class="card-period">
+            Showing data for:<br />
+            {{ startDate | date("DD MMM YYYY") }} to {{ endDate | date("DD MMM YYYY") }}
+            <a class="card-period-date-change" href="#">Change these dates</a>
+            <a class="app-c-download-link" href="#">
+              <svg class="app-c-download-link__icon"
+                aria-hidden="true"
+                viewBox="0 0 25 25"
+                height="25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg">
+                <g>
+                <path d="M23 5h2v20H5v-2h18V5z"/>
+                <path d="M0 0h20v20H0z"/>
+                </g>
+              </svg>
+              Download this data
+            </a> 
+          </p>
+        </div>
+      </div>
+
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+          <img src="/public/images/fake_graph.png" alt="" width="610" />
+          <p class="card-graph-key">
+            <span></span> {{ startDateYearAgo | date("DD MMM YYYY") }} to {{ endDateYearAgo | date("DD MMM YYYY") }}
+            <span></span> {{ startDate | date("DD MMM YYYY") }} to {{ endDate | date("DD MMM YYYY") }}
+          </p>
+        </div>
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <p class="card-big-metric">
+            <span class="card-big-metric-name"></span>
+            <span class="card-big-metric-latest">{{ contentItemData[metric].aggregation.latest }} </span>
+          </p>
+          <p class="card-metric-total-description">
+            Total {{ metric | title | lower | replace("_", " ") }} since first published.
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

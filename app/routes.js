@@ -1,7 +1,16 @@
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
+const moment = require('moment');
+
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
+const dates = require('../lib/dates.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
+const Table = require('../lib/prototype-manager/data_tables.js').Table;
+const Org = require('../lib/prototype-manager/data_tables.js').Org;
+const prerenderRows = require('../lib/prototype-manager/data_tables.js').prerenderRows;
+const metricDescriptions = require('../lib/prototype-manager/data_tables.js').metricDescriptions;
 const router = express.Router()
 
 // Route index page
@@ -261,6 +270,93 @@ router.get('/manage', function(req, res) {
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.get('/manage/:org/content-estate/', function(req, res) {
+  const org = new Org(req.params.org);
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/data/${req.params.org}_raw_data.json`));
+  const contentItems = JSON.parse(contentItemsEstateFile);
+
+  const table = new Table(contentItems, {
+    'sorting': {
+      'sortBy': req.query['sort-by'],
+      'sortDirection': req.query['sort-direction']
+    },
+    'filtering': {
+      'startDate': req.query['start-date'],
+      'endDate': req.query['end-date'],
+      'contentType': req.query['content-type']
+    },
+    'org': org
+  });
+
+  res.render('manage/content-estate', {
+    'contentItems': table,
+    'org': org
+  });
+});
+
+router.get('/manage/:org/content-item/:content_id', function(req, res) {
+  const org = new Org(req.params.org);
+  const contentId = req.params.content_id;
+
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/data/${req.params.org}_raw_data.json`));
+  const contentItemsData = JSON.parse(contentItemsFile);
+
+  let contentItemData = contentItemsData.filter(item => item['content_id'] === contentId)[0];
+
+  contentItemData = prerenderRows([contentItemData])[0];
+  const notMetrics = ['title', 'content_id', 'base_path', 'document_type', 'content_purpose', 'primary_organisation_title', 'first_published_at', 'public_updated_at', 'timeline_of_unique_pageviews'];
+  const metrics = Object.keys(contentItemData).filter(key => !notMetrics.includes(key));
+
+  res.render('manage/content-item', {
+    'heading': contentItemData['title'],
+    'meta': {
+      'format': contentItemData['document-type'],
+      'firstPublished': contentItemData['first_published_at'],
+      'lastPublished': contentItemData['public_updated_at']
+    },
+    'metrics': metrics,
+    'metricDescriptions': metricDescriptions,
+    'contentItemData': contentItemData,
+    'startDate': req.query['start-date'] || moment().subtract(1, 'month').format('YYYY-MM-DD'),
+    'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
+    'startDateYearAgo': moment(req.query['start-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(2, 'year').format('YYYY-MM-DD'),
+    'endDateYearAgo': moment(req.query['end-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(1, 'year').format('YYYY-MM-DD'),
+    'org': org
+  });
+});
+
+router.get('/manage/:org/organisation-performance/', function(req, res) {
+  const org = new Org(req.params.org);
+  const contentId = '3bb72f74-cd92-4930-923a-aa70f35a42d9';
+  const period = ('period' in req.query) ? req.query.period : 'year';
+
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/content_data_2017_05_29-2018_05_29_top_1000.json'));
+  const contentItemsEstate = JSON.parse(contentItemsEstateFile);
+
+  const itemData = contentItemsEstate.filter(item => { return item[0] === contentId })[0];
+
+  const contentItemsFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/content_item_data_2017_05_29-2018_05_29.json'));
+  const contentItemData = JSON.parse(contentItemsFile)[contentId];
+  const metrics = Object.keys(contentItemData);
+
+  res.render('manage/organisation-performance', {
+    'heading': itemData[1],
+    'meta': {
+      'format': itemData[2],
+      'firstPublished': itemData[3],
+      'lastPublished': itemData[4]
+    },
+    'metrics': metrics,
+    'contentItemData': contentItemData,
+    'metricDescriptions': metricDescriptions,
+    'startDate': req.query['start-date'] || moment().subtract(1, 'month').format('YYYY-MM-DD'),
+    'endDate': req.query['end-date'] || moment().format('YYYY-MM-DD'),
+    'startDateYearAgo': moment(req.query['start-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(2, 'year').format('YYYY-MM-DD'),
+    'endDateYearAgo': moment(req.query['end-date'], 'YYYY-MM-DD').subtract(1, 'year').format('YYYY-MM-DD') || moment().subtract(1, 'year').format('YYYY-MM-DD'),
+    'org': org
+  });
 });
 
 module.exports = router

@@ -7,10 +7,9 @@ dl {
 .app-c-publisher-metadata {
 	margin-bottom: $govuk-gutter-half;
 	@include mq($from: tablet) {
-		margin-bottom: $govuk-gutter * 1.5;
+		margin-bottom: $govuk-gutter;
 	}
   @include govuk-font-regular-16;
-  padding-top: $govuk-gutter-half;
 }
 
 .app-c-publisher-metadata__other a {
