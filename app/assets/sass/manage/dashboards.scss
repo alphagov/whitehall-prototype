@@ -116,3 +116,14 @@
 .filter-fields-button {
   float: right;
 }
+
+/* Full width styles */
+
+.govuk-o-full-width-container,
+#global-header .header-wrapper-full-width {
+  max-width: 100%;
+}
+
+.govuk-o-full-width-container {
+  margin: 0 $govuk-gutter;
+}

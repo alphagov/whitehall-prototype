@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_full_width.html" %}
 
 {% block page_title %}
   GOV.UK prototype kit
@@ -14,10 +14,17 @@
 
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
-			<nav class="activity-navigation">
-				<ul>
-					<li><a class="current" href="">Your content estate</a></li>
-					<li><a href="/manage/{{ org.url }}/organisation-performance?start-date={{ contentItems.startDate }}&end-date={{ contentItems.endDate}}">Performance</a></li>
+			<nav class="app-navigation govuk-clearfix">
+				<ul class="app-navigation__list">
+					<li>
+						<a class="govuk-link" href="#" data-topnav="Overview">Overview</a>
+					</li>
+					<li class="app-navigation--current-page">
+						<a class="govuk-link" href="#" data-topnav="Content data">Content data</a>
+					</li>
+					<li>
+						<a class="govuk-link" href="#" data-topnav="Performance">Performance</a>
+					</li>
 				</ul>
 			</nav>
     </div>
