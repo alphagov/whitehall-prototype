@@ -149,3 +149,13 @@
 .condensed-view {
   padding-top: 0;
 }
+
+/* extensions to details styles */
+
+details {
+  summary {
+    cursor: pointer;
+    clear: both;
+    display: inline-block;
+  }
+}
