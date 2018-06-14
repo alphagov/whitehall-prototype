@@ -5,152 +5,156 @@
 {% endblock %}
 
 {% block content %}
-<main role="main" class="govuk-o-main-wrapper">
-  <div class="govuk-o-grid">
-    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <h1 class="govuk-heading-l">{{ org.label }}</h1>
-    </div>
-  </div>
+<main role="main" class="govuk-o-main-wrapper condensed-view">
+  <div class="govuk-o-width-container">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+        <nav class="app-navigation govuk-clearfix">
+          <ul class="app-navigation__list">
+            <li>
+              <a class="govuk-link" href="#" data-topnav="Overview">Overview</a>
+            </li>
+            <li class="app-navigation--current-page">
+              <a class="govuk-link" href="#" data-topnav="Content data">Content data</a>
+            </li>
+            <li>
+              <a class="govuk-link" href="#" data-topnav="Performance">Performance</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-  <div class="govuk-o-grid">
-    <div class="govuk-o-grid__item govuk-o-grid__item--full">
-			<nav class="app-navigation govuk-clearfix">
-				<ul class="app-navigation__list">
-					<li>
-						<a class="govuk-link" href="#" data-topnav="Overview">Overview</a>
-					</li>
-					<li class="app-navigation--current-page">
-						<a class="govuk-link" href="#" data-topnav="Content data">Content data</a>
-					</li>
-					<li>
-						<a class="govuk-link" href="#" data-topnav="Performance">Performance</a>
-					</li>
-				</ul>
-			</nav>
-    </div>
-
-    <div class="govuk-o-grid__item govuk-o-grid__item--full">
-
-      <div class="filter-section filter-section-customers">
-
-          <form action="" method="get">
-            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-              <div class="govuk-form-group">
-                <label class="govuk-c-label" for="start-date">
-                  Date from
-                </label>
-                <input class="govuk-c-input" id="start-date" name="start-date" type="date" value="{{ contentItems.startDate }}">
-              </div>
-            </div>
-
-            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-              <div class="govuk-form-group">
-                <label class="govuk-c-label" for="end-date">
-                  Date to
-                </label>
-                <input class="govuk-c-input" id="end-date" name="end-date" type="date" value="{{ contentItems.endDate }}">
-              </div>
-            </div>
-
-            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-              <div class="govuk-form-group">
-                <label class="govuk-c-label" for="content-type">
-                  Content type
-                </label>
-                <select name="content-type" class="govuk-c-select" id="content-type">
-                  <option value="">All</option>
-                  {% for contentType in contentItems.contentTypes %}
-                    <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-              <div class="govuk-form-group">
-                <label class="govuk-c-label" for="topic">
-                  Topic
-                </label>
-                <select name="topic" class="govuk-c-select" id="topic">
-                  <option value="" selected>All</option>
-                  {% for topic in [
-                    "government",
-                    "transport",
-                    "going-and-being-abroad-old",
-                    "life-circumstances",
-                    "work",
-                    "entering-staying-uk",
-                    "international",
-                    "health-and-social-care",
-                    "welfare",
-                    "business",
-                    "housing-local-and-community",
-                    "crime-justice-and-law",
-                    "defence",
-                    "education",
-                    "money",
-                    "regional-and-local-government",
-                    "environment",
-                    "society-and-culture",
-                    "childcare-parenting",
-                    "corporate-information"
-                  ] %}
-                    <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields-button">
-              <button class="govuk-c-button filter-button filter-button-2">Filter</button>
-            </div>
-
-            <!-- sorting values for table headers -->
-            <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
-            <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
-          </form>
-        </div>
-
-    </div>
-
-    {% set pagination = {
-      'currentRange': {
-        'from': 1,
-        'to': contentItems.rows | length
-      },
-      'total': 195
-    } %}
-
-    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-      <div aria-live="assertive" id="js-search-results-info">
-        <p class="result-info">
-          Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
-        </p>
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <h1 class="govuk-heading-l">Content on GOV.UK</h1>
       </div>
     </div>
 
-		{% set downloadLink = {
-			'href': '#',
-			'text': 'Download this data'
-		} %}
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
 
-    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-			<a class="app-c-download-link" href="{{ downloadLink.href }}">
-				<svg class="app-c-download-link__icon"
-					aria-hidden="true"
-					viewBox="0 0 25 25"
-					height="25"
-					width="25"
-					xmlns="http://www.w3.org/2000/svg">
-					<g>
-					<path d="M23 5h2v20H5v-2h18V5z"/>
-					<path d="M0 0h20v20H0z"/>
-					</g>
-				</svg>
-				{{ downloadLink.text }}
-			</a> 
-    </div>
+        <div class="filter-section filter-section-customers">
 
+            <form action="" method="get">
+              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+                <div class="govuk-form-group">
+                  <label class="govuk-c-label" for="start-date">
+                    Date from
+                  </label>
+                  <input class="govuk-c-input" id="start-date" name="start-date" type="date" value="{{ contentItems.startDate }}">
+                </div>
+              </div>
+
+              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+                <div class="govuk-form-group">
+                  <label class="govuk-c-label" for="end-date">
+                    Date to
+                  </label>
+                  <input class="govuk-c-input" id="end-date" name="end-date" type="date" value="{{ contentItems.endDate }}">
+                </div>
+              </div>
+
+              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+                <div class="govuk-form-group">
+                  <label class="govuk-c-label" for="content-type">
+                    Content type
+                  </label>
+                  <select name="content-type" class="govuk-c-select" id="content-type">
+                    <option value="">All</option>
+                    {% for contentType in contentItems.contentTypes %}
+                      <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
+                <div class="govuk-form-group">
+                  <label class="govuk-c-label" for="topic">
+                    Topic
+                  </label>
+                  <select name="topic" class="govuk-c-select" id="topic">
+                    <option value="" selected>All</option>
+                    {% for topic in [
+                      "government",
+                      "transport",
+                      "going-and-being-abroad-old",
+                      "life-circumstances",
+                      "work",
+                      "entering-staying-uk",
+                      "international",
+                      "health-and-social-care",
+                      "welfare",
+                      "business",
+                      "housing-local-and-community",
+                      "crime-justice-and-law",
+                      "defence",
+                      "education",
+                      "money",
+                      "regional-and-local-government",
+                      "environment",
+                      "society-and-culture",
+                      "childcare-parenting",
+                      "corporate-information"
+                    ] %}
+                      <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields-button">
+                <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+              </div>
+
+              <!-- sorting values for table headers -->
+              <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
+              <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
+            </form>
+          </div>
+
+      </div>
+
+      {% set pagination = {
+        'currentRange': {
+          'from': 1,
+          'to': contentItems.rows | length
+        },
+        'total': 195
+      } %}
+
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+        <div aria-live="assertive" id="js-search-results-info">
+          <p class="result-info">
+            Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
+          </p>
+        </div>
+      </div>
+
+      {% set downloadLink = {
+        'href': '#',
+        'text': 'Download this data'
+      } %}
+
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+        <a class="app-c-download-link" href="{{ downloadLink.href }}">
+          <svg class="app-c-download-link__icon"
+            aria-hidden="true"
+            viewBox="0 0 25 25"
+            height="25"
+            width="25"
+            xmlns="http://www.w3.org/2000/svg">
+            <g>
+            <path d="M23 5h2v20H5v-2h18V5z"/>
+            <path d="M0 0h20v20H0z"/>
+            </g>
+          </svg>
+          {{ downloadLink.text }}
+        </a> 
+      </div>
+    </div> <!-- end of govuk-o-grid -->
+  </div>
+
+  <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
       <div class="table-scroll">
         <div class="table-wrap">
@@ -245,6 +249,6 @@
         </table>
       </div>
     </div>
-  </div>
+  </div><!-- end of govuk-o-grid -->
 </main>
 {% endblock %}

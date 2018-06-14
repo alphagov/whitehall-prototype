@@ -113,8 +113,26 @@
 }
 
 /* extensions to filter-fields */
+.filter-section {
+  margin-top: 0;
+}
+
 .filter-fields-button {
   float: right;
+}
+
+/* extensions to navigation */
+
+.app-navigation {
+  background-color: transparent;
+  border-bottom: solid 1px $govuk-border-colour;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: $govuk-gutter;
+
+  .app-navigation__list {
+    @include govuk-h-clearfix;
+  }
 }
 
 /* Full width styles */
@@ -126,4 +144,8 @@
 
 .govuk-o-full-width-container {
   margin: 0 $govuk-gutter;
+}
+
+.condensed-view {
+  padding-top: 0;
 }
