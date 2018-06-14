@@ -26,6 +26,7 @@
     "express": "4.15.2",
     "express-session": "^1.13.0",
     "express-writer": "0.0.4",
+    "fast-csv": "^2.4.1",
     "govuk_template_jinja": "0.22.3",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
