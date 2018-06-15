@@ -6,136 +6,195 @@
 
 {% block content %}
 <main role="main" class="govuk-o-main-wrapper condensed-view">
-  <div class="govuk-o-width-container">
-    <div class="govuk-o-grid">
-      <div class="govuk-o-grid__item govuk-o-grid__item--full">
-        <nav class="app-navigation govuk-clearfix">
-          <ul class="app-navigation__list">
-            <li>
-              <a class="govuk-link" href="#" data-topnav="Overview">Overview</a>
-            </li>
-            <li class="app-navigation--current-page">
-              <a class="govuk-link" href="#" data-topnav="Content data">Content data</a>
-            </li>
-            <li>
-              <a class="govuk-link" href="#" data-topnav="Performance">Performance</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <h1 class="govuk-heading-l">Content on GOV.UK</h1>
-      </div>
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
+      <nav class="app-navigation govuk-clearfix">
+        <ul class="app-navigation__list">
+          <li>
+            <a class="govuk-link" href="#" data-topnav="Overview">Overview</a>
+          </li>
+          <li class="app-navigation--current-page">
+            <a class="govuk-link" href="#" data-topnav="Content data">Content data</a>
+          </li>
+          <li>
+            <a class="govuk-link" href="#" data-topnav="Performance">Performance</a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
-    <div class="govuk-o-grid">
-      <div class="govuk-o-grid__item govuk-o-grid__item--full">
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+      <h1 class="govuk-heading-l">Content on GOV.UK</h1>
+    </div>
+  </div>
 
-        <div class="filter-section filter-section-customers">
+  <div class="govuk-o-grid">
+    <div class="govuk-o-grid__item govuk-o-grid__item--full">
 
-            <form action="" method="get">
-              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-                <div class="govuk-form-group">
-                  <label class="govuk-c-label" for="start-date">
-                    Date from
-                  </label>
-                  <input class="govuk-c-input" id="start-date" name="start-date" type="date" value="{{ contentItems.startDate }}">
+      <div class="filter-section filter-section-customers">
+
+          <form action="" method="get">
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="organisation">
+                  Organisation
+                </label>
+                <input class="govuk-c-input" id="organisation" name="organisation" type="text" value="{{ contentItems.org.url }}">
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="topic">
+                  Topic
+                </label>
+                <select name="topic" class="govuk-c-select" id="topic">
+                  <option value="" selected>All</option>
+                  {% for topic in [
+                    "government",
+                    "transport",
+                    "going-and-being-abroad-old",
+                    "life-circumstances",
+                    "work",
+                    "entering-staying-uk",
+                    "international",
+                    "health-and-social-care",
+                    "welfare",
+                    "business",
+                    "housing-local-and-community",
+                    "crime-justice-and-law",
+                    "defence",
+                    "education",
+                    "money",
+                    "regional-and-local-government",
+                    "environment",
+                    "society-and-culture",
+                    "childcare-parenting",
+                    "corporate-information"
+                  ] %}
+                    <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="title">
+                  Title
+                </label>
+                <input class="govuk-c-input" id="title" name="title" type="text" value="{{ contentItems.title }}">
+              </div>
+            </div>
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="title">
+                  Title
+                </label>
+                <select name="status" class="govuk-c-select" id="status">
+                  <option value="" selected>All</option>
+                  {% for status in [
+                    ""
+                  ] %}
+                    <option value="{{ status }}">{{ status | title | replace("-", " ") }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- beginning of advanced filters -->
+
+            <details open>
+              <summary data-module="summary-text-switch" data-options="more,fewer" data-texttemplate="Show {} filters">Show fewer filters</summary>
+              <div class="govuk-o-grid">
+
+                <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+                  <div class="govuk-form-group">
+                    <label class="govuk-c-label" for="content-type">
+                      Document type
+                    </label>
+                    <select name="content-type" class="govuk-c-select" id="content-type">
+                      <option value="">All</option>
+                      {% for contentType in contentItems.contentTypes %}
+                        <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div>
-              </div>
 
-              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-                <div class="govuk-form-group">
-                  <label class="govuk-c-label" for="end-date">
-                    Date to
-                  </label>
-                  <input class="govuk-c-input" id="end-date" name="end-date" type="date" value="{{ contentItems.endDate }}">
+                <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+                  <div class="govuk-form-group">
+                    <label class="govuk-c-label" for="editor">
+                      Editor
+                    </label>
+                    <input class="govuk-c-input" id="editor" name="editor" type="text" value="{{ contentItems.editor }}">
+                  </div>
                 </div>
-              </div>
-
-              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-                <div class="govuk-form-group">
-                  <label class="govuk-c-label" for="content-type">
-                    Content type
-                  </label>
-                  <select name="content-type" class="govuk-c-select" id="content-type">
-                    <option value="">All</option>
-                    {% for contentType in contentItems.contentTypes %}
-                      <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
-                    {% endfor %}
-                  </select>
+                    
+                <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+                  <div class="govuk-form-group">
+                    <label class="govuk-c-label" for="published-date-range">
+                      Published date 
+                    </label>
+                    <select name="published-date-range" class="govuk-c-select" id="published-date-range">
+                      {% for publishedDateRange in contentItems.publishedDateRanges %}
+                        <option value="{{ publishedDateRange }}"{% if publishedDateRange === contentItems.publishedDateRange %} selected{% endif %}>{{ publishedDateRange | title | replace("_", " ") }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div>
-              </div>
-
-              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields">
-                <div class="govuk-form-group">
-                  <label class="govuk-c-label" for="topic">
-                    Topic
-                  </label>
-                  <select name="topic" class="govuk-c-select" id="topic">
-                    <option value="" selected>All</option>
-                    {% for topic in [
-                      "government",
-                      "transport",
-                      "going-and-being-abroad-old",
-                      "life-circumstances",
-                      "work",
-                      "entering-staying-uk",
-                      "international",
-                      "health-and-social-care",
-                      "welfare",
-                      "business",
-                      "housing-local-and-community",
-                      "crime-justice-and-law",
-                      "defence",
-                      "education",
-                      "money",
-                      "regional-and-local-government",
-                      "environment",
-                      "society-and-culture",
-                      "childcare-parenting",
-                      "corporate-information"
-                    ] %}
-                      <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
-                    {% endfor %}
-                  </select>
+                    
+                <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+                  <div class="govuk-form-group">
+                    <label class="govuk-c-label" for="last-updated-date-range">
+                      Last updated
+                    </label>
+                    <select name="last-updated-date-range" class="govuk-c-select" id="last-updated-date-range">
+                      {% for lastUpdatedDateRange in contentItems.lastUpdatedDateRanges %}
+                        <option value="{{ lastUpdatedDateRange }}"{% if lastUpdatedDateRange === contentItems.lastUpdatedDateRange %} selected{% endif %}>{{ lastUpdatedDateRange | title | replace("_", " ") }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div>
-              </div>
 
-              <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter filter-fields-button">
-                <button class="govuk-c-button filter-button filter-button-2">Filter</button>
-              </div>
+              </div> <!-- end of govuk-o-grid -->
 
-              <!-- sorting values for table headers -->
-              <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
-              <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
-            </form>
-          </div>
+            </details>
 
-      </div>
+            <div class="govuk-o-grid__item govuk-o-grid__item--three-quarters">
+              <a href="#" class="clear-filters">Clear filters</a>
+            </div>
 
-      {% set pagination = {
-        'currentRange': {
-          'from': 1,
-          'to': contentItems.rows | length
-        },
-        'total': 195
-      } %}
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-quarter">
+              <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+            </div>
 
-      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
-        <div aria-live="assertive" id="js-search-results-info">
-          <p class="result-info">
-            Showing <span class="result-count"><strong>{{ pagination.currentRange.from }}</strong>&nbsp;-&nbsp;<strong>{{ pagination.currentRange.to }}</strong></span> of <strong>{{ pagination.total }}</strong> records
+            <!-- sorting values for table headers -->
+            <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
+            <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
+          </form>
+        </div>
+
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+      <div aria-live="assertive" id="js-search-results-info">
+        <div class="result-info">
+          <p class="result-count">
+            <strong>{{ contentItems.rows | length }}</strong> Content items
+          </p>
+          <p class="result-range">
+            Results per page <a href="#" class="result-range-option">20</a> <strong class="result-range-option">50</strong> <a href="#" class="result-range-option">100</a>
           </p>
         </div>
-      </div>
 
-      {% set downloadLink = {
-        'href': '#',
-        'text': 'Download this data'
-      } %}
+        {% set downloadLink = {
+          'href': '#',
+          'text': 'Download this data'
+        } %}
 
-      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
         <a class="app-c-download-link" href="{{ downloadLink.href }}">
           <svg class="app-c-download-link__icon"
             aria-hidden="true"
@@ -151,8 +210,43 @@
           {{ downloadLink.text }}
         </a> 
       </div>
-    </div> <!-- end of govuk-o-grid -->
-  </div>
+    </div>
+
+    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds filter-section table-filters">
+      <div class="govuk-o-grid">
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-c-label" for="column-grouping">
+              Show me data metrics for
+            </label>
+            <select name="column-grouping" class="govuk-c-select" id="column-grouping">
+              {% for contentType in contentItems.columnGroupings %}
+                <option value="{{ columnGrouping }}"{% if columnGrouping === contentItems.columnGrouping %} selected{% endif %}>{{ columnGrouping | title | replace("_", " ") }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <div class="govuk-form-group">
+            <label class="govuk-c-label" for="collection-date-range">
+              Show me data between
+            </label>
+            <select name="collection-date-range" class="govuk-c-select" id="collection-date-range">
+              {% for contentType in contentItems.collectionDateRanges %}
+                <option value="{{ collectionDateRange }}"{% if collectionDateRange === contentItems.collectionDateRange %} selected{% endif %}>{{ collectionDateRange | title | replace("_", " ") }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+          <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+        </div>
+      </div> <!-- end of govuk-o-grid -->
+      
+    </div>
+  </div> <!-- end of govuk-o-grid -->
 
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--full">

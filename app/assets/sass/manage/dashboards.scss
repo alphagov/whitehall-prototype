@@ -77,6 +77,70 @@
   }
 }
 
+.result-info {
+  padding-bottom: 0;
+
+  .result-count,
+  .result-range {
+    @include govuk-font-regular-19;
+    margin-bottom: 0;
+  }
+
+  .result-range-option {
+    margin-left: $govuk-gutter-half;
+  }
+}
+
+.result-info .result-range,
+.app-c-download-link {
+  margin-top: 10px;
+}
+
+.app-c-download-link {
+  float: none;
+}
+
+/* extensions to filter-fields */
+.filter-section {
+  margin-top: 0;
+	padding: $govuk-gutter 0;
+
+  .govuk-c-label {
+    @include govuk-font-bold-19;
+  }
+}
+
+.govuk-form-group {
+  margin-bottom: $govuk-gutter-half;
+}
+
+.filter-fields-button {
+  float: right;
+}
+
+.filter-button-2 {
+	margin-top: 0;
+}
+
+.table-filters {
+  margin-top: $govuk-gutter-half;
+  background: transparent;
+
+  .govuk-c-label {
+    @include govuk-font-bold-19;
+  }
+
+	.filter-button-2 {
+		margin-top: 25px;	
+	}
+}
+
+.clear-filters {
+	float: right;
+	display: inline-block;
+	padding-top: 7px;
+}
+
 /* Hack to make the first column fixed. From: https://codepen.io/paulobrien/pen/gWoVzN */
 .table-scroll {
   position: relative;
@@ -112,15 +176,6 @@
 	}
 }
 
-/* extensions to filter-fields */
-.filter-section {
-  margin-top: 0;
-}
-
-.filter-fields-button {
-  float: right;
-}
-
 /* extensions to navigation */
 
 .app-navigation {
@@ -153,9 +208,35 @@
 /* extensions to details styles */
 
 details {
+  @include govuk-font-regular-19;
+  color: $govuk-link-colour;
+
+  &:hover,
+  &:focus {
+    color: $govuk-link-hover-colour;
+  }
+
+  .filter-section & {
+    clear: both;
+    @include govuk-h-clearfix;
+    margin-left: $govuk-gutter-half;
+    margin-right: $govuk-gutter-half;
+    margin-bottom: 0;
+
+    summary {
+      margin-bottom: $govuk-gutter / 6;
+    }
+  }
+
   summary {
     cursor: pointer;
-    clear: both;
-    display: inline-block;
   }
+}
+
+/* extensions to grids */
+
+.govuk-o-grid__item--three-quarters {
+	@include mq($from: tablet) {
+		width: percentage(3 / 4);
+	}
 }
