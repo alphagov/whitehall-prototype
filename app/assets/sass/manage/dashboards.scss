@@ -63,6 +63,74 @@
 /* extensions to data-tables styles */
 .data-table {
   background: white;
+
+  thead th a {
+		position: relative;
+		padding-right: 15px;
+		color: $govuk-black;
+		font-weight: bold;
+
+		&,
+		&:active,
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+
+		&:after,
+		&:before {
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			content: "";
+			display: block;
+			margin-left: 5px;
+			position: absolute;
+			right: 0;
+			top: 7px; 
+		}
+
+		&:after {
+			border-bottom: 8px solid #005ea5;
+		}
+
+		&:before {
+			border-top: 8px solid #005ea5;
+			top: 18px;
+		}
+
+		&.sort-link:before,
+		&.sort-link.asc:before,
+		&.sort-link.desc:before {
+			border-top: none;
+			content: none;
+		}
+
+		&.sort-link.desc:after {
+			border-bottom: none;
+		}
+
+		&.info-link {
+			display: block;
+			color: $govuk-link-colour;
+			font-weight: normal;
+
+			&,
+			&:active,
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+
+			&:before,
+			&:after,
+			&.asc:before,
+			&.desc:before {
+				border-top: none;
+				content: none;
+			}
+		}
+
+  }
 }
 
 .heading-width-340 {

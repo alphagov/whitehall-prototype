@@ -286,6 +286,7 @@
             {% endif %}
             <th{% if headingWidth %} class="{{ headingWidth }}"{% endif %}>
               <a{% if heading.key == contentItems.sortBy %} class="sort-link {{ contentItems.sortDirection }}"{% endif %} href="{{ heading.url }}">{{ heading.label }}</a>
+              <a class="info-link" href="#">What is this?</a>
             </th>
             {% endfor %}
           </tr>
