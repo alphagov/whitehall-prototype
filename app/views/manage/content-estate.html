@@ -41,9 +41,9 @@
 								<select id="government-organisations" name="organisation" class="govuk-c-select">
                   {% for entry in organisations.acronyms %}
                     {% if loop.index == 1 %}
-                      <option value=""{% if not organisation %} selected{% endif %}>Any organisation</option>
+                      <option value=""{% if not contentItems.organisation %} selected{% endif %}>Any organisation</option>
                     {% endif %}
-                    <option value="{{ entry }}"{% if entry === organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
+                    <option value="{{ entry }}"{% if entry === contentItems.organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
                   {% endfor %}
 								</select>
 							</div>
@@ -56,16 +56,14 @@
 									<select id="topics" name="topic" class="govuk-c-select">
 										{% for breadcrumb in topicBreadcrumbs %}
                       {% if loop.index == 1 %}
-                        <option value=""{% if not breadcrumb %} selected{% endif %}>Any topic</option>
+                        <option value=""{% if not contentItems.topic %} selected{% endif %}>Any topic</option>
                       {% endif %}
-                      <option value="{{ breadcrumb }}"{% if breadcrumb == topic %} selected{% endif %}>{{ breadcrumb }}</option>
+                      <option value="{{ breadcrumb }}"{% if breadcrumb == contentItems.topic %} selected{% endif %}>{{ breadcrumb }}</option>
                     {% endfor %}
 									</select>
 								</div>
               </div>
             </div>
-
-            {% set statuses = ["draft", "submitted", "scheduled", "published", "force published", "withdrawn"] %}
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
               <div class="govuk-form-group">
@@ -73,7 +71,7 @@
                   Status
                 </label>
                 <select id="status" name="status" class="govuk-c-select">
-                  {% for entry in statuses %}
+                  {% for entry in contentItems.statuses %}
                     {% if loop.index == 1 %}
                       <option value="" selected>Any status</option>
                     {% endif %}
@@ -246,7 +244,7 @@
             {% for heading in contentItems.headings %}
             {% if heading.key == 'title' %}
               {% set headingWidth = 'heading-width-340' %}
-            {% elif heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
+            {% elif heading.key == 'updated_at' or heading.key == 'timeline_of_unique_pageviews' or heading.key == 'pageviews_per_person' %}
               {% set headingWidth = 'heading-width-100' %}
             {% else %}
               {% set headingWidth = null %}
@@ -264,18 +262,18 @@
               <tr>
                 {% for cell in row.cells %}
                   <td>
-                    {% if loop.index == 1 %}
-                    <a href="https://www.gov.uk{{ row.basePath }}">{{ cell }}</a>
+                    {% if cell.key == 'title' %}
+                    <a href="https://www.gov.uk{{ row.basePath }}">{{ cell.value }}</a>
                     <p class="content-item-ctas">
                       <a href="{{ row.viewDataUrl }}">View data</a>
                       <a href="#">Edit page</a>
                     </p>
-                    {% elif loop.index == 2 or loop.index == 3 %}
-                    {{ cell | title | replace("_", " ") }}
-                    {% elif loop.index == 6 %}
+                    {% elif cell.key == 'updated_at' %}
+                    {{ cell.value | date("DD MMM YYYY") }}
+                    {% elif cell.key == 'timeline_of_unique_pageviews' %}
                     <img src="/public/images/fake_sparkline_{{ [1,2,3,4] | random }}.png" alt="" width="138" />
                     {% else %}
-                    {{ cell }}
+                    {{ cell.value }}
                     {% endif %}
                   </td>
                 {% endfor %}
