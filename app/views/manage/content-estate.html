@@ -28,40 +28,40 @@
     </div>
   </div>
 
-  <div class="govuk-o-grid">
-    <div class="govuk-o-grid__item govuk-o-grid__item--full">
 
-      <div class="filter-section filter-section-customers">
+  <form action="" method="get">
+    <div class="govuk-o-grid">
+      <div class="govuk-o-grid__item govuk-o-grid__item--full">
 
-          <form action="" method="get">
+        <div class="filter-section filter-section-customers">
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
-							<div class="govuk-!-mb-r6">
-								<label class="govuk-c-label" for="government-organisations">Organisation</label>
-								<select id="government-organisations" name="organisation" class="govuk-c-select">
+              <div class="govuk-!-mb-r6">
+                <label class="govuk-c-label" for="government-organisations">Organisation</label>
+                <select id="government-organisations" name="organisation" class="govuk-c-select">
                   {% for entry in organisations.acronyms %}
                     {% if loop.index == 1 %}
                       <option value=""{% if not contentItems.organisation %} selected{% endif %}>Any organisation</option>
                     {% endif %}
                     <option value="{{ entry }}"{% if entry === contentItems.organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
                   {% endfor %}
-								</select>
-							</div>
+                </select>
+              </div>
             </div>
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
               <div class="govuk-form-group">
-								<div class="govuk-!-mb-r6">
-									<label class="govuk-c-label" for="topics">Topic</label>
-									<select id="topics" name="topic" class="govuk-c-select">
-										{% for breadcrumb in topicBreadcrumbs %}
+                <div class="govuk-!-mb-r6">
+                  <label class="govuk-c-label" for="topics">Topic</label>
+                  <select id="topics" name="topic" class="govuk-c-select">
+                    {% for breadcrumb in topicBreadcrumbs %}
                       {% if loop.index == 1 %}
                         <option value=""{% if not contentItems.topic %} selected{% endif %}>Any topic</option>
                       {% endif %}
                       <option value="{{ breadcrumb }}"{% if breadcrumb == contentItems.topic %} selected{% endif %}>{{ breadcrumb }}</option>
                     {% endfor %}
-									</select>
-								</div>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -160,81 +160,81 @@
             <!-- sorting values for table headers -->
             <input type="hidden" name="sortBy" value="{{ contentItems.sortBy }}" />
             <input type="hidden" name="sortDirection" value="{{ contentItems.sortDirection }}" />
-          </form>
-        </div>
+          </div>
 
-    </div>
-
-    <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-      <div aria-live="assertive" id="js-search-results-info">
-        <div class="result-info">
-          <p class="result-count">
-            <strong>{{ contentItems.rows | length }}</strong> Content items
-          </p>
-          <p class="result-range">
-            Results per page <a href="#" class="result-range-option">20</a> <strong class="result-range-option">50</strong> <a href="#" class="result-range-option">100</a>
-          </p>
-        </div>
-
-        {% set downloadLink = {
-          'href': '#',
-          'text': 'Download this data'
-        } %}
-
-        <a class="app-c-download-link" href="{{ downloadLink.href }}">
-          <svg class="app-c-download-link__icon"
-            aria-hidden="true"
-            viewBox="0 0 25 25"
-            height="25"
-            width="25"
-            xmlns="http://www.w3.org/2000/svg">
-            <g>
-            <path d="M23 5h2v20H5v-2h18V5z"/>
-            <path d="M0 0h20v20H0z"/>
-            </g>
-          </svg>
-          {{ downloadLink.text }}
-        </a> 
-
-        <a href="#" class="sharing-link">Copy address to share these results with another user</a>
       </div>
-    </div>
 
-    <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds filter-section table-filters">
-      <div class="govuk-o-grid">
-        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-          <div class="govuk-form-group">
-            <label class="govuk-c-label" for="column-grouping">
-              Show me data about content
-            </label>
-            <select name="column-grouping" class="govuk-c-select" id="column-grouping">
-              {% for columnGrouping in contentItems.columnGroupings %}
-                <option value="{{ columnGrouping }}"{% if columnGrouping === contentItems.columnGrouping %} selected{% endif %}>{{ columnGrouping | title | replace("_", " ") }}</option>
-              {% endfor %}
-            </select>
+      <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+        <div aria-live="assertive" id="js-search-results-info">
+          <div class="result-info">
+            <p class="result-count">
+              <strong>{{ contentItems.rows | length }}</strong> Content items
+            </p>
+            <p class="result-range">
+              Results per page <a href="#" class="result-range-option">20</a> <strong class="result-range-option">50</strong> <a href="#" class="result-range-option">100</a>
+            </p>
           </div>
-        </div>
 
-        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-          <div class="govuk-form-group">
-            <label class="govuk-c-label" for="collection-date-range">
-              Show me data about content from
-            </label>
-            <select name="collection-date-range" class="govuk-c-select" id="collection-date-range">
-              {% for collectionDateRange in contentItems.collectionDateRanges %}
-                <option value="{{ collectionDateRange }}"{% if collectionDateRange === contentItems.collectionDateRange %} selected{% endif %}>{{ collectionDateRange | title | replace("_", " ") }}</option>
-              {% endfor %}
-            </select>
+          {% set downloadLink = {
+            'href': '#',
+            'text': 'Download this data'
+          } %}
+
+          <a class="app-c-download-link" href="{{ downloadLink.href }}">
+            <svg class="app-c-download-link__icon"
+              aria-hidden="true"
+              viewBox="0 0 25 25"
+              height="25"
+              width="25"
+              xmlns="http://www.w3.org/2000/svg">
+              <g>
+              <path d="M23 5h2v20H5v-2h18V5z"/>
+              <path d="M0 0h20v20H0z"/>
+              </g>
+            </svg>
+            {{ downloadLink.text }}
+          </a> 
+
+          <a href="#" class="sharing-link">Copy address to share these results with another user</a>
+        </div>
+      </div>
+
+      <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds filter-section table-filters">
+        <div class="govuk-o-grid">
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="column-grouping">
+                Show me data about content
+              </label>
+              <select name="column-grouping" class="govuk-c-select" id="column-grouping">
+                {% for columnGrouping in contentItems.columnGroupings %}
+                  <option value="{{ columnGrouping }}"{% if columnGrouping === contentItems.columnGrouping %} selected{% endif %}>{{ columnGrouping | title | replace("_", " ") }}</option>
+                {% endfor %}
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-          <button class="govuk-c-button filter-button filter-button-2">Get data</button>
-        </div>
-      </div> <!-- end of govuk-o-grid -->
-      
-    </div>
-  </div> <!-- end of govuk-o-grid -->
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+            <div class="govuk-form-group">
+              <label class="govuk-c-label" for="collection-date-range">
+                Show me data about content from
+              </label>
+              <select name="collection-date-range" class="govuk-c-select" id="collection-date-range">
+                {% for collectionDateRange in contentItems.collectionDateRanges %}
+                  <option value="{{ collectionDateRange }}"{% if collectionDateRange === contentItems.collectionDateRange %} selected{% endif %}>{{ collectionDateRange | title | replace("_", " ") }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
+            <button class="govuk-c-button filter-button filter-button-2">Get data</button>
+          </div>
+        </div> <!-- end of govuk-o-grid -->
+        
+      </div>
+    </div> <!-- end of govuk-o-grid -->
+  </form>
 
   <div class="govuk-o-grid">
     <div class="govuk-o-grid__item govuk-o-grid__item--full">
