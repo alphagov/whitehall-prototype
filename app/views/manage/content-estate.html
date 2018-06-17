@@ -36,44 +36,43 @@
           <form action="" method="get">
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
-              <div class="govuk-form-group">
-                <label class="govuk-c-label" for="organisation">
-                  Organisation
-                </label>
-                <input class="govuk-c-input" id="organisation" name="organisation" type="text" value="{{ contentItems.org.url }}">
-              </div>
+							<div class="govuk-!-mb-r6">
+								<label class="govuk-c-label" for="government-organisations">Organisation</label>
+								<select id="government-organisations" name="organisation" class="govuk-c-select">
+                  {% for entry in organisations.acronyms %}
+                    {% if loop.index == 1 %}
+                      <option value=""{% if not organisation %} selected{% endif %}>Any organisation</option>
+                    {% endif %}
+                    <option value="{{ entry }}"{% if entry === organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
+                  {% endfor %}
+								</select>
+							</div>
             </div>
 
             <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
               <div class="govuk-form-group">
-                <label class="govuk-c-label" for="topic">
-                  Topic
+								<div class="govuk-!-mb-r6">
+									<label class="govuk-c-label" for="topics">Topic</label>
+									<select id="topics" name="topic" class="govuk-c-select">
+										{% include "../includes/topics-select-options.html" %}
+									</select>
+								</div>
+              </div>
+            </div>
+
+            {% set statuses = ["draft", "submitted", "scheduled", "published", "force published", "withdrawn"] %}
+
+            <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
+              <div class="govuk-form-group">
+                <label class="govuk-c-label" for="status">
+                  Status
                 </label>
-                <select name="topic" class="govuk-c-select" id="topic">
-                  <option value="" selected>All</option>
-                  {% for topic in [
-                    "government",
-                    "transport",
-                    "going-and-being-abroad-old",
-                    "life-circumstances",
-                    "work",
-                    "entering-staying-uk",
-                    "international",
-                    "health-and-social-care",
-                    "welfare",
-                    "business",
-                    "housing-local-and-community",
-                    "crime-justice-and-law",
-                    "defence",
-                    "education",
-                    "money",
-                    "regional-and-local-government",
-                    "environment",
-                    "society-and-culture",
-                    "childcare-parenting",
-                    "corporate-information"
-                  ] %}
-                    <option value="{{ topic }}">{{ topic | title | replace("-", " ") }}</option>
+                <select id="status" name="status" class="govuk-c-select">
+                  {% for entry in statuses %}
+                    {% if loop.index == 1 %}
+                      <option value="" selected>Any status</option>
+                    {% endif %}
+                    <option value="{{ entry }}"{% if entry === contentItems.status %} selected{% endif %}>{{ entry | capitalize | replace("_", " ") }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -85,22 +84,6 @@
                   Title
                 </label>
                 <input class="govuk-c-input" id="title" name="title" type="text" value="{{ contentItems.title }}">
-              </div>
-            </div>
-
-            <div class="govuk-o-grid__item govuk-o-grid__item--one-half filter-fields">
-              <div class="govuk-form-group">
-                <label class="govuk-c-label" for="title">
-                  Title
-                </label>
-                <select name="status" class="govuk-c-select" id="status">
-                  <option value="" selected>All</option>
-                  {% for status in [
-                    ""
-                  ] %}
-                    <option value="{{ status }}">{{ status | title | replace("-", " ") }}</option>
-                  {% endfor %}
-                </select>
               </div>
             </div>
 
@@ -117,8 +100,8 @@
                     </label>
                     <select name="content-type" class="govuk-c-select" id="content-type">
                       <option value="">All</option>
-                      {% for contentType in contentItems.contentTypes %}
-                        <option value="{{ contentType }}"{% if contentType === contentItems.contentType %} selected{% endif %}>{{ contentType | title | replace("_", " ") }}</option>
+                      {% for breadcrumb in contentTypeBreadcrumbs %}
+                        <option value="{{ breadcrumb }}"{% if contentItems.contentType === breadcrumb %} selected{% endif %}>{{ breadcrumb | replace("_", " ") }}</option>
                       {% endfor %}
                     </select>
                   </div>
@@ -179,6 +162,36 @@
 
     </div>
 
+		{% block page_scripts %}
+		<script>
+			govukGovernmentOrganisationsAutocomplete({
+				selectElement: document.getElementById('government-organisations'),
+				showAllValues: false,
+				minLength: 2,
+				displayMenu: 'overlay',
+				defaultValue: ''
+			});
+
+			accessibleAutocomplete.enhanceSelectElement({
+				selectElement: document.getElementById('content-type'),
+				id: 'content-type',
+				showAllValues: true,
+				minLength: 2,
+				displayMenu: 'overlay',
+				defaultValue: ''
+			});
+
+			accessibleAutocomplete.enhanceSelectElement({
+				selectElement: document.getElementById('topics'),
+				id: 'topics',
+				showAllValues: true,
+				minLength: 2,
+				displayMenu: 'overlay',
+				defaultValue: ''
+			});
+		</script>
+		{% endblock %}
+
     <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
       <div aria-live="assertive" id="js-search-results-info">
         <div class="result-info">
@@ -209,6 +222,8 @@
           </svg>
           {{ downloadLink.text }}
         </a> 
+
+        <a href="#" class="sharing-link">Copy address to share these results with another user</a>
       </div>
     </div>
 
@@ -217,10 +232,10 @@
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <div class="govuk-form-group">
             <label class="govuk-c-label" for="column-grouping">
-              Show me data metrics for
+              Show me data about content
             </label>
             <select name="column-grouping" class="govuk-c-select" id="column-grouping">
-              {% for contentType in contentItems.columnGroupings %}
+              {% for columnGrouping in contentItems.columnGroupings %}
                 <option value="{{ columnGrouping }}"{% if columnGrouping === contentItems.columnGrouping %} selected{% endif %}>{{ columnGrouping | title | replace("_", " ") }}</option>
               {% endfor %}
             </select>
@@ -230,10 +245,10 @@
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
           <div class="govuk-form-group">
             <label class="govuk-c-label" for="collection-date-range">
-              Show me data between
+              Show me data about content from
             </label>
             <select name="collection-date-range" class="govuk-c-select" id="collection-date-range">
-              {% for contentType in contentItems.collectionDateRanges %}
+              {% for collectionDateRange in contentItems.collectionDateRanges %}
                 <option value="{{ collectionDateRange }}"{% if collectionDateRange === contentItems.collectionDateRange %} selected{% endif %}>{{ collectionDateRange | title | replace("_", " ") }}</option>
               {% endfor %}
             </select>
@@ -241,7 +256,7 @@
         </div>
 
         <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
-          <button class="govuk-c-button filter-button filter-button-2">Filter</button>
+          <button class="govuk-c-button filter-button filter-button-2">Get data</button>
         </div>
       </div> <!-- end of govuk-o-grid -->
       

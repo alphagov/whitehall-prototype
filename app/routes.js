@@ -6,6 +6,8 @@ const moment = require('moment');
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
 const dates = require('../lib/dates.js')
+const contentTypes = require('../lib/prototype-manager/content_types.js')
+const organisations = require('../lib/prototype-manager/organisations.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const Table = require('../lib/prototype-manager/data_tables.js').Table;
 const Org = require('../lib/prototype-manager/data_tables.js').Org;
@@ -285,14 +287,21 @@ router.get('/manage/:org/content-estate/', function(req, res) {
     'filtering': {
       'startDate': req.query['start-date'],
       'endDate': req.query['end-date'],
-      'contentType': req.query['content-type']
+      'contentType': req.query['content-type'],
+      'collectionDataRange': req.query['collection-date-range'],
+      'collumnGrouping': req.query['collumn-grouping'],
+      'publishedDateRange': req.query['published-date-range'],
+      'lastUpdatedDateRange': req.query['last-updated-date-range']
     },
     'org': org
   });
 
+  organisations.putOrgAtTop('hmcts');
+  
   res.render('manage/content-estate', {
     'contentItems': table,
-    'org': org
+    'organisations': organisations,
+    'contentTypeBreadcrumbs': contentTypes.asBreadcrumbs()
   });
 });
 

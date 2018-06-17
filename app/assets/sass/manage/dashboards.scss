@@ -100,6 +100,12 @@
   float: none;
 }
 
+.sharing-link {
+  display: block;
+  @include govuk-font-bold-19;
+  max-width: 420px;
+}
+
 /* extensions to filter-fields */
 .filter-section {
   margin-top: 0;
@@ -239,4 +245,10 @@ details {
 	@include mq($from: tablet) {
 		width: percentage(3 / 4);
 	}
+}
+
+/* exntensions to autocomplete */
+
+.autocomplete__input {
+  background: white;
 }
