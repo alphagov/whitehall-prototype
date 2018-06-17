@@ -167,39 +167,6 @@
 
     </div>
 
-		{% block page_scripts %}
-		<script>
-			accessibleAutocomplete.enhanceSelectElement({
-				selectElement: document.getElementById('government-organisations'),
-				showAllValues: false,
-				minLength: 2,
-				displayMenu: 'overlay',
-				defaultValue: '',
-        placeholder: 'Any organisation'
-			});
-
-			accessibleAutocomplete.enhanceSelectElement({
-				selectElement: document.getElementById('content-type'),
-				id: 'content-type',
-				showAllValues: true,
-				minLength: 2,
-				displayMenu: 'overlay',
-				defaultValue: '',
-        placeholder: 'Any document type'
-			});
-
-			accessibleAutocomplete.enhanceSelectElement({
-				selectElement: document.getElementById('topics'),
-				id: 'topics',
-				showAllValues: true,
-				minLength: 2,
-				displayMenu: 'overlay',
-				defaultValue: '',
-        placeholder: 'Any topic'
-			});
-		</script>
-		{% endblock %}
-
     <div class="govuk-o-grid__item govuk-o-grid__item--one-third">
       <div aria-live="assertive" id="js-search-results-info">
         <div class="result-info">
@@ -320,4 +287,8 @@
     </div>
   </div><!-- end of govuk-o-grid -->
 </main>
+{% endblock %}
+
+{% block page_scripts %}
+  <script type="text/javascript" src="/public/javascripts/content-estate.js"></script>
 {% endblock %}
