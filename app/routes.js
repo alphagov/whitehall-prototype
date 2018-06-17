@@ -8,6 +8,7 @@ const marked = require('../lib/marked.js')
 const dates = require('../lib/dates.js')
 const contentTypes = require('../lib/prototype-manager/content_types.js')
 const organisations = require('../lib/prototype-manager/organisations.js')
+const taxonomy = require('../lib/prototype-manager/taxonomy.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const Table = require('../lib/prototype-manager/data_tables.js').Table;
 const Org = require('../lib/prototype-manager/data_tables.js').Org;
@@ -301,7 +302,8 @@ router.get('/manage/:org/content-estate/', function(req, res) {
   res.render('manage/content-estate', {
     'contentItems': table,
     'organisations': organisations,
-    'contentTypeBreadcrumbs': contentTypes.asBreadcrumbs()
+    'contentTypeBreadcrumbs': contentTypes.asBreadcrumbs(),
+    'topicBreadcrumbs': taxonomy.branchesAsBreadcrumbs()
   });
 });
 

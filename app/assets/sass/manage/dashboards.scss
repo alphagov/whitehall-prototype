@@ -61,6 +61,10 @@
 }
 
 /* extensions to data-tables styles */
+.data-table {
+  background: white;
+}
+
 .heading-width-340 {
   min-width: 340px;
 }
@@ -145,41 +149,6 @@
 	float: right;
 	display: inline-block;
 	padding-top: 7px;
-}
-
-/* Hack to make the first column fixed. From: https://codepen.io/paulobrien/pen/gWoVzN */
-.table-scroll {
-  position: relative;
-	overflow: hidden;
-
-	.table-wrap {
-		overflow: auto;
-	}
-
-  .clone {
-		position: absolute;
-		top: 0;
-		left: 0;
-    pointer-events: none;
-  }
-
-	.clone th, .clone td {
-		visibility: hidden
-	}
-
-	.clone tbody th {
-		visibility: visible;
-	}
-
-	.clone .fixed-side {
-		visibility: visible;
-		background: white;
-    pointer-events: auto;
-	}
-
-	.clone thead, .clone tfoot{
-		background: transparent;
-	}
 }
 
 /* extensions to navigation */
