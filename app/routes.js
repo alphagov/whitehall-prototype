@@ -276,7 +276,7 @@ router.get('/manage', function(req, res) {
 });
 
 router.get('/manage/content-estate/', function(req, res) {
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/round3/collection_from_2018-06-15.json'));
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json'));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
   const table = new Table(contentItems, {
@@ -291,7 +291,7 @@ router.get('/manage/content-estate/', function(req, res) {
       'contentType': req.query['content-type'],
       'topic': req.query['topic'],
       'status': req.query['status'],
-      'collectionDataRange': req.query['collection-date-range'],
+      'collectionDateRange': req.query['collection-date-range'],
       'columnGrouping': req.query['column-grouping'],
       'publishedDateRange': req.query['published-date-range'],
       'lastUpdatedDateRange': req.query['last-updated-date-range']
