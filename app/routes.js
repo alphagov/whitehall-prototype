@@ -279,11 +279,15 @@ router.get('/manage/content-estate/', function(req, res) {
   let fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
 
   if (req.query['organisation']) {
-    if (req.query['topic']) {
-      fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
+    fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_topic_all.json';
+  }
+
+  if (req.query['title']) {
+    if (req.query['title'].toLowerCase() === 'jury service') {
+      fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18_title_jury_service.json';
     }
-    else {
-      fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
+    if (req.query['title'].toLowerCase().match(/employment\sappeal\stribunal/) !== null) {
+      fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18_title_employment_tribunal.json';
     }
   }
 
@@ -300,6 +304,7 @@ router.get('/manage/content-estate/', function(req, res) {
       'endDate': req.query['end-date'],
       'organisation': req.query['organisation'],
       'contentType': req.query['content-type'],
+      'title': req.query['title'],
       'topic': req.query['topic'],
       'editor': req.query['editor'],
       'status': req.query['status'],
