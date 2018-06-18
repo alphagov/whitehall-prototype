@@ -276,7 +276,18 @@ router.get('/manage', function(req, res) {
 });
 
 router.get('/manage/content-estate/', function(req, res) {
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json'));
+  let fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
+
+  if (req.query['organisation']) {
+    if (req.query['topic']) {
+      fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
+    }
+    else {
+      fileName = '../lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
+    }
+  }
+
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, fileName));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
   const table = new Table(contentItems, {
@@ -290,6 +301,7 @@ router.get('/manage/content-estate/', function(req, res) {
       'organisation': req.query['organisation'],
       'contentType': req.query['content-type'],
       'topic': req.query['topic'],
+      'editor': req.query['editor'],
       'status': req.query['status'],
       'collectionDateRange': req.query['collection-date-range'],
       'columnGrouping': req.query['column-grouping'],
