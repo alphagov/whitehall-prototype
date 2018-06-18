@@ -43,7 +43,7 @@
                     {% if loop.index == 1 %}
                       <option value=""{% if not contentItems.organisation %} selected{% endif %}>Any organisation</option>
                     {% endif %}
-                    <option value="{{ entry }}"{% if entry === contentItems.organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
+                    <option value="{{ entry }}"{% if entry == contentItems.organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -75,7 +75,7 @@
                     {% if loop.index == 1 %}
                       <option value="" selected>Any status</option>
                     {% endif %}
-                    <option value="{{ entry }}"{% if entry === contentItems.status %} selected{% endif %}>{{ entry | capitalize | replace("_", " ") }}</option>
+                    <option value="{{ entry }}"{% if entry == contentItems.status %} selected{% endif %}>{{ entry | capitalize | replace("_", " ") }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -102,9 +102,12 @@
                       Document type
                     </label>
                     <select name="content-type" class="govuk-c-select" id="content-type">
-                      <option value="">All</option>
                       {% for breadcrumb in contentTypeBreadcrumbs %}
-                        <option value="{{ breadcrumb }}"{% if contentItems.contentType === breadcrumb %} selected{% endif %}>{{ breadcrumb | replace("_", " ") }}</option>
+                        {% if loop.index == 1 %}
+                          <option value=""{% if not contentItems.contentType %} selected{% endif %}>Any document type</option>
+                        {% else %}
+                          <option value="{{ breadcrumb }}"{% if contentItems.contentType == breadcrumb %} selected{% endif %}>{{ breadcrumb | replace("_", " ") }}</option>
+                        {% endif %}
                       {% endfor %}
                     </select>
                   </div>
@@ -126,7 +129,7 @@
                     </label>
                     <select name="published-date-range" class="govuk-c-select" id="published-date-range">
                       {% for publishedDateRange in contentItems.publishedDateRanges %}
-                        <option value="{{ publishedDateRange }}"{% if publishedDateRange === contentItems.publishedDateRange %} selected{% endif %}>{{ publishedDateRange | title | replace("_", " ") }}</option>
+                        <option value="{{ publishedDateRange }}"{% if publishedDateRange == contentItems.publishedDateRange %} selected{% endif %}>{{ publishedDateRange | title | replace("_", " ") }}</option>
                       {% endfor %}
                     </select>
                   </div>
@@ -139,7 +142,7 @@
                     </label>
                     <select name="last-updated-date-range" class="govuk-c-select" id="last-updated-date-range">
                       {% for lastUpdatedDateRange in contentItems.lastUpdatedDateRanges %}
-                        <option value="{{ lastUpdatedDateRange }}"{% if lastUpdatedDateRange === contentItems.lastUpdatedDateRange %} selected{% endif %}>{{ lastUpdatedDateRange | title | replace("_", " ") }}</option>
+                        <option value="{{ lastUpdatedDateRange }}"{% if lastUpdatedDateRange == contentItems.lastUpdatedDateRange %} selected{% endif %}>{{ lastUpdatedDateRange | title | replace("_", " ") }}</option>
                       {% endfor %}
                     </select>
                   </div>
@@ -208,7 +211,7 @@
               </label>
               <select name="column-grouping" class="govuk-c-select" id="column-grouping">
                 {% for columnGrouping in contentItems.columnGroupings %}
-                  <option value="{{ columnGrouping }}"{% if columnGrouping === contentItems.columnGrouping %} selected{% endif %}>{{ columnGrouping | title | replace("_", " ") }}</option>
+                  <option value="{{ columnGrouping }}"{% if columnGrouping == contentItems.columnGrouping %} selected{% endif %}>{{ columnGrouping | title | replace("_", " ") }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -221,7 +224,7 @@
               </label>
               <select name="collection-date-range" class="govuk-c-select" id="collection-date-range">
                 {% for collectionDateRange in contentItems.collectionDateRanges %}
-                  <option value="{{ collectionDateRange }}"{% if collectionDateRange === contentItems.collectionDateRange %} selected{% endif %}>{{ collectionDateRange | title | replace("_", " ") }}</option>
+                  <option value="{{ collectionDateRange }}"{% if collectionDateRange == contentItems.collectionDateRange %} selected{% endif %}>{{ collectionDateRange | title | replace("_", " ") }}</option>
                 {% endfor %}
               </select>
             </div>

@@ -10,7 +10,7 @@ accessibleAutocomplete.enhanceSelectElement({
 accessibleAutocomplete.enhanceSelectElement({
 	selectElement: document.getElementById('content-type'),
 	id: 'content-type',
-	showAllValues: true,
+	showAllValues: false,
 	minLength: 2,
 	displayMenu: 'overlay',
 	defaultValue: '',
@@ -20,7 +20,7 @@ accessibleAutocomplete.enhanceSelectElement({
 accessibleAutocomplete.enhanceSelectElement({
 	selectElement: document.getElementById('topics'),
 	id: 'topics',
-	showAllValues: true,
+	showAllValues: false,
 	minLength: 2,
 	displayMenu: 'overlay',
 	defaultValue: '',
