@@ -279,17 +279,17 @@ router.get('/manage/content-estate/', function(req, res) {
   let fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
 
   if (req.query['organisation']) {
-    fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_dvla_with_topics.json';
+    fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_with_topics.json';
   }
 
   if (req.query['title']) {
     let lowerTitle = req.query['title'].toLowerCase();
-    let titleWords = lowerTitle.split(' ');
-    if (lowerTitle.match('traffic commissioners: vocational driver conduct') !== null) {
-      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_title_traffic_commissioners.json';
+    let titleWords = lowerTitle.split(/\s+/);
+    if (lowerTitle.match(/jury\s{1}service/) !== null) {
+      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_with_title_jury_service.json';
     }
-    else if (titleWords.includes('buses') || titleWords.includes('driving') || titleWords.includes('tests') || titleWords.includes('rules')) {
-      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_title_driving_test_rules.json';
+    else if (titleWords.includes('employment') || titleWords.includes('appeal') || titleWords.includes('tribunal')) {
+      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_with_title_appeal_employment_tribunal.json';
     }
   }
 
