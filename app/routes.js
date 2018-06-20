@@ -317,7 +317,7 @@ router.get('/manage/content-estate/', function(req, res) {
     },
   });
 
-  organisations.putOrgAtTop('hmcts');
+  organisations.putOrgAtTop('HM Courts & Tribunals Service');
   
   res.render('manage/content-estate', {
     'contentItems': table,

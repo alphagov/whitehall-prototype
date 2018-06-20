@@ -39,11 +39,11 @@
               <div class="govuk-!-mb-r6">
                 <label class="govuk-c-label" for="government-organisations">Organisation</label>
                 <select id="government-organisations" name="organisation" class="govuk-c-select">
-                  {% for entry in organisations.acronyms %}
+                  {% for entry in organisations.slugs %}
                     {% if loop.index == 1 %}
                       <option value=""{% if not contentItems.organisation %} selected{% endif %}>Any organisation</option>
                     {% endif %}
-                    <option value="{{ entry }}"{% if entry == contentItems.organisation %} selected{% endif %}>{{ organisations.names[loop.index0] }}</option>
+                    <option value="{{ entry }}"{% if entry == contentItems.organisation %} selected{% endif %}>{{ organisations.titles[loop.index0] }}</option>
                   {% endfor %}
                 </select>
               </div>
