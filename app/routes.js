@@ -279,17 +279,17 @@ router.get('/manage/content-estate/', function(req, res) {
   let fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
 
   if (req.query['organisation']) {
-    fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_with_topics.json';
+    fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_office-for-product-safety-and-standards_with_topics.json';
   }
 
   if (req.query['title']) {
     let lowerTitle = req.query['title'].toLowerCase();
     let titleWords = lowerTitle.split(/\s+/);
-    if (lowerTitle.match(/jury\s{1}service/) !== null) {
-      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_with_title_jury_service.json';
+    if (lowerTitle.match(/consumer\s{1}law\s{1}advice\s{1}for\s{1}providers\s{1}and\s{1}students/) !== null) {
+      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_office-for-product-safety-and-standards_consumer-advice-law.json';
     }
-    else if (titleWords.includes('employment') || titleWords.includes('appeal') || titleWords.includes('tribunal')) {
-      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_hmcts_with_title_appeal_employment_tribunal.json';
+    else if (titleWords.includes('cma') || titleWords.includes('airbnb') || titleWords.includes('review')) {
+      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_office-for-product-safety-and-standards_cma-welcomes-airbnb.json';
     }
   }
 
@@ -317,7 +317,7 @@ router.get('/manage/content-estate/', function(req, res) {
     },
   });
 
-  organisations.putOrgAtTop('HM Courts & Tribunals Service');
+  organisations.putOrgAtTop('Office for Product Safety and Standards');
   
   res.render('manage/content-estate', {
     'contentItems': table,
