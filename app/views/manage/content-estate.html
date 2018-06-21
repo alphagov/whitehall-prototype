@@ -58,7 +58,7 @@
                       {% if loop.index == 1 %}
                         <option value=""{% if not contentItems.topic %} selected{% endif %}>Any topic</option>
                       {% endif %}
-                      <option value="{{ breadcrumb }}"{% if breadcrumb == contentItems.topic %} selected{% endif %}>{{ breadcrumb }}</option>
+                      <option value="{{ breadcrumb.basePath }}"{% if breadcrumb.basePath == contentItems.topic %} selected{% endif %}>{{ breadcrumb.label }}</option>
                     {% endfor %}
                   </select>
                 </div>
