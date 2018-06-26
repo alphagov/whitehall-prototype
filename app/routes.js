@@ -6,6 +6,9 @@ const moment = require('moment');
 const retext = require('../lib/retext.js')
 const marked = require('../lib/marked.js')
 const dates = require('../lib/dates.js')
+const contentTypes = require('../lib/prototype-manager/content_types.js')
+const organisations = require('../lib/prototype-manager/organisations.js')
+const taxonomy = require('../lib/prototype-manager/taxonomy.js')
 const Manager_api = require('../lib/prototype-manager/api.js')
 const Table = require('../lib/prototype-manager/data_tables.js').Table;
 const Org = require('../lib/prototype-manager/data_tables.js').Org;
@@ -272,9 +275,25 @@ router.get('/manage', function(req, res) {
     });
 });
 
-router.get('/manage/:org/content-estate/', function(req, res) {
-  const org = new Org(req.params.org);
-  const contentItemsEstateFile = fs.readFileSync(path.resolve(__dirname, `../lib/prototype-manager/data/${req.params.org}_raw_data.json`));
+router.get('/manage/content-estate/', function(req, res) {
+  let fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18.json';
+
+  if (req.query['organisation']) {
+    fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_office-for-product-safety-and-standards_with_topics.json';
+  }
+
+  if (req.query['title']) {
+    let lowerTitle = req.query['title'].toLowerCase();
+    let titleWords = lowerTitle.split(/\s+/);
+    if (lowerTitle.match(/consumer\s{1}law\s{1}advice\s{1}for\s{1}providers\s{1}and\s{1}students/) !== null) {
+      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_office-for-product-safety-and-standards_consumer-advice-law.json';
+    }
+    else if (titleWords.includes('cma') || titleWords.includes('airbnb') || titleWords.includes('review')) {
+      fileName = 'lib/prototype-manager/data/round3/collection_from_2018-06-18_office-for-product-safety-and-standards_cma-welcomes-airbnb.json';
+    }
+  }
+
+  const contentItemsEstateFile = fs.readFileSync(path.resolve(process.cwd(), fileName));
   const contentItems = JSON.parse(contentItemsEstateFile);
 
   const table = new Table(contentItems, {
@@ -285,14 +304,26 @@ router.get('/manage/:org/content-estate/', function(req, res) {
     'filtering': {
       'startDate': req.query['start-date'],
       'endDate': req.query['end-date'],
-      'contentType': req.query['content-type']
+      'organisation': req.query['organisation'],
+      'contentType': req.query['content-type'],
+      'title': req.query['title'],
+      'topic': req.query['topic'],
+      'editor': req.query['editor'],
+      'status': req.query['status'],
+      'collectionDateRange': req.query['collection-date-range'],
+      'columnGrouping': req.query['column-grouping'],
+      'publishedDateRange': req.query['published-date-range'],
+      'lastUpdatedDateRange': req.query['last-updated-date-range']
     },
-    'org': org
   });
 
+  organisations.putOrgAtTop('Office for Product Safety and Standards');
+  
   res.render('manage/content-estate', {
     'contentItems': table,
-    'org': org
+    'organisations': organisations,
+    'contentTypeBreadcrumbs': contentTypes.asBreadcrumbs(),
+    'topicBreadcrumbs': taxonomy.branchesAsBreadcrumbs()
   });
 });
 

@@ -61,6 +61,78 @@
 }
 
 /* extensions to data-tables styles */
+.data-table {
+  background: white;
+
+  thead th a {
+		position: relative;
+		padding-right: 15px;
+		color: $govuk-black;
+		font-weight: bold;
+
+		&,
+		&:active,
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+
+		&:after,
+		&:before {
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			content: "";
+			display: block;
+			margin-left: 5px;
+			position: absolute;
+			right: 0;
+			top: 7px; 
+		}
+
+		&:after {
+			border-bottom: 8px solid #005ea5;
+		}
+
+		&:before {
+			border-top: 8px solid #005ea5;
+			top: 18px;
+		}
+
+		&.sort-link:before,
+		&.sort-link.asc:before,
+		&.sort-link.desc:before {
+			border-top: none;
+			content: none;
+		}
+
+		&.sort-link.desc:after {
+			border-bottom: none;
+		}
+
+		&.info-link {
+			display: block;
+			color: $govuk-link-colour;
+			font-weight: normal;
+
+			&,
+			&:active,
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+
+			&:before,
+			&:after,
+			&.asc:before,
+			&.desc:before {
+				border-top: none;
+				content: none;
+			}
+		}
+
+  }
+}
+
 .heading-width-340 {
   min-width: 340px;
 }
@@ -77,42 +149,143 @@
   }
 }
 
-/* Hack to make the first column fixed. From: https://codepen.io/paulobrien/pen/gWoVzN */
-.table-scroll {
-  position: relative;
-	overflow: hidden;
+.result-info {
+  padding-bottom: 0;
 
-	.table-wrap {
-		overflow: auto;
-	}
-
-  .clone {
-		position: absolute;
-		top: 0;
-		left: 0;
-    pointer-events: none;
+  .result-count,
+  .result-range {
+    @include govuk-font-regular-19;
+    margin-bottom: 0;
   }
 
-	.clone th, .clone td {
-		visibility: hidden
-	}
+  .result-range-option {
+    margin-left: $govuk-gutter-half;
+  }
+}
 
-	.clone tbody th {
-		visibility: visible;
-	}
+.result-info .result-range,
+.app-c-download-link {
+  margin-top: 10px;
+}
 
-	.clone .fixed-side {
-		visibility: visible;
-		background: white;
-    pointer-events: auto;
-	}
+.app-c-download-link {
+  float: none;
+}
 
-	.clone thead, .clone tfoot{
-		background: transparent;
-	}
+.sharing-link {
+  display: block;
+  @include govuk-font-bold-19;
+  max-width: 420px;
 }
 
 /* extensions to filter-fields */
+.filter-section {
+  margin-top: 0;
+	padding: $govuk-gutter 0;
+
+  .govuk-c-label {
+    @include govuk-font-bold-19;
+  }
+}
+
+.govuk-form-group {
+  margin-bottom: $govuk-gutter-half;
+}
+
 .filter-fields-button {
   float: right;
+}
+
+.filter-button-2 {
+	margin-top: 0;
+}
+
+.table-filters {
+  margin-top: $govuk-gutter-half;
+  background: transparent;
+
+  .govuk-c-label {
+    @include govuk-font-bold-19;
+  }
+
+	.filter-button-2 {
+		margin-top: 25px;	
+	}
+}
+
+.clear-filters {
+	float: right;
+	display: inline-block;
+	padding-top: 7px;
+}
+
+/* extensions to navigation */
+
+.app-navigation {
+  background-color: transparent;
+  border-bottom: solid 1px $govuk-border-colour;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: $govuk-gutter;
+
+  .app-navigation__list {
+    @include govuk-h-clearfix;
+  }
+}
+
+/* Full width styles */
+
+.govuk-o-full-width-container,
+#global-header .header-wrapper-full-width {
+  max-width: 100%;
+}
+
+.govuk-o-full-width-container {
+  margin: 0 $govuk-gutter;
+}
+
+.condensed-view {
+  padding-top: 0;
+}
+
+/* extensions to details styles */
+
+details {
+  @include govuk-font-regular-19;
+  color: $govuk-link-colour;
+
+  &:hover,
+  &:focus {
+    color: $govuk-link-hover-colour;
+  }
+
+  .filter-section & {
+    clear: both;
+    @include govuk-h-clearfix;
+    margin-left: $govuk-gutter-half;
+    margin-right: $govuk-gutter-half;
+    margin-bottom: 0;
+
+    summary {
+      margin-bottom: $govuk-gutter / 6;
+    }
+  }
+
+  summary {
+    cursor: pointer;
+  }
+}
+
+/* extensions to grids */
+
+.govuk-o-grid__item--three-quarters {
+	@include mq($from: tablet) {
+		width: percentage(3 / 4);
+	}
+}
+
+/* exntensions to autocomplete */
+
+.autocomplete__input {
+  background: white;
 }
